@@ -29,9 +29,8 @@ public class ExplosiveEnemyScript : DefaultEnemyScript
     {
         Debug.Log("Boom");
         isAlive = false;
-        ExploedWithDelay();
         EnemesSpawner.OnEnemyDeath?.Invoke();
-        Destroy(gameObject);
+        ExploedWithDelay();
     }
     public void ExploedWithDelay()
     {
@@ -43,30 +42,29 @@ public class ExplosiveEnemyScript : DefaultEnemyScript
     private void Explode()
     {
         Collider[] overlappedColliders = Physics.OverlapSphere(transform.position, radius);
+
         foreach (var col in overlappedColliders)
         {
             Rigidbody rb = col.attachedRigidbody;
-            if (this.GetHashCode() != col?.GetHashCode())
+
+            if (rb != null)
             {
-
-                if (rb != null)
-                {
-                    IDamageable entity = rb?.GetComponent<IDamageable>();
+                IDamageable entity = rb?.GetComponent<IDamageable>();
 
 
-                    if (Vector3.Distance(transform.position, rb.transform.position) < radius / 2)
-                        entity?.TakeDamage(closeExplosionDamage);
-                    else
-                        entity?.TakeDamage(farExplosionDamage);
+                if (Vector3.Distance(transform.position, rb.transform.position) < radius / 2)
+                    entity?.TakeDamage(closeExplosionDamage);
+                else
+                    entity?.TakeDamage(farExplosionDamage);
 
-                    if (rb.CompareTag("Enemy"))
-                        rb.GetComponent<DefaultEnemyScript>().GetContusion();
+                if (rb.CompareTag("Enemy"))
+                    rb.GetComponent<DefaultEnemyScript>().GetContusion();
 
-                    rb.AddExplosionForce(force, transform.position, radius, 3f, ForceMode.Impulse);
-                }
+                rb.AddExplosionForce(force, transform.position, radius, 3f, ForceMode.Impulse);
             }
         }
         endExplosion = true;
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

@@ -33,6 +33,9 @@ public class EnemesSpawner : MonoBehaviour
     [SerializeField] private GameObject zombieShooter;
     [SerializeField] private GameObject bonusZombie;
 
+    [Header("Difficulty")]
+    public Difficulty difficulty;
+
     private static float WD;
     public static Action OnStartNewWave;
     public static Action OnEndNewWave;
@@ -40,6 +43,8 @@ public class EnemesSpawner : MonoBehaviour
     private Action Wave;
     private int complexityScale = 1;
     private static int neededEnemyDeathCounter;
+    public enum Difficulty { easy, normal, hard, nightmare }
+    private int maxCount;
     public static int needEnemy
     {
         get { return neededEnemyDeathCounter; }
@@ -51,9 +56,6 @@ public class EnemesSpawner : MonoBehaviour
             neededEnemyDeathCounter = value;
         }
     }
-    public Difficulty difficulty;
-    private int maxCount;
-    public enum Difficulty { easy, normal, hard, nightmare }
 
 
     private void OnDrawGizmos()
