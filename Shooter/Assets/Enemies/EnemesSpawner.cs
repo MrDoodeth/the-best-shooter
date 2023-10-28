@@ -40,7 +40,7 @@ public class EnemesSpawner : MonoBehaviour
     private static float WD;
     public static event Action OnStartNewWave;
     public static event Action OnEndNewWave;
-    public static event Action OnEnemyDeath;
+    public static Action OnEnemyDeath;
     private event Action Wave;
     private int complexityScale = 1;
     public enum Difficulty { easy, normal, hard, nightmare }
