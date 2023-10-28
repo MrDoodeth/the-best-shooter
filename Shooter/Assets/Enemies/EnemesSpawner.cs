@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
@@ -46,7 +47,6 @@ public class EnemesSpawner : MonoBehaviour
     public enum Difficulty { easy, normal, hard, nightmare }
     private int maxCount;
     private float timer;
-    private static float timer2;
     private static int neededEnemyDeathCounter;
     public static int needEnemy
     {
@@ -132,14 +132,11 @@ public class EnemesSpawner : MonoBehaviour
         needEnemy++;
     }
 
-    public static void OnEnemyDied()
+    public static async void OnEnemyDied()
     {
-        if (timer2 > 0.1f)
-        {
-            needEnemy--;
-            OnEnemyDeath?.Invoke();
-        }
-    }
+        needEnemy--;
+        await Task.Yield();
+    }   
     private void EndWave()
     {
         complexityScale++;
@@ -154,11 +151,13 @@ public class EnemesSpawner : MonoBehaviour
     #region WaitWave
     private void WaitWave(float _wd)
     {
-        Invoke(nameof(Inv), _wd);
-    }
-    private void Inv()
-    {
-        OnStartNewWave?.Invoke();
+        StartCoroutine(Inv()); 
+
+        IEnumerator Inv()
+        {
+            yield return new WaitForSeconds(_wd);
+            OnStartNewWave?.Invoke();
+        }
     }
     #endregion
 
@@ -247,7 +246,6 @@ public class EnemesSpawner : MonoBehaviour
         }
 
         timer += Time.deltaTime;
-        timer2 += Time.deltaTime;
 
         Debug.Log(needEnemy);
     }

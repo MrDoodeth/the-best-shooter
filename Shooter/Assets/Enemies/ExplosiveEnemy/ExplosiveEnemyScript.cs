@@ -1,6 +1,7 @@
 using ShooterInterfaces;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ExplosiveEnemyScript : DefaultEnemyScript
@@ -25,11 +26,12 @@ public class ExplosiveEnemyScript : DefaultEnemyScript
             Die();
     }
 
-    public override void Die()
+    public override async void Die()
     {
         Debug.Log("Boom");
+        await Task.Run(() => EnemesSpawner.OnEnemyDied());
+        EnemesSpawner.OnEnemyDeath?.Invoke();
         isAlive = false;
-        EnemesSpawner.OnEnemyDied();
         ExploedWithDelay();
     }
     public void ExploedWithDelay()

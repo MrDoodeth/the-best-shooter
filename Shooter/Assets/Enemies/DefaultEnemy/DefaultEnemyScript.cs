@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using ShooterInterfaces;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
+using System.Threading.Tasks;
 
 public class DefaultEnemyScript : MonoBehaviour, IDamageable
 {
@@ -116,11 +117,12 @@ public class DefaultEnemyScript : MonoBehaviour, IDamageable
         }
     }
 
-    public virtual void Die()
+    public virtual async void Die()
     {
-        EnemesSpawner.OnEnemyDied();
         isAlive = false;
-        Destroy(gameObject);
+        await Task.Run(() => EnemesSpawner.OnEnemyDied());
+        EnemesSpawner.OnEnemyDeath?.Invoke();
+        await Task.Run(() => Destroy(gameObject));
     }
 
     public virtual void OnGetDamage()
