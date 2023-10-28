@@ -29,7 +29,7 @@ public class ExplosiveEnemyScript : DefaultEnemyScript
     {
         Debug.Log("Boom");
         isAlive = false;
-        EnemesSpawner.OnEnemyDeath?.Invoke();
+        EnemesSpawner.OnEnemyDied();
         ExploedWithDelay();
     }
     public void ExploedWithDelay()

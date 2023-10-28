@@ -118,7 +118,7 @@ public class DefaultEnemyScript : MonoBehaviour, IDamageable
 
     public virtual void Die()
     {
-        EnemesSpawner.OnEnemyDeath?.Invoke();
+        EnemesSpawner.OnEnemyDied();
         isAlive = false;
         Destroy(gameObject);
     }

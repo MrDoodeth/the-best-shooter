@@ -38,14 +38,15 @@ public class EnemesSpawner : MonoBehaviour
     public Difficulty difficulty;
 
     private static float WD;
-    public static event Action OnStartNewWave;
-    public static event Action OnEndNewWave;
+    public static Action OnStartNewWave;
+    public static Action OnEndNewWave;
     public static Action OnEnemyDeath;
-    private event Action Wave;
+    private Action Wave;
     private int complexityScale = 1;
     public enum Difficulty { easy, normal, hard, nightmare }
     private int maxCount;
     private float timer;
+    private static float timer2;
     private static int neededEnemyDeathCounter;
     public static int needEnemy
     {
@@ -70,7 +71,6 @@ public class EnemesSpawner : MonoBehaviour
     {
         OnStartNewWave += ChooseWave;
         OnEndNewWave += EndWave;
-        OnEnemyDeath += OnEnemyDied;
         OnEnemyDeath += CheckWave;
         maxCount = secondBorder;
 
@@ -96,7 +96,6 @@ public class EnemesSpawner : MonoBehaviour
     {
         OnStartNewWave -= ChooseWave;
         OnEndNewWave -= EndWave;
-        OnEnemyDeath -= OnEnemyDied;
         OnEnemyDeath -= CheckWave;
 
         #region ReinitDifficulty
@@ -128,14 +127,18 @@ public class EnemesSpawner : MonoBehaviour
             }
         }
     }
-    public void AddNeededEnemyDeath()
+    private void AddNeededEnemyDeath()
     {
         needEnemy++;
     }
 
-    private void OnEnemyDied()
+    public static void OnEnemyDied()
     {
-        needEnemy--;
+        if (timer2 > 0.1f)
+        {
+            needEnemy--;
+            OnEnemyDeath?.Invoke();
+        }
     }
     private void EndWave()
     {
@@ -244,6 +247,7 @@ public class EnemesSpawner : MonoBehaviour
         }
 
         timer += Time.deltaTime;
+        timer2 += Time.deltaTime;
 
         Debug.Log(needEnemy);
     }
