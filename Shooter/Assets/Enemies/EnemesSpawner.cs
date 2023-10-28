@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 
@@ -37,14 +38,15 @@ public class EnemesSpawner : MonoBehaviour
     public Difficulty difficulty;
 
     private static float WD;
-    public static Action OnStartNewWave;
-    public static Action OnEndNewWave;
-    public static Action OnEnemyDeath;
-    private Action Wave;
+    public static event Action OnStartNewWave;
+    public static event Action OnEndNewWave;
+    public static event Action OnEnemyDeath;
+    private event Action Wave;
     private int complexityScale = 1;
-    private static int neededEnemyDeathCounter;
     public enum Difficulty { easy, normal, hard, nightmare }
     private int maxCount;
+    private float timer;
+    private static int neededEnemyDeathCounter;
     public static int needEnemy
     {
         get { return neededEnemyDeathCounter; }
@@ -66,7 +68,7 @@ public class EnemesSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        OnStartNewWave += ChooseDifficulty;
+        OnStartNewWave += ChooseWave;
         OnEndNewWave += EndWave;
         OnEnemyDeath += OnEnemyDied;
         OnEnemyDeath += CheckWave;
@@ -92,7 +94,7 @@ public class EnemesSpawner : MonoBehaviour
 
     private void OnDisable()
     {
-        OnStartNewWave -= ChooseDifficulty;
+        OnStartNewWave -= ChooseWave;
         OnEndNewWave -= EndWave;
         OnEnemyDeath -= OnEnemyDied;
         OnEnemyDeath -= CheckWave;
@@ -119,7 +121,11 @@ public class EnemesSpawner : MonoBehaviour
     {
         if (needEnemy <= 0)
         {
-            OnEndNewWave.Invoke();
+            if (timer > 5f)
+            {
+                OnEndNewWave?.Invoke();
+                timer = 0;
+            }
         }
     }
     public void AddNeededEnemyDeath()
@@ -137,7 +143,7 @@ public class EnemesSpawner : MonoBehaviour
         WaitWave(WD);
     }
 
-    private void ChooseDifficulty()
+    private void ChooseWave()
     {
         Wave?.Invoke();      
     }
@@ -236,5 +242,9 @@ public class EnemesSpawner : MonoBehaviour
             isPause = !isPause;
             EditorApplication.isPaused = isPause;
         }
+
+        timer += Time.deltaTime;
+
+        Debug.Log(needEnemy);
     }
 }
