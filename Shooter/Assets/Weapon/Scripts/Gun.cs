@@ -1,0 +1,225 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Timeline;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using ShooterInterfaces;
+using System;
+using Random = UnityEngine.Random;
+using DG.Tweening;
+using static UnityEngine.Rendering.DebugUI;
+
+public class Gun : MonoBehaviour
+{
+    [SerializeField] private GameObject bulletHole;
+
+    [Header("Info")]
+    public string Name;
+    public int Size { get; private set; }
+    [Space(10)]
+
+    [Header("Shooting")]
+    [SerializeField] public bool automatic;
+    [SerializeField] private int damage;
+    [SerializeField] private float maxDistance;
+    [Space(10)]
+
+    [Header("Recoil")]
+    [SerializeField] private float powerOfVerticalRecoil;
+    [SerializeField] private float powerOfHorizontalRecoil;
+    [SerializeField] private float powerOfForwardRecoil = 0.1f;
+    [SerializeField][Range(0.01f, 5f)] private float cameraRecoilRatio = 1f;
+    [Space(10)]
+
+    [Header("Reloading")]
+    public int currentAmmo;
+    public int reserveAmmo;
+    [SerializeField] private int maxReserveAmmo;
+    [SerializeField] private int magSize;
+    [SerializeField] private float fireRate;
+    [SerializeField] private float reloadTime;
+    [SerializeField] private bool reloading = false;
+    [Space(10)]
+
+    [Header("Zoom")]
+    [SerializeField] private float Ergonomics;
+    [SerializeField][Range(0.01f, 1f)] private float ZoomSize = 1f;
+    [Space(10)]
+
+    [Header("Gun Initialization")]
+    [SerializeField] public Transform rightHandle;
+    [SerializeField] public Transform leftHandle;
+    [SerializeField] private Transform muzzle;
+    [SerializeField] private FirstPersonController fpc;
+    public Vector3 zoomPosition;
+    public Vector3 defaultGunPosition;
+    private float timeSinceLastShoot;
+    private bool isZoom = false;
+    private bool isShooted;
+    private Transform fireDirection;
+
+
+    public void SetFPC(FirstPersonController parent)
+    {
+        if (parent == null)
+        {
+            fpc = null;
+            return;
+        }
+
+        fpc = parent;  
+    }
+
+    private void Awake()
+    {
+        currentAmmo = magSize;
+        reserveAmmo = maxReserveAmmo;
+        reloading = false;
+        fireDirection = muzzle;
+        enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        PlayerController.OnShootInput += Shoot;
+        PlayerController.OnReloadInput += StartReload;
+        PlayerController.OnZoomInput += Zoom;
+        PlayerController.OnReleasedTrigger += Shooted;
+    }
+    private void OnDisable()
+    {
+        PlayerController.OnShootInput -= Shoot;
+        PlayerController.OnReloadInput -= StartReload;
+        PlayerController.OnZoomInput -= Zoom;
+        PlayerController.OnReleasedTrigger -= Shooted;
+        reloading = false;
+        Zoom(false);
+        transform.localPosition = defaultGunPosition;
+    }
+
+
+
+    private bool CanReload() => !reloading && currentAmmo < magSize && reserveAmmo > 0 && this.gameObject.activeSelf;
+    private void StartReload()
+    {
+        if (CanReload())
+        {
+            StartCoroutine(Reload());
+        }
+
+        IEnumerator Reload()
+        {
+            reloading = true;
+            //Debug.Log("Reload start");
+            yield return new WaitForSeconds(reloadTime);
+
+
+            if (enabled == true)
+            {
+                ReloadEnd();
+            }
+
+            PlayerController.OnReloadEnd?.Invoke();
+            reloading = false;
+            //Debug.Log("Reload finished");
+        }
+    }
+
+    private void ReloadEnd()
+    {
+        int neededAmmo = magSize - currentAmmo;
+        if (neededAmmo >= reserveAmmo)
+        {
+            currentAmmo += reserveAmmo;
+            reserveAmmo = 0;
+        }
+        else
+        {
+            currentAmmo = magSize;
+            reserveAmmo -= neededAmmo;
+        }
+    }
+
+    private void Zoom(bool isPressed)
+    {
+        if (enabled == true)
+            fpc.zoomFOV = fpc.fov * ZoomSize;
+
+        if (isPressed)
+            isZoom = true;
+        else
+            isZoom = false;
+    }
+
+
+    private void Shooted()
+    {
+        isShooted = false;
+    }
+    private bool CanShoot()
+    {
+        if (automatic)
+            return !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);
+        else
+            return !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f) && !isShooted;
+    }
+    private void Shoot()
+    {
+        if (CanShoot())
+        {
+            //Debug.Log("Piu");
+            currentAmmo--;
+            timeSinceLastShoot = 0;
+            isShooted = true;
+
+
+            if (Physics.Raycast(fireDirection.position, fireDirection.forward, out RaycastHit hitInfo, maxDistance))
+            {
+                hitInfo.transform.GetComponent<IDamageable>()?.TakeDamage(damage);
+                var hole = Instantiate(bulletHole, hitInfo.point, Quaternion.identity);
+                hitInfo.transform.SetParent(hole.transform);
+                OnGunShot();
+            }
+
+            Recoil();
+
+            void Recoil()
+            {
+                transform.localPosition -= Vector3.forward * powerOfForwardRecoil;
+
+                transform.localEulerAngles -= Vector3.right * powerOfVerticalRecoil;
+                transform.localEulerAngles -= Vector3.up * Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil);
+
+                fpc.pitch += -powerOfVerticalRecoil * cameraRecoilRatio;
+
+                fpc.transform.localEulerAngles = new Vector3(0, fpc.transform.localEulerAngles.y + Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil) / 2, 0);
+            }
+
+            void OnGunShot()
+            {
+                
+            }
+        }
+    }
+
+
+
+    private void Update()
+    {
+        timeSinceLastShoot += Time.deltaTime;
+
+        if (isZoom)
+        {          
+            transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, Ergonomics * Time.deltaTime);
+        }
+        else
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, defaultGunPosition, Ergonomics * Time.deltaTime);
+        }
+
+
+        Debug.DrawRay(fireDirection.position, fireDirection.forward, Color.red);
+    }
+}

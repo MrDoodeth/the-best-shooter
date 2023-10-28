@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: b3aa180ff04fc9c4db5aaff188e3a4cc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
+      type: 3}
+  - rightHandle: {instanceID: 0}
+  - leftHandle: {instanceID: 0}
+  - muzzle: {instanceID: 0}
+  - fpc: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
