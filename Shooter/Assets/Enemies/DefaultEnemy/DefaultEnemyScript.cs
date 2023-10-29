@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using ShooterInterfaces;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 using System.Threading.Tasks;
 
 public class DefaultEnemyScript : MonoBehaviour, IDamageable
