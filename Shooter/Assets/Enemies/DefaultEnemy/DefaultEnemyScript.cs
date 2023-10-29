@@ -122,7 +122,7 @@ public class DefaultEnemyScript : MonoBehaviour, IDamageable
         isAlive = false;
         await Task.Run(() => EnemesSpawner.OnEnemyDied());
         EnemesSpawner.OnEnemyDeath?.Invoke();
-        await Task.Run(() => Destroy(gameObject));
+        Destroy(gameObject);
     }
 
     public virtual void OnGetDamage()
