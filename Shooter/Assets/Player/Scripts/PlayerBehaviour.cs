@@ -12,18 +12,18 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
 
     [SerializeField] private PlayerController controller;
 
-    //[SerializeField] private int score;
-    //public int Score 
-    //{ 
-    //    get { return score; }
-    //    set 
-    //    {
-    //        if (value >= 0)
-    //            score = value; 
-    //        else
-    //            score = 0;
-    //    }
-    //}
+    [SerializeField] private int score;
+    public int Score 
+    { 
+        get { return score; }
+        set 
+        {
+            if (value >= 0)
+                score = value; 
+            else
+                score = 0;
+        }
+    }
 
     private void Start()
     {
