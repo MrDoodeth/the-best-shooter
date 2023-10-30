@@ -28,10 +28,11 @@ public class ExplosiveEnemyScript : DefaultEnemyScript
 
     public override async void Die()
     {
-        Debug.Log("Boom");
         await Task.Run(() => EnemesSpawner.OnEnemyDied());
-        EnemesSpawner.OnEnemyDeath?.Invoke();
+        await Task.Delay(1);
+        Debug.Log("Boom");
         isAlive = false;
+        EnemesSpawner.OnEnemyDeath?.Invoke();
         ExploedWithDelay();
     }
     public void ExploedWithDelay()

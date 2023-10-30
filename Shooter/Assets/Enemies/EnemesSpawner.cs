@@ -132,10 +132,9 @@ public class EnemesSpawner : MonoBehaviour
         needEnemy++;
     }
 
-    public static async void OnEnemyDied()
+    public static void OnEnemyDied()
     {
         needEnemy--;
-        await Task.Yield();
     }   
     private void EndWave()
     {

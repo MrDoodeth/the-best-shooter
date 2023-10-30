@@ -4,23 +4,24 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using ShooterInterfaces;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 using System.Threading.Tasks;
 
 public class DefaultEnemyScript : MonoBehaviour, IDamageable
 {
     [Header("Fight")]
-    [SerializeField][Range(1,5000)] private float maxHealth = 100;
     [SerializeField] private float attackRange = 1.6f;
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private float timeBetweenAttack;
 
+    [Header("Health")]
+    [SerializeField][Range(1, 5000)] private float maxHealth = 100;
+    protected float currentHealth;
+
     protected NavMeshAgent agent;
     private GameObject[] playerPosition;
-    protected float currentHealth;
     private bool playerInAttackRange;
-    [SerializeField] protected bool isAlive = true;
-    [SerializeField] private bool onFloor;
+    protected bool isAlive = true;
+    private bool onFloor;
     private bool alreadyAttacked;
     private Rigidbody rb;
     private Collider col;
@@ -119,8 +120,9 @@ public class DefaultEnemyScript : MonoBehaviour, IDamageable
 
     public virtual async void Die()
     {
-        isAlive = false;
         await Task.Run(() => EnemesSpawner.OnEnemyDied());
+        await Task.Delay(1);
+        isAlive = false;
         EnemesSpawner.OnEnemyDeath?.Invoke();
         Destroy(gameObject);
     }
