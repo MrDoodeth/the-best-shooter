@@ -112,7 +112,6 @@ public class Gun : MonoBehaviour
         IEnumerator Reload()
         {
             reloading = true;
-            //Debug.Log("Reload start");
             yield return new WaitForSeconds(reloadTime);
 
 
@@ -123,7 +122,6 @@ public class Gun : MonoBehaviour
 
             PlayerController.OnReloadEnd?.Invoke();
             reloading = false;
-            //Debug.Log("Reload finished");
         }
     }
 
@@ -169,7 +167,6 @@ public class Gun : MonoBehaviour
     {
         if (CanShoot())
         {
-            //Debug.Log("Piu");
             currentAmmo--;
             timeSinceLastShoot = 0;
             isShooted = true;
@@ -179,7 +176,7 @@ public class Gun : MonoBehaviour
             {
                 hitInfo.transform.GetComponent<IDamageable>()?.TakeDamage(damage);
                 var hole = Instantiate(bulletHole, hitInfo.point, Quaternion.identity);
-                hitInfo.transform.SetParent(hole.transform);
+                hole.transform.SetParent(hitInfo.transform);            
                 OnGunShot();
             }
 

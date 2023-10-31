@@ -6,10 +6,11 @@ using UnityEngine.AI;
 using ShooterInterfaces;
 using System.Threading.Tasks;
 
-public class DefaultEnemyScript : MonoBehaviour, IDamageable
+public class DefaultEnemyScript : MonoBehaviour, IDamageable, IAttackable
 {
     [Header("Fight")]
     [SerializeField] private float attackRange = 1.6f;
+    [SerializeField] private float damage = 33f;
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private float timeBetweenAttack;
 
@@ -57,7 +58,7 @@ public class DefaultEnemyScript : MonoBehaviour, IDamageable
         {
             //attack           
             alreadyAttacked = true;
-            Attack();
+            Attack(damage);
             Invoke(nameof(ResetAttack), timeBetweenAttack);
         }
     }
@@ -71,6 +72,16 @@ public class DefaultEnemyScript : MonoBehaviour, IDamageable
     {
         if (agent.isOnNavMesh == true)    
             agent.SetDestination(playerPosition[0].transform.position);
+    }
+    public virtual void Attack(float _damage)
+    {
+        Collider[] playerHit = Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
+
+        foreach (Collider hit in playerHit)
+        {
+            if (hit.CompareTag("Player"))
+                hit.GetComponent<IDamageable>().TakeDamage(_damage);
+        }
     }
 
 
@@ -105,16 +116,6 @@ public class DefaultEnemyScript : MonoBehaviour, IDamageable
         else
         {
             OnGetDamage();
-        }
-    }
-    public virtual void Attack()
-    {
-        Collider[] playerHit = Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
-
-        foreach (Collider hit in playerHit)
-        {
-            if (hit.CompareTag("Player"))
-                hit.GetComponent<IDamageable>().TakeDamage(33);
         }
     }
 

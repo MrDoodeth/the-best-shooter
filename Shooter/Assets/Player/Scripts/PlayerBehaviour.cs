@@ -18,10 +18,7 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         get { return score; }
         set 
         {
-            if (value >= 0)
-                score = value; 
-            else
-                score = 0;
+            Mathf.Clamp(score, 0, int.MaxValue);
         }
     }
 
@@ -36,23 +33,21 @@ public class PlayerBehaviour : MonoBehaviour, IDamageable
         if (currentHealth <= 0)
         {
             Die();
-
-            void Die()
-            {
-                Debug.Log("GAME OVER");
-                controller.enabled = false;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                //Destroy(gameObject);
-            }
         }
         else
         {
-            OnTargetDamage();
-
-            void OnTargetDamage()
-            {
-                Debug.Log("Auch");
-            }
+            OnGetDamage();
         }
+    }
+    public void Die()
+    {
+        Debug.Log("GAME OVER");
+        controller.enabled = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void OnGetDamage()
+    {
+        Debug.Log("Auch");
     }
 }

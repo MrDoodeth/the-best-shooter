@@ -15,7 +15,7 @@ public class ExplosiveEnemyScript : DefaultEnemyScript
 
 
 
-    public override void Attack()
+    public override void Attack(float damage)
     {
         if (isAlive)
             Die();
@@ -48,21 +48,27 @@ public class ExplosiveEnemyScript : DefaultEnemyScript
 
         foreach (var col in overlappedColliders)
         {
+            IDamageable entity = col.GetComponent<IDamageable>();
+
+            if (entity != null)
+            {
+                if (Vector3.Distance(transform.position, col.transform.position) < radius / 2)
+                    entity?.TakeDamage(closeExplosionDamage);
+                else
+                    entity?.TakeDamage(farExplosionDamage);
+            }
+
+            DefaultEnemyScript enemy = col.GetComponent<DefaultEnemyScript>();
+
+            if (enemy != null)
+            {
+                enemy.GetContusion();
+            }
+
             Rigidbody rb = col.attachedRigidbody;
 
             if (rb != null)
             {
-                IDamageable entity = rb?.GetComponent<IDamageable>();
-
-
-                if (Vector3.Distance(transform.position, rb.transform.position) < radius / 2)
-                    entity?.TakeDamage(closeExplosionDamage);
-                else
-                    entity?.TakeDamage(farExplosionDamage);
-
-                if (rb.CompareTag("Enemy"))
-                    rb.GetComponent<DefaultEnemyScript>().GetContusion();
-
                 rb.AddExplosionForce(force, transform.position, radius, 3f, ForceMode.Impulse);
             }
         }
