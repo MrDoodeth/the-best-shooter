@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 3481187744642279713}
   - component: {fileID: 3481187744642279712}
   - component: {fileID: 3481187744642279716}
-  - component: {fileID: 1665916234601087726}
   - component: {fileID: -3301900758289967520}
+  - component: {fileID: 427436237343735729}
+  - component: {fileID: -4480675552047526626}
+  - component: {fileID: 7147616679447119248}
   m_Layer: 0
   m_Name: DefaultZombie
   m_TagString: Enemy
@@ -122,26 +124,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1665916234601087726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3481187744642279715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a7641a1a2183f24899b41d5c84c4102, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackRange: 1.24
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 8
-  timeBetweenAttack: 2
-  isAlive: 1
-  onFloor: 0
 --- !u!54 &-3301900758289967520
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -158,3 +140,46 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &427436237343735729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481187744642279715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75444100f4810841aecdb3809633296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4480675552047526626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481187744642279715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861b00ba41e24054b923ecda1c0ca25e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+--- !u!114 &7147616679447119248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481187744642279715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 765d59ebadc7ebe4cbf8f13fa16d88e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 1.6
+  damage: 33
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 8
+  timeBetweenAttack: 2

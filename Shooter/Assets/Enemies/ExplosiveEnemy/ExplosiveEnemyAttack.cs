@@ -1,10 +1,9 @@
 using ShooterInterfaces;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
-public class ExplosiveEnemyScript : DefaultEnemyScript
+public class ExplosiveEnemyAttack : EnemyAttack
 {
     [Header("Explosion Settings")]
     [SerializeField] private float radius;
@@ -13,27 +12,11 @@ public class ExplosiveEnemyScript : DefaultEnemyScript
     [SerializeField, Range(1f, 100f)] private int farExplosionDamage = 30;
     private bool endExplosion;
 
-
-
+    private ExplosiveEnemyHealth exHealth;
     public override void Attack(float damage)
     {
         if (isAlive)
-            Die();
-    }
-    public override void TakeDamage(float damage)
-    {
-        if (isAlive)
-            Die();
-    }
-
-    public override async void Die()
-    {
-        await Task.Run(() => EnemesSpawner.OnEnemyDied());
-        await Task.Delay(1);
-        Debug.Log("Boom");
-        isAlive = false;
-        EnemesSpawner.OnEnemyDeath?.Invoke();
-        ExploedWithDelay();
+            exHealth.Die();
     }
     public void ExploedWithDelay()
     {
@@ -58,7 +41,7 @@ public class ExplosiveEnemyScript : DefaultEnemyScript
                     entity?.TakeDamage(farExplosionDamage);
             }
 
-            DefaultEnemyScript enemy = col.GetComponent<DefaultEnemyScript>();
+            EnemyHealth enemy = col.GetComponent<EnemyHealth>();
 
             if (enemy != null)
             {
@@ -83,5 +66,10 @@ public class ExplosiveEnemyScript : DefaultEnemyScript
 
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, radius / 2);
+    }
+
+    void Start()
+    {
+        Init();
     }
 }

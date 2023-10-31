@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 187904205467696762}
   - component: {fileID: 187904205467696763}
   - component: {fileID: 187904205467696767}
-  - component: {fileID: 2928306016900465431}
   - component: {fileID: -6849462003901996404}
+  - component: {fileID: -2716006325317553336}
+  - component: {fileID: -8207887446195481378}
+  - component: {fileID: -749195622834553145}
   m_Layer: 0
   m_Name: ExplosiveZombie
   m_TagString: Enemy
@@ -122,30 +124,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2928306016900465431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187904205467696760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34af2a0d061c8b746abc8064331f1e1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 1
-  attackRange: 1.6
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 8
-  timeBetweenAttack: 2
-  isAlive: 1
-  onFloor: 0
-  radius: 5
-  force: 130
-  closeExplosionDamage: 70
-  farExplosionDamage: 30
 --- !u!54 &-6849462003901996404
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -162,3 +140,50 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-2716006325317553336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187904205467696760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75444100f4810841aecdb3809633296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8207887446195481378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187904205467696760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4447b6f1567ae1449a0229a7175724e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+--- !u!114 &-749195622834553145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187904205467696760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06cdeeac7c1fc2548afeda4e62e1f19b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 1.6
+  damage: 33
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 8
+  timeBetweenAttack: 2
+  radius: 3
+  force: 250
+  closeExplosionDamage: 70
+  farExplosionDamage: 30
