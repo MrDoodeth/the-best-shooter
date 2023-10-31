@@ -25,12 +25,6 @@ public class Enemy : MonoBehaviour
         col = GetComponent<Collider>();
         playerPosition = GameObject.FindGameObjectsWithTag("Player");
     }
-
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
