@@ -61,15 +61,15 @@ public class Gun : MonoBehaviour
     private Transform fireDirection;
 
 
-    public void SetFPC(FirstPersonController parent)
+    public void SetFPC(FirstPersonController fpc)
     {
-        if (parent == null)
+        if (fpc == null)
         {
-            fpc = null;
+            this.fpc = null;
             return;
         }
 
-        fpc = parent;  
+        this.fpc = fpc;  
     }
 
     private void Awake()
