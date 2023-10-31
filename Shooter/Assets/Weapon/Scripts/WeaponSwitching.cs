@@ -40,7 +40,6 @@ public class WeaponSwitching : MonoBehaviour
     {
         timeSinceLastSwitch = 0f;
         currentInventorySize = inventorySize;
-        //GetWeapon(weapon);
     }
 
     private void HandMovements(Transform rightPos, Transform leftPos, Transform parent)
@@ -130,9 +129,9 @@ public class WeaponSwitching : MonoBehaviour
             gunRb = null;
             col = null;
 
-            Destroy(weapons[_selectedWeapon].gameObject);
             weapons.Remove(weapons[_selectedWeapon]);
             currentInventorySize += gun.Size;
+            Destroy(weapons[_selectedWeapon].gameObject);
             ChangeSelectedWeapon("Down");
         }
     }
