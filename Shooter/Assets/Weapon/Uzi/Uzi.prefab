@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 18198136533641983}
   - component: {fileID: 18198136533641980}
   - component: {fileID: 18198136533641981}
+  - component: {fileID: 2392865066863269297}
   m_Layer: 0
   m_Name: Uzi
   m_TagString: Weapone
@@ -172,6 +173,7 @@ MonoBehaviour:
   fpc: {fileID: 0}
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
+  weaponBobbing: {fileID: 0}
 --- !u!114 &200763546178363780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +188,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ergonomics: 13
   zoomSize: 0.95
-  typeOfClick: 0
   zoomPosition: {x: 0, y: -0.063, z: 0.29}
   defaultGunPosition: {x: 0.1, y: -0.07, z: 0.23}
   fpc: {fileID: 0}
@@ -233,6 +234,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04684031, y: 0.22696483, z: 0.3945806}
   m_Center: {x: -0.0012509227, y: -0.03627509, z: 0.030020833}
+--- !u!114 &2392865066863269297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18198136533641952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.48
+  sensitivityMultiplier: 0.64
 --- !u!1 &18932745190431081
 GameObject:
   m_ObjectHideFlags: 0

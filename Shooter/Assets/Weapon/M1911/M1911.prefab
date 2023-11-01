@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 8178916179672470889}
   - component: {fileID: 8183252265878648142}
   - component: {fileID: 8183252265878648143}
+  - component: {fileID: 2690638802374388557}
   m_Layer: 0
   m_Name: M1911
   m_TagString: Weapone
@@ -421,6 +422,7 @@ MonoBehaviour:
   fpc: {fileID: 0}
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
+  weaponBobbing: {fileID: 0}
 --- !u!114 &2711640644429102420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,7 +437,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ergonomics: 15
   zoomSize: 0.95
-  typeOfClick: 0
   zoomPosition: {x: 0, y: -0.0456, z: 0.29}
   defaultGunPosition: {x: 0.1861, y: -0.0964, z: 0.2325}
   fpc: {fileID: 0}
@@ -482,6 +483,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04607746, y: 0.15523279, z: 0.2525233}
   m_Center: {x: 0.0023729503, y: -0.028475285, z: 0.029661596}
+--- !u!114 &2690638802374388557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8180610573758829913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.48
+  sensitivityMultiplier: 0.64
 --- !u!1 &8180629165706775623
 GameObject:
   m_ObjectHideFlags: 0

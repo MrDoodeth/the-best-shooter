@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 using DG.Tweening;
 using static UnityEngine.Rendering.DebugUI;
 
-[RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)))]
+[RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
 public class Gun : MonoBehaviour
 {
     [SerializeField] private GameObject bulletHole;
@@ -54,6 +54,7 @@ public class Gun : MonoBehaviour
 
     [HideInInspector] public WeaponZoom weaponZoom;
     [HideInInspector] public WeaponSway weaponSway;
+    [HideInInspector] public WeaponBobbing weaponBobbing;
 
 
     public void SetFPC(FirstPersonController fpc)
@@ -78,6 +79,7 @@ public class Gun : MonoBehaviour
 
         weaponZoom = GetComponent<WeaponZoom>();
         weaponSway = GetComponent<WeaponSway>();
+        weaponBobbing = GetComponent<WeaponBobbing>();
 
         enabled = false;
     }
@@ -93,6 +95,7 @@ public class Gun : MonoBehaviour
 
         weaponZoom.enabled = true;
         weaponSway.enabled = true;
+        weaponBobbing.enabled = true;
     }
     private void OnDisable()
     {
@@ -106,6 +109,7 @@ public class Gun : MonoBehaviour
 
         weaponZoom.enabled = false;
         weaponSway.enabled = false;
+        weaponBobbing.enabled = false;
     }
 
 
