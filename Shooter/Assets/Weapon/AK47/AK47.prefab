@@ -40,8 +40,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1829007119099331878}
-  - component: {fileID: 1829007119099331879}
   - component: {fileID: 1829007119099331880}
+  - component: {fileID: 3786346487634470170}
+  - component: {fileID: 1829007119099331879}
   - component: {fileID: 1829007119099331881}
   - component: {fileID: 1829007119099331882}
   m_Layer: 0
@@ -73,20 +74,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1829007119099331879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829007119099331877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  sensitivityMultiplier: 3
 --- !u!114 &1829007119099331880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,9 +89,8 @@ MonoBehaviour:
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
   Name: AK47
-  Size: 2
   automatic: 1
-  damage: 36
+  damage: 100
   maxDistance: 200
   powerOfVerticalRecoil: 2.5
   powerOfHorizontalRecoil: 1
@@ -117,14 +103,44 @@ MonoBehaviour:
   fireRate: 600
   reloadTime: 2
   reloading: 0
-  Ergonomics: 8
-  ZoomSize: 0.65
   rightHandle: {fileID: 1829007117957071425}
   leftHandle: {fileID: 1829007119287524062}
   muzzle: {fileID: 1829007119323588178}
   fpc: {fileID: 0}
+  weaponZoom: {fileID: 0}
+  weaponSway: {fileID: 0}
+--- !u!114 &3786346487634470170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829007119099331877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403ca266daa896d4295242ebefa9fcdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ergonomics: 10
+  zoomSize: 0.86
+  typeOfClick: 0
   zoomPosition: {x: 0, y: -0.047, z: 0.25}
   defaultGunPosition: {x: 0.135, y: -0.06, z: 0.17}
+  fpc: {fileID: 0}
+--- !u!114 &1829007119099331879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829007119099331877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  sensitivityMultiplier: 3
 --- !u!54 &1829007119099331881
 Rigidbody:
   m_ObjectHideFlags: 0

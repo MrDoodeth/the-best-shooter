@@ -31,7 +31,6 @@ public class WeaponSwitching : MonoBehaviour
     private float timeSinceLastSwitch;
 
     public Gun gun;
-    [SerializeField] private WeaponSway sway;
     [SerializeField] private Rigidbody gunRb;
     [SerializeField] private BoxCollider col;
 
@@ -100,7 +99,6 @@ public class WeaponSwitching : MonoBehaviour
         {
             gunRb.isKinematic = false;
             gun.enabled = false;
-            sway.enabled = false;
             col.enabled = true;
             gunRb.AddForce(transform.forward * 4f + transform.up * 2f, ForceMode.Impulse);  
             weapons[selectedWeapon].SetParent(null);
@@ -110,7 +108,6 @@ public class WeaponSwitching : MonoBehaviour
             weapons.Remove(weapons[selectedWeapon]);
 
             gun = null;
-            sway = null;
             gunRb = null;
             col = null;
 
@@ -125,7 +122,6 @@ public class WeaponSwitching : MonoBehaviour
         if (weapons.Count != 0)
         {           
             gun = null;
-            sway = null;
             gunRb = null;
             col = null;
 
@@ -137,7 +133,7 @@ public class WeaponSwitching : MonoBehaviour
     }
     public void GetWeapon(GameObject _weapon)
     {
-        GameObject weapon = Instantiate(_weapon, _weapon.GetComponent<Gun>().defaultGunPosition, Quaternion.identity);
+        GameObject weapon = Instantiate(_weapon, _weapon.GetComponent<Gun>().weaponZoom.defaultGunPosition, Quaternion.identity);
 
         if (weapon.transform.tag == "Weapone" && CanPickUp(weapon.transform.GetComponent<Gun>().Size))
         {
@@ -148,18 +144,17 @@ public class WeaponSwitching : MonoBehaviour
     private void GiveWeapon(Transform wp)
     {
         weapons.Add(wp);
+
         gun = wp.GetComponent<Gun>();
-        sway = wp.GetComponent<WeaponSway>();
         gunRb = wp.GetComponent<Rigidbody>();
         col = wp.GetComponent<BoxCollider>();
 
-        wp.position = Vector3.Lerp(wp.position, gun.defaultGunPosition, selectionSpeed * Time.deltaTime);
+        wp.position = Vector3.Lerp(wp.position, gun.weaponZoom.defaultGunPosition, selectionSpeed * Time.deltaTime);
         PlayerController.OnTakenGun?.Invoke();
         wp.SetParent(transform);
         gunRb.isKinematic = true;
         col.enabled = false;
         gun.enabled = true;
-        sway.enabled = true;
         gun.SetFPC(FPC);
         currentInventorySize -= gun.Size;
         ChangeSelectedWeapon("Up");
@@ -216,7 +211,6 @@ public class WeaponSwitching : MonoBehaviour
         if (weapons.Count == 0)
         {
             gun = null;
-            sway = null;
             gunRb = null;
             col = null;
 
@@ -228,7 +222,6 @@ public class WeaponSwitching : MonoBehaviour
         else
         {
             gun = weapons[selectedWeapon].GetComponent<Gun>();
-            sway = weapons[selectedWeapon].GetComponent<WeaponSway>();
             gunRb = weapons[selectedWeapon].GetComponent<Rigidbody>();
             col = weapons[selectedWeapon].GetComponent<BoxCollider>();
 
@@ -244,7 +237,6 @@ public class WeaponSwitching : MonoBehaviour
         if (weapons.Count == 0)
         {
             gun = null;
-            sway = null;
             gunRb = null;
             col = null;
 
@@ -256,7 +248,6 @@ public class WeaponSwitching : MonoBehaviour
         else
         {
             gun = weapons[selectedWeapon].GetComponent<Gun>();
-            sway = weapons[selectedWeapon].GetComponent<WeaponSway>();
             gunRb = weapons[selectedWeapon].GetComponent<Rigidbody>();
             col = weapons[selectedWeapon].GetComponent<BoxCollider>();
 

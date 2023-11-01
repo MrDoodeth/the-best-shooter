@@ -102,8 +102,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 18198136533641953}
-  - component: {fileID: 18198136533641983}
   - component: {fileID: 18198136533641982}
+  - component: {fileID: 200763546178363780}
+  - component: {fileID: 18198136533641983}
   - component: {fileID: 18198136533641980}
   - component: {fileID: 18198136533641981}
   m_Layer: 0
@@ -136,20 +137,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &18198136533641983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18198136533641952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
-  sensitivityMultiplier: 6
 --- !u!114 &18198136533641982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +152,6 @@ MonoBehaviour:
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
   Name: Uzi
-  Size: 1
   automatic: 1
   damage: 16
   maxDistance: 200
@@ -180,14 +166,44 @@ MonoBehaviour:
   fireRate: 600
   reloadTime: 2
   reloading: 0
-  Ergonomics: 15
-  ZoomSize: 0.7
   rightHandle: {fileID: 18198135315490283}
   leftHandle: {fileID: 18198135312184129}
   muzzle: {fileID: 18198136038128552}
   fpc: {fileID: 0}
+  weaponZoom: {fileID: 0}
+  weaponSway: {fileID: 0}
+--- !u!114 &200763546178363780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18198136533641952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403ca266daa896d4295242ebefa9fcdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ergonomics: 13
+  zoomSize: 0.95
+  typeOfClick: 0
   zoomPosition: {x: 0, y: -0.063, z: 0.29}
   defaultGunPosition: {x: 0.1, y: -0.07, z: 0.23}
+  fpc: {fileID: 0}
+--- !u!114 &18198136533641983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18198136533641952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 8
+  sensitivityMultiplier: 6
 --- !u!54 &18198136533641980
 Rigidbody:
   m_ObjectHideFlags: 0

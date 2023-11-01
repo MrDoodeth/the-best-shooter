@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 using DG.Tweening;
 using static UnityEngine.Rendering.DebugUI;
 
+[RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)))]
 public class Gun : MonoBehaviour
 {
     [SerializeField] private GameObject bulletHole;
@@ -43,21 +44,16 @@ public class Gun : MonoBehaviour
     [SerializeField] private bool reloading = false;
     [Space(10)]
 
-    [Header("Zoom")]
-    [SerializeField] private float Ergonomics;
-    [SerializeField][Range(0.01f, 1f)] private float ZoomSize = 1f;
-    [Space(10)]
-
     [Header("Gun Initialization")]
     [SerializeField] public Transform rightHandle;
     [SerializeField] public Transform leftHandle;
     [SerializeField] private Transform muzzle;
     [SerializeField] private FirstPersonController fpc;
-    public Vector3 zoomPosition;
-    public Vector3 defaultGunPosition;
     private float timeSinceLastShoot;
-    private bool isZoom = false;
     private Transform fireDirection;
+
+    [HideInInspector] public WeaponZoom weaponZoom;
+    [HideInInspector] public WeaponSway weaponSway;
 
 
     public void SetFPC(FirstPersonController fpc)
@@ -65,10 +61,12 @@ public class Gun : MonoBehaviour
         if (fpc == null)
         {
             this.fpc = null;
+            weaponZoom.fpc = null;
             return;
         }
 
-        this.fpc = fpc;  
+        this.fpc = fpc;
+        weaponZoom.fpc = fpc;
     }
 
     private void Awake()
@@ -77,6 +75,10 @@ public class Gun : MonoBehaviour
         reserveAmmo = maxReserveAmmo;
         reloading = false;
         fireDirection = muzzle;
+
+        weaponZoom = GetComponent<WeaponZoom>();
+        weaponSway = GetComponent<WeaponSway>();
+
         enabled = false;
     }
 
@@ -88,7 +90,9 @@ public class Gun : MonoBehaviour
             PlayerController.OnShootInputDown += Shoot;
 
         PlayerController.OnReloadInput += StartReload;
-        PlayerController.OnZoomInput += Zoom;
+
+        weaponZoom.enabled = true;
+        weaponSway.enabled = true;
     }
     private void OnDisable()
     {
@@ -98,10 +102,10 @@ public class Gun : MonoBehaviour
             PlayerController.OnShootInputDown -= Shoot;
 
         PlayerController.OnReloadInput -= StartReload;
-        PlayerController.OnZoomInput -= Zoom;
         reloading = false;
-        Zoom(false);
-        transform.localPosition = defaultGunPosition;
+
+        weaponZoom.enabled = false;
+        weaponSway.enabled = false;
     }
 
 
@@ -143,17 +147,6 @@ public class Gun : MonoBehaviour
             currentAmmo = magSize;
             reserveAmmo -= neededAmmo;
         }
-    }
-
-    private void Zoom(bool isPressed)
-    {
-        if (enabled == true)
-            fpc.zoomFOV = fpc.fov * ZoomSize;
-
-        if (isPressed)
-            isZoom = true;
-        else
-            isZoom = false;
     }
 
     private bool CanShoot() => !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);
@@ -199,16 +192,6 @@ public class Gun : MonoBehaviour
     private void Update()
     {
         timeSinceLastShoot += Time.deltaTime;
-
-        if (isZoom)
-        {          
-            transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, Ergonomics * Time.deltaTime);
-        }
-        else
-        {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, defaultGunPosition, Ergonomics * Time.deltaTime);
-        }
-
 
         Debug.DrawRay(fireDirection.position, fireDirection.forward, Color.red);
     }
