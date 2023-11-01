@@ -57,7 +57,6 @@ public class Gun : MonoBehaviour
     public Vector3 defaultGunPosition;
     private float timeSinceLastShoot;
     private bool isZoom = false;
-    private bool isShooted;
     private Transform fireDirection;
 
 
@@ -83,17 +82,23 @@ public class Gun : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.OnShootInput += Shoot;
+        if (automatic)
+            PlayerController.OnShootInput += Shoot;
+        else
+            PlayerController.OnShootInputDown += Shoot;
+
         PlayerController.OnReloadInput += StartReload;
         PlayerController.OnZoomInput += Zoom;
-        PlayerController.OnReleasedTrigger += Shooted;
     }
     private void OnDisable()
     {
-        PlayerController.OnShootInput -= Shoot;
+        if (automatic)
+            PlayerController.OnShootInput -= Shoot;
+        else
+            PlayerController.OnShootInputDown -= Shoot;
+
         PlayerController.OnReloadInput -= StartReload;
         PlayerController.OnZoomInput -= Zoom;
-        PlayerController.OnReleasedTrigger -= Shooted;
         reloading = false;
         Zoom(false);
         transform.localPosition = defaultGunPosition;
@@ -151,25 +156,13 @@ public class Gun : MonoBehaviour
             isZoom = false;
     }
 
-
-    private void Shooted()
-    {
-        isShooted = false;
-    }
-    private bool CanShoot()
-    {
-        if (automatic)
-            return !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);
-        else
-            return !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f) && !isShooted;
-    }
+    private bool CanShoot() => !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);
     private void Shoot()
     {
         if (CanShoot())
         {
             currentAmmo--;
             timeSinceLastShoot = 0;
-            isShooted = true;
 
 
             if (Physics.Raycast(fireDirection.position, fireDirection.forward, out RaycastHit hitInfo, maxDistance))

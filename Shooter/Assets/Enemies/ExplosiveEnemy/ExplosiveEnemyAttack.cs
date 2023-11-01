@@ -70,6 +70,7 @@ public class ExplosiveEnemyAttack : EnemyAttack
 
     void Start()
     {
+        exHealth = GetComponent<ExplosiveEnemyHealth>();
         Init();
     }
 }

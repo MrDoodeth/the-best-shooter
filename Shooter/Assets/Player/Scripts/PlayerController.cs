@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static Action OnShootInput;
+    public static Action OnShootInputDown;
     public static Action OnReleasedTrigger;
 
     public static Action OnReloadInput;
@@ -23,9 +24,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0))
             OnShootInput?.Invoke();
 
-        if (Input.GetMouseButtonUp(0))
-            OnReleasedTrigger?.Invoke();
-
+        //if (Input.GetMouseButtonUp(0))
+        //    OnReleasedTrigger?.Invoke();
+        if (Input.GetMouseButtonDown(0))
+            OnShootInputDown?.Invoke();
 
         if (Input.GetMouseButton(1))
             OnZoomInput?.Invoke(true);
