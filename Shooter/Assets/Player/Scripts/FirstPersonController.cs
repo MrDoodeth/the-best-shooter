@@ -134,6 +134,7 @@ public class FirstPersonController : MonoBehaviour
     public Transform head;
     public Transform body;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -459,10 +460,12 @@ public class FirstPersonController : MonoBehaviour
         {
             Debug.DrawRay(origin, direction * distance, Color.red);
             isGrounded = true;
+            animator.SetBool("onFloor", true);
         }
         else
         {
             isGrounded = false;
+            animator.SetBool("onFloor", false);
         }
     }
 
