@@ -16,6 +16,7 @@ public class WeaponSwitching : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private List<Transform> weapons;
+    [Space(10)]
 
     [Header("Settings")]
     //[SerializeField] private float switchTime;

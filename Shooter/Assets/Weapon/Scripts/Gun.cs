@@ -18,11 +18,11 @@ public class Gun : MonoBehaviour
 
     [Header("Info")]
     public string Name;
-    public int Size { get; private set; }
+    public int Size;
     [Space(10)]
 
     [Header("Shooting")]
-    [SerializeField] public bool automatic;
+    [SerializeField] private bool automatic;
     [SerializeField] private int damage;
     [SerializeField] private float maxDistance;
     [Space(10)]
@@ -179,9 +179,9 @@ public class Gun : MonoBehaviour
                 transform.localEulerAngles -= Vector3.right * powerOfVerticalRecoil;
                 transform.localEulerAngles -= Vector3.up * Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil);
 
-                fpc.pitch += -powerOfVerticalRecoil * cameraRecoilRatio;
+                //fpc.pitch += -powerOfVerticalRecoil * cameraRecoilRatio;
 
-                fpc.transform.localEulerAngles = new Vector3(0, fpc.transform.localEulerAngles.y + Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil) / 2, 0);
+                //fpc.transform.localEulerAngles = new Vector3(0, fpc.transform.localEulerAngles.y + Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil) / 2, 0);
             }
 
             void OnGunShot()
