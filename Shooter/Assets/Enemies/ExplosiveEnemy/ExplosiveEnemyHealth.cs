@@ -22,9 +22,4 @@ public class ExplosiveEnemyHealth : EnemyHealth
         exAttack = GetComponent<ExplosiveEnemyAttack>();
         Init();
     }
-
-    void Update()
-    {
-        
-    }
 }

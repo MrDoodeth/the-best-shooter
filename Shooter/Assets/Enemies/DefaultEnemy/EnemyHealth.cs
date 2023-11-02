@@ -33,12 +33,16 @@ public class EnemyHealth : Enemy, IDamageable
             OnGetDamage();
         }
     }
-    public virtual async void Die()
+    public virtual void Die()
     {
-        await Task.Run(() => EnemesSpawner.OnEnemyDied());
-        await Task.Delay(1);
-        isAlive = false;
-        EnemesSpawner.OnEnemyDeath?.Invoke();
+        StartCoroutine(Death());
+        IEnumerator Death()
+        {
+            EnemesSpawner.OnEnemyDied();
+            isAlive = false;
+            EnemesSpawner.OnEnemyDeath?.Invoke();
+            yield return null;
+        }
     }
 
     public virtual void OnGetDamage()

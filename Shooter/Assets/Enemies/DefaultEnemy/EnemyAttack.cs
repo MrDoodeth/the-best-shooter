@@ -14,9 +14,13 @@ public class EnemyAttack : Enemy, IAttackable
     {
         Init();
     }
+
+    #region Attack
     private void AttackPlayer()
     {
-        agent.SetDestination(transform.position);
+        if (agent.isOnNavMesh == true)
+            agent.SetDestination(transform.position);
+
         transform.LookAt(playerPosition[0].transform);
 
         if (!alreadyAttacked)
@@ -28,16 +32,6 @@ public class EnemyAttack : Enemy, IAttackable
         }
     }
 
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
-
-    private void ChasePlayer()
-    {
-        if (agent.isOnNavMesh == true)
-            agent.SetDestination(playerPosition[0].transform.position);
-    }
     public virtual void Attack(float _damage)
     {
         Collider[] playerHit = Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
@@ -47,6 +41,17 @@ public class EnemyAttack : Enemy, IAttackable
             if (hit.CompareTag("Player"))
                 hit.GetComponent<IDamageable>().TakeDamage(_damage);
         }
+    }
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
+    }
+    #endregion
+
+    private void ChasePlayer()
+    {
+        if (agent.isOnNavMesh == true)
+            agent.SetDestination(playerPosition[0].transform.position);
     }
     void Update()
     {
