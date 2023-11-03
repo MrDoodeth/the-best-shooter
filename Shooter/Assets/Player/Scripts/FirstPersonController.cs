@@ -60,7 +60,7 @@ public class FirstPersonController : MonoBehaviour
     public float maxVelocityChange = 10f;
 
     // Internal Variables
-    private bool isWalking = false;
+    public bool isWalking = false;
 
     #region Sprint
 
@@ -83,7 +83,7 @@ public class FirstPersonController : MonoBehaviour
 
     // Internal Variables
     private CanvasGroup sprintBarCG;
-    private bool isSprinting = false;
+    public bool isSprinting = false;
     private float sprintRemaining;
     private float sprintBarWidth;
     private float sprintBarHeight;
@@ -112,7 +112,7 @@ public class FirstPersonController : MonoBehaviour
     public float speedReduction = .5f;
 
     // Internal Variables
-    private bool isCrouched = false;
+    public bool isCrouched = false;
     private Vector3 originalScale;
 
     #endregion
@@ -224,8 +224,8 @@ public class FirstPersonController : MonoBehaviour
             // Clamp pitch between lookAngle
             pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
 
-            transform.localEulerAngles = new Vector3(0, yaw, 0);
-            joint.transform.localEulerAngles = new Vector3(pitch, 0, 0);
+            transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, new Vector3(0, yaw, 0), 10f);
+            joint.transform.localEulerAngles = Vector3.Slerp(joint.transform.localEulerAngles, new Vector3(pitch, 0, 0), 10f);
         }
 
         #region Camera Zoom
