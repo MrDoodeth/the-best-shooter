@@ -12,33 +12,16 @@ public class WeaponZoom : MonoBehaviour
     public Vector3 defaultGunPosition;
 
     private bool isZoom = false;
-    public FirstPersonController fpc;
+    [HideInInspector] public FirstPersonController fpc;
 
     private void OnEnable()
     {
-        switch (PlayerController.TypeOfClick)
-        {
-            case TypeOfClick.Click:
-                PlayerController.OnZoomInputDown += Zoom;
-                break;
-            case TypeOfClick.Hold:
-                PlayerController.OnZoomInput += Zoom;
-                break;
-        }
+        PlayerController.OnZoomInput += Zoom;
     }
 
     private void OnDisable()
     {
-        switch (PlayerController.TypeOfClick)
-        {
-            case TypeOfClick.Click:
-                PlayerController.OnZoomInputDown -= Zoom;
-                break;
-            case TypeOfClick.Hold:
-                PlayerController.OnZoomInput -= Zoom;
-                break;
-        }
-
+        PlayerController.OnZoomInput -= Zoom;
         Zoom(false);
         transform.localPosition = defaultGunPosition;
     }
@@ -54,11 +37,11 @@ public class WeaponZoom : MonoBehaviour
     {
         if (isZoom)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, zoomPosition, ergonomics * Time.deltaTime);
+            transform.localPosition = Vector3.Slerp(transform.localPosition, zoomPosition, ergonomics * Time.deltaTime);
         }
         else
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, defaultGunPosition, ergonomics * Time.deltaTime);
+            transform.localPosition = Vector3.Slerp(transform.localPosition, defaultGunPosition, ergonomics * Time.deltaTime);
         }
     }
 }

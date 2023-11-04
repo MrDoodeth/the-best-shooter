@@ -105,9 +105,9 @@ GameObject:
   - component: {fileID: 18198136533641982}
   - component: {fileID: 200763546178363780}
   - component: {fileID: 18198136533641983}
+  - component: {fileID: 2392865066863269297}
   - component: {fileID: 18198136533641980}
   - component: {fileID: 18198136533641981}
-  - component: {fileID: 2392865066863269297}
   m_Layer: 0
   m_Name: Uzi
   m_TagString: Weapone
@@ -153,6 +153,7 @@ MonoBehaviour:
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
   Name: Uzi
+  Size: 2
   automatic: 1
   damage: 16
   maxDistance: 200
@@ -205,6 +206,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   sensitivityMultiplier: 6
+--- !u!114 &2392865066863269297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18198136533641952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.1
+  sensitivityMultiplier: 1
 --- !u!54 &18198136533641980
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -234,20 +249,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04684031, y: 0.22696483, z: 0.3945806}
   m_Center: {x: -0.0012509227, y: -0.03627509, z: 0.030020833}
---- !u!114 &2392865066863269297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18198136533641952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.48
-  sensitivityMultiplier: 0.64
 --- !u!1 &18932745190431081
 GameObject:
   m_ObjectHideFlags: 0

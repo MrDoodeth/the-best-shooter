@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 1829007119099331880}
   - component: {fileID: 3786346487634470170}
   - component: {fileID: 1829007119099331879}
+  - component: {fileID: 5903728323974821215}
   - component: {fileID: 1829007119099331881}
   - component: {fileID: 1829007119099331882}
-  - component: {fileID: 5903728323974821215}
   m_Layer: 0
   m_Name: AK47
   m_TagString: Weapone
@@ -90,6 +90,7 @@ MonoBehaviour:
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
   Name: AK47
+  Size: 2
   automatic: 1
   damage: 100
   maxDistance: 200
@@ -142,6 +143,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   sensitivityMultiplier: 3
+--- !u!114 &5903728323974821215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829007119099331877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.1
+  sensitivityMultiplier: 1
 --- !u!54 &1829007119099331881
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -171,20 +186,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.066241145, y: 0.23983616, z: 0.786204}
   m_Center: {x: 0.010050237, y: -0.07126537, z: 0.06304246}
---- !u!114 &5903728323974821215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829007119099331877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.48
-  sensitivityMultiplier: 0.64
 --- !u!1 &1829007119287524061
 GameObject:
   m_ObjectHideFlags: 0

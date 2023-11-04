@@ -354,9 +354,9 @@ GameObject:
   - component: {fileID: 8178916179672470902}
   - component: {fileID: 2711640644429102420}
   - component: {fileID: 8178916179672470889}
+  - component: {fileID: 2690638802374388557}
   - component: {fileID: 8183252265878648142}
   - component: {fileID: 8183252265878648143}
-  - component: {fileID: 2690638802374388557}
   m_Layer: 0
   m_Name: M1911
   m_TagString: Weapone
@@ -402,6 +402,7 @@ MonoBehaviour:
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
   Name: M1911
+  Size: 1
   automatic: 0
   damage: 26
   maxDistance: 200
@@ -454,6 +455,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   sensitivityMultiplier: 8
+--- !u!114 &2690638802374388557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8180610573758829913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.1
+  sensitivityMultiplier: 1
 --- !u!54 &8183252265878648142
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -483,20 +498,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04607746, y: 0.15523279, z: 0.2525233}
   m_Center: {x: 0.0023729503, y: -0.028475285, z: 0.029661596}
---- !u!114 &2690638802374388557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8180610573758829913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.48
-  sensitivityMultiplier: 0.64
 --- !u!1 &8180629165706775623
 GameObject:
   m_ObjectHideFlags: 0

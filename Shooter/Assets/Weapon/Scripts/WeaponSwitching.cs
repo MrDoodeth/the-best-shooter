@@ -6,39 +6,39 @@ using UnityEngine.Animations.Rigging;
 
 public class WeaponSwitching : MonoBehaviour
 {
-
+    [Header("Arms")]
     [SerializeField] private Transform joint;
     [SerializeField] private Transform rightHand;
     [SerializeField] private Transform leftHand;
     [SerializeField] private Rig armsRig;
-    [SerializeField] private Animator animator;
-    [SerializeField] private FirstPersonController FPC;
+    [Space(10)]
 
-    [Header("References")]
-    [SerializeField] private List<Transform> weapons;
+    [Header("Body")]
+    [SerializeField] private MultiAimConstraint bodyAim;
+    [SerializeField] private Vector3 takeBodyAimPosition;
+    [SerializeField] private MultiAimConstraint bodyStatic;
+    [SerializeField] private Vector3 takeBodyStaticPosition;
     [Space(10)]
 
     [Header("Settings")]
-    //[SerializeField] private float switchTime;
-
-    //Inventoty
     [SerializeField][Range(1f, 5f)] private int inventorySize;
     [SerializeField] private float pickUpDistance;
-    [SerializeField] private int currentInventorySize;
-
     [SerializeField] private float selectionSpeed = 4f;
+    private int currentInventorySize;
+    [Space(10)]
 
+    [SerializeField] private Animator animator;
+    [SerializeField] private FirstPersonController FPC;
+
+    [SerializeField] private List<Transform> weapons;
     private int selectedWeapon;
-    private float timeSinceLastSwitch;
 
-    public Gun gun;
-    [SerializeField] private Rigidbody gunRb;
-    [SerializeField] private BoxCollider col;
-
+    [HideInInspector] public Gun gun;
+    private Rigidbody gunRb;
+    private BoxCollider col;
 
     private void Start()
     {
-        timeSinceLastSwitch = 0f;
         currentInventorySize = inventorySize;
     }
 
@@ -53,6 +53,11 @@ public class WeaponSwitching : MonoBehaviour
             leftHand.DOLocalMove(Vector3.zero, 0.4f);
             rightHand.localRotation = Quaternion.identity;
             leftHand.localRotation = Quaternion.identity;
+
+            armsRig.weight = 0f;
+            bodyAim.data.offset = Vector3.zero;
+            bodyStatic.data.offset = Vector3.zero;
+            animator.SetLayerWeight(1, 0f);
         }
         else
         {
@@ -60,6 +65,11 @@ public class WeaponSwitching : MonoBehaviour
             leftHand.DOLocalMove(leftPos.localPosition, 0.4f);
             rightHand.localRotation = rightPos.localRotation;
             leftHand.localRotation = leftPos.localRotation;
+
+            armsRig.weight = 1f;
+            bodyAim.data.offset = takeBodyAimPosition;
+            bodyStatic.data.offset = takeBodyStaticPosition;
+            animator.SetLayerWeight(1, 1f);
         }
 
 
@@ -170,8 +180,6 @@ public class WeaponSwitching : MonoBehaviour
                 weapons[i].gameObject.SetActive(false);
         }
 
-        timeSinceLastSwitch = 0f;
-
         OnWeaponSelected();
     }
     private void OnWeaponSelected()
@@ -209,28 +217,7 @@ public class WeaponSwitching : MonoBehaviour
     {
         selectedWeapon = _selectedWeapon;
 
-        if (weapons.Count == 0)
-        {
-            gun = null;
-            gunRb = null;
-            col = null;
-
-            PlayerController.OnDropGun?.Invoke();
-            HandMovements(null, null, joint);
-            armsRig.weight = 0f;
-            animator.SetLayerWeight(1, 0f);
-        }
-        else
-        {
-            gun = weapons[selectedWeapon].GetComponent<Gun>();
-            gunRb = weapons[selectedWeapon].GetComponent<Rigidbody>();
-            col = weapons[selectedWeapon].GetComponent<BoxCollider>();
-
-            PlayerController.OnChangedGun?.Invoke();
-            HandMovements(gun.rightHandle, gun.leftHandle, gun.transform);
-            armsRig.weight = 1f;
-            animator.SetLayerWeight(1, 1f);
-        }
+        ChangeSelectedWeapon();
     }
 
     private void ChangeSelectedWeapon()
@@ -243,8 +230,8 @@ public class WeaponSwitching : MonoBehaviour
 
             PlayerController.OnDropGun?.Invoke();
             HandMovements(null, null, joint);
-            armsRig.weight = 0f;
-            animator.SetLayerWeight(1, 0f);
+            FPC.playerCamera.nearClipPlane = 0.08f;
+            PlayerController.isGunPickedUp = false;
         }
         else
         {
@@ -254,8 +241,8 @@ public class WeaponSwitching : MonoBehaviour
 
             PlayerController.OnChangedGun?.Invoke();
             HandMovements(gun.rightHandle, gun.leftHandle, gun.transform);
-            armsRig.weight = 1f;
-            animator.SetLayerWeight(1, 1f);
+            FPC.playerCamera.nearClipPlane = 0.04f;
+            PlayerController.isGunPickedUp = true;
         }
     }
     #endregion
@@ -297,8 +284,5 @@ public class WeaponSwitching : MonoBehaviour
         }
 
         if (previousSelectedWeapon != selectedWeapon) Select(selectedWeapon);
-
-
-        timeSinceLastSwitch += Time.deltaTime;
     }
 }

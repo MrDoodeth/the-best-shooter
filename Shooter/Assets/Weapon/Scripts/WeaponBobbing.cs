@@ -11,14 +11,15 @@ public class WeaponBobbing : MonoBehaviour
     private void Update()
     {
         // get mouse input
-        float mouseX = (Input.GetAxis("Mouse X") + Input.GetAxis("Horizontal") * 0.2f) * sensitivityMultiplier;
-        float mouseY = (Input.GetAxis("Mouse Y") + Input.GetAxis("Vertical") * 0.2f) * sensitivityMultiplier;
+        float mouseX = (Input.GetAxis("Mouse X") + Input.GetAxis("Horizontal") * 0.1f) * sensitivityMultiplier;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivityMultiplier;
+        float mouseZ = -Input.GetAxis("Vertical") * sensitivityMultiplier;
 
         Mathf.Clamp(mouseX, 0f, 1f);
-        Mathf.Clamp(mouseY, 0f, 1f);
+        Mathf.Clamp(mouseZ, 0f, 1f);
 
-        Vector3 targetPosition = new Vector3(mouseX, mouseY, 0f);
+        Vector3 targetPosition = new Vector3(mouseX, mouseY, mouseZ);
 
-        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, speed * Time.deltaTime);
+        transform.localPosition = Vector3.Slerp(transform.localPosition, targetPosition, speed * Time.deltaTime);
     }
 }

@@ -16,12 +16,12 @@ public class PlayerController : MonoBehaviour
     public static Action OnReloadEnd;
 
     public static Action<bool> OnZoomInput;
-    public static Action<bool> OnZoomInputDown;
 
     public static Action OnTakenGun;
     public static Action OnChangedGun;
     public static Action OnDropGun;
 
+    public static bool isGunPickedUp;
     private bool isZoom;
 
     [SerializeField] private KeyCode reloadKey;
@@ -32,35 +32,37 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetMouseButton(0))
-            OnShootInput?.Invoke();
-
-        if (Input.GetMouseButtonDown(0))
-            OnShootInputDown?.Invoke();
-
-        switch (TypeOfClick)
+        if (isGunPickedUp) //if Gun Picked Up
         {
-            case TypeOfClick.Click:
-                {
-                    if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButton(0))
+                OnShootInput?.Invoke();
+
+            if (Input.GetMouseButtonDown(0))
+                OnShootInputDown?.Invoke();
+
+            switch (TypeOfClick)
+            {
+                case TypeOfClick.Click:
                     {
-                        OnZoomInputDown?.Invoke(!isZoom);
-                        isZoom = !isZoom;
+                        if (Input.GetMouseButtonDown(1))
+                        {
+                            OnZoomInput?.Invoke(!isZoom);
+                            isZoom = !isZoom;
+                        }
                     }
-                }
-                break;
-            case TypeOfClick.Hold:
-                {
-                    if (Input.GetMouseButton(1))
-                        OnZoomInput?.Invoke(true);
-                    else
-                        OnZoomInput?.Invoke(false);
-                }
-                break;
-        }
+                    break;
+                case TypeOfClick.Hold:
+                    {
+                        if (Input.GetMouseButton(1))
+                            OnZoomInput?.Invoke(true);
+                        else
+                            OnZoomInput?.Invoke(false);
+                    }
+                    break;
+            }
 
-        if (Input.GetKeyDown(reloadKey))
-            OnReloadInput?.Invoke(); 
-
+            if (Input.GetKeyDown(reloadKey))
+                OnReloadInput?.Invoke();
+        }      
     }
 }

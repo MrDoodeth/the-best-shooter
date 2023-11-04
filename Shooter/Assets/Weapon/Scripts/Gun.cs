@@ -179,9 +179,9 @@ public class Gun : MonoBehaviour
                 transform.localEulerAngles -= Vector3.right * powerOfVerticalRecoil;
                 transform.localEulerAngles -= Vector3.up * Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil);
 
-                //fpc.pitch += -powerOfVerticalRecoil * cameraRecoilRatio;
+                fpc.pitch += -powerOfVerticalRecoil * cameraRecoilRatio;
 
-                //fpc.transform.localEulerAngles = new Vector3(0, fpc.transform.localEulerAngles.y + Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil) / 2, 0);
+                fpc.transform.localEulerAngles = new Vector3(0, fpc.transform.localEulerAngles.y + Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil) / 2, 0);
             }
 
             void OnGunShot()
