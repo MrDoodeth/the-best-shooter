@@ -81,8 +81,8 @@ public class WeaponBreathing : MonoBehaviour
             float Ypos = transform.localPosition.y + Mathf.Sin(_timer) * Y;
             float Zpos = transform.localPosition.z * Z;
 
-            transform.localPosition = new Vector3(Xpos, Ypos, Zpos);
-            transform.localRotation = Quaternion.Euler(Zpos, 0, Xpos);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(Xpos, Ypos, Zpos), 150f * Time.deltaTime);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(Zpos, 0, Xpos), 150f * Time.deltaTime);
         } 
     }
 

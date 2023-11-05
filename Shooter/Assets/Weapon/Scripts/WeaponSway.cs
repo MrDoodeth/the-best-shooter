@@ -16,7 +16,7 @@ public class WeaponSway : MonoBehaviour
 
         Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
         Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
-        Quaternion rotationZ = Quaternion.AngleAxis(-mouseX * 0.6f, Vector3.forward);
+        Quaternion rotationZ = Quaternion.AngleAxis(-mouseX * 0.4f, Vector3.forward);
 
         Quaternion targetRotation = rotationX * rotationY * rotationZ;
 

@@ -16,9 +16,10 @@ public class WeaponBobbing : MonoBehaviour
         float mouseZ = -Input.GetAxis("Vertical") * sensitivityMultiplier;
 
         Mathf.Clamp(mouseX, 0f, 1f);
+        Mathf.Clamp(mouseY, 0f, 1f);
         Mathf.Clamp(mouseZ, 0f, 1f);
 
-        Vector3 targetPosition = new Vector3(mouseX, mouseY, mouseZ);
+        Vector3 targetPosition = new Vector3(mouseX, mouseY, 0);
 
         transform.localPosition = Vector3.Slerp(transform.localPosition, targetPosition, speed * Time.deltaTime);
     }
