@@ -56,7 +56,7 @@ public class WeaponSwitching : MonoBehaviour
 
             armsRig.weight = 0f;
             bodyAim.data.offset = Vector3.zero;
-            bodyStatic.data.offset = Vector3.zero;
+            bodyStatic.data.offset = new Vector3(-20, 0, 0);
             animator.SetLayerWeight(1, 0f);
         }
         else
