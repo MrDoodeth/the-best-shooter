@@ -10,6 +10,7 @@ using System;
 using Random = UnityEngine.Random;
 using DG.Tweening;
 using static UnityEngine.Rendering.DebugUI;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
 public class Gun : MonoBehaviour
@@ -49,6 +50,7 @@ public class Gun : MonoBehaviour
     [SerializeField] public Transform leftHandle;
     [SerializeField] private Transform muzzle;
     [SerializeField] private FirstPersonController fpc;
+    [SerializeField] private Animator animator;
     private float timeSinceLastShoot;
     private Transform fireDirection;
 
@@ -81,6 +83,9 @@ public class Gun : MonoBehaviour
         weaponSway = GetComponent<WeaponSway>();
         weaponBobbing = GetComponent<WeaponBobbing>();
 
+
+        animator = GetComponent<Animator>();
+
         enabled = false;
     }
 
@@ -107,6 +112,8 @@ public class Gun : MonoBehaviour
         PlayerController.OnReloadInput -= StartReload;
         reloading = false;
 
+        animator.enabled = false;
+
         weaponZoom.enabled = false;
         weaponSway.enabled = false;
         weaponBobbing.enabled = false;
@@ -119,38 +126,52 @@ public class Gun : MonoBehaviour
     {
         if (CanReload())
         {
-            StartCoroutine(Reload());
-        }
+            weaponZoom.enabled = false;
+            weaponSway.enabled = false;
+            weaponBobbing.enabled = false;
 
-        IEnumerator Reload()
-        {
             reloading = true;
-            yield return new WaitForSeconds(reloadTime);
 
+            animator.enabled = true;
+            animator.SetBool("isReloading", true);
 
-            if (enabled == true)
-            {
-                ReloadEnd();
-            }
-
-            PlayerController.OnReloadEnd?.Invoke();
-            reloading = false;
         }
     }
 
-    private void ReloadEnd()
+    private void ReloadEnd() //animator
     {
-        int neededAmmo = magSize - currentAmmo;
-        if (neededAmmo >= reserveAmmo)
+        if (enabled == true)
         {
-            currentAmmo += reserveAmmo;
-            reserveAmmo = 0;
+            int neededAmmo = magSize - currentAmmo;
+            if (neededAmmo >= reserveAmmo)
+            {
+                currentAmmo += reserveAmmo;
+                reserveAmmo = 0;
+            }
+            else
+            {
+                currentAmmo = magSize;
+                reserveAmmo -= neededAmmo;
+            }
+
+            PlayerController.OnReloadEnd?.Invoke();
+
+            reloading = false;
+            animator.SetBool("isReloading", false);
+
+            weaponZoom.enabled = true;
+            weaponSway.enabled = true;
+            weaponBobbing.enabled = true;
+
+            AnimatorOff();
         }
-        else
-        {
-            currentAmmo = magSize;
-            reserveAmmo -= neededAmmo;
-        }
+    }
+
+
+    private async void AnimatorOff()
+    {
+        await Task.Delay(20);
+        animator.enabled = false;
     }
 
     private bool CanShoot() => !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);

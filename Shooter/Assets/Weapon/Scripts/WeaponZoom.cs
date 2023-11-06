@@ -22,8 +22,8 @@ public class WeaponZoom : MonoBehaviour
     private void OnDisable()
     {
         PlayerController.OnZoomInput -= Zoom;
-        Zoom(false);
         transform.localPosition = defaultGunPosition;
+        Zoom(false);
     }
     private void Zoom(bool isPressed)
     {

@@ -42,18 +42,18 @@ public class WeaponSwitching : MonoBehaviour
         currentInventorySize = inventorySize;
     }
 
-    private void HandMovements(Transform rightPos, Transform leftPos, Transform parent)
+    private void HandMovements(Transform rightPos, Transform leftPos)
     {
-        rightHand.SetParent(parent);
-        leftHand.SetParent(parent);
+        rightHand.SetParent(rightPos);
+        rightHand.DOLocalMove(Vector3.zero, 0.4f);
+        rightHand.localRotation = Quaternion.identity;
 
-        if (rightPos == null || leftPos == null)
+        leftHand.SetParent(leftPos);
+        leftHand.DOLocalMove(Vector3.zero, 0.4f);
+        leftHand.localRotation = Quaternion.identity;
+
+        if (rightPos == joint || leftPos == joint)
         {
-            rightHand.DOLocalMove(Vector3.zero, 0.4f);
-            leftHand.DOLocalMove(Vector3.zero, 0.4f);
-            rightHand.localRotation = Quaternion.identity;
-            leftHand.localRotation = Quaternion.identity;
-
             armsRig.weight = 0f;
             bodyAim.data.offset = Vector3.zero;
             bodyStatic.data.offset = new Vector3(-20, 0, 0);
@@ -61,19 +61,11 @@ public class WeaponSwitching : MonoBehaviour
         }
         else
         {
-            rightHand.DOLocalMove(rightPos.localPosition, 0.4f);
-            leftHand.DOLocalMove(leftPos.localPosition, 0.4f);
-            rightHand.localRotation = rightPos.localRotation;
-            leftHand.localRotation = leftPos.localRotation;
-
             armsRig.weight = 1f;
             bodyAim.data.offset = takeBodyAimPosition;
             bodyStatic.data.offset = takeBodyStaticPosition;
             animator.SetLayerWeight(1, 1f);
-        }
-
-
-        
+        }       
     }
     private bool CanPickUp(int gunInvSize) => currentInventorySize >= gunInvSize;
     private void PickUp()
@@ -229,7 +221,7 @@ public class WeaponSwitching : MonoBehaviour
             col = null;
 
             PlayerController.OnDropGun?.Invoke();
-            HandMovements(null, null, joint);
+            HandMovements(joint, joint);
             FPC.playerCamera.nearClipPlane = 0.08f;
             PlayerController.isGunPickedUp = false;
         }
@@ -240,7 +232,7 @@ public class WeaponSwitching : MonoBehaviour
             col = weapons[selectedWeapon].GetComponent<BoxCollider>();
 
             PlayerController.OnChangedGun?.Invoke();
-            HandMovements(gun.rightHandle, gun.leftHandle, gun.transform);
+            HandMovements(gun.rightHandle, gun.leftHandle);
             FPC.playerCamera.nearClipPlane = 0.04f;
             PlayerController.isGunPickedUp = true;
         }
