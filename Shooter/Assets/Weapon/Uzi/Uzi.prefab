@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 2392865066863269297}
   - component: {fileID: 18198136533641980}
   - component: {fileID: 18198136533641981}
+  - component: {fileID: 1559947911}
   m_Layer: 0
   m_Name: Uzi
   m_TagString: Weapone
@@ -172,6 +173,7 @@ MonoBehaviour:
   leftHandle: {fileID: 18198135312184129}
   muzzle: {fileID: 18198136038128552}
   fpc: {fileID: 0}
+  animator: {fileID: 0}
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
   weaponBobbing: {fileID: 0}
@@ -249,6 +251,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04684031, y: 0.22696483, z: 0.3945806}
   m_Center: {x: -0.0012509227, y: -0.03627509, z: 0.030020833}
+--- !u!95 &1559947911
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18198136533641952}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &18932745190431081
 GameObject:
   m_ObjectHideFlags: 0

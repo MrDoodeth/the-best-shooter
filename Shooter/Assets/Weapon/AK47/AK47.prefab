@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 5903728323974821215}
   - component: {fileID: 1829007119099331881}
   - component: {fileID: 1829007119099331882}
+  - component: {fileID: 719624726}
   m_Layer: 0
   m_Name: AK47
   m_TagString: Weapone
@@ -109,6 +110,7 @@ MonoBehaviour:
   leftHandle: {fileID: 1829007119287524062}
   muzzle: {fileID: 1829007119323588178}
   fpc: {fileID: 0}
+  animator: {fileID: 0}
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
   weaponBobbing: {fileID: 0}
@@ -186,6 +188,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.066241145, y: 0.23983616, z: 0.786204}
   m_Center: {x: 0.010050237, y: -0.07126537, z: 0.06304246}
+--- !u!95 &719624726
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829007119099331877}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1829007119287524061
 GameObject:
   m_ObjectHideFlags: 0

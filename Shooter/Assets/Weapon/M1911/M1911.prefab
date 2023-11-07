@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 2690638802374388557}
   - component: {fileID: 8183252265878648142}
   - component: {fileID: 8183252265878648143}
+  - component: {fileID: 475303178}
   m_Layer: 0
   m_Name: M1911
   m_TagString: Weapone
@@ -421,6 +422,7 @@ MonoBehaviour:
   leftHandle: {fileID: 8178916180163578512}
   muzzle: {fileID: 7456368721888274317}
   fpc: {fileID: 0}
+  animator: {fileID: 0}
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
   weaponBobbing: {fileID: 0}
@@ -498,6 +500,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04607746, y: 0.15523279, z: 0.2525233}
   m_Center: {x: 0.0023729503, y: -0.028475285, z: 0.029661596}
+--- !u!95 &475303178
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8180610573758829913}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4bd39ce965e85b64c8a6d2061f6153ac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8180629165706775623
 GameObject:
   m_ObjectHideFlags: 0
