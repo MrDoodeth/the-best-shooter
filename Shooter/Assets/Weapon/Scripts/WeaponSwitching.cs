@@ -101,6 +101,7 @@ public class WeaponSwitching : MonoBehaviour
         if (weapons.Count != 0)
         {
             gunRb.isKinematic = false;
+            gun.CancelInvoke();
             gun.enabled = false;
             col.enabled = true;
             gunRb.AddForce(transform.forward * 4f + transform.up * 2f, ForceMode.Impulse);  

@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Timeline;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using ShooterInterfaces;
 using System;
 using Random = UnityEngine.Random;
-using DG.Tweening;
-using static UnityEngine.Rendering.DebugUI;
+
 using System.Threading.Tasks;
 
 [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
@@ -131,8 +124,8 @@ public class Gun : MonoBehaviour
             weaponBobbing.enabled = false;
 
             reloading = true;
-
             animator.enabled = true;
+
             animator.SetBool("isReloading", true);
 
         }
@@ -159,20 +152,21 @@ public class Gun : MonoBehaviour
             reloading = false;
             animator.SetBool("isReloading", false);
 
-            weaponZoom.enabled = true;
-            weaponSway.enabled = true;
-            weaponBobbing.enabled = true;
-
-            AnimatorOff();
+            CancelReload();
         }
     }
 
-
-    private async void AnimatorOff()
+    public void CancelReload()
     {
-        await Task.Delay(20);
-        animator.enabled = false;
+        weaponZoom.enabled = true;
+        weaponSway.enabled = true;
+        weaponBobbing.enabled = true;
+
+        animator.SetBool("isReloading", false);
+        reloading = false;
     }
+
+    private void AnimatorOff() => animator.enabled = false;
 
     private bool CanShoot() => !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);
     private void Shoot()

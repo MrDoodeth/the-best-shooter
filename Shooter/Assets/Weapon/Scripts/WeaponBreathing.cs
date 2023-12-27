@@ -69,12 +69,6 @@ public class WeaponBreathing : MonoBehaviour
         timer += Time.deltaTime * stayTimeScale;
         Shake(timer, BreathAmount.x, BreathAmount.y, 1f);
 
-
-
-
-
-
-
         void Shake(float _timer, float X, float Y, float Z)
         {
             float Xpos = transform.localPosition.x + Mathf.Cos(_timer + Shift) * X;

@@ -110,7 +110,7 @@ MonoBehaviour:
   leftHandle: {fileID: 1829007119287524062}
   muzzle: {fileID: 1829007119323588178}
   fpc: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 719624726}
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
   weaponBobbing: {fileID: 0}
@@ -198,7 +198,7 @@ Animator:
   m_GameObject: {fileID: 1829007119099331877}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa7fe6918a9048b45946ce521ea56505, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

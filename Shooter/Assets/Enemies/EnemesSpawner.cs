@@ -238,12 +238,6 @@ public class EnemesSpawner : MonoBehaviour
     private bool isPause = false;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            isPause = !isPause;
-            EditorApplication.isPaused = isPause;
-        }
-
         timer += Time.deltaTime;
 
         Debug.Log(needEnemy);

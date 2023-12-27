@@ -422,7 +422,7 @@ MonoBehaviour:
   leftHandle: {fileID: 8178916180163578512}
   muzzle: {fileID: 7456368721888274317}
   fpc: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 475303178}
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
   weaponBobbing: {fileID: 0}
