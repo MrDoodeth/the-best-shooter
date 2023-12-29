@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine.Animations.Rigging;
 
-public class WeaponSwitching : MonoBehaviour
+public class WeaponsSwitching : MonoBehaviour
 {
     [Header("Arms")]
     [SerializeField] private Transform joint;
@@ -70,13 +70,16 @@ public class WeaponSwitching : MonoBehaviour
     private bool CanPickUp(int gunInvSize) => currentInventorySize >= gunInvSize;
     private void PickUp()
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpDistance))
+        if ((weapons.Count != 0 && !gun.reloading) || weapons.Count == 0)
         {
-            if (hit.transform.tag == "Weapone" && CanPickUp(hit.transform.GetComponent<Gun>().Size))
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpDistance))
             {
-                GiveWeapon(hit.transform);
+                if (hit.transform.tag == "Weapone" && CanPickUp(hit.transform.GetComponent<Gun>().Size))
+                {
+                    GiveWeapon(hit.transform);
+                }
             }
         }
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class WeaponRunPosition : MonoBehaviour
 {
     [SerializeField] private FirstPersonController fpc;
-    [SerializeField] private WeaponSwitching weaponSwitching;
+    [SerializeField] private WeaponsSwitching weaponSwitching;
     public float speed;
     public Transform runTransform;
 
