@@ -3,8 +3,6 @@ using ShooterInterfaces;
 using System;
 using Random = UnityEngine.Random;
 
-using System.Threading.Tasks;
-
 [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
 public class Gun : MonoBehaviour
 {
@@ -35,7 +33,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private int magSize;
     [SerializeField] private float fireRate;
     [SerializeField] private float reloadTime;
-    [SerializeField] private bool reloading = false;
+    public bool reloading = false;
     [Space(10)]
 
     [Header("Gun Initialization")]
@@ -84,6 +82,32 @@ public class Gun : MonoBehaviour
 
     private void OnEnable()
     {
+        TurnOnControl();
+        animator.enabled = false;
+    }
+    private void OnDisable()
+    {
+        TurnOffControl();
+        CancelReload();
+    }
+
+
+    private void TurnOffControl()
+    {
+        if (automatic)
+            PlayerController.OnShootInput -= Shoot;
+        else
+            PlayerController.OnShootInputDown -= Shoot;
+
+        PlayerController.OnReloadInput -= StartReload;
+
+        weaponZoom.enabled = false;
+        weaponSway.enabled = false;
+        weaponBobbing.enabled = false;
+    }
+
+    private void TurnOnControl()
+    {
         if (automatic)
             PlayerController.OnShootInput += Shoot;
         else
@@ -95,34 +119,13 @@ public class Gun : MonoBehaviour
         weaponSway.enabled = true;
         weaponBobbing.enabled = true;
     }
-    private void OnDisable()
-    {
-        if (automatic)
-            PlayerController.OnShootInput -= Shoot;
-        else
-            PlayerController.OnShootInputDown -= Shoot;
-
-        PlayerController.OnReloadInput -= StartReload;
-        reloading = false;
-
-        animator.enabled = false;
-
-        weaponZoom.enabled = false;
-        weaponSway.enabled = false;
-        weaponBobbing.enabled = false;
-    }
-
-
 
     private bool CanReload() => !reloading && currentAmmo < magSize && reserveAmmo > 0 && this.gameObject.activeSelf;
     private void StartReload()
     {
         if (CanReload())
         {
-            weaponZoom.enabled = false;
-            weaponSway.enabled = false;
-            weaponBobbing.enabled = false;
-
+            TurnOffControl();
             reloading = true;
             animator.enabled = true;
 
@@ -151,22 +154,22 @@ public class Gun : MonoBehaviour
 
             reloading = false;
             animator.SetBool("isReloading", false);
-
             CancelReload();
+            TurnOnControl();
         }
     }
 
     public void CancelReload()
     {
-        weaponZoom.enabled = true;
-        weaponSway.enabled = true;
-        weaponBobbing.enabled = true;
-
         animator.SetBool("isReloading", false);
-        reloading = false;
     }
 
-    private void AnimatorOff() => animator.enabled = false;
+    private void AnimatorOff()
+    {
+        animator.enabled = false;
+        reloading = false;
+        //Debug.LogError("Stop");
+    }
 
     private bool CanShoot() => !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);
     private void Shoot()

@@ -98,17 +98,17 @@ public class WeaponSwitching : MonoBehaviour
 
     private void Drop()
     {
-        if (weapons.Count != 0)
+        if (weapons.Count != 0 && !gun.reloading)
         {
-            gunRb.isKinematic = false;
-            gun.CancelInvoke();
-            gun.enabled = false;
-            col.enabled = true;
-            gunRb.AddForce(transform.forward * 4f + transform.up * 2f, ForceMode.Impulse);  
-            weapons[selectedWeapon].SetParent(null);
-
             gun.SetFPC(null);
             currentInventorySize += gun.Size;
+            gun.enabled = false;
+
+            gunRb.isKinematic = false;
+            col.enabled = true;
+            gunRb.AddForce(transform.forward * 4f + transform.up * 2f, ForceMode.Impulse);  
+
+            weapons[selectedWeapon].SetParent(null);
             weapons.Remove(weapons[selectedWeapon]);
 
             gun = null;
@@ -147,11 +147,12 @@ public class WeaponSwitching : MonoBehaviour
 
     private void GiveWeapon(Transform wp)
     {
-        weapons.Add(wp);
 
         gun = wp.GetComponent<Gun>();
         gunRb = wp.GetComponent<Rigidbody>();
         col = wp.GetComponent<BoxCollider>();
+
+        weapons.Add(wp);
 
         wp.position = Vector3.Lerp(wp.position, gun.weaponZoom.defaultGunPosition, selectionSpeed * Time.deltaTime);
         PlayerController.OnTakenGun?.Invoke();
@@ -242,7 +243,6 @@ public class WeaponSwitching : MonoBehaviour
     private void Update()
     {
         Debug.DrawRay(transform.position, transform.forward, Color.green);
-
         InventoryState();
     }
     private void InventoryState()
@@ -250,18 +250,18 @@ public class WeaponSwitching : MonoBehaviour
         int previousSelectedWeapon = selectedWeapon + 1;
 
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)  //timeSinceLastSwitch >= switchTime
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && !gun.reloading)  //timeSinceLastSwitch >= switchTime
             ChangeSelectedWeapon("Up");
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)  //timeSinceLastSwitch >= switchTime
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && !gun.reloading)  //timeSinceLastSwitch >= switchTime
             ChangeSelectedWeapon("Up");
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && weapons.Count >= 1)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && weapons.Count >= 1 && !gun.reloading)
         {
             ChangeSelectedWeapon(0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && weapons.Count >= 2)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && weapons.Count >= 2 && !gun.reloading)
         {
             ChangeSelectedWeapon(1);
         }

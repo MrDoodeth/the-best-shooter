@@ -1,14 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Tools;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public TypeOfClick typeOfClick;
+    public TypeOfClick typeOfClick; //Show in Editor
     public static TypeOfClick TypeOfClick;
-
     public static Action OnShootInput;
     public static Action OnShootInputDown;
 
