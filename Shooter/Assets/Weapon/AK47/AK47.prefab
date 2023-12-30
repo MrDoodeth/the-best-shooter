@@ -93,7 +93,7 @@ MonoBehaviour:
   Name: AK47
   Size: 2
   automatic: 1
-  damage: 100
+  damage: 45
   maxDistance: 200
   powerOfVerticalRecoil: 2.5
   powerOfHorizontalRecoil: 1
