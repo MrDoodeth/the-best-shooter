@@ -13,7 +13,7 @@ public class ExplosiveEnemyAttack : EnemyAttack
     private bool endExplosion;
 
     private ExplosiveEnemyHealth exHealth;
-    public override void Attack(float damage)
+    public override void Attack()
     {
         if (isAlive)
             exHealth.Die();

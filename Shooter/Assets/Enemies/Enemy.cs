@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody), typeof(Collider))]
 public class Enemy : MonoBehaviour
 {
     protected NavMeshAgent agent;
+    protected Animator animator;
     protected GameObject[] playerPosition;
     protected bool playerInAttackRange;
-    protected bool isAlive = true;
+    public bool isAlive = true;
+    protected Enemy mainEnemy;
     protected bool onFloor;
     protected bool alreadyAttacked;
     protected Rigidbody rb;
@@ -18,11 +18,13 @@ public class Enemy : MonoBehaviour
         Init();
     }
 
-    public void Init()
+    protected void Init()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+        mainEnemy = this;
         playerPosition = GameObject.FindGameObjectsWithTag("Player");
     }
     private void OnCollisionEnter(Collision collision)

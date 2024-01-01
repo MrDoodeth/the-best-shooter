@@ -1,15 +1,16 @@
 using ShooterInterfaces;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class EnemyAttack : Enemy, IAttackable
 {
+
     [Header("Fight")]
     [SerializeField] private float attackRange = 1.6f;
     [SerializeField] private float damage = 33f;
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private float timeBetweenAttack;
+
+    private bool isRun;
+    private bool isAttack;
     void Start()
     {
         Init();
@@ -22,24 +23,23 @@ public class EnemyAttack : Enemy, IAttackable
             agent.SetDestination(transform.position);
 
         transform.LookAt(playerPosition[0].transform);
-
+        isAttack = true;
+        isRun = false;
         if (!alreadyAttacked)
         {
             //attack           
             alreadyAttacked = true;
-            Attack(damage);
-            Invoke(nameof(ResetAttack), timeBetweenAttack);
         }
     }
 
-    public virtual void Attack(float _damage)
+    public virtual void Attack()
     {
         Collider[] playerHit = Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
 
         foreach (Collider hit in playerHit)
         {
             if (hit.CompareTag("Player"))
-                hit.GetComponent<IDamageable>().TakeDamage(_damage);
+                hit.GetComponent<IDamageable>().TakeDamage(damage);
         }
     }
     private void ResetAttack()
@@ -50,13 +50,18 @@ public class EnemyAttack : Enemy, IAttackable
 
     private void ChasePlayer()
     {
-        if (agent.isOnNavMesh == true)
+        if (agent.isOnNavMesh == true && !animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK"))
             agent.SetDestination(playerPosition[0].transform.position);
+        isAttack = false;
+        isRun = true;
     }
     void Update()
     {
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        if (isAlive)
+
+        AnimationsUpdate();
+
+        if (mainEnemy.isAlive)
         {
             if (playerInAttackRange)
             {
@@ -64,9 +69,14 @@ public class EnemyAttack : Enemy, IAttackable
             }
             else
             {
-                Invoke(nameof(ChasePlayer), 0.5f);
+                ChasePlayer();
             }
         }
+    }
+    private void AnimationsUpdate()
+    {
+        animator.SetBool("isRunning", isRun);
+        animator.SetBool("isAttacking", isAttack);
     }
     private void OnDrawGizmos()
     {

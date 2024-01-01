@@ -9,7 +9,7 @@ namespace ShooterInterfaces
 
     public interface IAttackable
     {
-        public void Attack(float damage);
+        public void Attack();
     }
 }
 

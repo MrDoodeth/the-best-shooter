@@ -1,11 +1,9 @@
 using ShooterInterfaces;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-
 public class EnemyHealth : Enemy, IDamageable
 {
+
     [Header("Health")]
     [SerializeField][Range(1, 5000)] private float maxHealth = 100;
     protected float currentHealth;
@@ -19,7 +17,7 @@ public class EnemyHealth : Enemy, IDamageable
     {
         currentHealth -= damage;
 
-        agent.speed *= 0.8f;
+        //agent.speed *= 0.8f;
 
 
 
@@ -39,7 +37,7 @@ public class EnemyHealth : Enemy, IDamageable
         IEnumerator Death()
         {
             EnemesSpawner.OnEnemyDied();
-            isAlive = false;
+            mainEnemy.isAlive = false;
             EnemesSpawner.OnEnemyDeath?.Invoke();
             yield return null;
         }
@@ -51,11 +49,12 @@ public class EnemyHealth : Enemy, IDamageable
 
         IEnumerator Damage()
         {
-            var Render = GetComponent<MeshRenderer>();
-            Color col = Render.material.color;
-            Render.material.color = Color.white;
-            yield return new WaitForSeconds(0.1f);
-            Render.material.color = col;
+            animator.SetTrigger("isHit");
+            animator.SetBool("isMirror",Random.value > 0.5f);
+            agent.enabled = false;
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 0.26f);
+            agent.enabled = true;
+            yield return null;
         }
     }
     public void GetContusion() => StartCoroutine(Contusion());
@@ -63,12 +62,12 @@ public class EnemyHealth : Enemy, IDamageable
     IEnumerator Contusion()
     {
         rb.isKinematic = false;
-        isAlive = false;
+        mainEnemy.isAlive = false;
         agent.enabled = false;
         yield return new WaitForSeconds(3f);
         yield return new WaitUntil(() => onFloor == true);
         rb.isKinematic = true;
-        isAlive = true;
+        mainEnemy.isAlive = true;
         agent.enabled = true;
         yield return null;
     }
