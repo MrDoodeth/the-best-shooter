@@ -6,6 +6,9 @@ public class EnemyHealth : Enemy, IDamageable
 
     [Header("Health")]
     [SerializeField][Range(1, 5000)] private float maxHealth = 100;
+    [SerializeField][Range(1, 30)] private float contusionDelay = 3f;
+    [SerializeField][Range(1, 30)] private float deathDelay = 3f;
+    [HideInInspector] public bool isAlive = true;
     protected float currentHealth;
 
     void Start()
@@ -24,7 +27,6 @@ public class EnemyHealth : Enemy, IDamageable
         if (currentHealth <= 0)
         {
             Die();
-            Destroy(gameObject);
         }
         else
         {
@@ -37,8 +39,14 @@ public class EnemyHealth : Enemy, IDamageable
         IEnumerator Death()
         {
             EnemesSpawner.OnEnemyDied();
-            mainEnemy.isAlive = false;
+            isAlive = false;
             EnemesSpawner.OnEnemyDeath?.Invoke();
+            isAlive = false;
+            agent.enabled = false;
+            MakeKinematic(false);
+            animator.enabled = false;
+            yield return new WaitForSeconds(deathDelay);
+            Destroy(gameObject);
             yield return null;
         }
     }
@@ -54,21 +62,28 @@ public class EnemyHealth : Enemy, IDamageable
             agent.enabled = false;
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 0.26f);
             agent.enabled = true;
-            yield return null;
         }
     }
     public void GetContusion() => StartCoroutine(Contusion());
 
     IEnumerator Contusion()
     {
-        rb.isKinematic = false;
-        mainEnemy.isAlive = false;
+        isAlive = false;
         agent.enabled = false;
-        yield return new WaitForSeconds(3f);
-        yield return new WaitUntil(() => onFloor == true);
-        rb.isKinematic = true;
-        mainEnemy.isAlive = true;
+        MakeKinematic(false);
+        animator.enabled = false;
+        yield return new WaitForSeconds(contusionDelay);
+        yield return new WaitUntil(() => agent.isOnNavMesh);
+        { 
+            //return rigs in world position
+            transform.position = collider.transform.position;
+            collider.transform.localPosition = Vector3.zero;
+        }
+        animator.enabled = true;
+        animator.SetTrigger("isStandUp");
+        MakeKinematic(true);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 0.26f);
         agent.enabled = true;
-        yield return null;
+        isAlive = true;
     }
 }

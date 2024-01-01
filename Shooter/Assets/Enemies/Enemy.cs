@@ -1,18 +1,16 @@
 using UnityEngine;
 using UnityEngine.AI;
-[RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody), typeof(Collider))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
     protected NavMeshAgent agent;
     protected Animator animator;
+    protected Rigidbody[] allRigidbodys;
     protected GameObject[] playerPosition;
     protected bool playerInAttackRange;
-    public bool isAlive = true;
-    protected Enemy mainEnemy;
     protected bool onFloor;
     protected bool alreadyAttacked;
-    protected Rigidbody rb;
-    protected Collider col;
+    protected Collider collider;
     void Start()
     {
         Init();
@@ -20,11 +18,11 @@ public class Enemy : MonoBehaviour
 
     protected void Init()
     {
+        allRigidbodys = GetComponentsInChildren<Rigidbody>();
+        collider = GetComponentInChildren<Collider>();
+        MakeKinematic(true);
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
-        col = GetComponent<Collider>();
-        mainEnemy = this;
         playerPosition = GameObject.FindGameObjectsWithTag("Player");
     }
     private void OnCollisionEnter(Collision collision)
@@ -37,5 +35,13 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Floor"))
             onFloor = false;
+    }
+
+    protected void MakeKinematic(bool _iskinematic)
+    {
+        for (int i = 0; i < allRigidbodys.Length; i++)
+        {
+            allRigidbodys[i].isKinematic = _iskinematic;
+        }
     }
 }

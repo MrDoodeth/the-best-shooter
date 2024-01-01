@@ -1,6 +1,4 @@
 using ShooterInterfaces;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ExplosiveEnemyAttack : EnemyAttack
@@ -15,7 +13,7 @@ public class ExplosiveEnemyAttack : EnemyAttack
     private ExplosiveEnemyHealth exHealth;
     public override void Attack()
     {
-        if (isAlive)
+        if (exHealth.isAlive)
             exHealth.Die();
     }
     public void ExploedWithDelay()
@@ -31,7 +29,7 @@ public class ExplosiveEnemyAttack : EnemyAttack
 
         foreach (var col in overlappedColliders)
         {
-            IDamageable entity = col.GetComponent<IDamageable>();
+            IDamageable entity = col.GetComponentInParent<IDamageable>();
 
             if (entity != null)
             {
@@ -41,21 +39,21 @@ public class ExplosiveEnemyAttack : EnemyAttack
                     entity?.TakeDamage(farExplosionDamage);
             }
 
-            EnemyHealth enemy = col.GetComponent<EnemyHealth>();
+            EnemyHealth enemy = col.GetComponentInParent<EnemyHealth>();
 
             if (enemy != null)
             {
                 enemy.GetContusion();
             }
 
-            Rigidbody rb = col.attachedRigidbody;
-
-            if (rb != null)
+            Rigidbody[] rb = col.GetComponents<Rigidbody>();
+            for (int i = 0; i < rb.Length; i++)
             {
-                rb.AddExplosionForce(force, transform.position, radius, 3f, ForceMode.Impulse);
+                rb[i].AddExplosionForce(force, transform.position, radius, 3f, ForceMode.Impulse);
             }
         }
         endExplosion = true;
+        Debug.Log("Boom");
         Destroy(gameObject);
     }
 

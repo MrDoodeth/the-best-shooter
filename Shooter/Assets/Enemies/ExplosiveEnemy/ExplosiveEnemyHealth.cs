@@ -11,7 +11,6 @@ public class ExplosiveEnemyHealth : EnemyHealth
     public override void Die()
     {
         base.Die();
-        Debug.Log("Boom");
         exAttack.ExploedWithDelay();
     }
     void Start()

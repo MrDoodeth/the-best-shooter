@@ -1,7 +1,8 @@
 using ShooterInterfaces;
 using UnityEngine;
 public class EnemyAttack : Enemy, IAttackable
-{
+{   
+    private EnemyHealth health;
 
     [Header("Fight")]
     [SerializeField] private float attackRange = 1.6f;
@@ -13,6 +14,7 @@ public class EnemyAttack : Enemy, IAttackable
     private bool isAttack;
     void Start()
     {
+        health = GetComponent<EnemyHealth>();
         Init();
     }
 
@@ -50,7 +52,7 @@ public class EnemyAttack : Enemy, IAttackable
 
     private void ChasePlayer()
     {
-        if (agent.isOnNavMesh == true && !animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK"))
+        if (agent.isOnNavMesh && !animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK"))
             agent.SetDestination(playerPosition[0].transform.position);
         isAttack = false;
         isRun = true;
@@ -61,7 +63,7 @@ public class EnemyAttack : Enemy, IAttackable
 
         AnimationsUpdate();
 
-        if (mainEnemy.isAlive)
+        if (health.isAlive)
         {
             if (playerInAttackRange)
             {
