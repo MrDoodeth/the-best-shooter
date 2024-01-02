@@ -46,7 +46,7 @@ public class EnemyHealth : Enemy, IDamageable
             MakeKinematic(false);
             animator.enabled = false;
             yield return new WaitForSeconds(deathDelay);
-            //Destroy(gameObject);
+            Destroy(gameObject);
             yield return null;
         }
     }
@@ -60,7 +60,7 @@ public class EnemyHealth : Enemy, IDamageable
             animator.SetTrigger("isHit");
             animator.SetBool("isMirror",Random.value > 0.5f);
             agent.enabled = false;
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 0.26f);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 0.5f);
             agent.enabled = true;
         }
     }
@@ -82,7 +82,7 @@ public class EnemyHealth : Enemy, IDamageable
         animator.enabled = true;
         animator.SetTrigger("isStandUp");
         MakeKinematic(true);
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 0.26f);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 0.5f);
         agent.enabled = true;
         isAlive = true;
     }
