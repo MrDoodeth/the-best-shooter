@@ -2,6 +2,7 @@ using UnityEngine;
 using ShooterInterfaces;
 using System;
 using Random = UnityEngine.Random;
+using UnityEditor.ShaderGraph.Internal;
 
 [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
 public class Gun : MonoBehaviour
@@ -17,6 +18,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private bool automatic;
     [SerializeField] private int damage;
     [SerializeField] private float maxDistance;
+    [SerializeField][Min(0.01f)] private float powerOfShot = 10f;
     [Space(10)]
 
     [Header("Recoil")]
@@ -168,7 +170,6 @@ public class Gun : MonoBehaviour
     {
         animator.enabled = false;
         reloading = false;
-        //Debug.LogError("Stop");
     }
 
     private bool CanShoot() => !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);
@@ -184,7 +185,11 @@ public class Gun : MonoBehaviour
             {
                 hitInfo.transform.GetComponentInParent<IDamageable>()?.TakeDamage(damage);
                 var hole = Instantiate(bulletHole, hitInfo.point, Quaternion.identity);
-                hole.transform.SetParent(hitInfo.transform);            
+                hole.transform.SetParent(hitInfo.transform);
+                var rb = hitInfo.transform.GetComponent<Rigidbody>();
+                if (rb != null)
+                    rb.AddForceAtPosition(fireDirection.forward * powerOfShot, hitInfo.point, ForceMode.Impulse);
+
                 OnGunShot();
             }
 

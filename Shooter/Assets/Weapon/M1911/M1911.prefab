@@ -407,6 +407,7 @@ MonoBehaviour:
   automatic: 0
   damage: 26
   maxDistance: 200
+  powerOfShot: 50
   powerOfVerticalRecoil: 2.5
   powerOfHorizontalRecoil: 2
   powerOfForwardRecoil: 0.02

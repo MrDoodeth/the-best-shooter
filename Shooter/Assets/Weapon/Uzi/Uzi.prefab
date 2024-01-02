@@ -158,6 +158,7 @@ MonoBehaviour:
   automatic: 1
   damage: 16
   maxDistance: 200
+  powerOfShot: 50
   powerOfVerticalRecoil: 2.5
   powerOfHorizontalRecoil: 1.5
   powerOfForwardRecoil: 0.02
@@ -166,7 +167,7 @@ MonoBehaviour:
   reserveAmmo: 999
   maxReserveAmmo: 999
   magSize: 32
-  fireRate: 600
+  fireRate: 700
   reloadTime: 2
   reloading: 0
   rightHandle: {fileID: 18198135315490283}
