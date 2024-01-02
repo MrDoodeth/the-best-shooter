@@ -46,7 +46,7 @@ public class EnemyHealth : Enemy, IDamageable
             MakeKinematic(false);
             animator.enabled = false;
             yield return new WaitForSeconds(deathDelay);
-            Destroy(gameObject);
+            //Destroy(gameObject);
             yield return null;
         }
     }
