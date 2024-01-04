@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     protected bool playerInAttackRange;
     protected bool onFloor;
     protected bool alreadyAttacked;
-    protected Collider collider;
+    protected Collider collid;
     void Start()
     {
         Init();
@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     protected void Init()
     {
         allRigidbodys = GetComponentsInChildren<Rigidbody>();
-        collider = GetComponentInChildren<Collider>();
+        collid = GetComponentInChildren<Collider>();
         MakeKinematic(true);
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();

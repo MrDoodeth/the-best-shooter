@@ -76,8 +76,8 @@ public class EnemyHealth : Enemy, IDamageable
         yield return new WaitUntil(() => agent.isOnNavMesh);
         { 
             //return rigs in world position
-            transform.position = collider.transform.position;
-            collider.transform.localPosition = Vector3.zero;
+            transform.position = collid.transform.position;
+            collid.transform.localPosition = Vector3.zero;
         }
         animator.enabled = true;
         animator.SetTrigger("isStandUp");
