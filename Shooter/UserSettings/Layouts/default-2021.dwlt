@@ -43,7 +43,7 @@ MonoBehaviour:
     width: 2560
     height: 1367
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 121}
   m_MaxSize: {x: 4000, y: 4021}
   vertical: 0
-  controlID: 58
+  controlID: 108
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 51
+  controlID: 66
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 220
+  controlID: 216
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -292,8 +292,8 @@ MonoBehaviour:
     y: 1028
     width: 1628
     height: 289
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 86
+  controlID: 19
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 52
+  controlID: 67
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -678,7 +678,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
-      displayed: 1
+      displayed: 0
       snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -828,9 +828,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 8.897342, y: 3.7089155, z: 7.7129984}
+    m_Target: {x: -2.6319966, y: 3.312076, z: -2.328774}
     speed: 2
-    m_Value: {x: 8.897342, y: 3.7089155, z: 7.7129984}
+    m_Value: {x: -2.6319966, y: 3.312076, z: -2.328774}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -877,13 +877,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.0014884274, y: -0.9348557, z: 0.35508782, w: 0.0039236047}
+    m_Target: {x: 0.008779435, y: -0.21988396, z: -0.0019806651, w: -0.9754914}
     speed: 2
-    m_Value: {x: 0.0020209965, y: -0.9348207, z: 0.35507452, w: 0.0053257234}
+    m_Value: {x: 0.008779377, y: -0.21988249, z: -0.0019806519, w: -0.9754849}
   m_Size:
     m_Target: 0.8660254
     speed: 2
-    m_Value: 10
+    m_Value: 0.8660254
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -949,14 +949,14 @@ MonoBehaviour:
     - {fileID: -7902876784369062446, guid: adb3dd6612409c94b899816761a9cee9, type: 2}
     - {fileID: -7902876784369062446, guid: e075fde1a93a42a4aa076941f000efed, type: 2}
     m_ValueSerializationHelper:
-    - e00: 1
+    - e00: 1.3311162
       e01: 0
       e02: 0
-      e03: 82.5
+      e03: -138.45306
       e10: 0
-      e11: 1
+      e11: 1.3311162
       e12: 0
-      e13: 283.5
+      e13: 367.7072
       e20: 0
       e21: 0
       e22: 1
@@ -1064,11 +1064,11 @@ MonoBehaviour:
     - e00: 0.88113207
       e01: 0
       e02: 0
-      e03: 534.8679
+      e03: 778.8679
       e10: 0
       e11: 0.88113207
       e12: 0
-      e13: 338.61322
+      e13: 353.61325
       e20: 0
       e21: 0
       e22: 1
@@ -1078,10 +1078,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: e075fde1a93a42a4aa076941f000efed,
+  m_AnimatorController: {fileID: 9100000, guid: 4c70c73b042eb2f4198328aeb642f325,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -7902876784369062446, guid: e075fde1a93a42a4aa076941f000efed,
+  - m_Target: {fileID: 8113055708133551213, guid: 4c70c73b042eb2f4198328aeb642f325,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -1092,9 +1092,9 @@ MonoBehaviour:
   m_MiniTool: 0
   m_LockTracker:
     m_IsLocked: 0
-  m_CurrentEditor: 1
+  m_CurrentEditor: 0
   m_LayerEditor:
-    m_SelectedLayerIndex: 0
+    m_SelectedLayerIndex: 1
 --- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1127,7 +1127,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 27440
+  m_LastSelectedObjectID: 27234
 --- !u!114 &23
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1200,9 +1200,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 306b0000
-      m_LastClickedID: 27440
-      m_ExpandedIDs: 2cfbffff2e6b00003a6b0000
+      m_SelectedIDs: 626a0000
+      m_LastClickedID: 27234
+      m_ExpandedIDs: 2cfbffff026a00002e6b00003a6b0000d46b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1299,13 +1299,13 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Player/Resources/Humanoid
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets
+  - Assets/Player/Resources/Humanoid
   m_LastFoldersGridSize: 16
   m_LastProjectPath: "C:\\Users\\odina\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439
     \u0441\u0442\u043E\u043B\\GitRepositories\\TheBestShooter\\Shooter"
@@ -1313,9 +1313,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: d2740000
-    m_LastClickedID: 29906
-    m_ExpandedIDs: 00000000d2740000d4740000d6740000d8740000da740000dc740000de740000e0740000e2740000e4740000e6740000e8740000ea74000000ca9a3b
+    m_SelectedIDs: b88b0000
+    m_LastClickedID: 35768
+    m_ExpandedIDs: 00000000d2740000d4740000d6740000d8740000da740000dc740000de740000e0740000e2740000e4740000e6740000e8740000ea7400002a75000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1371,7 +1371,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: f86e0000827f00000a6d000044b70100140d010008810000
+    m_ExpandedInstanceIDs: f86e0000827f00000a6d000044b70100140d01000881000018730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
