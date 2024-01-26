@@ -16,11 +16,10 @@ public class WeaponsSwitching : MonoBehaviour
     [Header("Body")]
     [SerializeField] private MultiAimConstraint bodyAim;
     [SerializeField] private Vector3 takeBodyAimPosition;
-    [SerializeField] private MultiAimConstraint bodyStatic;
-    [SerializeField] private Vector3 takeBodyStaticPosition;
     [Space(10)]
 
     [Header("Settings")]
+    [SerializeField] private Transform centerPoint;
     [SerializeField][Range(1f, 5f)] private int inventorySize;
     [SerializeField] private float pickUpDistance;
     [SerializeField] private float selectionSpeed = 4f;
@@ -56,14 +55,12 @@ public class WeaponsSwitching : MonoBehaviour
         {
             armsRig.weight = 0f;
             bodyAim.data.offset = Vector3.zero;
-            bodyStatic.data.offset = new Vector3(-20, 0, 0);
             animator.SetLayerWeight(1, 0f);
         }
         else
         {
             armsRig.weight = 1f;
             bodyAim.data.offset = takeBodyAimPosition;
-            bodyStatic.data.offset = takeBodyStaticPosition;
             animator.SetLayerWeight(1, 1f);
         }       
     }
@@ -74,7 +71,7 @@ public class WeaponsSwitching : MonoBehaviour
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, pickUpDistance))
+            if (Physics.Raycast(centerPoint.position, transform.forward, out hit, pickUpDistance))
             {
                 if (hit.transform.tag == "Weapone" && CanPickUp(hit.transform.GetComponent<Gun>().Size))
                 {
@@ -216,9 +213,11 @@ public class WeaponsSwitching : MonoBehaviour
 
         ChangeSelectedWeapon();
     }
-
     private void ChangeSelectedWeapon()
     {
+        if (gun != null && gun.reloading)
+            return;
+
         if (weapons.Count == 0)
         {
             gun = null;
@@ -227,7 +226,6 @@ public class WeaponsSwitching : MonoBehaviour
 
             PlayerController.OnDropGun?.Invoke();
             HandMovements(joint, joint);
-            FPC.playerCamera.nearClipPlane = 0.08f;
             PlayerController.isGunPickedUp = false;
         }
         else
@@ -238,14 +236,13 @@ public class WeaponsSwitching : MonoBehaviour
 
             PlayerController.OnChangedGun?.Invoke();
             HandMovements(gun.rightHandle, gun.leftHandle);
-            FPC.playerCamera.nearClipPlane = 0.04f;
             PlayerController.isGunPickedUp = true;
         }
     }
     #endregion
     private void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward, Color.green);
+        Debug.DrawRay(centerPoint.position, transform.forward, Color.green);
         InventoryState();
     }
     private void InventoryState()
@@ -253,10 +250,10 @@ public class WeaponsSwitching : MonoBehaviour
         int previousSelectedWeapon = selectedWeapon + 1;
 
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && !gun.reloading)  //timeSinceLastSwitch >= switchTime
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)  //timeSinceLastSwitch >= switchTime
             ChangeSelectedWeapon("Up");
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 0 && !gun.reloading)  //timeSinceLastSwitch >= switchTime
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)  //timeSinceLastSwitch >= switchTime
             ChangeSelectedWeapon("Up");
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && weapons.Count >= 1 && !gun.reloading)

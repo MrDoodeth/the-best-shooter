@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if (isGunPickedUp) //if Gun Picked Up
+        if (isGunPickedUp)
         {
             if (Input.GetMouseButton(0))
                 OnShootInput?.Invoke();
