@@ -20,9 +20,9 @@ public class WeaponsSwitching : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private Transform centerPoint;
+    [SerializeField] private Transform gunPivot;
     [SerializeField][Range(1f, 5f)] private int inventorySize;
     [SerializeField] private float pickUpDistance;
-    [SerializeField] private float selectionSpeed = 4f;
     private int currentInventorySize;
     [Space(10)]
 
@@ -44,11 +44,13 @@ public class WeaponsSwitching : MonoBehaviour
     private void HandMovements(Transform rightPos, Transform leftPos)
     {
         rightHand.SetParent(rightPos);
-        rightHand.DOLocalMove(Vector3.zero, 0.4f);
+        //rightHand.DOLocalMove(Vector3.zero, 0.4f);  //smooth movement
+        rightHand.localPosition = Vector3.zero;
         rightHand.localRotation = Quaternion.identity;
 
         leftHand.SetParent(leftPos);
-        leftHand.DOLocalMove(Vector3.zero, 0.4f);
+        //leftHand.DOLocalMove(Vector3.zero, 0.4f);   //smooth movement
+        leftHand.localPosition = Vector3.zero;
         leftHand.localRotation = Quaternion.identity;
 
         if (rightPos == joint || leftPos == joint)
@@ -67,16 +69,16 @@ public class WeaponsSwitching : MonoBehaviour
     private bool CanPickUp(int gunInvSize) => currentInventorySize >= gunInvSize;
     private void PickUp()
     {
-        if ((weapons.Count != 0 && !gun.reloading) || weapons.Count == 0)
-        {
-            RaycastHit hit;
+        if (gun != null && gun.reloading)
+            return;
 
-            if (Physics.Raycast(centerPoint.position, transform.forward, out hit, pickUpDistance))
+        RaycastHit hit;
+
+        if (Physics.Raycast(centerPoint.position, transform.forward, out hit, pickUpDistance))
+        {
+            if (hit.transform.tag == "Weapone" && CanPickUp(hit.transform.GetComponent<Gun>().Size))
             {
-                if (hit.transform.tag == "Weapone" && CanPickUp(hit.transform.GetComponent<Gun>().Size))
-                {
-                    GiveWeapon(hit.transform);
-                }
+                GiveWeapon(hit.transform);
             }
         }
     }
@@ -153,8 +155,9 @@ public class WeaponsSwitching : MonoBehaviour
         col = wp.GetComponent<BoxCollider>();
 
         weapons.Add(wp);
-
-        wp.position = Vector3.Lerp(wp.position, gun.weaponZoom.defaultGunPosition, selectionSpeed * Time.deltaTime);
+        
+        wp.position = gunPivot.position;
+        wp.rotation = gunPivot.rotation;
         PlayerController.OnTakenGun?.Invoke();
         wp.SetParent(transform);
         gunRb.isKinematic = true;
@@ -238,6 +241,7 @@ public class WeaponsSwitching : MonoBehaviour
             HandMovements(gun.rightHandle, gun.leftHandle);
             PlayerController.isGunPickedUp = true;
         }
+
     }
     #endregion
     private void Update()
@@ -266,7 +270,7 @@ public class WeaponsSwitching : MonoBehaviour
             ChangeSelectedWeapon(1);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
             PickUp();
         }

@@ -122,6 +122,7 @@ public class Gun : MonoBehaviour
         weaponBobbing.enabled = true;
     }
 
+
     private bool CanReload() => !reloading && currentAmmo < magSize && reserveAmmo > 0 && this.gameObject.activeSelf;
     private void StartReload()
     {

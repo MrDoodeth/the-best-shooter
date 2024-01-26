@@ -407,7 +407,7 @@ MonoBehaviour:
       m_Item7:
         transform: {fileID: 0}
         weight: 0
-    m_Offset: {x: 0, y: 30, z: 0}
+    m_Offset: {x: 0, y: 0, z: 0}
     m_MinLimit: -180
     m_MaxLimit: 180
     m_AimAxis: 4
@@ -1326,6 +1326,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2012241745}
   m_CullTransparentMesh: 1
+--- !u!1 &2104408427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2104408428}
+  m_Layer: 0
+  m_Name: GunPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2104408428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104408427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1283, y: -0.4447, z: 0.0255}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4459864850931025848}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2106616984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,6 +1530,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 200763546178363780, guid: c8eef3b0eaa4f814e8502c11cef8b986,
+        type: 3}
+      propertyPath: gunPivot
+      value: 
+      objectReference: {fileID: 2104408428}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8eef3b0eaa4f814e8502c11cef8b986, type: 3}
 --- !u!4 &20828692476062871
@@ -2221,6 +2257,16 @@ PrefabInstance:
       propertyPath: powerOfShot
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3786346487634470170, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
+        type: 3}
+      propertyPath: gunPivot
+      value: 
+      objectReference: {fileID: 2104408428}
+    - target: {fileID: 3786346487634470170, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
+        type: 3}
+      propertyPath: ergonomics
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06431fa2fd9d9804da65a2cbf24fa88c, type: 3}
 --- !u!1 &1909489973751129902
@@ -2383,7 +2429,7 @@ Transform:
   m_GameObject: {fileID: 2540516230264680839}
   m_LocalRotation: {x: -0.000000018697083, y: 0.00000009196923, z: 6.0977595e-16,
     w: 1}
-  m_LocalPosition: {x: 0, y: 0.1085, z: 0.035}
+  m_LocalPosition: {x: -0, y: 0.1479, z: 0.0761}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2538,11 +2584,11 @@ MonoBehaviour:
   leftHand: {fileID: 476543507484578630}
   armsRig: {fileID: 201386269}
   bodyAim: {fileID: 365392590}
-  takeBodyAimPosition: {x: 0, y: 30, z: 0}
+  takeBodyAimPosition: {x: 0, y: 0, z: 0}
   centerPoint: {fileID: 4459864850847559997}
+  gunPivot: {fileID: 2104408428}
   inventorySize: 3
   pickUpDistance: 5
-  selectionSpeed: 4
   animator: {fileID: 743482759017279231}
   FPC: {fileID: 4459864849525365668}
   weapons: []
@@ -3466,7 +3512,7 @@ MonoBehaviour:
   crouchHeight: 0.75
   speedReduction: 0.5
   isCrouched: 0
-  enableHeadBob: 0
+  enableHeadBob: 1
   joint: {fileID: 4459864850931025848}
   bobSpeed: 10
   bobAmount: {x: 0, y: 0.07, z: 0}
@@ -3589,7 +3635,7 @@ Transform:
   m_GameObject: {fileID: 4459864850847559992}
   m_LocalRotation: {x: 0.000000039378342, y: -0.000000064729164, z: -0.000000020227862,
     w: 1}
-  m_LocalPosition: {x: 0, y: 0.1085, z: 0.0541}
+  m_LocalPosition: {x: -0, y: 0.1479, z: 0.0952}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3614,6 +3660,7 @@ Transform:
   - {fileID: 175659624599669276}
   - {fileID: 476543507484578630}
   - {fileID: 1657641489}
+  - {fileID: 2104408428}
   m_Father: {fileID: 4459864849525365666}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4914,6 +4961,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2711640644429102420, guid: f9a5b9d1dd1280147a79169fa3131817,
+        type: 3}
+      propertyPath: gunPivot
+      value: 
+      objectReference: {fileID: 2104408428}
     - target: {fileID: 8180610573758829913, guid: f9a5b9d1dd1280147a79169fa3131817,
         type: 3}
       propertyPath: m_Name
