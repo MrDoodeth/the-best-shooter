@@ -191,6 +191,9 @@ public class WeaponsSwitching : MonoBehaviour
     /// <param name="type">Up or Down</param>
     private void ChangeSelectedWeapon(string type)
     {
+        if (gun != null && gun.reloading)
+            return;
+
         if (type == "Up")
         {
             if (selectedWeapon >= weapons.Count - 1)
@@ -217,9 +220,7 @@ public class WeaponsSwitching : MonoBehaviour
         ChangeSelectedWeapon();
     }
     private void ChangeSelectedWeapon()
-    {
-        if (gun != null && gun.reloading)
-            return;
+    {       
 
         if (weapons.Count == 0)
         {
