@@ -863,7 +863,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1367521931
 GameObject:
@@ -990,11 +990,11 @@ Transform:
   m_GameObject: {fileID: 1594151753}
   m_LocalRotation: {x: 0.0000001410395, y: -0.00000004323897, z: 9.334591e-10, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100.00001, z: 100}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9055160361036129496}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1594151755
 SkinnedMeshRenderer:
@@ -2350,7 +2350,7 @@ PrefabInstance:
     - target: {fileID: 1829007119099331878, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1829007119099331878, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
@@ -2739,6 +2739,7 @@ MonoBehaviour:
   gunPivot: {fileID: 2104408428}
   inventorySize: 3
   pickUpDistance: 5
+  delayBeforeSwitching: 0.2
   animator: {fileID: 743482759017279231}
   FPC: {fileID: 4459864849525365668}
   weapons: []
@@ -4190,7 +4191,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9055160361036129496}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5374130286164376215
 GameObject:
@@ -4462,7 +4463,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9055160361036129496}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6332394750540535029
 Transform:
@@ -4473,7 +4474,7 @@ Transform:
   m_GameObject: {fileID: 6088818525866904330}
   m_LocalRotation: {x: 0.0000001410395, y: -0.00000004323897, z: 9.334591e-10, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 99.999985, y: 100.00001, z: 100}
+  m_LocalScale: {x: 99.999985, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9055160361036129496}
@@ -5056,7 +5057,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9055160361036129496}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &7970985467725904067
 Transform:
@@ -5517,11 +5518,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4024348712271117434}
-  - {fileID: 7772449619100612293}
-  - {fileID: 5213495832217116870}
-  - {fileID: 6332394750540535029}
-  - {fileID: 6309509054785942701}
   - {fileID: 1594151754}
+  - {fileID: 7772449619100612293}
+  - {fileID: 6332394750540535029}
+  - {fileID: 5213495832217116870}
+  - {fileID: 6309509054785942701}
   m_Father: {fileID: 79570616204293190}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

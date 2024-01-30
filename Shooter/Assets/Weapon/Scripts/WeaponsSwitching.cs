@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine.Animations.Rigging;
 
 public class WeaponsSwitching : MonoBehaviour
@@ -23,6 +22,8 @@ public class WeaponsSwitching : MonoBehaviour
     [SerializeField] private Transform gunPivot;
     [SerializeField][Range(1f, 5f)] private int inventorySize;
     [SerializeField] private float pickUpDistance;
+    [SerializeField] private float delayBeforeSwitching = 0.5f;
+    private float timeSinceLastSwitch;
     private int currentInventorySize;
     [Space(10)]
 
@@ -220,7 +221,7 @@ public class WeaponsSwitching : MonoBehaviour
         ChangeSelectedWeapon();
     }
     private void ChangeSelectedWeapon()
-    {       
+    {      
 
         if (weapons.Count == 0)
         {
@@ -243,6 +244,7 @@ public class WeaponsSwitching : MonoBehaviour
             PlayerController.isGunPickedUp = true;
         }
 
+        timeSinceLastSwitch = 0f;
     }
     #endregion
     private void Update()
@@ -254,29 +256,31 @@ public class WeaponsSwitching : MonoBehaviour
     {
         int previousSelectedWeapon = selectedWeapon + 1;
 
+        timeSinceLastSwitch += Time.deltaTime;
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)  //timeSinceLastSwitch >= switchTime
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && timeSinceLastSwitch >= delayBeforeSwitching)  
             ChangeSelectedWeapon("Up");
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)  //timeSinceLastSwitch >= switchTime
-            ChangeSelectedWeapon("Up");
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && timeSinceLastSwitch >= delayBeforeSwitching)  
+            ChangeSelectedWeapon("Down");
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && weapons.Count >= 1 && !gun.reloading)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && weapons.Count >= 1 && !gun.reloading && timeSinceLastSwitch >= delayBeforeSwitching)
         {
             ChangeSelectedWeapon(0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && weapons.Count >= 2 && !gun.reloading)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && weapons.Count >= 2 && !gun.reloading && timeSinceLastSwitch >= delayBeforeSwitching)
         {
             ChangeSelectedWeapon(1);
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E) && timeSinceLastSwitch >= delayBeforeSwitching)
         {
             PickUp();
         }
 
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G) && timeSinceLastSwitch >= delayBeforeSwitching)
         {
             Drop();
         }
