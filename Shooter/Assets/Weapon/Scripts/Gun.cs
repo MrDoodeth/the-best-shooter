@@ -1,8 +1,6 @@
 using UnityEngine;
-using ShooterInterfaces;
 using System;
 using Random = UnityEngine.Random;
-using Unity.VisualScripting;
 
 [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
 public class Gun : MonoBehaviour

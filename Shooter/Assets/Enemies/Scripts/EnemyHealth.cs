@@ -1,4 +1,3 @@
-using ShooterInterfaces;
 using System.Collections;
 using UnityEngine;
 public class EnemyHealth : Enemy, IDamageable

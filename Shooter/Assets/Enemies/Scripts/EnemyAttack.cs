@@ -1,4 +1,3 @@
-using ShooterInterfaces;
 using UnityEngine;
 public class EnemyAttack : Enemy, IAttackable
 {   
