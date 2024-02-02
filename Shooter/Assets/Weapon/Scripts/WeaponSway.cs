@@ -5,18 +5,18 @@ public class WeaponSway : MonoBehaviour
     [Header("Sway Settings")]
     [SerializeField] private float speed;
     [SerializeField] private float sensitivityMultiplier;
+    [SerializeField][Range(0.01f, 2f)] private float walkSensitivity = 0.2f;
+    [SerializeField][Range(0.01f, 2f)] private float tiltSensitivity = 0.5f;
     private void Update()
     {
         // get mouse input
-        float mouseX = (Input.GetAxis("Mouse X") + Input.GetAxis("Horizontal") * 0.1f) * sensitivityMultiplier;
+        float mouseX = (Input.GetAxis("Mouse X") + Input.GetAxis("Horizontal") * walkSensitivity) * sensitivityMultiplier;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivityMultiplier;
 
-        Mathf.Clamp(mouseX, 0f, 1f);
-        Mathf.Clamp(mouseY, 0f, 1f);
 
         Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
         Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
-        Quaternion rotationZ = Quaternion.AngleAxis(-mouseX * 0.4f, Vector3.forward);
+        Quaternion rotationZ = Quaternion.AngleAxis(-mouseX * tiltSensitivity, Vector3.forward);
 
         Quaternion targetRotation = rotationX * rotationY * rotationZ;
 

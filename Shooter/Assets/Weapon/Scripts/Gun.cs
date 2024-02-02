@@ -179,7 +179,6 @@ public class Gun : MonoBehaviour
             currentAmmo--;
             timeSinceLastShoot = 0;
 
-
             if (Physics.Raycast(fireDirection.position, fireDirection.forward, out RaycastHit hitInfo, maxDistance))
             {
                 hitInfo.transform.GetComponentInParent<IDamageable>()?.TakeDamage(damage);

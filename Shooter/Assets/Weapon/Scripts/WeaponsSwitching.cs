@@ -15,10 +15,10 @@ public class WeaponsSwitching : MonoBehaviour
     [Header("Body")]
     [SerializeField] private MultiAimConstraint bodyAim;
     [SerializeField] private Vector3 takeBodyAimPosition;
+    [SerializeField] private Transform centerPoint;
     [Space(10)]
 
     [Header("Settings")]
-    [SerializeField] private Transform centerPoint;
     [SerializeField] private Transform gunPivot;
     [SerializeField][Range(1f, 5f)] private int inventorySize;
     [SerializeField] private float pickUpDistance;
@@ -84,21 +84,6 @@ public class WeaponsSwitching : MonoBehaviour
         }
     }
 
-
-    #region Future
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.transform.tag == "Weapone" && CanPickUp())
-    //    {
-    //        Collider previousCollider = other;
-    //        if (previousCollider != other)
-    //        {
-    //            GiveWeapon(other.transform);
-    //        }
-    //    }
-    //}
-    #endregion
-
     private void Drop()
     {
         if (weapons.Count != 0 && !gun.reloading)
@@ -123,7 +108,7 @@ public class WeaponsSwitching : MonoBehaviour
     }
 
 
-
+    #region Admin commands
     public void DeleteWeapon(int _selectedWeapon)
     {
         if (weapons.Count != 0)
@@ -147,6 +132,7 @@ public class WeaponsSwitching : MonoBehaviour
             GiveWeapon(weapon.transform);
         }
     }
+    #endregion
 
     private void GiveWeapon(Transform wp)
     {
@@ -159,13 +145,17 @@ public class WeaponsSwitching : MonoBehaviour
         
         wp.position = gunPivot.position;
         wp.rotation = gunPivot.rotation;
-        PlayerController.OnTakenGun?.Invoke();
         wp.SetParent(transform);
+
         gunRb.isKinematic = true;
         col.enabled = false;
+
         gun.enabled = true;
         gun.SetFPC(FPC);
+
+        PlayerController.OnTakenGun?.Invoke();
         currentInventorySize -= gun.Size;
+
         ChangeSelectedWeapon("Up");
     }
     private void Select(int weaponIndex)
@@ -250,9 +240,10 @@ public class WeaponsSwitching : MonoBehaviour
     private void Update()
     {
         Debug.DrawRay(centerPoint.position, transform.forward, Color.green);
-        InventoryState();
+
+        UpdateInventoryState();
     }
-    private void InventoryState()
+    private void UpdateInventoryState()
     {
         int previousSelectedWeapon = selectedWeapon + 1;
 
