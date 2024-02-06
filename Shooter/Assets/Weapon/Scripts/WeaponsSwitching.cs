@@ -215,11 +215,19 @@ public class WeaponsSwitching : MonoBehaviour
 
         if (weapons.Count == 0)
         {
+            gun = null;
+            gunRb = null;
+            col = null;
+
             PlayerController.OnDropGun?.Invoke();
             HandMovements(joint, joint);
         }
         else
         {
+            gun = weapons[selectedWeapon].GetComponent<Gun>();
+            gunRb = weapons[selectedWeapon].GetComponent<Rigidbody>();
+            col = weapons[selectedWeapon].GetComponent<BoxCollider>();
+
             PlayerController.OnChangedGun?.Invoke();
             HandMovements(gun.rightHandle, gun.leftHandle);
         }

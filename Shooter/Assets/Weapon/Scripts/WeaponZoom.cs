@@ -8,7 +8,6 @@ public class WeaponZoom : MonoBehaviour
     [SerializeField] private Transform gunPivot;
     public Vector3 zoomPosition;
     public Vector3 defaultGunPosition;
-
     private bool isZoom = false;
     [HideInInspector] public FirstPersonController fpc;
 

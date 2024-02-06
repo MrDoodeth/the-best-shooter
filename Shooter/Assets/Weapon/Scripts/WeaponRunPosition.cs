@@ -4,16 +4,12 @@ public class WeaponRunPosition : MonoBehaviour
     [SerializeField] private WeaponsSwitching weaponSwitching;
     [SerializeField] private FirstPersonController fpc;
     public Transform runTransform;
-    private Transform defaultPosition;
+    public Vector3 defaultPosition;
     public float speed;
-
-
-
 
     private void Awake()
     {
         weaponSwitching = GetComponent<WeaponsSwitching>();
-        defaultPosition = transform;
     }
     void Update()
     {
@@ -21,31 +17,42 @@ public class WeaponRunPosition : MonoBehaviour
         {
             if (fpc.isSprinting)
             {
-                //transform.localPosition = Vector3.Lerp(transform.localPosition, runTransform.localPosition, speed * Time.deltaTime);
-                //transform.localRotation = Quaternion.Lerp(transform.localRotation, runTransform.localRotation, speed * Time.deltaTime);
-
-                //transform.DOLocalMove(runTransform.localPosition, 0.7f); 
-                //transform.DOLocalRotate(runTransform.localRotation.eulerAngles, 0.7f);
-
-                transform.localPosition = runTransform.localPosition;
-                transform.localRotation = runTransform.localRotation;
+                SprintState();
             }
             else
             {
-                //transform.DOLocalMove(defaultPosition.localPosition, 0.7f);
-                //transform.DOLocalRotate(defaultPosition.localRotation.eulerAngles, 0.7f);
-
-                //transform.localPosition = Vector3.Lerp(transform.localPosition, defaultPosition.localPosition, speed * Time.deltaTime);
-                //transform.localRotation = Quaternion.Lerp(transform.localRotation, defaultPosition.localRotation, speed * Time.deltaTime);
-
-                transform.localPosition = defaultPosition.localPosition;
-                transform.localRotation = defaultPosition.localRotation;
+                DefaultState();
             }
         }
         else
         {
-            //transform.DOLocalMove(defaultPosition.localPosition, 0.7f);
-            //transform.DOLocalRotate(defaultPosition.localRotation.eulerAngles, 0.7f);
+            DefaultState();
         }
+    }
+
+    private void SprintState()
+    {
+        //if man running - STOP reloading
+        if (weaponSwitching.gun.reloading)
+            return;
+
+        //disable ZOOM
+        if (weaponSwitching.gun != null)
+            weaponSwitching.gun.weaponZoom.enabled = false;
+
+        PlayerController.isControllerAvailable = false;
+        transform.localPosition = Vector3.Lerp(transform.localPosition, runTransform.localPosition, speed * Time.deltaTime);
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, runTransform.localRotation, speed * Time.deltaTime);
+    }
+
+    private void DefaultState()
+    {
+        //enable ZOOM
+        if (weaponSwitching.gun != null)
+            weaponSwitching.gun.weaponZoom.enabled = true;
+
+        PlayerController.isControllerAvailable = true;
+        transform.localPosition = Vector3.Lerp(transform.localPosition, defaultPosition, speed * Time.deltaTime);
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, speed * Time.deltaTime);
     }
 }

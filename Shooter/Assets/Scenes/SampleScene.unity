@@ -1215,14 +1215,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657641488}
-  m_LocalRotation: {x: 0.18774073, y: -0.6648995, z: 0.17815931, w: 0.70065784}
-  m_LocalPosition: {x: 0.033, y: 0.321, z: 0.136}
+  m_LocalRotation: {x: -0.000000014477945, y: -0.6327671, z: 0.000000011830904, w: 0.7743423}
+  m_LocalPosition: {x: 0.0466, y: 0.4139, z: 0.3087}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4459864850931025848}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 30, y: -87, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -78.509, z: 0}
 --- !u!114 &1781928449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2779,10 +2779,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a415b60a18b1645996d9a8a3b20313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fpc: {fileID: 4459864849525365668}
   weaponSwitching: {fileID: 2540516230264680840}
-  speed: 0
+  fpc: {fileID: 4459864849525365668}
   runTransform: {fileID: 1657641489}
+  defaultPosition: {x: 0, y: 0.4139, z: 0.1109}
+  speed: 5
 --- !u!1 &2639730429387555276
 GameObject:
   m_ObjectHideFlags: 0
