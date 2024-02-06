@@ -88,7 +88,7 @@ public class Gun : MonoBehaviour
     private void OnDisable()
     {
         TurnOffControl();
-        CancelReload();
+        animator.SetBool("isReloading", false);
     }
 
 
@@ -126,7 +126,7 @@ public class Gun : MonoBehaviour
     {
         if (CanReload())
         {
-            TurnOffControl();
+            PlayerController.isControllerAvailable = false;
             reloading = true;
             animator.enabled = true;
 
@@ -151,24 +151,15 @@ public class Gun : MonoBehaviour
                 reserveAmmo -= neededAmmo;
             }
 
-            PlayerController.OnReloadEnd?.Invoke();
-
-            reloading = false;
             animator.SetBool("isReloading", false);
-            CancelReload();
-            TurnOnControl();
         }
     }
-
-    public void CancelReload()
-    {
-        animator.SetBool("isReloading", false);
-    }
-
     private void AnimatorOff()
     {
         animator.enabled = false;
         reloading = false;
+        PlayerController.isControllerAvailable = true;
+        PlayerController.OnReloadEnd?.Invoke();
     }
 
     private bool CanShoot() => !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);

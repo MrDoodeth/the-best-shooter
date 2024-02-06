@@ -215,23 +215,13 @@ public class WeaponsSwitching : MonoBehaviour
 
         if (weapons.Count == 0)
         {
-            gun = null;
-            gunRb = null;
-            col = null;
-
             PlayerController.OnDropGun?.Invoke();
             HandMovements(joint, joint);
-            PlayerController.isGunPickedUp = false;
         }
         else
         {
-            gun = weapons[selectedWeapon].GetComponent<Gun>();
-            gunRb = weapons[selectedWeapon].GetComponent<Rigidbody>();
-            col = weapons[selectedWeapon].GetComponent<BoxCollider>();
-
             PlayerController.OnChangedGun?.Invoke();
             HandMovements(gun.rightHandle, gun.leftHandle);
-            PlayerController.isGunPickedUp = true;
         }
 
         timeSinceLastSwitch = 0f;
@@ -245,6 +235,9 @@ public class WeaponsSwitching : MonoBehaviour
     }
     private void UpdateInventoryState()
     {
+        if (!PlayerController.isControllerAvailable)
+            return;
+
         int previousSelectedWeapon = selectedWeapon + 1;
 
         timeSinceLastSwitch += Time.deltaTime;
