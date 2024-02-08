@@ -32,6 +32,7 @@ public class EnemesSpawner : MonoBehaviour
     private Action Wave;
 
     private static int currentEnemyCount;
+    private int currentWaveNumber = 1;
 
     private void OnDrawGizmos()
     {
@@ -42,8 +43,7 @@ public class EnemesSpawner : MonoBehaviour
     private void Start()
     {
         currentEnemyCount = baseEnemyCount;
-        WaitWave(waveDelay);
-
+        OnStartNewWave?.Invoke();
     }
 
     private void OnEnable()
@@ -108,7 +108,9 @@ public class EnemesSpawner : MonoBehaviour
     }   
     private void EndWave()
     {
-        currentEnemyCount = Mathf.RoundToInt(baseEnemyCount * enemyCountIncreaseRate);
+        baseEnemyCount = Mathf.RoundToInt(baseEnemyCount * enemyCountIncreaseRate);
+        currentEnemyCount = baseEnemyCount;
+        currentWaveNumber++;
         WaitWave(waveDelay);
     }
 
@@ -143,6 +145,7 @@ public class EnemesSpawner : MonoBehaviour
         for (int i = currentEnemyCount; i > 0; i--)
         {
             SpawnRandomEnemy(spawnPoints[selectedSpawner], zombies[Random.Range(0, zombies.Count)],
+                                                           zombies[Random.Range(0, zombies.Count)],
                                                            zombies[Random.Range(0, zombies.Count)]);
             ChangeSelectedSpawnPoint();
         }
@@ -184,8 +187,12 @@ public class EnemesSpawner : MonoBehaviour
     private void SpawnEnemy(GameObject enemy, Transform spawnPoint)
     {
         Instantiate(enemy, spawnPoint.position, Quaternion.identity);
-        currentEnemyCount++;
     }
 
     #endregion
+
+    private void Update()
+    {
+        Debug.Log($"{currentWaveNumber} Wave, Zombie: {currentEnemyCount}");
+    }
 }

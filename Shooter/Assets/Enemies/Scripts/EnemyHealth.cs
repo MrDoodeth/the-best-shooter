@@ -17,11 +17,11 @@ public class EnemyHealth : Enemy, IDamageable
     }
     public virtual void TakeDamage(float damage)
     {
+        if (currentHealth <= 0) return;
+            
         currentHealth -= damage;
 
         //agent.speed *= 0.8f;
-
-
 
         if (currentHealth <= 0)
         {
