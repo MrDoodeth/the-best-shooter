@@ -42,7 +42,7 @@ public class EnemyHealth : Enemy, IDamageable
             EnemesSpawner.OnEnemyDeath?.Invoke();
             isAlive = false;
             agent.enabled = false;
-            MakeKinematic(false);
+            SetIsKinematic(false);
             animator.enabled = false;
             yield return new WaitForSeconds(deathDelay);
             Destroy(gameObject);
@@ -69,7 +69,7 @@ public class EnemyHealth : Enemy, IDamageable
     {
         isAlive = false;
         agent.enabled = false;
-        MakeKinematic(false);
+        SetIsKinematic(false);
         animator.enabled = false;
         yield return new WaitForSeconds(contusionDelay);
         yield return new WaitUntil(() => agent.isOnNavMesh);
@@ -80,7 +80,7 @@ public class EnemyHealth : Enemy, IDamageable
         }
         animator.enabled = true;
         animator.SetTrigger("isStandUp");
-        MakeKinematic(true);
+        SetIsKinematic(true);
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 0.5f);
         agent.enabled = true;
         isAlive = true;

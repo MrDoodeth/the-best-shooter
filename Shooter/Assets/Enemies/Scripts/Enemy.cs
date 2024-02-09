@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     {
         allRigidbodys = GetComponentsInChildren<Rigidbody>();
         collid = GetComponentInChildren<Collider>();
-        MakeKinematic(true);
+        SetIsKinematic(true);
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         playerPosition = GameObject.FindGameObjectsWithTag("Player");
@@ -37,11 +37,11 @@ public class Enemy : MonoBehaviour
             onFloor = false;
     }
 
-    protected void MakeKinematic(bool _iskinematic)
+    protected void SetIsKinematic(bool _isKinematic)
     {
         for (int i = 0; i < allRigidbodys.Length; i++)
         {
-            allRigidbodys[i].isKinematic = _iskinematic;
+            allRigidbodys[i].isKinematic = _isKinematic;
         }
     }
 }
