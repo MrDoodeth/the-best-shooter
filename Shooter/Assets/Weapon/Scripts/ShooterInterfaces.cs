@@ -8,3 +8,8 @@ public interface IAttackable
 {
     public void Attack();
 }
+
+public interface IContusionable
+{
+    public void GetContusion();
+}

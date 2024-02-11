@@ -1,20 +1,24 @@
+using UnityEngine;
+[RequireComponent (typeof(Enemy))]
 
-public class ExplosiveEnemyHealth : EnemyHealth
+public class ExplosiveEnemyHealth : MonoBehaviour, IDamageable
 {
+    private Enemy enemy;
     private ExplosiveEnemyAttack exAttack;
-    public override void TakeDamage(float damage)
-    {
-        if (isAlive)
-            Die();
-    }
-    public override void Die()
-    {
-        base.Die();
-        exAttack.ExploedWithDelay();
-    }
     void Start()
     {
+        enemy = GetComponent<Enemy>();
         exAttack = GetComponent<ExplosiveEnemyAttack>();
-        Init();
+    }
+    public void TakeDamage(float damage)
+    {
+        if (enemy.isAlive)
+            Die();
+    }
+    public void Die()
+    {
+        enemy.isAlive = false;
+        EnemesSpawner.OnEnemyDeath?.Invoke();
+        exAttack.ExploedWithDelay();
     }
 }

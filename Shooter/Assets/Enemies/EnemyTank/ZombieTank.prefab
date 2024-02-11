@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 1832510817252317912}
   - component: {fileID: 1832510817252317915}
   - component: {fileID: 1832510817252317914}
+  - component: {fileID: 8402902968451554565}
   m_Layer: 0
   m_Name: ZombieTank
   m_TagString: Untagged
@@ -412,10 +413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861b00ba41e24054b923ecda1c0ca25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
-  contusionDelay: 5
-  deathDelay: 3
-  isAlive: 1
 --- !u!114 &1832510817252317914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,12 +425,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765d59ebadc7ebe4cbf8f13fa16d88e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 0.76
+  attackRange: 1.6
   damage: 33
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
-  timeBetweenAttack: 2
+--- !u!114 &8402902968451554565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307647313016176743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75444100f4810841aecdb3809633296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 300
+  contusionDelay: 3
+  deathDelay: 3
+  isAlive: 1
+  currentHealth: 0
+  allRigidbodys: []
+  allColliders: []
+  agent: {fileID: 0}
+  animator: {fileID: 0}
+  playerPosition: {fileID: 0}
 --- !u!1 &1971422423221032214
 GameObject:
   m_ObjectHideFlags: 0

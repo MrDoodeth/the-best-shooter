@@ -1,47 +1,47 @@
 using UnityEngine;
 using UnityEngine.AI;
-[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
-    protected NavMeshAgent agent;
-    protected Animator animator;
-    protected Rigidbody[] allRigidbodys;
-    protected GameObject[] playerPosition;
-    protected bool playerInAttackRange;
-    protected bool onFloor;
-    protected bool alreadyAttacked;
-    protected Collider collid;
-    void Start()
+    [Header("Health")]
+    [SerializeField][Range(1, 5000)] private float maxHealth = 100;
+    [Range(1, 30)] public float contusionDelay = 3f;
+    [Range(1, 30)] public float deathDelay = 3f;
+    [HideInInspector] public bool isAlive = true;
+    [HideInInspector] public float currentHealth;
+    [Space(15)]
+
+    [HideInInspector] public Rigidbody[] allRigidbodys;
+    [HideInInspector] public Collider[] allColliders;
+    [HideInInspector] public NavMeshAgent agent;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public Transform playerPosition;
+    void Awake()
     {
         Init();
     }
 
-    protected void Init()
+    private void Init()
     {
         allRigidbodys = GetComponentsInChildren<Rigidbody>();
-        collid = GetComponentInChildren<Collider>();
-        SetIsKinematic(true);
+        allColliders = GetComponentsInChildren<Collider>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        playerPosition = GameObject.FindGameObjectsWithTag("Player");
+        playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+        allRigidbodys.SetIsKinematics(true);
+        currentHealth = maxHealth;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Floor"))
-            onFloor = true;
-    }
+}
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Floor"))
-            onFloor = false;
-    }
 
-    protected void SetIsKinematic(bool _isKinematic)
+
+//Перегрузка метода
+public static class RigidbodyTools
+{
+    public static void SetIsKinematics(this Rigidbody[] rb, bool _isKinematic)
     {
-        for (int i = 0; i < allRigidbodys.Length; i++)
+        for (int i = 0; i < rb.Length; i++)
         {
-            allRigidbodys[i].isKinematic = _isKinematic;
+            rb[i].isKinematic = _isKinematic;
         }
     }
 }

@@ -1,39 +1,35 @@
 using UnityEngine;
-public class EnemyAttack : Enemy, IAttackable
-{   
-    private EnemyHealth health;
-
+[RequireComponent(typeof(Enemy))]
+public class EnemyAttack : MonoBehaviour, IAttackable
+{
     [Header("Fight")]
     [SerializeField] private float attackRange = 1.6f;
     [SerializeField] private float damage = 33f;
     [SerializeField] private LayerMask whatIsPlayer;
-    [SerializeField] private float timeBetweenAttack;
 
+    private Enemy enemy;
+    //States
     private bool isRun;
     private bool isAttack;
+    private bool playerInAttackRange;
+
     void Start()
     {
-        health = GetComponent<EnemyHealth>();
-        Init();
+        enemy = GetComponent<Enemy>();
     }
 
     #region Attack
     private void AttackPlayer()
     {
-        if (agent.isOnNavMesh == true)
-            agent.SetDestination(transform.position);
+        if (enemy.agent.isOnNavMesh)
+            enemy.agent.SetDestination(transform.position);
 
-        transform.LookAt(playerPosition[0].transform);
+        transform.LookAt(enemy.playerPosition);
         isAttack = true;
         isRun = false;
-        if (!alreadyAttacked)
-        {
-            //attack           
-            alreadyAttacked = true;
-        }
     }
 
-    public virtual void Attack()
+    public void Attack()
     {
         Collider[] playerHit = Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
 
@@ -43,16 +39,12 @@ public class EnemyAttack : Enemy, IAttackable
                 hit.GetComponent<IDamageable>().TakeDamage(damage);
         }
     }
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
     #endregion
 
     private void ChasePlayer()
     {
-        if (agent.isOnNavMesh && !animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK"))
-            agent.SetDestination(playerPosition[0].transform.position);
+        if (enemy.agent.isOnNavMesh && !enemy.animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK"))
+            enemy.agent.SetDestination(enemy.playerPosition.position);
         isAttack = false;
         isRun = true;
     }
@@ -60,9 +52,7 @@ public class EnemyAttack : Enemy, IAttackable
     {
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        AnimationsUpdate();
-
-        if (health.isAlive)
+        if (enemy.isAlive)
         {
             if (playerInAttackRange)
             {
@@ -73,11 +63,13 @@ public class EnemyAttack : Enemy, IAttackable
                 ChasePlayer();
             }
         }
+
+        UpdateAnimations();
     }
-    private void AnimationsUpdate()
+    private void UpdateAnimations()
     {
-        animator.SetBool("isRunning", isRun);
-        animator.SetBool("isAttacking", isAttack);
+        enemy.animator.SetBool("isRunning", isRun);
+        enemy.animator.SetBool("isAttacking", isAttack);
     }
     private void OnDrawGizmos()
     {

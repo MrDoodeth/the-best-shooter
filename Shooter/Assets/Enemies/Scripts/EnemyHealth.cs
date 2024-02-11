@@ -1,29 +1,24 @@
 using System.Collections;
 using UnityEngine;
-public class EnemyHealth : Enemy, IDamageable
+
+[RequireComponent(typeof(Enemy))]
+public class EnemyHealth : MonoBehaviour, IDamageable, IContusionable
 {
+    private Enemy enemy;
 
-    [Header("Health")]
-    [SerializeField][Range(1, 5000)] private float maxHealth = 100;
-    [SerializeField][Range(1, 30)] private float contusionDelay = 3f;
-    [SerializeField][Range(1, 30)] private float deathDelay = 3f;
-    [HideInInspector] public bool isAlive = true;
-    protected float currentHealth;
-
-    void Start()
+    private void Start()
     {
-        currentHealth = maxHealth;
-        Init();
+        enemy = GetComponent<Enemy>();
     }
-    public virtual void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
-        if (currentHealth <= 0) return;
-            
-        currentHealth -= damage;
+        if (enemy.currentHealth <= 0) return;
+
+        enemy.currentHealth -= damage;
 
         //agent.speed *= 0.8f;
 
-        if (currentHealth <= 0)
+        if (enemy.currentHealth <= 0)
         {
             Die();
         }
@@ -32,57 +27,56 @@ public class EnemyHealth : Enemy, IDamageable
             OnGetDamage();
         }
     }
-    public virtual void Die()
+    public void Die()
     {
         StartCoroutine(Death());
+
         IEnumerator Death()
         {
-            EnemesSpawner.OnEnemyDied();
-            isAlive = false;
+            enemy.isAlive = false;
             EnemesSpawner.OnEnemyDeath?.Invoke();
-            isAlive = false;
-            agent.enabled = false;
-            SetIsKinematic(false);
-            animator.enabled = false;
-            yield return new WaitForSeconds(deathDelay);
+            enemy.agent.enabled = false;
+            enemy.allRigidbodys.SetIsKinematics(false);
+            enemy.animator.enabled = false;
+            yield return new WaitForSeconds(enemy.deathDelay);
             Destroy(gameObject);
             yield return null;
         }
     }
 
-    public virtual void OnGetDamage()
+    private void OnGetDamage()
     {
         StartCoroutine(Damage());
 
         IEnumerator Damage()
         {
-            animator.SetTrigger("isHit");
-            animator.SetBool("isMirror",Random.value > 0.5f);
-            agent.enabled = false;
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 0.5f);
-            agent.enabled = true;
+            enemy.agent.enabled = false;
+            enemy.animator.SetTrigger("isHit");
+            enemy.animator.SetBool("isMirror",Random.value > 0.5f);
+            yield return new WaitForSeconds(enemy.animator.GetCurrentAnimatorStateInfo(0).length + 0.8f);
+            enemy.agent.enabled = true;
         }
     }
     public void GetContusion() => StartCoroutine(Contusion());
 
     IEnumerator Contusion()
     {
-        isAlive = false;
-        agent.enabled = false;
-        SetIsKinematic(false);
-        animator.enabled = false;
-        yield return new WaitForSeconds(contusionDelay);
-        yield return new WaitUntil(() => agent.isOnNavMesh);
+        enemy.isAlive = false;
+        enemy.agent.enabled = false;
+        enemy.allRigidbodys.SetIsKinematics(false);
+        enemy.animator.enabled = false;
+        yield return new WaitForSeconds(enemy.contusionDelay);
+        yield return new WaitUntil(() => enemy.agent.isOnNavMesh);
         { 
             //return rigs in world position
-            transform.position = collid.transform.position;
-            collid.transform.localPosition = Vector3.zero;
+            transform.position = enemy.allColliders[0].transform.position;
+            enemy.allColliders[0].transform.localPosition = Vector3.zero;
         }
-        animator.enabled = true;
-        animator.SetTrigger("isStandUp");
-        SetIsKinematic(true);
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 0.5f);
-        agent.enabled = true;
-        isAlive = true;
+        enemy.animator.enabled = true;
+        enemy.animator.SetTrigger("isStandUp");
+        enemy.allRigidbodys.SetIsKinematics(true);
+        yield return new WaitForSeconds(enemy.animator.GetCurrentAnimatorStateInfo(0).length + 0.5f);
+        enemy.agent.enabled = true;
+        enemy.isAlive = true;
     }
 }

@@ -46,6 +46,7 @@ public class EnemesSpawner : MonoBehaviour
     {
         OnStartNewWave += ChooseWave;
         OnEndWave += EndWave;
+        OnEnemyDeath += OnEnemyDied;
         OnEnemyDeath += CheckWave;
 
         #region InitDifficulty
@@ -70,6 +71,7 @@ public class EnemesSpawner : MonoBehaviour
     {
         OnStartNewWave -= ChooseWave;
         OnEndWave -= EndWave;
+        OnEnemyDeath -= OnEnemyDied;
         OnEnemyDeath -= CheckWave;
 
         #region ReinitDifficulty
