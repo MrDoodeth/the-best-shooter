@@ -1,0 +1,60 @@
+using UnityEngine;
+
+public class ExplosiveComponent : MonoBehaviour, IDamageable
+{
+    [Header("Explosion Settings")]
+    [SerializeField, Range(1f, 100f)] private int closeExplosionDamage = 70;
+    [SerializeField, Range(1f, 100f)] private int farExplosionDamage = 30;
+    [SerializeField] private float explosionDelay = 0.15f;
+    [SerializeField] private float radius;
+    [SerializeField] private float force;
+    private bool endExplosion;
+
+    public void TakeDamage(float damage) => Die();
+    public void Die() => ExploedWithDelay();
+
+    public void ExploedWithDelay()
+    {
+        if (endExplosion)
+            return;
+
+        Invoke(nameof(Explode), explosionDelay);
+    }
+
+    private void Explode()
+    {
+        Collider[] overlappedColliders = Physics.OverlapSphere(transform.position, radius);
+
+        foreach (var col in overlappedColliders)
+        {
+            IDamageable entity = col.GetComponentInParent<IDamageable>();
+
+            if (Vector3.Distance(transform.position, col.transform.position) <= radius / 2)
+                entity?.TakeDamage(closeExplosionDamage);
+            else
+                entity?.TakeDamage(farExplosionDamage);
+
+            IContusionable enemy = col.GetComponentInParent<IContusionable>();
+            enemy?.GetContusion();
+
+            //Regdoll отталкивание
+            Rigidbody[] rbEntities = col.GetComponents<Rigidbody>();
+            for (int i = 0; i < rbEntities.Length; i++)
+            {
+                rbEntities[i].AddExplosionForce(force, transform.position, radius, 3f, ForceMode.Impulse);
+            }
+        }
+        endExplosion = true;
+        Debug.Log("Boom");
+        Destroy(gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, radius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius / 2);
+    }
+}

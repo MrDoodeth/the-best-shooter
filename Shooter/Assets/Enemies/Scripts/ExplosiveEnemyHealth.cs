@@ -1,14 +1,14 @@
 using UnityEngine;
-[RequireComponent (typeof(Enemy))]
+[RequireComponent(typeof(ExplosiveComponent), typeof(Enemy))]
 
-public class ExplosiveEnemyHealth : MonoBehaviour, IDamageable
+public class ExplosiveEnemyHealth : MonoBehaviour
 {
     private Enemy enemy;
-    private ExplosiveEnemyAttack exAttack;
+    private ExplosiveComponent exComponent;
     void Start()
     {
         enemy = GetComponent<Enemy>();
-        exAttack = GetComponent<ExplosiveEnemyAttack>();
+        exComponent = GetComponent<ExplosiveComponent>();
     }
     public void TakeDamage(float damage)
     {
@@ -19,6 +19,6 @@ public class ExplosiveEnemyHealth : MonoBehaviour, IDamageable
     {
         enemy.isAlive = false;
         EnemesSpawner.OnEnemyDeath?.Invoke();
-        exAttack.ExploedWithDelay();
+        exComponent.ExploedWithDelay();
     }
 }

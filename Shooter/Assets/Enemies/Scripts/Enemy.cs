@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
     {
         Init();
     }
-
     private void Init()
     {
         allRigidbodys = GetComponentsInChildren<Rigidbody>();
@@ -31,8 +30,6 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
 }
-
-
 
 //Перегрузка метода
 public static class RigidbodyTools

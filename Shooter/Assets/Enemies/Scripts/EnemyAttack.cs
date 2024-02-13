@@ -1,6 +1,6 @@
 using UnityEngine;
 [RequireComponent(typeof(Enemy))]
-public class EnemyAttack : MonoBehaviour, IAttackable
+public class EnemyAttack : MonoBehaviour
 {
     [Header("Fight")]
     [SerializeField] private float attackRange = 1.6f;
@@ -11,7 +11,6 @@ public class EnemyAttack : MonoBehaviour, IAttackable
     //States
     private bool isRun;
     private bool isAttack;
-    private bool playerInAttackRange;
 
     void Start()
     {
@@ -50,7 +49,7 @@ public class EnemyAttack : MonoBehaviour, IAttackable
     }
     void Update()
     {
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        bool playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (enemy.isAlive)
         {

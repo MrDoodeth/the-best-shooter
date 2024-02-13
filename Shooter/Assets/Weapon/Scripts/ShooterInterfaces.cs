@@ -4,11 +4,6 @@ public interface IDamageable
     public void Die();
 }
 
-public interface IAttackable
-{
-    public void Attack();
-}
-
 public interface IContusionable
 {
     public void GetContusion();
