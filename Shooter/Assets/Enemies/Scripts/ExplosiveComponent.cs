@@ -1,18 +1,18 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
-public class ExplosiveComponent : MonoBehaviour, IDamageable
+public class ExplosiveComponent : MonoBehaviour
 {
     [Header("Explosion Settings")]
+    [Tooltip("Ќужно помнить, что коллайдеров несколько => урон проходит по каждому отдельно")]
     [SerializeField, Range(1f, 100f)] private int closeExplosionDamage = 70;
+    [Tooltip("Ќужно помнить, что коллайдеров несколько => урон проходит по каждому отдельно")]
     [SerializeField, Range(1f, 100f)] private int farExplosionDamage = 30;
     [SerializeField] private float explosionDelay = 0.15f;
     [SerializeField] private float radius;
     [SerializeField] private float force;
     private bool endExplosion;
-
-    public void TakeDamage(float damage) => Die();
-    public void Die() => ExploedWithDelay();
-
+    private float timer;
     public void ExploedWithDelay()
     {
         if (endExplosion)
@@ -56,5 +56,10 @@ public class ExplosiveComponent : MonoBehaviour, IDamageable
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius / 2);
+    }
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
     }
 }

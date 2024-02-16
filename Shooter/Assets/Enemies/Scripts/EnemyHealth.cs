@@ -12,7 +12,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IContusionable
     }
     public void TakeDamage(float damage)
     {
-        if (enemy.currentHealth <= 0) return;
+        if (!enemy.isAlive) return;
 
         enemy.currentHealth -= damage;
 
@@ -78,5 +78,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IContusionable
         yield return new WaitForSeconds(enemy.animator.GetCurrentAnimatorStateInfo(0).length + 0.5f);
         enemy.agent.enabled = true;
         enemy.isAlive = true;
+        yield return null;
     }
 }

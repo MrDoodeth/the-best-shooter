@@ -3,17 +3,18 @@ using UnityEngine;
 public class ExplosiveEnemyAttack : MonoBehaviour
 {
     private Enemy enemy;
-    private ExplosiveComponent exComponent;
+    private ExplosiveEnemyHealth exHealth;
     private bool isRun;
 
     void Start()
     {
         enemy = GetComponent<Enemy>();
-        exComponent = GetComponent<ExplosiveComponent>();
+        exHealth = GetComponent<ExplosiveEnemyHealth>();
     }
     public void Attack()
     {
-        exComponent.ExploedWithDelay();
+        if (enemy.isAlive)
+            exHealth.Die();
     }
     private void OnCollisionEnter(Collision collision)
     {

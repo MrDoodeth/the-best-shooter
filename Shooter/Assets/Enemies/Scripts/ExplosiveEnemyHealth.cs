@@ -1,7 +1,7 @@
 using UnityEngine;
 [RequireComponent(typeof(ExplosiveComponent), typeof(Enemy))]
 
-public class ExplosiveEnemyHealth : MonoBehaviour
+public class ExplosiveEnemyHealth : MonoBehaviour, IDamageable
 {
     private Enemy enemy;
     private ExplosiveComponent exComponent;
@@ -19,6 +19,7 @@ public class ExplosiveEnemyHealth : MonoBehaviour
     {
         enemy.isAlive = false;
         EnemesSpawner.OnEnemyDeath?.Invoke();
+        Debug.Log("Death");
         exComponent.ExploedWithDelay();
     }
 }

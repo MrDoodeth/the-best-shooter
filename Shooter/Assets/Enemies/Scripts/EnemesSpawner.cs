@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 using Random = UnityEngine.Random;
@@ -16,10 +17,12 @@ public class EnemesSpawner : MonoBehaviour
     public enum Difficulty { easy, normal, hard, nightmare }
 
     [Header("Types of zombies")]
-    [SerializeField] private List<GameObject> zombies; [Tooltip("—юда вставл€ть всех зомби в пор€дке возрастани€ их силы (обычный, бегун; танк, токсик)")]
+    [Tooltip("—юда вставл€ть всех зомби в пор€дке возрастани€ их силы (обычный, бегун; танк, токсик)")]
+    [SerializeField] private List<GameObject> zombies; 
     [Space(15)]
 
-    [SerializeField] private Transform[] spawnPoints; [Tooltip("—юда вставл€ть все точки спавна на карте")]
+    [Tooltip("—юда вставл€ть все точки спавна на карте")]
+    [SerializeField] private Transform[] spawnPoints; 
 
 
     public static Action OnStartNewWave;
@@ -29,6 +32,8 @@ public class EnemesSpawner : MonoBehaviour
 
     private static int currentEnemyCount;
     private int currentWaveNumber = 1;
+    private static object locker = new();
+    private List<GameObject> currentZombies = new List<GameObject>();
 
     private void OnDrawGizmos()
     {
@@ -94,7 +99,7 @@ public class EnemesSpawner : MonoBehaviour
 
     private void CheckWave()
     {
-        if (currentEnemyCount == 0)
+        if (currentEnemyCount == 0 || currentZombies.Count == 0)
         {
             OnEndWave?.Invoke();
         }
@@ -102,7 +107,8 @@ public class EnemesSpawner : MonoBehaviour
 
     public static void OnEnemyDied()
     {
-        currentEnemyCount--;
+        lock (locker)
+            currentEnemyCount--;
     }   
     private void EndWave()
     {
@@ -184,7 +190,8 @@ public class EnemesSpawner : MonoBehaviour
     }
     private void SpawnEnemy(GameObject enemy, Transform spawnPoint)
     {
-        Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+        var Z = Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+        currentZombies.Add(Z);
     }
 
     #endregion
