@@ -33,7 +33,7 @@ public class WeaponsSwitching : MonoBehaviour
     [SerializeField] private List<Transform> weapons;
     private int selectedWeapon;
 
-    [HideInInspector] public Gun gun;
+    [HideInInspector] public Gun gun { get; private set; }
     private Rigidbody gunRb;
     private BoxCollider col;
 

@@ -10,11 +10,14 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public float currentHealth;
     [Space(15)]
 
+    [Min(10)] public int rewardAmount = 100;
+
     [HideInInspector] public Rigidbody[] allRigidbodys;
     [HideInInspector] public Collider[] allColliders;
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Animator animator;
     [HideInInspector] public Transform playerPosition;
+    [HideInInspector] public PlayerInventory plInventory;
     void Awake()
     {
         Init();
@@ -25,7 +28,9 @@ public class Enemy : MonoBehaviour
         allColliders = GetComponentsInChildren<Collider>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+        var player = GameObject.FindGameObjectWithTag("Player");
+        playerPosition = player.transform;
+        plInventory = player.GetComponent<PlayerInventory>();
         allRigidbodys.SetIsKinematics(true);
         currentHealth = maxHealth;
     }

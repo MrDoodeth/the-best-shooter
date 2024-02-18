@@ -1,12 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-public class EnemesSpawner : MonoBehaviour
+public class EnemiesSpawner : MonoBehaviour
 {
 
     [Header("Wave Settings")]
@@ -24,16 +23,16 @@ public class EnemesSpawner : MonoBehaviour
     [Tooltip("—юда вставл€ть все точки спавна на карте")]
     [SerializeField] private Transform[] spawnPoints; 
 
+    private PlayerInventory plInventory;
 
     public static Action OnStartNewWave;
     public static Action OnEndWave;
     public static Action OnEnemyDeath;
+    public static Action<int> OnGetReward;
     private Action Wave;
 
     private static int currentEnemyCount;
     private int currentWaveNumber = 1;
-    private static object locker = new();
-    private List<GameObject> currentZombies = new List<GameObject>();
 
     private void OnDrawGizmos()
     {
@@ -49,10 +48,14 @@ public class EnemesSpawner : MonoBehaviour
 
     private void OnEnable()
     {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        plInventory = player.GetComponent<PlayerInventory>();
+
         OnStartNewWave += ChooseWave;
         OnEndWave += EndWave;
         OnEnemyDeath += OnEnemyDied;
         OnEnemyDeath += CheckWave;
+        OnGetReward += Reward;
 
         #region InitDifficulty
         switch (difficulty)
@@ -78,6 +81,7 @@ public class EnemesSpawner : MonoBehaviour
         OnEndWave -= EndWave;
         OnEnemyDeath -= OnEnemyDied;
         OnEnemyDeath -= CheckWave;
+        OnGetReward -= Reward;
 
         #region ReinitDifficulty
         switch (difficulty)
@@ -97,9 +101,13 @@ public class EnemesSpawner : MonoBehaviour
         #endregion
     }
 
+    private void Reward(int value)
+    {
+        plInventory.pointsAmount += value;
+    }
     private void CheckWave()
     {
-        if (currentEnemyCount == 0 || currentZombies.Count == 0)
+        if (currentEnemyCount == 0)
         {
             OnEndWave?.Invoke();
         }
@@ -107,8 +115,7 @@ public class EnemesSpawner : MonoBehaviour
 
     public static void OnEnemyDied()
     {
-        lock (locker)
-            currentEnemyCount--;
+        currentEnemyCount--;
     }   
     private void EndWave()
     {
@@ -137,6 +144,7 @@ public class EnemesSpawner : MonoBehaviour
     #region Difficulty Presets
 
     private int selectedSpawner = 0;
+
     private void ChangeSelectedSpawnPoint()
     {
         if (selectedSpawner >= spawnPoints.Length - 1)
@@ -190,8 +198,7 @@ public class EnemesSpawner : MonoBehaviour
     }
     private void SpawnEnemy(GameObject enemy, Transform spawnPoint)
     {
-        var Z = Instantiate(enemy, spawnPoint.position, Quaternion.identity);
-        currentZombies.Add(Z);
+        Instantiate(enemy, spawnPoint.position, Quaternion.identity);
     }
 
     #endregion

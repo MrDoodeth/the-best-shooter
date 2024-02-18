@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IContusionable
     {
         enemy = GetComponent<Enemy>();
     }
+
     public void TakeDamage(float damage)
     {
         if (!enemy.isAlive) return;
@@ -29,18 +30,19 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IContusionable
     }
     public void Die()
     {
+        enemy.isAlive = false;
+        EnemiesSpawner.OnEnemyDeath?.Invoke();
+        EnemiesSpawner.OnGetReward?.Invoke(enemy.rewardAmount);
+        enemy.agent.enabled = false;
+        enemy.allRigidbodys.SetIsKinematics(false);
+        enemy.animator.enabled = false;
+
         StartCoroutine(Death());
 
         IEnumerator Death()
-        {
-            enemy.isAlive = false;
-            EnemesSpawner.OnEnemyDeath?.Invoke();
-            enemy.agent.enabled = false;
-            enemy.allRigidbodys.SetIsKinematics(false);
-            enemy.animator.enabled = false;
+        {           
             yield return new WaitForSeconds(enemy.deathDelay);
-            Destroy(gameObject);
-            yield return null;
+            Destroy(gameObject);         
         }
     }
 

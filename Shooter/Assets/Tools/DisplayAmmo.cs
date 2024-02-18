@@ -3,11 +3,11 @@ using TMPro;
 
 public class DisplayAmmo : MonoBehaviour
 {
-    [SerializeField] private TMP_Text ammo;
+    [SerializeField] private TMP_Text ammoText;
     [SerializeField] private WeaponsSwitching switching;
     void Start()
     {
-        ammo.enabled = false;
+        ammoText.enabled = false;
     }
 
     private void OnEnable()
@@ -34,13 +34,13 @@ public class DisplayAmmo : MonoBehaviour
         PlayerController.OnChangedGun -= DetermineAmmo;
     }
 
-    private void OnTaken() => ammo.enabled = true;
+    private void OnTaken() => ammoText.enabled = true;
 
-    private void OnDroped() => ammo.enabled = false;
+    private void OnDroped() => ammoText.enabled = false;
 
     private void DetermineAmmo()
     {
         if (switching.gun is not null)
-            ammo.text = $"{switching.gun.currentAmmo}/{switching.gun.reserveAmmo}";
+            ammoText.text = $"{switching.gun.currentAmmo}/{switching.gun.reserveAmmo}";
     }
 }

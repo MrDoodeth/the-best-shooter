@@ -18,7 +18,8 @@ public class ExplosiveEnemyHealth : MonoBehaviour, IDamageable
     public void Die()
     {
         enemy.isAlive = false;
-        EnemesSpawner.OnEnemyDeath?.Invoke();
+        EnemiesSpawner.OnEnemyDeath?.Invoke();
+        EnemiesSpawner.OnGetReward?.Invoke(enemy.rewardAmount);
         Debug.Log("Death");
         exComponent.ExploedWithDelay();
     }
