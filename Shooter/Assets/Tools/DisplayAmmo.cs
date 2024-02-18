@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -7,8 +5,6 @@ public class DisplayAmmo : MonoBehaviour
 {
     [SerializeField] private TMP_Text ammo;
     [SerializeField] private WeaponsSwitching switching;
-
-    // Start is called before the first frame update
     void Start()
     {
         ammo.enabled = false;

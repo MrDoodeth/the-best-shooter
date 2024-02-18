@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 18198136533641980}
   - component: {fileID: 18198136533641981}
   - component: {fileID: 1559947911}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Uzi
   m_TagString: Weapone
   m_Icon: {fileID: 0}
@@ -192,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ergonomics: 13
   zoomSize: 0.95
+  gunPivot: {fileID: 0}
   zoomPosition: {x: 0, y: -0.063, z: 0.29}
   defaultGunPosition: {x: 0.1, y: -0.07, z: 0.23}
   fpc: {fileID: 0}
@@ -209,6 +210,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   sensitivityMultiplier: 6
+  walkSensitivity: 0.2
+  tiltSensitivity: 0.5
 --- !u!114 &2392865066863269297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.1
   sensitivityMultiplier: 1
+  walkSensitivity: 0.1
 --- !u!54 &18198136533641980
 Rigidbody:
   m_ObjectHideFlags: 0

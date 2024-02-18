@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 1829007119099331881}
   - component: {fileID: 1829007119099331882}
   - component: {fileID: 719624726}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AK47
   m_TagString: Weapone
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   automatic: 1
   damage: 45
   maxDistance: 200
-  powerOfShot: 50
+  powerOfShot: 100
   powerOfVerticalRecoil: 2.5
   powerOfHorizontalRecoil: 1
   powerOfForwardRecoil: 0.02
@@ -127,8 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403ca266daa896d4295242ebefa9fcdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ergonomics: 10
+  ergonomics: 8
   zoomSize: 0.86
+  gunPivot: {fileID: 0}
   zoomPosition: {x: 0, y: -0.047, z: 0.25}
   defaultGunPosition: {x: 0.135, y: -0.06, z: 0.17}
   fpc: {fileID: 0}
@@ -146,6 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   sensitivityMultiplier: 3
+  walkSensitivity: 0.2
+  tiltSensitivity: 0.5
 --- !u!114 &5903728323974821215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.1
   sensitivityMultiplier: 1
+  walkSensitivity: 0.1
 --- !u!54 &1829007119099331881
 Rigidbody:
   m_ObjectHideFlags: 0

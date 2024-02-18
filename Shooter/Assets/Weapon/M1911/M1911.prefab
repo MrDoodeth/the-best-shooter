@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 8183252265878648142}
   - component: {fileID: 8183252265878648143}
   - component: {fileID: 475303178}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: M1911
   m_TagString: Weapone
   m_Icon: {fileID: 0}
@@ -441,6 +441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ergonomics: 15
   zoomSize: 0.95
+  gunPivot: {fileID: 0}
   zoomPosition: {x: 0, y: -0.0456, z: 0.29}
   defaultGunPosition: {x: 0.1861, y: -0.0964, z: 0.2325}
   fpc: {fileID: 0}
@@ -458,6 +459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   sensitivityMultiplier: 8
+  walkSensitivity: 0.2
+  tiltSensitivity: 0.5
 --- !u!114 &2690638802374388557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.1
   sensitivityMultiplier: 1
+  walkSensitivity: 0.1
 --- !u!54 &8183252265878648142
 Rigidbody:
   m_ObjectHideFlags: 0
