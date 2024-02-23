@@ -29,22 +29,17 @@ public class PlayerInventory : MonoBehaviour
     private void Update()
     {
         if (Physics.Raycast(centerPoint.position, transform.forward, out RaycastHit hit, pickUpDistance))
-        {           
-            if (hit.transform.CompareTag("Vendor"))
-            {
-                var vendor = hit.transform.GetComponent<IBuyable>();
-                priceLabel.enabled = true;
-                priceLabel.text = vendor.price.ToString();
+        {
+            var iBuyableEntity = hit.transform.GetComponent<IBuyable>();
+            if (iBuyableEntity is null)
+                return;
+            priceLabel.enabled = true;
+            priceLabel.text = iBuyableEntity.price.ToString();
 
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    vendor.Buy(ref PointsAmount);
-                    OnChangePointsAmount?.Invoke();
-                }
-            }
-            else
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                priceLabel.text = "";
+                iBuyableEntity.Buy(ref PointsAmount);
+                OnChangePointsAmount?.Invoke();
                 priceLabel.enabled = false;
             }
         }

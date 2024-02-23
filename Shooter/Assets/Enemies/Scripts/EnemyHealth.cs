@@ -17,8 +17,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IContusionable
 
         enemy.currentHealth -= damage;
 
-        //agent.speed *= 0.8f;
-
         if (enemy.currentHealth <= 0)
         {
             Die();
