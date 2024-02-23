@@ -5,7 +5,7 @@ public class WeaponZoom : MonoBehaviour
     [Header("Zoom")]
     [SerializeField][Range(0.01f, 20f)] private float ergonomics;
     [SerializeField][Range(0.01f, 1f)] private float zoomSize = 1f;
-    [SerializeField] private Transform gunPivot;
+    public Transform gunPivot;
     public Vector3 zoomPosition;
     public Vector3 defaultGunPosition;
     private bool isZoom = false;
@@ -18,8 +18,9 @@ public class WeaponZoom : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerController.OnZoomInput -= Zoom;
-        transform.localPosition = gunPivot.localPosition;
+        PlayerController.OnZoomInput -= Zoom;    
+        if (gunPivot != null)
+            transform.localPosition = gunPivot.localPosition;
         Zoom(false);
     }
     private void Zoom(bool isPressed)

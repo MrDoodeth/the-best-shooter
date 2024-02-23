@@ -73,9 +73,8 @@ public class WeaponsSwitching : MonoBehaviour
         if (gun != null && gun.reloading)
             return;
 
-        RaycastHit hit;
 
-        if (Physics.Raycast(centerPoint.position, transform.forward, out hit, pickUpDistance))
+        if (Physics.Raycast(centerPoint.position, transform.forward, out RaycastHit hit, pickUpDistance))
         {
             if (hit.transform.tag == "Weapone" && CanPickUp(hit.transform.GetComponent<Gun>().Size))
             {
@@ -145,6 +144,7 @@ public class WeaponsSwitching : MonoBehaviour
         
         wp.position = gunPivot.position;
         wp.rotation = gunPivot.rotation;
+        gun.weaponZoom.gunPivot = gunPivot;
         wp.SetParent(transform);
 
         gunRb.isKinematic = true;

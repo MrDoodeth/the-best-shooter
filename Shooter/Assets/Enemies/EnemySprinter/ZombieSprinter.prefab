@@ -1544,11 +1544,13 @@ MonoBehaviour:
   deathDelay: 3
   isAlive: 1
   currentHealth: 0
+  rewardAmount: 30
   allRigidbodys: []
   allColliders: []
   agent: {fileID: 0}
   animator: {fileID: 0}
   playerPosition: {fileID: 0}
+  plInventory: {fileID: 0}
 --- !u!1 &3548904014879360052
 GameObject:
   m_ObjectHideFlags: 0

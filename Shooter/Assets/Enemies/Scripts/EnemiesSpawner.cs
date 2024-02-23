@@ -21,9 +21,9 @@ public class EnemiesSpawner : MonoBehaviour
     [Space(15)]
 
     [Tooltip("—юда вставл€ть все точки спавна на карте")]
-    [SerializeField] private Transform[] spawnPoints; 
+    [SerializeField] private Transform[] spawnPoints;
 
-    private PlayerInventory plInventory;
+    [SerializeField] private PlayerInventory plInventory;
 
     public static Action OnStartNewWave;
     public static Action OnEndWave;
@@ -48,9 +48,6 @@ public class EnemiesSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        var player = GameObject.FindGameObjectWithTag("Player");
-        plInventory = player.GetComponent<PlayerInventory>();
-
         OnStartNewWave += ChooseWave;
         OnEndWave += EndWave;
         OnEnemyDeath += OnEnemyDied;
@@ -110,7 +107,7 @@ public class EnemiesSpawner : MonoBehaviour
         if (currentEnemyCount == 0)
         {
             OnEndWave?.Invoke();
-        }
+        }        
     }
 
     public static void OnEnemyDied()
@@ -127,7 +124,8 @@ public class EnemiesSpawner : MonoBehaviour
 
     private void ChooseWave()
     {
-        Wave?.Invoke();      
+        Wave?.Invoke();
+        Debug.Log($"{currentWaveNumber} Wave, Zombie: {currentEnemyCount}");
     }
     private void WaitWave(float delayInSeconds)
     {
@@ -202,9 +200,4 @@ public class EnemiesSpawner : MonoBehaviour
     }
 
     #endregion
-
-    private void Update()
-    {
-        Debug.Log($"{currentWaveNumber} Wave, Zombie: {currentEnemyCount}");
-    }
 }

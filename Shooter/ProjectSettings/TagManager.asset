@@ -8,6 +8,7 @@ TagManager:
   - Floor
   - Enemy
   - MAST_Holder
+  - Vendor
   layers:
   - Default
   - TransparentFX
