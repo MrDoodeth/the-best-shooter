@@ -1,33 +1,32 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour, IDamageable
 {
     [SerializeField] private float maxHealth = 100;
-    [SerializeField] private float currentHealth;
-
-
-    [SerializeField] private PlayerController controller;
-
-    [SerializeField] private int score;
-    public int Score 
-    { 
-        get { return score; }
-        set 
-        {
-            Mathf.Clamp(score, 0, int.MaxValue);
+    private float currentHealth;
+    public float CurrentHealth
+    {
+        get => currentHealth;
+        private set
+        {            
+            currentHealth = Math.Clamp(value, 0, int.MaxValue);
+            OnPlayerHealthChanged?.Invoke();
         }
     }
+    public static Action OnPlayerHealthChanged;
+    [SerializeField] private PlayerController controller;
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        CurrentHealth -= damage;
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Die();
         }

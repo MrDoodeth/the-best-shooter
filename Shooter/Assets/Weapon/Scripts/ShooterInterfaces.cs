@@ -13,6 +13,6 @@ public interface IContusionable
 
 public interface IBuyable
 {
-    public int price { get; }
+    public int price { get; set; }
     public void Buy(ref int balance);
 }
