@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class UnlockDoor : MonoBehaviour, IBuyable
+public class UnlockForPointsDoor : MonoBehaviour, IBuyable
 {
     [SerializeField] private int Price;
     [SerializeField] private float openDuration = 2f;
