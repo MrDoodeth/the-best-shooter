@@ -31,16 +31,21 @@ public class PlayerInventory : MonoBehaviour
         if (Physics.Raycast(centerPoint.position, transform.forward, out RaycastHit hit, pickUpDistance))
         {
             var iBuyableEntity = hit.transform.GetComponent<IBuyable>();
-            if (iBuyableEntity is null)
-                return;
             priceLabel.enabled = true;
-            priceLabel.text = iBuyableEntity.price.ToString();
+            priceLabel.text = iBuyableEntity?.price.ToString();
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {               
+                iBuyableEntity?.Buy(ref PointsAmount);
+                OnChangePointsAmount?.Invoke();
+                priceLabel.enabled = false;
+            }
+
+            var iOpenableEntity = hit.transform.GetComponent<IOpenable>();
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                iBuyableEntity.Buy(ref PointsAmount);
-                OnChangePointsAmount?.Invoke();
-                priceLabel.enabled = false;
+                iOpenableEntity.Open();
             }
         }
         else

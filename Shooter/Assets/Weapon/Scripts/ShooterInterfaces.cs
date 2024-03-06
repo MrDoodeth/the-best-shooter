@@ -16,3 +16,8 @@ public interface IBuyable
     public int price { get; set; }
     public void Buy(ref int balance);
 }
+
+public interface IOpenable
+{
+    public void Open();
+}
