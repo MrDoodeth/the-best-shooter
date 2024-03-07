@@ -45,7 +45,7 @@ public class PlayerInventory : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                iOpenableEntity.Open();
+                iOpenableEntity?.Open();
             }
         }
         else
