@@ -217,7 +217,7 @@ MonoBehaviour:
   centerPoint: {fileID: 1913834937827708524}
   gunPivot: {fileID: 2840594680257283645}
   inventorySize: 3
-  pickUpDistance: 5
+  pickUpDistance: 2
   delayBeforeSwitching: 0.2
   animator: {fileID: 3259111270828020142}
   FPC: {fileID: 1913834936968865013}
@@ -1004,7 +1004,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1913834937827708523}
-  weaponeAndBodyCamera: {fileID: 0}
   fov: 75
   invertCamera: 0
   cameraCanMove: 1
