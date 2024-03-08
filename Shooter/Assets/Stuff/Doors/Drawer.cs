@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class OpenableShelf : MonoBehaviour, IOpenable
+public class Drawer : MonoBehaviour, IOpenable
 {
-    [SerializeField] private Transform shelf;
+    [SerializeField] private Transform drawer;
     [SerializeField] private Vector3 offsetVector;
     [SerializeField] private float openDuration;
     [SerializeField] private bool isOpen = false;
@@ -10,18 +10,18 @@ public class OpenableShelf : MonoBehaviour, IOpenable
 
     private void Start()
     {
-        shelf = this.transform;
-        defaultPosition = shelf.position;
+        drawer = this.transform;
+        defaultPosition = drawer.position;
     }
     void Update()
     {
         if (isOpen)
         {
-            shelf.position = Vector3.Slerp(shelf.position, defaultPosition + offsetVector, openDuration * Time.deltaTime);
+            drawer.position = Vector3.Slerp(drawer.position, defaultPosition + offsetVector, openDuration * Time.deltaTime);
         }
         else
         {
-            shelf.position = Vector3.Slerp(shelf.position, defaultPosition, openDuration * Time.deltaTime);
+            drawer.position = Vector3.Slerp(drawer.position, defaultPosition, openDuration * Time.deltaTime);
         }
     }
 
