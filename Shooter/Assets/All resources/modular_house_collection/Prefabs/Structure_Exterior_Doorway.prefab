@@ -207,28 +207,22 @@ MonoBehaviour:
   openDuration: 2
   openingAngle: 90
   rotMode: 0
+--- !u!65 &1826022494
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4924341413286144126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 1.9, z: 0.1}
+  m_Center: {x: 0.4, y: 0.95, z: 0}
 --- !u!4 &5700737718436901572 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3157506687137071388, guid: ca61b04b5ded9c640a41fd07caa0ba40,
     type: 3}
   m_PrefabInstance: {fileID: 7263357707089081304}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6233140670046781479 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3624325883269886975, guid: ca61b04b5ded9c640a41fd07caa0ba40,
-    type: 3}
-  m_PrefabInstance: {fileID: 7263357707089081304}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &112997010628326248
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6233140670046781479}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.9, z: 0.100000024}
-  m_Center: {x: 0, y: 0.95, z: -0.5}
