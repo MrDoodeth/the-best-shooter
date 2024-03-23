@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7853804386622643887}
   - component: {fileID: 6134686989214113257}
   - component: {fileID: 5322558062336234768}
+  - component: {fileID: 6512863655353477912}
   m_Layer: 0
   m_Name: object1
   m_TagString: Untagged
@@ -1510,6 +1511,19 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!65 &6512863655353477912
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243363538223083796}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 0.2}
+  m_Center: {x: 0, y: 1.35, z: -0.45}
 --- !u!1 &521076116480561884
 GameObject:
   m_ObjectHideFlags: 0
