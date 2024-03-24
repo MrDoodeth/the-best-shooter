@@ -7,7 +7,6 @@ TagManager:
   - Weapone
   - Floor
   - Enemy
-  - MAST_Holder
   - Vendor
   layers:
   - Default
