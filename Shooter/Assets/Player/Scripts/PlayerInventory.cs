@@ -17,7 +17,7 @@ public class PlayerInventory : MonoBehaviour
         get { return PointsAmount; }
         set
         {
-            PointsAmount = value;
+            PointsAmount = Math.Clamp(value, 0, int.MaxValue);
             OnChangePointsAmount?.Invoke();
         }
     }

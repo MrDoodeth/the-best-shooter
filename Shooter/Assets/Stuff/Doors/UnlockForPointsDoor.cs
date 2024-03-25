@@ -22,8 +22,7 @@ public class UnlockForPointsDoor : MonoBehaviour, IBuyable
 
         balance -= price;
         Debug.Log("Дверь открыта");
-        transform.DORotate(new Vector3(0f, openingAngle, 0f), openDuration, rotMode);
+        transform.DOLocalRotate(new Vector3(0f, openingAngle, 0f), openDuration, rotMode);
         Destroy(this);
-
     }
 }
