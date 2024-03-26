@@ -74,7 +74,7 @@ public class WeaponsSwitching : MonoBehaviour
 
         var _hit = PlayerRayCaster.HIT;
 
-        if (_hit.transform.tag == "Weapone" && CanPickUp(_hit.transform.GetComponent<Gun>().Size))
+        if (_hit.transform.CompareTag("Weapone") && CanPickUp(_hit.transform.GetComponent<Gun>().Size))
         {
             PickUpWeapon(_hit.transform);
         }

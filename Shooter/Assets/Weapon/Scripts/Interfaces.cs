@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public interface IDamageable
 {
     public void TakeDamage(float damage);
@@ -18,9 +20,4 @@ public interface IBuyable
 public interface IOpenable
 {
     public void Open();
-}
-
-public interface ITakeable
-{
-    public void Take();
 }

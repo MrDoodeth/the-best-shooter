@@ -8,6 +8,7 @@ TagManager:
   - Floor
   - Enemy
   - Vendor
+  - Item
   layers:
   - Default
   - TransparentFX
