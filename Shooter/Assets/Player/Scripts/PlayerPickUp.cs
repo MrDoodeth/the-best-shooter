@@ -18,24 +18,19 @@ public class PlayerPickUp : MonoBehaviour
         {
             var _hit = PlayerRayCaster.HIT;
 
-            if (_hit.transform.CompareTag("Item"))
-            {
-                Item _item = _hit.transform.GetComponent<Item>();
-                itemNameLabel.enabled = true;
-                itemNameLabel.text = _item?.itemName.ToString();
+            PhysicalItem phItem = _hit.transform.GetComponent<PhysicalItem>();
+            itemNameLabel.enabled = true;
+            itemNameLabel.text = phItem?.item.itemName.ToString();
 
-                if (Input.GetKeyDown(pickUpKey))
+            if (Input.GetKeyDown(pickUpKey) && phItem is not null)
+            {
+                if (plInventory.AddItem(phItem.item))
                 {
-                    plInventory.AddItem(_item);
                     //OnItemPickedUp?.Invoke();
                     itemNameLabel.enabled = false;
-                    _hit.transform.gameObject?.SetActive(false);
+                    phItem.gameObject.SetActive(false);
+                    Destroy(phItem.gameObject);
                 }
-            }
-            else
-            {
-                itemNameLabel.text = "";
-                itemNameLabel.enabled = false;
             }
         }
         else

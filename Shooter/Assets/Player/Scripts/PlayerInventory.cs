@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -15,13 +16,16 @@ public class PlayerInventory : MonoBehaviour
         UpdateCounterLabels();
     }
 
-    public void AddItem(Item item)
+    /// <summary>
+    /// If return false => inventory is FULL
+    /// </summary>
+    public bool AddItem(Item item)
     {
         for(int i = 0; i < inventory.Length; i++)
         {
             if (itemAmounts[i] == 0)
             {
-                inventory[i] = item;
+                inventory[i] = item;               
                 itemAmounts[i]++;
 
                 var icon = slots[i].GetComponentInChildren<Image>();
@@ -31,17 +35,27 @@ public class PlayerInventory : MonoBehaviour
                 color.a = 1f;
                 icon.color = color;
 
+                item = null;
                 break;
             }
 
             if (item.stackable && item.id == inventory[i].id && itemAmounts[i] < maxItemAmount)
             {
                 itemAmounts[i]++;
-                Destroy(item.gameObject);
+
+                item = null;
                 break;
             }
         }
         UpdateCounterLabels();
+        
+        if (item != null)
+        {
+            Debug.Log("Инвентарь полон");
+            return false;
+        }
+
+        return true;
     }
 
     public void UpdateCounterLabels()

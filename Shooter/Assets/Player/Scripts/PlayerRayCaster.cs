@@ -9,10 +9,7 @@ public class PlayerRayCaster : MonoBehaviour
     void Update()
     {
         isHit = Physics.Raycast(centerPoint.position, transform.forward, out RaycastHit hit, pickUpDistance);
-        if (isHit)
-        {
-            HIT = hit;
-        }
+        HIT = hit;
         Debug.DrawRay(centerPoint.position, transform.forward, Color.green);
     }
 }

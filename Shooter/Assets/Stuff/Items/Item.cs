@@ -1,15 +1,12 @@
 using System;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+[Serializable]
+[CreateAssetMenu(fileName = "Item", menuName = "Inventory/Item", order = 1)]
+public class Item : ScriptableObject
 {
-    [field: SerializeField] public int id { get; set; }
-    [field: SerializeField] public string itemName { get; set; }
-    [field: SerializeField] public bool stackable { get; set; }
-    [field: SerializeField] public Sprite icon { get; set; }
-
-    public void Take()
-    {
-
-    }
+    [field: SerializeField] public int id { get; private set; }
+    [field: SerializeField] public string itemName { get; private set; }
+    [field: SerializeField] public bool stackable { get; private set; }
+    [field: SerializeField] public Sprite icon { get; private set; }
 }
