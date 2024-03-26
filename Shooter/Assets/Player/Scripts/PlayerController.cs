@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private KeyCode reloadKey;
 
+
     private void Start()
     {
         TypeOfClick = typeOfClick;

@@ -2,14 +2,13 @@ using System;
 using UnityEngine;
 using TMPro;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerScore : MonoBehaviour
 {
-    [Header("Balance")]
-    [SerializeField] private int PointsAmount;
-    public static event Action OnChangePointsAmount;
-
     [Header("Purchase")]
     [SerializeField] private TMP_Text priceLabel;
+    [SerializeField] private KeyCode buyKey;
+    [SerializeField] private int PointsAmount;
+    public static event Action OnChangePointsAmount;
     public int pointsAmount
     {
         get { return PointsAmount; }
@@ -30,22 +29,15 @@ public class PlayerInventory : MonoBehaviour
         {
             var _hit = PlayerRayCaster.HIT;
 
-            var iBuyableEntity = _hit.transform.GetComponent<IBuyable>();
+            IBuyable iBuyableEntity = _hit.transform.GetComponent<IBuyable>();
             priceLabel.enabled = true;
             priceLabel.text = iBuyableEntity?.price.ToString();
 
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(buyKey))
             {               
                 iBuyableEntity?.Buy(ref PointsAmount);
                 OnChangePointsAmount?.Invoke();
                 priceLabel.enabled = false;
-            }
-
-            var iOpenableEntity = _hit.transform.GetComponent<IOpenable>();
-
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                iOpenableEntity?.Open();
             }
         }
         else

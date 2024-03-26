@@ -111,7 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71379cf6ca4c8049b361160800c8f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawer: {fileID: 0}
   offsetVector: {x: 0, y: 0, z: 0.3}
   openDuration: 5
   isOpen: 0
@@ -226,7 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71379cf6ca4c8049b361160800c8f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawer: {fileID: 0}
   offsetVector: {x: 0, y: 0, z: 0.3}
   openDuration: 5
   isOpen: 0
@@ -276,6 +274,7 @@ GameObject:
   - component: {fileID: 8739455413522964669}
   - component: {fileID: 3616450514781862431}
   - component: {fileID: 1251324570969180083}
+  - component: {fileID: 1961287733}
   m_Layer: 0
   m_Name: Drawer B
   m_TagString: Untagged
@@ -348,6 +347,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1961287733
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4357644506545463604}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 16
+  m_Mesh: {fileID: -8939206813545021338, guid: 14f030b8066cd704488250536c1d3c93, type: 3}
 --- !u!1 &7124634286077565211
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71379cf6ca4c8049b361160800c8f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawer: {fileID: 0}
   offsetVector: {x: 0, y: 0, z: 0.3}
   openDuration: 5
   isOpen: 0
