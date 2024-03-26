@@ -21,3 +21,8 @@ public interface IOpenable
 {
     public void Open();
 }
+
+public interface ITakeable
+{
+    public void Take();
+}

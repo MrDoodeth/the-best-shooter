@@ -9,15 +9,13 @@ public class PlayerInventory : MonoBehaviour
     public static event Action OnChangePointsAmount;
 
     [Header("Purchase")]
-    [SerializeField] private float pickUpDistance;
-    [SerializeField] private Transform centerPoint;
     [SerializeField] private TMP_Text priceLabel;
     public int pointsAmount
     {
         get { return PointsAmount; }
         set
         {
-            PointsAmount = value;
+            PointsAmount = Math.Clamp(value, 0, int.MaxValue);
             OnChangePointsAmount?.Invoke();
         }
     }
@@ -28,9 +26,11 @@ public class PlayerInventory : MonoBehaviour
     }
     private void Update()
     {
-        if (Physics.Raycast(centerPoint.position, transform.forward, out RaycastHit hit, pickUpDistance))
+        if (PlayerRayCaster.isHit)
         {
-            var iBuyableEntity = hit.transform.GetComponent<IBuyable>();
+            var _hit = PlayerRayCaster.HIT;
+
+            var iBuyableEntity = _hit.transform.GetComponent<IBuyable>();
             priceLabel.enabled = true;
             priceLabel.text = iBuyableEntity?.price.ToString();
 
@@ -41,7 +41,7 @@ public class PlayerInventory : MonoBehaviour
                 priceLabel.enabled = false;
             }
 
-            var iOpenableEntity = hit.transform.GetComponent<IOpenable>();
+            var iOpenableEntity = _hit.transform.GetComponent<IOpenable>();
 
             if (Input.GetKeyDown(KeyCode.F))
             {
