@@ -4,17 +4,17 @@ using UnityEngine;
 public class DisplayHealth : MonoBehaviour
 {
     [SerializeField] private TMP_Text healthText;
-    [SerializeField] private PlayerBehaviour plBehaviour;
+    [SerializeField] private PlayerHealth plBehaviour;
     private string defaultText;
     private void OnEnable()
     {
-        PlayerBehaviour.OnPlayerHealthChanged += DetermineHealth;
+        PlayerHealth.OnPlayerHealthChanged += DetermineHealth;
         defaultText = healthText.text;
     }
 
     private void OnDisable()
     {
-        PlayerBehaviour.OnPlayerHealthChanged -= DetermineHealth;
+        PlayerHealth.OnPlayerHealthChanged -= DetermineHealth;
     }
 
     private void DetermineHealth() => healthText.text = defaultText + plBehaviour.CurrentHealth.ToString();

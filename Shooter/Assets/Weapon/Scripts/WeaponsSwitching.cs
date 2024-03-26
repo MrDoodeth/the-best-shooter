@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Animations.Rigging;
+using Unity.Burst.CompilerServices;
 
 public class WeaponsSwitching : MonoBehaviour
 {
@@ -15,13 +16,11 @@ public class WeaponsSwitching : MonoBehaviour
     [Header("Body")]
     [SerializeField] private MultiAimConstraint bodyAim;
     [SerializeField] private Vector3 takeBodyAimPosition;
-    [SerializeField] private Transform centerPoint;
     [Space(10)]
 
     [Header("Settings")]
     [SerializeField] private Transform gunPivot;
     [SerializeField][Range(1f, 5f)] private int inventorySize;
-    [SerializeField] private float pickUpDistance;
     [SerializeField] private float delayBeforeSwitching = 0.5f;
     private float timeSinceLastSwitch;
     private int currentInventorySize;
@@ -73,16 +72,13 @@ public class WeaponsSwitching : MonoBehaviour
         if (gun != null && gun.reloading)
             return;
 
+        var _hit = PlayerRayCaster.HIT;
 
-        if (Physics.Raycast(centerPoint.position, transform.forward, out RaycastHit hit, pickUpDistance))
+        if (_hit.transform.tag == "Weapone" && CanPickUp(_hit.transform.GetComponent<Gun>().Size))
         {
-            if (hit.transform.tag == "Weapone" && CanPickUp(hit.transform.GetComponent<Gun>().Size))
-            {
-                GiveWeapon(hit.transform);
-            }
+            PickUpWeapon(_hit.transform);
         }
     }
-
     private void Drop()
     {
         if (weapons.Count != 0 && !gun.reloading)
@@ -105,35 +101,7 @@ public class WeaponsSwitching : MonoBehaviour
             ChangeSelectedWeapon("Down");
         }     
     }
-
-
-    #region Admin commands
-    public void DeleteWeapon(int _selectedWeapon)
-    {
-        if (weapons.Count != 0)
-        {           
-            gun = null;
-            gunRb = null;
-            col = null;
-
-            weapons.Remove(weapons[_selectedWeapon]);
-            currentInventorySize += gun.Size;
-            Destroy(weapons[_selectedWeapon].gameObject);
-            ChangeSelectedWeapon("Down");
-        }
-    }
-    public void GetWeapon(GameObject _weapon)
-    {
-        GameObject weapon = Instantiate(_weapon, _weapon.GetComponent<Gun>().weaponZoom.defaultGunPosition, Quaternion.identity);
-
-        if (weapon.transform.tag == "Weapone" && CanPickUp(weapon.transform.GetComponent<Gun>().Size))
-        {
-            GiveWeapon(weapon.transform);
-        }
-    }
-    #endregion
-
-    private void GiveWeapon(Transform wp)
+    private void PickUpWeapon(Transform wp)
     {
 
         gun = wp.GetComponent<Gun>();
@@ -167,7 +135,6 @@ public class WeaponsSwitching : MonoBehaviour
             else
                 weapons[i].gameObject.SetActive(false);
         }
-
         OnWeaponSelected();
     }
     private void OnWeaponSelected()
@@ -235,10 +202,9 @@ public class WeaponsSwitching : MonoBehaviour
         timeSinceLastSwitch = 0f;
     }
     #endregion
+
     private void Update()
     {
-        Debug.DrawRay(centerPoint.position, transform.forward, Color.green);
-
         UpdateInventoryState();
     }
     private void UpdateInventoryState()
