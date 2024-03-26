@@ -23,7 +23,7 @@ public class EnemiesSpawner : MonoBehaviour
     [Tooltip("—юда вставл€ть все точки спавна на карте")]
     [SerializeField] private Transform[] spawnPoints;
 
-    [SerializeField] private PlayerInventory plInventory;
+    [SerializeField] private PlayerScore plInventory;
 
     public static Action OnStartNewWave;
     public static Action OnEndWave;

@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Animator animator;
     [HideInInspector] public Transform playerPosition;
-    [HideInInspector] public PlayerInventory plInventory;
+    [HideInInspector] public PlayerScore plInventory;
     void Awake()
     {
         Init();
@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         var player = GameObject.FindGameObjectWithTag("Player");
         playerPosition = player.transform;
-        plInventory = player.GetComponent<PlayerInventory>();
+        plInventory = player.GetComponent<PlayerScore>();
         allRigidbodys.SetIsKinematics(true);
         currentHealth = maxHealth;
     }
