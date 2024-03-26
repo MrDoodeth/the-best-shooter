@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Drawer : MonoBehaviour, IOpenable
 {
-    [SerializeField] private Transform drawer;
     [SerializeField] private Vector3 offsetVector;
     [SerializeField] private float openDuration;
     [SerializeField] private bool isOpen = false;
@@ -10,18 +9,17 @@ public class Drawer : MonoBehaviour, IOpenable
 
     private void Start()
     {
-        drawer = this.transform;
-        defaultPosition = drawer.position;
+        defaultPosition = transform.position;
     }
     void Update()
     {
         if (isOpen)
         {
-            drawer.position = Vector3.Slerp(drawer.position, defaultPosition + offsetVector, openDuration * Time.deltaTime);
+            transform.position = Vector3.Slerp(transform.position, defaultPosition + offsetVector, openDuration * Time.deltaTime);
         }
         else
         {
-            drawer.position = Vector3.Slerp(drawer.position, defaultPosition, openDuration * Time.deltaTime);
+            transform.position = Vector3.Slerp(transform.position, defaultPosition, openDuration * Time.deltaTime);
         }
     }
 

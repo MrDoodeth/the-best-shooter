@@ -143,7 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee9adb04e88f654891d809279c2e443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelf: {fileID: 0}
   openingAngle: 90
   openDuration: 3
   isOpen: 0
@@ -276,8 +275,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
+  m_Convex: 0
+  m_CookingOptions: 16
   m_Mesh: {fileID: 7412013183842586207, guid: a20cabd956fdad949b1545690024f38a, type: 3}
 --- !u!1 &8791797221906310708
 GameObject:
@@ -422,7 +421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee9adb04e88f654891d809279c2e443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelf: {fileID: 0}
   openingAngle: -90
   openDuration: 3
   isOpen: 0
