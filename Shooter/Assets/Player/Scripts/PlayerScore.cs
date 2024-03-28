@@ -8,7 +8,7 @@ public class PlayerScore : MonoBehaviour
     [SerializeField] private TMP_Text priceLabel;
     [SerializeField] private KeyCode buyKey;
     [SerializeField] private int PointsAmount;
-    public static event Action OnChangePointsAmount;
+    public static Action OnChangePointsAmount;
     public int pointsAmount
     {
         get { return PointsAmount; }
@@ -34,9 +34,8 @@ public class PlayerScore : MonoBehaviour
             priceLabel.text = iBuyableEntity?.price.ToString();
 
             if (Input.GetKeyDown(buyKey))
-            {               
-                iBuyableEntity?.Buy(ref PointsAmount);
-                OnChangePointsAmount?.Invoke();
+            {
+                iBuyableEntity?.Buy(ref PointsAmount);                
                 priceLabel.enabled = false;
             }
         }

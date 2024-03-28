@@ -1,7 +1,7 @@
 using UnityEngine;
 [RequireComponent(typeof(ExplosiveComponent), typeof(Enemy))]
 
-public class ExplosiveEnemyHealth : MonoBehaviour, IDamageable
+public class ExplosiveEnemyHealth : MonoBehaviour, IDamagable
 {
     private Enemy enemy;
     private ExplosiveComponent exComponent;

@@ -4,14 +4,15 @@ using UnityEngine;
 public class UnlockForPointsDoor : MonoBehaviour, IBuyable
 {
     [SerializeField] private int Price;
-    [SerializeField] private float openDuration = 2f;
-    [SerializeField][Range(-180f,180f)] private float openingAngle = 90f;
-    [SerializeField] private RotateMode rotMode;
     public int price
     {
         get => Price;
         set { Price = value <= 0 ? 0 : value; }
     }
+    [Space]
+    [SerializeField] private float openDuration = 2f;
+    [SerializeField][Range(-180f,180f)] private float openingAngle = 90f;
+    [SerializeField] private RotateMode rotMode;
     public void Buy(ref int balance)
     {
         if (balance < price)
@@ -21,6 +22,8 @@ public class UnlockForPointsDoor : MonoBehaviour, IBuyable
         }
 
         balance -= price;
+
+        //Usefull actions
         Debug.Log("Дверь открыта");
         transform.DOLocalRotate(new Vector3(0f, openingAngle, 0f), openDuration, rotMode);
         Destroy(this);

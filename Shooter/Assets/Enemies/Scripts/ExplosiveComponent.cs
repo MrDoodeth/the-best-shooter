@@ -27,7 +27,7 @@ public class ExplosiveComponent : MonoBehaviour
 
         foreach (var col in overlappedColliders)
         {
-            IDamageable entity = col.GetComponentInParent<IDamageable>();
+            IDamagable entity = col.GetComponentInParent<IDamagable>();
 
             if (Vector3.Distance(transform.position, col.transform.position) <= radius / 2)
                 entity?.TakeDamage(closeExplosionDamage);

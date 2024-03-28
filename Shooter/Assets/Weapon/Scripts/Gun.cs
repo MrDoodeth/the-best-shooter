@@ -172,7 +172,7 @@ public class Gun : MonoBehaviour
 
             if (Physics.Raycast(fireDirection.position, fireDirection.forward, out RaycastHit hitInfo, maxDistance))
             {
-                var entity = hitInfo.transform.GetComponentInParent<IDamageable>();
+                var entity = hitInfo.transform.GetComponentInParent<IDamagable>();
                 entity?.TakeDamage(damage);
                 var hole = Instantiate(bulletHole, hitInfo.point, Quaternion.identity);
                 hole.transform.SetParent(hitInfo.transform);

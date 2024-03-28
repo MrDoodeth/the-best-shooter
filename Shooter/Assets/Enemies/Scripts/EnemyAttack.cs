@@ -35,7 +35,7 @@ public class EnemyAttack : MonoBehaviour
         foreach (Collider hit in playerHit)
         {
             if (hit.CompareTag("Player"))
-                hit.GetComponent<IDamageable>().TakeDamage(damage);
+                hit.GetComponent<IDamagable>().TakeDamage(damage);
         }
     }
     #endregion

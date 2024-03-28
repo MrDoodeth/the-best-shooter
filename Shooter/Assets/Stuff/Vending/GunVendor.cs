@@ -19,6 +19,7 @@ public class GunVendor : MonoBehaviour, IBuyable
         }
 
         balance -= price;
+        PlayerScore.OnChangePointsAmount?.Invoke();
         Debug.Log($"Вы купили {item.GetComponent<Gun>().Name} за {price} ");
         SpawnItem();          
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Enemy))]
-public class EnemyHealth : MonoBehaviour, IDamageable, IContusionable
+public class EnemyHealth : MonoBehaviour, IDamagable, IContusionable
 {
     private Enemy enemy;
 
