@@ -83,6 +83,7 @@ public class PlayerInventory : MonoBehaviour
                 }
             }
             UpdateInventoryUI();
+            tradeLabel.enabled = false;
 
             return true;            
         }
