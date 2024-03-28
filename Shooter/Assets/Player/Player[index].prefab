@@ -1061,7 +1061,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  maxItemAmount: 64
+  maxItemAmount: 3
   itemAmounts: 00000000000000000000000000000000
   icons:
   - {fileID: 1641664527}

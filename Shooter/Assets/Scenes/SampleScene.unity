@@ -626,7 +626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <neededItem>k__BackingField: {fileID: 11400000, guid: c74238487b25cb84eb1c6f6ef3aa692e,
     type: 2}
-  <neededItemsAmount>k__BackingField: 1
+  <neededItemsAmount>k__BackingField: 5
   openDuration: 2
   openingAngle: 90
   rotMode: 1

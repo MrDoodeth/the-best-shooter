@@ -31,5 +31,5 @@ public interface ITradable
     /// </summary>
     /// <param name="items">Player inventory</param>
     /// <param name="itemsAmounts">Amounts of items</param>
-    public void Trade(PlayerInventory plInv, Item[] items, ref int[] itemsAmounts);
+    public void Trade(PlayerInventory plInv);
 }

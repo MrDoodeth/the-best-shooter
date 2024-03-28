@@ -1,6 +1,10 @@
+using DG.Tweening;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -47,8 +51,48 @@ public class PlayerInventory : MonoBehaviour
         }
         return true;
     }
+    public bool TryDeleteItems(Item exampleItem, int numberDeletedItems)
+    {
+        int currentNeededAmount = 0; //Счётчик текущего количества предметов в инвентаре
+        List<int> currentNeededIndexes = new List<int>(); //Лист индексов необходимых слотов
 
-    public void UpdateInventoryUI()
+        //Подсчёт текущего количества предметов в инвентаре
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == exampleItem)
+            {
+                currentNeededAmount += itemAmounts[i];
+                currentNeededIndexes.Add(i);
+            }
+        }
+
+        //Хватает или нет???
+        if (currentNeededAmount >= numberDeletedItems)
+        {
+            foreach (int index in currentNeededIndexes)
+            {
+                numberDeletedItems -= itemAmounts[index];
+                if (numberDeletedItems >= 0)
+                {
+                    itemAmounts[index] = 0;
+                }
+                else
+                {
+                    itemAmounts[index] = -(numberDeletedItems);
+                    break;
+                }
+            }
+            UpdateInventoryUI();
+
+            return true;            
+        }
+        else
+        {
+            Debug.Log($"Нехватает {numberDeletedItems - currentNeededAmount} {exampleItem.name}");
+            return false;
+        }
+    }
+    private void UpdateInventoryUI()
     {
         for (int i = 0; i < icons.Length; i++)
         {
@@ -93,7 +137,7 @@ public class PlayerInventory : MonoBehaviour
 
             if (Input.GetKeyDown(tradeKey))
             {
-                iTradableEntity?.Trade(this, inventory, ref itemAmounts);
+                iTradableEntity?.Trade(this);
                 //OnChangePointsAmount?.Invoke();
                 tradeLabel.enabled = false;
             }
