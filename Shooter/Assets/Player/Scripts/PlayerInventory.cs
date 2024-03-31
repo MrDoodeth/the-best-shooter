@@ -1,15 +1,11 @@
-using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private Item[] inventory;
-    [SerializeField][Range(2, 64)] private int maxItemAmount;
     [SerializeField] private int[] itemAmounts;
     [SerializeField] private Image[] icons;
     [SerializeField] private TMP_Text[] counterLabels;
@@ -35,7 +31,7 @@ public class PlayerInventory : MonoBehaviour
                 break;
             }
 
-            if (item.stackable && item == inventory[i] && itemAmounts[i] < maxItemAmount)
+            if (item == inventory[i] && item.stackable && itemAmounts[i] < item.maxItemAmount)
             {
                 itemAmounts[i]++;
 
@@ -54,7 +50,7 @@ public class PlayerInventory : MonoBehaviour
     public bool TryDeleteItems(Item exampleItem, int numberDeletedItems)
     {
         int currentNeededAmount = 0; //Счётчик текущего количества предметов в инвентаре
-        List<int> currentNeededIndexes = new List<int>(); //Лист индексов необходимых слотов
+        Stack<int> currentNeededIndexes = new(); //Стек индексов необходимых слотов
 
         //Подсчёт текущего количества предметов в инвентаре
         for (int i = 0; i < inventory.Length; i++)
@@ -62,7 +58,7 @@ public class PlayerInventory : MonoBehaviour
             if (inventory[i] == exampleItem)
             {
                 currentNeededAmount += itemAmounts[i];
-                currentNeededIndexes.Add(i);
+                currentNeededIndexes.Push(i);
             }
         }
 
@@ -75,6 +71,7 @@ public class PlayerInventory : MonoBehaviour
                 if (numberDeletedItems >= 0)
                 {
                     itemAmounts[index] = 0;
+                    inventory[index] = null;
                 }
                 else
                 {
