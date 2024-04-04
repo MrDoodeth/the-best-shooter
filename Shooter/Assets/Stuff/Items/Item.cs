@@ -1,23 +1,30 @@
-using System;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
+using System;
 
-[Serializable]
 [CreateAssetMenu(fileName = "Item", menuName = "Inventory/Item", order = 1)]
+[Serializable]
 public class Item : ScriptableObject
 {
-    public string itemName { get; set; }
-    public Sprite icon { get; set; }
-    public bool stackable { get; set; }
-    public int maxItemAmount { get; set; }
+    public string itemName;
+    public Sprite icon;
+    public bool stackable;
+    public int maxItemAmount;
 }
 
-[CustomEditor(typeof(Item))]
+[CustomEditor(typeof(Item)), InitializeOnLoadAttribute]
 public class ItemEditor : Editor
 {
+    Item item;
+    private void Awake()
+    {
+        item = (Item)target;
+    }
     public override void OnInspectorGUI()
     {
-        var item = (Item)target;
+        item = (Item)target;
+
+        serializedObject.Update();
 
         item.itemName = EditorGUILayout.TextField("Item name", item.itemName);
         item.icon = EditorGUILayout.ObjectField("Item icon", item.icon, typeof(Sprite), true) as Sprite;
@@ -26,7 +33,16 @@ public class ItemEditor : Editor
 
         if (item.stackable)
         {
-            item.maxItemAmount = EditorGUILayout.IntSlider("Max item amount", item.maxItemAmount, 1, 64);
+            item.maxItemAmount = EditorGUILayout.IntSlider("Max item amount", item.maxItemAmount, 2, 64);
+        }
+
+        item = (Item)target;
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(item);
+            Undo.RecordObject(item, "Item Change");
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

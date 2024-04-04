@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d385e397c512094493e8f42eaae96b7, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: 
-  <id>k__BackingField: 0
-  <itemName>k__BackingField: Key
-  <stackable>k__BackingField: 1
-  <icon>k__BackingField: {fileID: 21300000, guid: 1889c1909ff70a84d81678b5e1fd1ae5,
-    type: 3}
+  itemName: Key
+  icon: {fileID: 21300000, guid: 1889c1909ff70a84d81678b5e1fd1ae5, type: 3}
+  stackable: 1
+  maxItemAmount: 4
