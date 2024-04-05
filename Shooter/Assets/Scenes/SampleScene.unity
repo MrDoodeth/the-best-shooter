@@ -2199,7 +2199,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608808991}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b74f70fd14e4f5408021a7e3ffb57b8, type: 3}
   m_Name: 
@@ -2213,12 +2213,12 @@ MonoBehaviour:
   - {fileID: 3044759202855864814, guid: f06de8d4ce8184a4e800fcdcfe401c05, type: 3}
   - {fileID: 1307647313016176743, guid: a57cf6879b37ca941a8802b83174a7eb, type: 3}
   - {fileID: 5381057961795650585, guid: 1b0d779723d70c546953dd386350a129, type: 3}
+  maxExplosiveEnemyAmount: 2
   spawnPoints:
   - {fileID: 1629281318}
   - {fileID: 701180430}
   - {fileID: 1375718665}
   - {fileID: 2144702519}
-  plInventory: {fileID: 2540516230264680843}
 --- !u!1 &1629281317
 GameObject:
   m_ObjectHideFlags: 0
@@ -3579,18 +3579,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06431fa2fd9d9804da65a2cbf24fa88c, type: 3}
---- !u!114 &2540516230264680843 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 300170808926228186, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
-    type: 3}
-  m_PrefabInstance: {fileID: 2840594680179539793}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c0992dac1e1c8347b91ad5bebdef92e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2840594680179539793
 PrefabInstance:
   m_ObjectHideFlags: 0

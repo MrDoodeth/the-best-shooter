@@ -13,19 +13,19 @@ public class UnlockForPointsDoor : MonoBehaviour, IBuyable
     [SerializeField] private float openDuration = 2f;
     [SerializeField][Range(-180f,180f)] private float openingAngle = 90f;
     [SerializeField] private RotateMode rotMode;
-    public void Buy(ref int balance)
+    public int Buy(int balance)
     {
         if (balance < price)
         {
             Debug.Log("Недостаточно средств!");
-            return;
+            return 0;
         }
-
-        balance -= price;
 
         //Usefull actions
         Debug.Log("Дверь открыта");
         transform.DOLocalRotate(new Vector3(0f, openingAngle, 0f), openDuration, rotMode);
         Destroy(this);
+
+        return price;
     }
 }

@@ -30,7 +30,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable, IContusionable
     {
         enemy.isAlive = false;
         EnemiesSpawner.OnEnemyDeath?.Invoke();
-        EnemiesSpawner.OnGetReward?.Invoke(enemy.rewardAmount);
+        PlayerScore.OnGetReward?.Invoke(enemy.rewardAmount);
         enemy.agent.enabled = false;
         enemy.allRigidbodys.SetIsKinematics(false);
         enemy.animator.enabled = false;
@@ -67,11 +67,9 @@ public class EnemyHealth : MonoBehaviour, IDamagable, IContusionable
         enemy.animator.enabled = false;
         yield return new WaitForSeconds(enemy.contusionDelay);
         yield return new WaitUntil(() => enemy.agent.isOnNavMesh);
-        { 
-            //return rigs in world position
-            transform.position = enemy.allColliders[0].transform.position;
-            enemy.allColliders[0].transform.localPosition = Vector3.zero;
-        }
+        //return rigs in world position
+        transform.position = enemy.allColliders[0].transform.position;
+        enemy.allColliders[0].transform.localPosition = Vector3.zero;
         enemy.animator.enabled = true;
         enemy.animator.SetTrigger("isStandUp");
         enemy.allRigidbodys.SetIsKinematics(true);

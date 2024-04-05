@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using Random = UnityEngine.Random;
 
 public class EnemiesSpawner : MonoBehaviour
@@ -17,18 +16,17 @@ public class EnemiesSpawner : MonoBehaviour
 
     [Header("Types of zombies")]
     [Tooltip("—юда вставл€ть всех зомби в пор€дке возрастани€ их силы (обычный, бегун; танк, токсик)")]
-    [SerializeField] private List<GameObject> zombies; 
+    [SerializeField] private GameObject[] zombies;
+    [SerializeField][Range(1, 10)] private int maxExplosiveEnemyAmount;
+    private int currentExplosiveEnemyAmount;
     [Space(15)]
 
     [Tooltip("—юда вставл€ть все точки спавна на карте")]
     [SerializeField] private Transform[] spawnPoints;
 
-    [SerializeField] private PlayerScore plInventory;
-
     public static Action OnStartNewWave;
     public static Action OnEndWave;
     public static Action OnEnemyDeath;
-    public static Action<int> OnGetReward;
     private Action Wave;
 
     private static int currentEnemyCount;
@@ -50,9 +48,9 @@ public class EnemiesSpawner : MonoBehaviour
     {
         OnStartNewWave += ChooseWave;
         OnEndWave += EndWave;
+
         OnEnemyDeath += OnEnemyDied;
         OnEnemyDeath += CheckWave;
-        OnGetReward += Reward;
 
         #region InitDifficulty
         switch (difficulty)
@@ -76,9 +74,9 @@ public class EnemiesSpawner : MonoBehaviour
     {
         OnStartNewWave -= ChooseWave;
         OnEndWave -= EndWave;
+
         OnEnemyDeath -= OnEnemyDied;
         OnEnemyDeath -= CheckWave;
-        OnGetReward -= Reward;
 
         #region ReinitDifficulty
         switch (difficulty)
@@ -97,11 +95,6 @@ public class EnemiesSpawner : MonoBehaviour
         }
         #endregion
     }
-
-    private void Reward(int value)
-    {
-        plInventory.pointsAmount += value;
-    }
     private void CheckWave()
     {
         if (currentEnemyCount == 0)
@@ -119,6 +112,7 @@ public class EnemiesSpawner : MonoBehaviour
         baseEnemyCount = Mathf.RoundToInt(baseEnemyCount * enemyCountIncreaseRate);
         currentEnemyCount = baseEnemyCount;
         currentWaveNumber++;
+        currentExplosiveEnemyAmount = 0;
         WaitWave(waveDelay);
     }
 
@@ -152,12 +146,17 @@ public class EnemiesSpawner : MonoBehaviour
     }
     private void EasyMode()
     {
-        for (int i = currentEnemyCount; i > 0; i--)
+        StartCoroutine(Spawning());
+
+        IEnumerator Spawning()
         {
-            SpawnRandomEnemy(spawnPoints[selectedSpawner], zombies[Random.Range(0, zombies.Count)],
-                                                           zombies[Random.Range(0, zombies.Count)],
-                                                           zombies[Random.Range(0, zombies.Count)]);
-            ChangeSelectedSpawnPoint();
+            for (int i = currentEnemyCount; i > 0; i--)
+            {
+                SpawnRandomEnemy(spawnPoints[selectedSpawner], zombies);
+                ChangeSelectedSpawnPoint();
+                yield return new WaitForSeconds(0.5f);
+            }
+            yield return null;
         }
     }
 
@@ -191,6 +190,16 @@ public class EnemiesSpawner : MonoBehaviour
     private void SpawnRandomEnemy(Transform spawnPoint, params GameObject[] enemes)
     {
         int type = Random.Range(0, enemes.Length);
+        
+        if (type == (enemes.Length - 1))
+        {
+            currentExplosiveEnemyAmount++;
+            if (currentExplosiveEnemyAmount > maxExplosiveEnemyAmount)
+            {
+                SpawnRandomEnemy(spawnPoint, enemes);
+                return;
+            }
+        }
 
         SpawnEnemy(enemes[type], spawnPoint);
     }

@@ -19,7 +19,7 @@ public class ExplosiveEnemyHealth : MonoBehaviour, IDamagable
     {
         enemy.isAlive = false;
         EnemiesSpawner.OnEnemyDeath?.Invoke();
-        EnemiesSpawner.OnGetReward?.Invoke(enemy.rewardAmount);
+        PlayerScore.OnGetReward?.Invoke(enemy.rewardAmount);
         Debug.Log("Death");
         exComponent.ExploedWithDelay();
     }

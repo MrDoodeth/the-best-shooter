@@ -10,18 +10,20 @@ public class GunVendor : MonoBehaviour, IBuyable
         get => Price;
         set { Price = value <= 0 ? 0 : value; }
     }
-    public void Buy(ref int balance)
+    public int Buy(int balance)
     {
         if (balance < price)
         {
             Debug.Log("Недостаточно средств!");
-            return;
+            return 0;
         }
 
-        balance -= price;
+        //Usefull action
         PlayerScore.OnChangePointsAmount?.Invoke();
         Debug.Log($"Вы купили {item.GetComponent<Gun>().Name} за {price} ");
-        SpawnItem();          
+        SpawnItem();     
+        
+        return price;
     }
 
     private void SpawnItem()

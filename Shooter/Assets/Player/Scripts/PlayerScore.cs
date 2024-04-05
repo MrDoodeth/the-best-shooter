@@ -9,6 +9,7 @@ public class PlayerScore : MonoBehaviour
     [SerializeField] private KeyCode buyKey;
     [SerializeField] private int PointsAmount;
     public static Action OnChangePointsAmount;
+    public static Action<int> OnGetReward;
     public int pointsAmount
     {
         get { return PointsAmount; }
@@ -18,10 +19,21 @@ public class PlayerScore : MonoBehaviour
             OnChangePointsAmount?.Invoke();
         }
     }
-
     private void Awake()
     {
         priceLabel.enabled = false;
+    }
+    private void OnEnable()
+    {
+        OnGetReward += Reward;
+    }
+    private void OnDisable()
+    {
+        OnGetReward -= Reward;
+    }
+    private void Reward(int value)
+    {
+        pointsAmount += value;
     }
     private void Update()
     {
@@ -33,9 +45,9 @@ public class PlayerScore : MonoBehaviour
             priceLabel.enabled = true;
             priceLabel.text = iBuyableEntity?.price.ToString();
 
-            if (Input.GetKeyDown(buyKey))
+            if (Input.GetKeyDown(buyKey) && iBuyableEntity is not null)
             {
-                iBuyableEntity?.Buy(ref PointsAmount);                
+                pointsAmount -= iBuyableEntity.Buy(PointsAmount);                
                 priceLabel.enabled = false;
             }
         }
