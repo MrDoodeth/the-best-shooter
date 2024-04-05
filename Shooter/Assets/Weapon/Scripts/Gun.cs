@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
 public class Gun : MonoBehaviour
@@ -23,6 +24,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private float powerOfVerticalRecoil;
     [SerializeField] private float powerOfHorizontalRecoil;
     [SerializeField] private float powerOfForwardRecoil = 0.1f;
+    [SerializeField] private float powerOfBoltRecoil = 0.1f;
+    [SerializeField] private float durationOfBoltRecoil = 0.1f;
     [SerializeField][Range(0.01f, 5f)] private float cameraRecoilRatio = 1f;
     [Space(10)]
 
@@ -41,6 +44,7 @@ public class Gun : MonoBehaviour
     [SerializeField] public Transform rightHandle;
     [SerializeField] public Transform leftHandle;
     [SerializeField] private Transform muzzle;
+    [SerializeField] private Transform bolt;   
     [SerializeField] private FirstPersonController fpc;
     [SerializeField] private Animator animator;
     private float timeSinceLastShoot;
@@ -191,6 +195,10 @@ public class Gun : MonoBehaviour
             void Recoil()
             {
                 transform.localPosition -= Vector3.forward * powerOfForwardRecoil;
+                var fPos = bolt.localPosition;
+                DOTween.Sequence()
+                    .Append(bolt.DOLocalMove(bolt.localPosition - (Vector3.forward * powerOfBoltRecoil), durationOfBoltRecoil))
+                    .Append(bolt.DOLocalMove(fPos, durationOfBoltRecoil));
 
                 transform.localEulerAngles -= Vector3.right * powerOfVerticalRecoil;
                 transform.localEulerAngles -= Vector3.up * Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil);
@@ -202,8 +210,7 @@ public class Gun : MonoBehaviour
 
             void OnGunShot()
             {
-                animator.enabled = true;
-                animator.SetTrigger("Shoot");
+
             }
         }
     }

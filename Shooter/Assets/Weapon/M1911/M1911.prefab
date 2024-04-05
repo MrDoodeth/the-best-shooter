@@ -411,22 +411,27 @@ MonoBehaviour:
   powerOfVerticalRecoil: 2.5
   powerOfHorizontalRecoil: 2
   powerOfForwardRecoil: 0.02
+  powerOfBoltRecoil: 0.038
+  durationOfBoltRecoil: 0.04
   cameraRecoilRatio: 0.9
-  currentAmmo: 8
-  reserveAmmo: 999
   maxReserveAmmo: 999
   magSize: 8
   fireRate: 270
   reloadTime: 1
   reloading: 0
+  currentAmmo: 8
+  reserveAmmo: 999
   rightHandle: {fileID: 8178916180084907248}
   leftHandle: {fileID: 8178916180163578512}
   muzzle: {fileID: 7456368721888274317}
+  bolt: {fileID: 8183275557969373699}
   fpc: {fileID: 0}
   animator: {fileID: 475303178}
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
   weaponBobbing: {fileID: 0}
+  weaponRigidbody: {fileID: 0}
+  weaponCollider: {fileID: 0}
 --- !u!114 &2711640644429102420
 MonoBehaviour:
   m_ObjectHideFlags: 0
