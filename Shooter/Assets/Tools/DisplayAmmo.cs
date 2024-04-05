@@ -12,26 +12,26 @@ public class DisplayAmmo : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.OnTakenGun += OnTaken;
-        PlayerController.OnTakenGun += DetermineAmmo;
+        PlayerController.OnGunTaken += OnTaken;
+        PlayerController.OnGunTaken += DetermineAmmo;
 
         PlayerController.OnShootInput += DetermineAmmo;
-        PlayerController.OnReloadEnd += DetermineAmmo;
+        Gun.OnReloadEnd += DetermineAmmo;
 
-        PlayerController.OnDropGun += OnDroped;
-        PlayerController.OnChangedGun += DetermineAmmo;
+        PlayerController.OnGunDroped += OnDroped;
+        PlayerController.OnGunChanged += DetermineAmmo;
     }
 
     private void OnDisable()
     {
-        PlayerController.OnTakenGun -= OnTaken;
-        PlayerController.OnTakenGun -= DetermineAmmo;
+        PlayerController.OnGunTaken -= OnTaken;
+        PlayerController.OnGunTaken -= DetermineAmmo;
 
         PlayerController.OnShootInput -= DetermineAmmo;
-        PlayerController.OnReloadEnd -= DetermineAmmo;
+        Gun.OnReloadEnd -= DetermineAmmo;
 
-        PlayerController.OnDropGun -= OnDroped;
-        PlayerController.OnChangedGun -= DetermineAmmo;
+        PlayerController.OnGunDroped -= OnDroped;
+        PlayerController.OnGunChanged -= DetermineAmmo;
     }
 
     private void OnTaken() => ammoText.enabled = true;
@@ -40,7 +40,7 @@ public class DisplayAmmo : MonoBehaviour
 
     private void DetermineAmmo()
     {
-        if (switching.gun is not null)
-            ammoText.text = $"{switching.gun.currentAmmo}/{switching.gun.reserveAmmo}";
+        if (switching.currentGun != null)
+            ammoText.text = $"{switching.currentGun.currentAmmo}/{switching.currentGun.reserveAmmo}";
     }
 }

@@ -5,8 +5,8 @@ using TMPro;
 public class PlayerScore : MonoBehaviour
 {
     [Header("Purchase")]
-    [SerializeField] private TMP_Text priceLabel;
     [SerializeField] private KeyCode buyKey;
+    [SerializeField] private TMP_Text priceLabel;
     [SerializeField] private int PointsAmount;
     public static Action OnChangePointsAmount;
     public static Action<int> OnGetReward;
@@ -37,17 +37,23 @@ public class PlayerScore : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerRayCaster.isHit)
+        if (PlayerRayCaster.isHit && PlayerRayCaster.HIT.transform != null)
         {
             var _hit = PlayerRayCaster.HIT;
-
-            IBuyable iBuyableEntity = _hit.transform.GetComponent<IBuyable>();
-            priceLabel.enabled = true;
-            priceLabel.text = iBuyableEntity?.price.ToString();
-
-            if (Input.GetKeyDown(buyKey) && iBuyableEntity is not null)
+            if (_hit.transform.TryGetComponent(out IBuyable iBuyableEntity))
             {
-                pointsAmount -= iBuyableEntity.Buy(PointsAmount);                
+                priceLabel.enabled = true;
+                priceLabel.text = iBuyableEntity?.price.ToString();
+
+                if (Input.GetKeyDown(buyKey))
+                {
+                    pointsAmount -= iBuyableEntity.Buy(pointsAmount);
+                    priceLabel.enabled = false;
+                }
+            }
+            else
+            {
+                priceLabel.text = "";
                 priceLabel.enabled = false;
             }
         }

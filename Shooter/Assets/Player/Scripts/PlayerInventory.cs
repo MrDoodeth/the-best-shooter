@@ -124,19 +124,24 @@ public class PlayerInventory : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerRayCaster.isHit)
+        if (PlayerRayCaster.isHit && PlayerRayCaster.HIT.transform != null)
         {
             var _hit = PlayerRayCaster.HIT;
-
-            ITradable iTradableEntity = _hit.transform.GetComponent<ITradable>();
-            tradeLabel.enabled = true;
-            if (iTradableEntity is not null)
+            if (_hit.transform.TryGetComponent(out ITradable iTradableEntity))
+            {
+                tradeLabel.enabled = true;
                 tradeLabel.text = $"Needed {iTradableEntity?.neededItemsAmount} {iTradableEntity?.neededItem.itemName}";
 
-            if (Input.GetKeyDown(tradeKey))
+                if (Input.GetKeyDown(tradeKey))
+                {
+                    iTradableEntity.Trade(this);
+                    //OnChangePointsAmount?.Invoke();
+                    tradeLabel.enabled = false;
+                }
+            }
+            else
             {
-                iTradableEntity?.Trade(this);
-                //OnChangePointsAmount?.Invoke();
+                tradeLabel.text = "";
                 tradeLabel.enabled = false;
             }
         }

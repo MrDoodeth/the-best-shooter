@@ -8,11 +8,12 @@ public class PlayerOpener : MonoBehaviour
         if (PlayerRayCaster.isHit)
         {
             var _hit = PlayerRayCaster.HIT;
-            IOpenable iOpenableEntity = _hit.transform?.GetComponent<IOpenable>();
-
-            if (Input.GetKeyDown(openKey))
+            if (_hit.transform.TryGetComponent(out IOpenable iOpenableEntity) && PlayerRayCaster.HIT.transform != null)
             {
-                iOpenableEntity?.Open();
+                if (Input.GetKeyDown(openKey))
+                {
+                    iOpenableEntity.Open();
+                }
             }
         }
     }

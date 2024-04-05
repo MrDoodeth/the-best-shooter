@@ -3,30 +3,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public TypeOfClick typeOfClick; //Show in Editor
-    public static TypeOfClick TypeOfClick;
-    public static Action OnShootInput;
-    public static Action OnShootInputDown;
+    public enum TypeOfClick
+    {
+        Click,
+        Hold
+    }
 
-    public static Action OnReloadInput;
-    public static Action OnReloadEnd;
+    [SerializeField] private TypeOfClick typeOfClick;
+    public static event Action OnShootInput;
+    public static event Action OnShootInputDown;
 
-    public static Action<bool> OnZoomInput;
+    [SerializeField] private KeyCode reloadKey;
+    public static event Action OnReloadInput;
 
-    public static Action OnTakenGun;
-    public static Action OnChangedGun;
-    public static Action OnDropGun;
+    public static event Action<bool> OnZoomInput;
+    public static Action OnGunTaken;
+    public static Action OnGunChanged;
+    public static Action OnGunDroped;
 
     public static bool isControllerAvailable;
     private bool isZoom;
 
-    [SerializeField] private KeyCode reloadKey;
-
-
-    private void Start()
-    {
-        TypeOfClick = typeOfClick;
-    }
     private void Update()
     {
         if (!isControllerAvailable)
@@ -38,14 +35,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             OnShootInputDown?.Invoke();
 
-        switch (TypeOfClick)
+        switch (typeOfClick)
         {
             case TypeOfClick.Click:
                 {
                     if (Input.GetMouseButtonDown(1))
                     {
-                        OnZoomInput?.Invoke(!isZoom);
                         isZoom = !isZoom;
+                        OnZoomInput?.Invoke(isZoom);
                     }
                 }
                 break;
@@ -61,6 +58,5 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(reloadKey))
             OnReloadInput?.Invoke();
-
     }
 }

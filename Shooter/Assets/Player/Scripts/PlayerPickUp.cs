@@ -1,12 +1,13 @@
-using System.Collections;
+using System;
 using TMPro;
 using UnityEngine;
 
 public class PlayerPickUp : MonoBehaviour
 {
-    [SerializeField] private TMP_Text itemNameLabel;
     [SerializeField] private KeyCode pickUpKey;
+    [SerializeField] private TMP_Text itemNameLabel;
     [SerializeField] private PlayerInventory plInventory;
+    public static event Action OnItemPickedUp;
 
    private void Awake()
     {
@@ -14,23 +15,29 @@ public class PlayerPickUp : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerRayCaster.isHit)
+        if (PlayerRayCaster.isHit && PlayerRayCaster.HIT.transform != null)
         {
             var _hit = PlayerRayCaster.HIT;
-
-            PhysicalItem phItem = _hit.transform.GetComponent<PhysicalItem>();
-            itemNameLabel.enabled = true;
-            itemNameLabel.text = phItem?.item.itemName.ToString();
-
-            if (Input.GetKeyDown(pickUpKey) && phItem is not null)
+            if (_hit.transform.TryGetComponent(out PhysicalItem phItem))
             {
-                if (plInventory.AddItem(phItem.item))
+                itemNameLabel.enabled = true;
+                itemNameLabel.text = phItem.item.itemName.ToString();
+
+                if (Input.GetKeyDown(pickUpKey))
                 {
-                    //OnItemPickedUp?.Invoke();
-                    itemNameLabel.enabled = false;
-                    phItem.gameObject.SetActive(false);
-                    Destroy(phItem.gameObject);
+                    if (plInventory.AddItem(phItem.item))
+                    {
+                        OnItemPickedUp?.Invoke();
+                        itemNameLabel.enabled = false;
+                        phItem.gameObject.SetActive(false);
+                        Destroy(phItem.gameObject);
+                    }
                 }
+            }
+            else
+            {
+                itemNameLabel.text = "";
+                itemNameLabel.enabled = false;
             }
         }
         else

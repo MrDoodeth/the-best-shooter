@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Animations.Rigging;
-using Unity.Burst.CompilerServices;
 
 public class WeaponsSwitching : MonoBehaviour
 {
@@ -29,14 +28,11 @@ public class WeaponsSwitching : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private FirstPersonController FPC;
 
-    [SerializeField] private List<Transform> weapons;
+    [SerializeField] private List<Gun> weapons;
+    public Gun currentGun;
     private int selectedWeapon;
 
-    [HideInInspector] public Gun gun { get; private set; }
-    private Rigidbody gunRb;
-    private BoxCollider col;
-
-    private void Start()
+    private void Awake()
     {
         currentInventorySize = inventorySize;
     }
@@ -44,14 +40,9 @@ public class WeaponsSwitching : MonoBehaviour
     private void HandMovements(Transform rightPos, Transform leftPos)
     {
         rightHand.SetParent(rightPos);
-        //rightHand.DOLocalMove(Vector3.zero, 0.4f);  //smooth movement
-        rightHand.localPosition = Vector3.zero;
-        rightHand.localRotation = Quaternion.identity;
-
+        rightHand.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         leftHand.SetParent(leftPos);
-        //leftHand.DOLocalMove(Vector3.zero, 0.4f);   //smooth movement
-        leftHand.localPosition = Vector3.zero;
-        leftHand.localRotation = Quaternion.identity;
+        leftHand.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
         if (rightPos == joint || leftPos == joint)
         {
@@ -66,65 +57,60 @@ public class WeaponsSwitching : MonoBehaviour
             animator.SetLayerWeight(1, 1f);
         }       
     }
-    private bool CanPickUp(int gunInvSize) => currentInventorySize >= gunInvSize;
     private void PickUp()
     {
-        if (gun != null && gun.reloading)
+        if (currentGun != null && currentGun.reloading)
             return;
 
         var _hit = PlayerRayCaster.HIT;
-
-        if (_hit.transform.CompareTag("Weapone") && CanPickUp(_hit.transform.GetComponent<Gun>().Size))
+        if (PlayerRayCaster.HIT.transform != null && _hit.transform.TryGetComponent(out Gun gun))
         {
-            PickUpWeapon(_hit.transform);
+            if (CanPickUp(gun.Size, _hit.transform))
+            {
+                currentGun = gun;
+                PickUpWeapon(gun);
+            }
         }
+
+        void PickUpWeapon(Gun wp)
+        {
+            weapons.Add(wp);
+
+            wp.transform.SetPositionAndRotation(gunPivot.position, gunPivot.rotation);
+            currentGun.weaponZoom.gunPivot = gunPivot;
+            wp.transform.SetParent(transform);
+
+            wp.weaponRigidbody.isKinematic = true;
+            wp.weaponCollider.enabled = false;
+
+            currentGun.enabled = true;
+            currentGun.SetFPC(FPC);
+
+            PlayerController.OnGunTaken?.Invoke();
+            currentInventorySize -= currentGun.Size;
+
+            ChangeSelectedWeapon("Up");
+        }
+
+        bool CanPickUp(int gunInvSize, Transform tr) => currentInventorySize >= gunInvSize && tr.CompareTag("Weapone");
     }
     private void Drop()
-    {
-        if (weapons.Count != 0 && !gun.reloading)
-        {
-            gun.SetFPC(null);
-            currentInventorySize += gun.Size;
-            gun.enabled = false;
+    {     
+        if ((currentGun != null && currentGun.reloading) || weapons.Count == 0)
+            return;
 
-            gunRb.isKinematic = false;
-            col.enabled = true;
-            gunRb.AddForce(transform.forward * 4f + transform.up * 2f, ForceMode.Impulse);  
+        currentGun.SetFPC(null);
+        currentInventorySize += currentGun.Size;
+        currentGun.enabled = false;
 
-            weapons[selectedWeapon].SetParent(null);
-            weapons.Remove(weapons[selectedWeapon]);
+        currentGun.weaponRigidbody.isKinematic = false;
+        currentGun.weaponCollider.enabled = true;
+        currentGun.weaponRigidbody.AddForce(transform.forward * 4f + transform.up * 2f, ForceMode.Impulse);
 
-            gun = null;
-            gunRb = null;
-            col = null;
+        currentGun.transform.SetParent(null);
+        weapons.Remove(currentGun);
 
-            ChangeSelectedWeapon("Down");
-        }     
-    }
-    private void PickUpWeapon(Transform wp)
-    {
-
-        gun = wp.GetComponent<Gun>();
-        gunRb = wp.GetComponent<Rigidbody>();
-        col = wp.GetComponent<BoxCollider>();
-
-        weapons.Add(wp);
-        
-        wp.position = gunPivot.position;
-        wp.rotation = gunPivot.rotation;
-        gun.weaponZoom.gunPivot = gunPivot;
-        wp.SetParent(transform);
-
-        gunRb.isKinematic = true;
-        col.enabled = false;
-
-        gun.enabled = true;
-        gun.SetFPC(FPC);
-
-        PlayerController.OnTakenGun?.Invoke();
-        currentInventorySize -= gun.Size;
-
-        ChangeSelectedWeapon("Up");
+        ChangeSelectedWeapon("Down");
     }
     private void Select(int weaponIndex)
     {
@@ -135,11 +121,6 @@ public class WeaponsSwitching : MonoBehaviour
             else
                 weapons[i].gameObject.SetActive(false);
         }
-        OnWeaponSelected();
-    }
-    private void OnWeaponSelected()
-    {
-
     }
 
     #region ChangeWeapon
@@ -149,7 +130,7 @@ public class WeaponsSwitching : MonoBehaviour
     /// <param name="type">Up or Down</param>
     private void ChangeSelectedWeapon(string type)
     {
-        if (gun != null && gun.reloading)
+        if (currentGun != null && currentGun.reloading)
             return;
 
         if (type == "Up")
@@ -182,21 +163,17 @@ public class WeaponsSwitching : MonoBehaviour
 
         if (weapons.Count == 0)
         {
-            gun = null;
-            gunRb = null;
-            col = null;
-
-            PlayerController.OnDropGun?.Invoke();
+            PlayerController.OnGunDroped?.Invoke();
             HandMovements(joint, joint);
+
+            currentGun = null;
         }
         else
         {
-            gun = weapons[selectedWeapon].GetComponent<Gun>();
-            gunRb = weapons[selectedWeapon].GetComponent<Rigidbody>();
-            col = weapons[selectedWeapon].GetComponent<BoxCollider>();
+            PlayerController.OnGunChanged?.Invoke();
+            HandMovements(weapons[selectedWeapon].rightHandle, weapons[selectedWeapon].leftHandle);
 
-            PlayerController.OnChangedGun?.Invoke();
-            HandMovements(gun.rightHandle, gun.leftHandle);
+            currentGun = weapons[selectedWeapon];
         }
 
         timeSinceLastSwitch = 0f;
@@ -223,17 +200,17 @@ public class WeaponsSwitching : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") < 0 && timeSinceLastSwitch >= delayBeforeSwitching)  
             ChangeSelectedWeapon("Down");
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && weapons.Count >= 1 && !gun.reloading && timeSinceLastSwitch >= delayBeforeSwitching)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && weapons.Count >= 1 && timeSinceLastSwitch >= delayBeforeSwitching)
         {
             ChangeSelectedWeapon(0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && weapons.Count >= 2 && !gun.reloading && timeSinceLastSwitch >= delayBeforeSwitching)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && weapons.Count >= 2 && timeSinceLastSwitch >= delayBeforeSwitching)
         {
             ChangeSelectedWeapon(1);
         }
 
-        if (Input.GetKey(KeyCode.E) && timeSinceLastSwitch >= delayBeforeSwitching)
+        if (Input.GetKeyDown(KeyCode.E) && timeSinceLastSwitch >= delayBeforeSwitching)
         {
             PickUp();
         }
