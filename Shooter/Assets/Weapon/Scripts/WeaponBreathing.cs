@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public class WeaponBreathing : MonoBehaviour
@@ -14,22 +15,24 @@ public class WeaponBreathing : MonoBehaviour
     [SerializeField] private float walkingTimeScale;
     [SerializeField] private float walkingAmplitudeX;
     [SerializeField] private float walkingAmplitudeY;
+    [SerializeField] private float walkingAmplitudeZ;
     [Space(10)]
 
     //Sprint
     [SerializeField] private float sprintingTimeScale;
     [SerializeField] private float sprintingAmplitudeX;
     [SerializeField] private float sprintingAmplitudeY;
+    [SerializeField] private float sprintingAmplitudeZ;
     [Space(10)]
 
     [SerializeField] private Vector3 BreathAmount;
     [SerializeField] private float Shift;
-    private Vector3 defaultPosition;
+    private Vector3 defaultLocalPosition;
     private bool isZoom = true;
 
     private void OnValidate()
     {
-        defaultPosition = transform.localPosition;
+        defaultLocalPosition = transform.localPosition;
     }
 
     private void OnEnable()
@@ -42,14 +45,14 @@ public class WeaponBreathing : MonoBehaviour
         PlayerController.OnZoomInput -= OnZoom;
     }
 
-    private void GunShake()
+    private void GunShaking()
     {
         if (fpc.isWalking)
         {
             if (fpc.isSprinting)
             {
                 timer += Time.deltaTime * sprintingTimeScale;
-                Shake(timer, BreathAmount.x * sprintingAmplitudeX, BreathAmount.y * sprintingAmplitudeY, 1f);
+                ShakeRotation(timer, BreathAmount.x * sprintingAmplitudeX, BreathAmount.y * sprintingAmplitudeY, BreathAmount.z * sprintingAmplitudeZ);
             }
             else if (fpc.isCrouched)
             {
@@ -58,23 +61,32 @@ public class WeaponBreathing : MonoBehaviour
             else
             {
                 timer += Time.deltaTime * walkingTimeScale;
-                Shake(timer, BreathAmount.x * walkingAmplitudeX, BreathAmount.y * walkingAmplitudeY, 1f);
+                ShakeRotation(timer, BreathAmount.x * walkingAmplitudeX, BreathAmount.y * walkingAmplitudeY, BreathAmount.z * walkingAmplitudeZ);
             }         
         }
 
         timer += Time.deltaTime * stayTimeScale;
 
-        Shake(timer, BreathAmount.x, BreathAmount.y, 1f);
+        ShakeRotation(timer, BreathAmount.x, BreathAmount.y, BreathAmount.z);
 
         void Shake(float _timer, float X, float Y, float Z)
         {
-            float Xpos = transform.localPosition.x + Mathf.Cos(_timer + Shift) * X;
+            float Xpos = transform.localPosition.x + Mathf.Sin(_timer + Shift) * X;
             float Ypos = transform.localPosition.y + Mathf.Sin(_timer) * Y;
             float Zpos = transform.localPosition.z * Z;
 
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(Xpos, Ypos, Zpos), 150f * Time.deltaTime);
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(Zpos, 0, Xpos), 150f * Time.deltaTime);
-        } 
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(Xpos, Ypos, Zpos), 1 / Time.deltaTime);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, Xpos * 90f), 1 / Time.deltaTime);
+        }
+
+        void ShakeRotation(float _timer, float X, float Y, float Z)
+        {
+            float Xpos = transform.localPosition.x + Mathf.Sin(_timer + Shift) * X;
+            float Ypos = transform.localPosition.y + Mathf.Sin(_timer) * Y;
+            float Zpos = transform.localPosition.z * Mathf.Sin(_timer) * Z;
+
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(Xpos, Ypos, Zpos), 1 / Time.deltaTime);
+        }
     }
 
     private void OnZoom(bool _isZoom)
@@ -86,11 +98,11 @@ public class WeaponBreathing : MonoBehaviour
     {
         if (!isZoom)
         {
-            GunShake();
+            GunShaking();
         }
         else
         {
-            transform.localPosition = defaultPosition;
+            transform.localPosition = defaultLocalPosition;
         }
 
     }

@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class UnlockForKeyDoor : MonoBehaviour, ITradable
+public class UnlockForItemDoor : MonoBehaviour, ITradable
 {
     [field: SerializeField] public Item neededItem { get; set; }
     [field: SerializeField] public int neededItemsAmount { get; set; }

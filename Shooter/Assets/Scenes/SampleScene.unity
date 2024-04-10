@@ -3650,6 +3650,46 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 300170808926228184, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+        type: 3}
+      propertyPath: Shift
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 300170808926228184, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+        type: 3}
+      propertyPath: timer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300170808926228184, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300170808926228184, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+        type: 3}
+      propertyPath: stayTimeScale
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 300170808926228184, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+        type: 3}
+      propertyPath: BreathAmount.x
+      value: 0.0002
+      objectReference: {fileID: 0}
+    - target: {fileID: 300170808926228184, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+        type: 3}
+      propertyPath: BreathAmount.y
+      value: 0.0005
+      objectReference: {fileID: 0}
+    - target: {fileID: 300170808926228184, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+        type: 3}
+      propertyPath: BreathAmount.z
+      value: 0.00007
+      objectReference: {fileID: 0}
+    - target: {fileID: 300170808926228184, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+        type: 3}
+      propertyPath: walkingAmplitudeY
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1913834936968865011, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
         type: 3}
       propertyPath: m_RootOrder

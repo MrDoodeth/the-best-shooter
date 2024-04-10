@@ -416,7 +416,7 @@ MonoBehaviour:
   cameraRecoilRatio: 0.9
   maxReserveAmmo: 999
   magSize: 8
-  fireRate: 270
+  fireRate: 250
   reloadTime: 1
   reloading: 0
   currentAmmo: 8
