@@ -4,7 +4,6 @@ using TMPro;
 public class DisplayAmmo : MonoBehaviour
 {
     [SerializeField] private TMP_Text ammoText;
-    [SerializeField] private WeaponsSwitching switching;
     void Start()
     {
         ammoText.enabled = false;
@@ -40,7 +39,8 @@ public class DisplayAmmo : MonoBehaviour
 
     private void DetermineAmmo()
     {
-        if (switching.currentGun != null)
-            ammoText.text = $"{switching.currentGun.currentAmmo}/{switching.currentGun.reserveAmmo}";
+        Gun currentGun = WeaponsSwitching.currentGun;
+        if (WeaponsSwitching.currentGun != null)
+            ammoText.text = $"{currentGun.currentAmmo}/{currentGun.reserveAmmo}";
     }
 }

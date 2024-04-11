@@ -29,7 +29,7 @@ public class WeaponsSwitching : MonoBehaviour
     [SerializeField] private FirstPersonController FPC;
 
     [SerializeField] private List<Gun> weapons;
-    public Gun currentGun;
+    public static Gun currentGun { get; private set; }
     private int selectedWeapon;
 
     private void Awake()
@@ -163,17 +163,21 @@ public class WeaponsSwitching : MonoBehaviour
 
         if (weapons.Count == 0)
         {
+            //Важен именно такой порядок
+            currentGun = null;
             PlayerController.OnGunDroped?.Invoke();
+
             HandMovements(joint, joint);
 
-            currentGun = null;
         }
         else
         {
+            //Важен именно такой порядок
+            currentGun = weapons[selectedWeapon];
             PlayerController.OnGunChanged?.Invoke();
+
             HandMovements(weapons[selectedWeapon].rightHandle, weapons[selectedWeapon].leftHandle);
 
-            currentGun = weapons[selectedWeapon];
         }
 
         timeSinceLastSwitch = 0f;
