@@ -7,7 +7,7 @@ public class Shelf : MonoBehaviour, IOpenable
     [SerializeField] private bool isOpen = false;
     private Quaternion defaultRotation;
 
-    private void Start()
+    private void Awake()
     {
         defaultRotation = transform.localRotation;
     }

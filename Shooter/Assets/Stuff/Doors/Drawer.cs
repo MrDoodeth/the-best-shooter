@@ -7,7 +7,7 @@ public class Drawer : MonoBehaviour, IOpenable
     [SerializeField] private bool isOpen = false;
     private Vector3 defaultPosition;
 
-    private void Start()
+    private void Awake()
     {
         defaultPosition = transform.position;
     }

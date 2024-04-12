@@ -10,16 +10,16 @@ public class PlayerController : MonoBehaviour
     }
 
     [SerializeField] private TypeOfClick typeOfClick;
-    public static event Action OnShootInput;
-    public static event Action OnShootInputDown;
+    public static event Action OnAttackInput;
+    public static event Action OnAttackInputDown;
 
     [SerializeField] private KeyCode reloadKey;
     public static event Action OnReloadInput;
 
     public static event Action<bool> OnZoomInput;
-    public static Action OnGunTaken;
-    public static Action OnGunChanged;
-    public static Action OnGunDroped;
+    public static Action OnWeaponTaken;
+    public static Action OnWeaponChanged;
+    public static Action OnWeaponDroped;
 
     public static bool isControllerAvailable;
     private bool isZoom;
@@ -30,10 +30,10 @@ public class PlayerController : MonoBehaviour
             return;
 
         if (Input.GetMouseButton(0))
-            OnShootInput?.Invoke();
+            OnAttackInput?.Invoke();
 
         if (Input.GetMouseButtonDown(0))
-            OnShootInputDown?.Invoke();
+            OnAttackInputDown?.Invoke();
 
         switch (typeOfClick)
         {

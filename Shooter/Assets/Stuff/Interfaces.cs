@@ -26,10 +26,5 @@ public interface ITradable
 {
     public Item neededItem { get; set; }
     public int neededItemsAmount { get; set; }
-    /// <summary>
-    /// Trade to swap items
-    /// </summary>
-    /// <param name="items">Player inventory</param>
-    /// <param name="itemsAmounts">Amounts of items</param>
     public void Trade(PlayerInventory plInv);
 }

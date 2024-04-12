@@ -5,11 +5,11 @@ public class WeaponZoom : MonoBehaviour
     [Header("Zoom")]
     [SerializeField][Range(0.01f, 20f)] private float ergonomics;
     [SerializeField][Range(0.01f, 1f)] private float zoomSize = 1f;
-    public Transform gunPivot;
+    public Transform weaponPivot;
     public Vector3 zoomPosition;
-    public Vector3 defaultGunPosition;
+    public Vector3 defaultWeaponPosition;
     private bool isZoom = false;
-    [HideInInspector] public FirstPersonController fpc;
+    [HideInInspector] public FirstPersonController FPC;
 
     private void OnEnable()
     {
@@ -19,14 +19,14 @@ public class WeaponZoom : MonoBehaviour
     private void OnDisable()
     {
         PlayerController.OnZoomInput -= Zoom;    
-        if (gunPivot != null)
-            transform.localPosition = gunPivot.localPosition;
+        if (weaponPivot != null)
+            transform.localPosition = weaponPivot.localPosition;
         Zoom(false);
     }
     private void Zoom(bool isPressed)
     {
         if (enabled == true)
-            fpc.zoomFOV = fpc.fov * zoomSize;
+            FPC.zoomFOV = FPC.fov * zoomSize;
 
         isZoom = isPressed;
     }
@@ -39,7 +39,7 @@ public class WeaponZoom : MonoBehaviour
         }
         else
         {
-            transform.localPosition = Vector3.Slerp(transform.localPosition, defaultGunPosition, ergonomics * Time.deltaTime);
+            transform.localPosition = Vector3.Slerp(transform.localPosition, defaultWeaponPosition, ergonomics * Time.deltaTime);
         }
     }
 }

@@ -18,7 +18,7 @@ public class WeaponsSwitching : MonoBehaviour
     [Space(10)]
 
     [Header("Settings")]
-    [SerializeField] private Transform gunPivot;
+    [SerializeField] private Transform weaponPivot;
     [SerializeField][Range(1f, 5f)] private int inventorySize;
     [SerializeField] private float delayBeforeSwitching = 0.5f;
     private float timeSinceLastSwitch;
@@ -28,8 +28,8 @@ public class WeaponsSwitching : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private FirstPersonController FPC;
 
-    [SerializeField] private List<Gun> weapons;
-    public static Gun currentGun { get; private set; }
+    [SerializeField] private List<Weapon> weapons;
+    public static Weapon currentWeapon { get; private set; }
     private int selectedWeapon;
 
     private void Awake()
@@ -59,35 +59,32 @@ public class WeaponsSwitching : MonoBehaviour
     }
     private void PickUp()
     {
-        if (currentGun != null && currentGun.reloading)
-            return;
-
         var _hit = PlayerRayCaster.HIT;
-        if (PlayerRayCaster.HIT.transform != null && _hit.transform.TryGetComponent(out Gun gun))
+        if (PlayerRayCaster.HIT.transform != null && _hit.transform.TryGetComponent(out Weapon weapon))
         {
-            if (CanPickUp(gun.Size, _hit.transform))
+            if (CanPickUp(weapon.Size, _hit.transform))
             {
-                currentGun = gun;
-                PickUpWeapon(gun);
+                currentWeapon = weapon;
+                PickUpWeapon(weapon);
             }
         }
 
-        void PickUpWeapon(Gun wp)
+        void PickUpWeapon(Weapon wp)
         {
             weapons.Add(wp);
 
-            wp.transform.SetPositionAndRotation(gunPivot.position, gunPivot.rotation);
-            currentGun.weaponZoom.gunPivot = gunPivot;
+            wp.transform.SetPositionAndRotation(weaponPivot.position, weaponPivot.rotation);
+            currentWeapon.weaponZoom.weaponPivot = weaponPivot;
             wp.transform.SetParent(transform);
 
             wp.weaponRigidbody.isKinematic = true;
             wp.weaponCollider.enabled = false;
 
-            currentGun.enabled = true;
-            currentGun.SetFPC(FPC);
+            currentWeapon.enabled = true;
+            currentWeapon.SetFPC(FPC);
 
-            PlayerController.OnGunTaken?.Invoke();
-            currentInventorySize -= currentGun.Size;
+            PlayerController.OnWeaponTaken?.Invoke();
+            currentInventorySize -= currentWeapon.Size;
 
             ChangeSelectedWeapon("Up");
         }
@@ -96,19 +93,19 @@ public class WeaponsSwitching : MonoBehaviour
     }
     private void Drop()
     {     
-        if ((currentGun != null && currentGun.reloading) || weapons.Count == 0)
+        if (currentWeapon == null)
             return;
 
-        currentGun.SetFPC(null);
-        currentInventorySize += currentGun.Size;
-        currentGun.enabled = false;
+        currentWeapon.SetFPC(null);
+        currentInventorySize += currentWeapon.Size;
+        currentWeapon.enabled = false;
 
-        currentGun.weaponRigidbody.isKinematic = false;
-        currentGun.weaponCollider.enabled = true;
-        currentGun.weaponRigidbody.AddForce(transform.forward * 4f + transform.up * 2f, ForceMode.Impulse);
+        currentWeapon.weaponRigidbody.isKinematic = false;
+        currentWeapon.weaponCollider.enabled = true;
+        currentWeapon.weaponRigidbody.AddForce(transform.forward * 4f + transform.up * 2f, ForceMode.Impulse);
 
-        currentGun.transform.SetParent(null);
-        weapons.Remove(currentGun);
+        currentWeapon.transform.SetParent(null);
+        weapons.Remove(currentWeapon);
 
         ChangeSelectedWeapon("Down");
     }
@@ -130,7 +127,7 @@ public class WeaponsSwitching : MonoBehaviour
     /// <param name="type">Up or Down</param>
     private void ChangeSelectedWeapon(string type)
     {
-        if (currentGun != null && currentGun.reloading)
+        if (currentWeapon == null)
             return;
 
         if (type == "Up")
@@ -164,8 +161,8 @@ public class WeaponsSwitching : MonoBehaviour
         if (weapons.Count == 0)
         {
             //Важен именно такой порядок
-            currentGun = null;
-            PlayerController.OnGunDroped?.Invoke();
+            currentWeapon = null;
+            PlayerController.OnWeaponDroped?.Invoke();
 
             HandMovements(joint, joint);
 
@@ -173,8 +170,8 @@ public class WeaponsSwitching : MonoBehaviour
         else
         {
             //Важен именно такой порядок
-            currentGun = weapons[selectedWeapon];
-            PlayerController.OnGunChanged?.Invoke();
+            currentWeapon = weapons[selectedWeapon];
+            PlayerController.OnWeaponChanged?.Invoke();
 
             HandMovements(weapons[selectedWeapon].rightHandle, weapons[selectedWeapon].leftHandle);
 

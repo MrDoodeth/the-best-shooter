@@ -4,21 +4,15 @@ using Random = UnityEngine.Random;
 using DG.Tweening;
 
 [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
-public class Gun : MonoBehaviour
+public sealed class Gun : Weapon
 {
-    [SerializeField] private GameObject bulletHole;
-
-    [Header("Info")]
-    public string Name;
-    public int Size;
     [Space(10)]
+    [SerializeField] private GameObject bulletHole;
 
     [Header("Shooting")]
     [SerializeField] private bool automatic;
-    [SerializeField] private int damage;
     [SerializeField] private float maxDistance;
-    [SerializeField][Min(0.01f)] private float powerOfShot = 10f;
-    [Space(10)]
+    private float timeSinceLastShoot;
 
     [Header("Recoil")]
     [SerializeField] private float powerOfVerticalRecoil;
@@ -26,6 +20,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float powerOfForwardRecoil = 0.1f;
     [SerializeField] private float powerOfBoltRecoil = 0.1f;
     [SerializeField] private float durationOfBoltRecoil = 0.1f;
+
     [SerializeField][Range(0.01f, 5f)] private float cameraRecoilRatio = 1f;
     [Space(10)]
 
@@ -34,97 +29,50 @@ public class Gun : MonoBehaviour
     [SerializeField] private int magSize;
     [SerializeField] private float fireRate;
     [SerializeField] private float reloadTime;
-    public bool reloading = false;
-    public int currentAmmo;
-    public int reserveAmmo;
+    public bool reloading { get; private set; }
+    public int currentAmmo { get; private set; }
+    public int reserveAmmo { get; private set; }
     public static event Action OnReloadEnd;
     [Space(10)]
 
     [Header("Gun Initialization")]
-    [SerializeField] public Transform rightHandle;
-    [SerializeField] public Transform leftHandle;
     [SerializeField] private Transform muzzle;
     [SerializeField] private Transform bolt;   
-    [SerializeField] private FirstPersonController fpc;
-    [SerializeField] private Animator animator;
-    private float timeSinceLastShoot;
-    private Transform fireDirection;
-
-    [HideInInspector] public WeaponZoom weaponZoom;
-    [HideInInspector] public WeaponSway weaponSway;
-    [HideInInspector] public WeaponBobbing weaponBobbing;
-    [HideInInspector] public Rigidbody weaponRigidbody;
-    [HideInInspector] public BoxCollider weaponCollider;
-
-
-    public void SetFPC(FirstPersonController fpc)
-    {
-        if (fpc == null)
-        {
-            this.fpc = null;
-            weaponZoom.fpc = null;
-            return;
-        }
-
-        this.fpc = fpc;
-        weaponZoom.fpc = fpc;
-    }
 
     private void Awake()
     {
         currentAmmo = magSize;
         reserveAmmo = maxReserveAmmo;
         reloading = false;
-        fireDirection = muzzle;
 
-        weaponZoom = GetComponent<WeaponZoom>();
-        weaponSway = GetComponent<WeaponSway>();
-        weaponBobbing = GetComponent<WeaponBobbing>();
-        weaponRigidbody = GetComponent<Rigidbody>();
-        weaponCollider = GetComponent<BoxCollider>();
-
-        animator = GetComponent<Animator>();
-
+        Initialization();
+        //Важно в конце!!!
         enabled = false;
     }
 
     private void OnEnable()
     {
+        if (automatic)
+            PlayerController.OnAttackInput += Shoot;
+        else
+            PlayerController.OnAttackInputDown += Shoot;
+
+        PlayerController.OnReloadInput += StartReload;
+
         TurnOnControl();
         animator.enabled = false;
     }
     private void OnDisable()
     {
-        TurnOffControl();
-        animator.SetBool("isReloading", false);
-    }
-    private void TurnOnControl()
-    {
         if (automatic)
-            PlayerController.OnShootInput += Shoot;
+            PlayerController.OnAttackInput -= Shoot;
         else
-            PlayerController.OnShootInputDown += Shoot;
-
-        PlayerController.OnReloadInput += StartReload;
-
-        weaponZoom.enabled = true;
-        weaponSway.enabled = true;
-        weaponBobbing.enabled = true;
-    }    
-    private void TurnOffControl()
-    {
-        if (automatic)
-            PlayerController.OnShootInput -= Shoot;
-        else
-            PlayerController.OnShootInputDown -= Shoot;
+            PlayerController.OnAttackInputDown -= Shoot;
 
         PlayerController.OnReloadInput -= StartReload;
 
-        weaponZoom.enabled = false;
-        weaponSway.enabled = false;
-        weaponBobbing.enabled = false;
+        TurnOffControl();        
     }
-
     private void StartReload()
     {
         bool CanReload() => !reloading && currentAmmo < magSize && reserveAmmo > 0 && this.gameObject.activeSelf;
@@ -177,15 +125,14 @@ public class Gun : MonoBehaviour
             currentAmmo--;
             timeSinceLastShoot = 0;
 
-            if (Physics.Raycast(fireDirection.position, fireDirection.forward, out RaycastHit hitInfo, maxDistance))
+            if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance))
             {
                 var entity = hitInfo.transform.GetComponentInParent<IDamagable>();
                 entity?.TakeDamage(damage);
                 var hole = Instantiate(bulletHole, hitInfo.point, Quaternion.identity);
                 hole.transform.SetParent(hitInfo.transform);
-                var rb = hitInfo.transform.GetComponent<Rigidbody>();
-                if (rb != null)
-                    rb.AddForceAtPosition(fireDirection.forward * powerOfShot, hitInfo.point, ForceMode.Impulse);
+                if (hitInfo.transform.TryGetComponent<Rigidbody>(out var rb))
+                    rb.AddForceAtPosition(muzzle.forward * powerOfHit, hitInfo.point, ForceMode.Impulse);
 
                 OnGunShot();
             }
@@ -215,12 +162,10 @@ public class Gun : MonoBehaviour
         }
     }
 
-
-
     private void Update()
     {
         timeSinceLastShoot += Time.deltaTime;
 
-        Debug.DrawRay(fireDirection.position, fireDirection.forward, Color.red);
+        Debug.DrawRay(muzzle.position, muzzle.forward, Color.red);
     }
 }
