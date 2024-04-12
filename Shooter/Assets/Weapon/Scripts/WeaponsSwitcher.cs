@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Animations.Rigging;
 
-public class WeaponsSwitching : MonoBehaviour
+public class WeaponsSwitcher : MonoBehaviour
 {
     [Header("Arms")]
     [SerializeField] private Transform joint;

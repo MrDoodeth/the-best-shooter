@@ -1,7 +1,7 @@
 using UnityEngine;
 public class WeaponRunPosition : MonoBehaviour
 {
-    [SerializeField] private WeaponsSwitching weaponSwitching;
+    [SerializeField] private WeaponsSwitcher weaponSwitching;
     [SerializeField] private FirstPersonController fpc;
     public Transform runTransform;
     public Vector3 defaultPosition;
@@ -9,7 +9,7 @@ public class WeaponRunPosition : MonoBehaviour
 
     private void Awake()
     {
-        weaponSwitching = GetComponent<WeaponsSwitching>();
+        weaponSwitching = GetComponent<WeaponsSwitcher>();
     }
     //void Update()
     //{

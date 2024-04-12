@@ -29,7 +29,6 @@ public sealed class Gun : Weapon
     [SerializeField] private int magSize;
     [SerializeField] private float fireRate;
     [SerializeField] private float reloadTime;
-    public bool reloading { get; private set; }
     public int currentAmmo { get; private set; }
     public int reserveAmmo { get; private set; }
     public static event Action OnReloadEnd;
@@ -43,7 +42,6 @@ public sealed class Gun : Weapon
     {
         currentAmmo = magSize;
         reserveAmmo = maxReserveAmmo;
-        reloading = false;
 
         Initialization();
         //Важно в конце!!!
@@ -75,12 +73,11 @@ public sealed class Gun : Weapon
     }
     private void StartReload()
     {
-        bool CanReload() => !reloading && currentAmmo < magSize && reserveAmmo > 0 && this.gameObject.activeSelf;
+        bool CanReload() => currentAmmo < magSize && reserveAmmo > 0 && this.gameObject.activeSelf;
 
         if (CanReload())
         {
             PlayerController.isControllerAvailable = false;
-            reloading = true;
             animator.enabled = true;
 
             animator.SetBool("isReloading", true);
@@ -110,7 +107,6 @@ public sealed class Gun : Weapon
     private void AnimatorOff()
     {
         animator.enabled = false;
-        reloading = false;
         PlayerController.isControllerAvailable = true;
         OnReloadEnd?.Invoke();
     }
@@ -118,7 +114,7 @@ public sealed class Gun : Weapon
     #endregion
     private void Shoot()
     {
-        bool CanShoot() => !reloading && currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);
+        bool CanShoot() => currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);
 
         if (CanShoot())
         {

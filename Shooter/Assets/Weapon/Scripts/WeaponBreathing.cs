@@ -69,15 +69,15 @@ public class WeaponBreathing : MonoBehaviour
 
         ShakeRotation(timer, BreathAmount.x, BreathAmount.y, BreathAmount.z);
 
-        void Shake(float _timer, float X, float Y, float Z)
-        {
-            float Xpos = transform.localPosition.x + Mathf.Sin(_timer + Shift) * X;
-            float Ypos = transform.localPosition.y + Mathf.Sin(_timer) * Y;
-            float Zpos = transform.localPosition.z * Z;
+        //void Shake(float _timer, float X, float Y, float Z)
+        //{
+        //    float Xpos = transform.localPosition.x + Mathf.Sin(_timer + Shift) * X;
+        //    float Ypos = transform.localPosition.y + Mathf.Sin(_timer) * Y;
+        //    float Zpos = transform.localPosition.z * Z;
 
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(Xpos, Ypos, Zpos), 1 / Time.deltaTime);
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, Xpos * 90f), 1 / Time.deltaTime);
-        }
+        //    transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(Xpos, Ypos, Zpos), 1 / Time.deltaTime);
+        //    transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, Xpos * 90f), 1 / Time.deltaTime);
+        //}
 
         void ShakeRotation(float _timer, float X, float Y, float Z)
         {

@@ -39,8 +39,8 @@ public class DisplayAmmo : MonoBehaviour
 
     private void DetermineAmmo()
     {
-        Gun currentGun = WeaponsSwitching.currentWeapon as Gun;
-        if (WeaponsSwitching.currentWeapon != null)
+        Gun currentGun = WeaponsSwitcher.currentWeapon as Gun;
+        if (WeaponsSwitcher.currentWeapon != null)
             ammoText.text = $"{currentGun.currentAmmo}/{currentGun.reserveAmmo}";
     }
 }
