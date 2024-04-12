@@ -151,33 +151,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3aa180ff04fc9c4db5aaff188e3a4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 16
+  <Name>k__BackingField: 
+  <Size>k__BackingField: 0
+  powerOfHit: 0
+  powerOfDrop: 4
+  rightHandle: {fileID: 18198135315490283}
+  leftHandle: {fileID: 18198135312184129}
+  weaponZoom: {fileID: 0}
+  weaponSway: {fileID: 0}
+  weaponBobbing: {fileID: 0}
+  weaponRigidbody: {fileID: 0}
+  weaponCollider: {fileID: 0}
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
-  Name: Uzi
-  Size: 2
   automatic: 1
-  damage: 16
   maxDistance: 200
-  powerOfShot: 50
   powerOfVerticalRecoil: 2.5
   powerOfHorizontalRecoil: 1.5
   powerOfForwardRecoil: 0.02
+  powerOfBoltRecoil: 0.1
+  durationOfBoltRecoil: 0.1
   cameraRecoilRatio: 0.8
-  currentAmmo: 32
-  reserveAmmo: 999
   maxReserveAmmo: 999
   magSize: 32
   fireRate: 700
   reloadTime: 2
-  reloading: 0
-  rightHandle: {fileID: 18198135315490283}
-  leftHandle: {fileID: 18198135312184129}
   muzzle: {fileID: 18198136038128552}
-  fpc: {fileID: 0}
-  animator: {fileID: 0}
-  weaponZoom: {fileID: 0}
-  weaponSway: {fileID: 0}
-  weaponBobbing: {fileID: 0}
+  bolt: {fileID: 0}
 --- !u!114 &200763546178363780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,10 +193,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ergonomics: 13
   zoomSize: 0.95
-  gunPivot: {fileID: 0}
+  weaponPivot: {fileID: 0}
   zoomPosition: {x: 0, y: -0.063, z: 0.29}
-  defaultGunPosition: {x: 0.1, y: -0.07, z: 0.23}
-  fpc: {fileID: 0}
+  defaultWeaponPosition: {x: 0, y: 0, z: 0}
+  FPC: {fileID: 0}
 --- !u!114 &18198136533641983
 MonoBehaviour:
   m_ObjectHideFlags: 0

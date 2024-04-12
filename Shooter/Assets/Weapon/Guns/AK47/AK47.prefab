@@ -88,14 +88,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3aa180ff04fc9c4db5aaff188e3a4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 45
+  <Name>k__BackingField: AK47
+  <Size>k__BackingField: 2
+  powerOfHit: 100
+  powerOfDrop: 4
+  rightHandle: {fileID: 1829007117957071425}
+  leftHandle: {fileID: 1829007119287524062}
+  weaponZoom: {fileID: 0}
+  weaponSway: {fileID: 0}
+  weaponBobbing: {fileID: 0}
+  weaponRigidbody: {fileID: 0}
+  weaponCollider: {fileID: 0}
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
-  Name: AK47
-  Size: 2
   automatic: 1
-  damage: 45
   maxDistance: 200
-  powerOfShot: 100
   powerOfVerticalRecoil: 2.5
   powerOfHorizontalRecoil: 1
   powerOfForwardRecoil: 0.02
@@ -106,20 +114,8 @@ MonoBehaviour:
   magSize: 30
   fireRate: 600
   reloadTime: 2
-  reloading: 0
-  currentAmmo: 30
-  reserveAmmo: 999
-  rightHandle: {fileID: 1829007117957071425}
-  leftHandle: {fileID: 1829007119287524062}
   muzzle: {fileID: 1829007119323588178}
   bolt: {fileID: 6535404287001055372}
-  fpc: {fileID: 0}
-  animator: {fileID: 719624726}
-  weaponZoom: {fileID: 0}
-  weaponSway: {fileID: 0}
-  weaponBobbing: {fileID: 0}
-  weaponRigidbody: {fileID: 0}
-  weaponCollider: {fileID: 0}
 --- !u!114 &3786346487634470170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,10 +130,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ergonomics: 8
   zoomSize: 0.86
-  gunPivot: {fileID: 0}
+  weaponPivot: {fileID: 0}
   zoomPosition: {x: 0, y: -0.047, z: 0.25}
-  defaultGunPosition: {x: 0.135, y: -0.06, z: 0.17}
-  fpc: {fileID: 0}
+  defaultWeaponPosition: {x: 0.134, y: -0.06, z: 0.17}
+  FPC: {fileID: 0}
 --- !u!114 &1829007119099331879
 MonoBehaviour:
   m_ObjectHideFlags: 0

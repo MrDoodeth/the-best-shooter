@@ -11,7 +11,6 @@ public class DisplayAmmo : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.OnWeaponTaken += OnTaken;
         PlayerController.OnWeaponTaken += DetermineAmmo;
 
         PlayerController.OnAttackInput += DetermineAmmo;
@@ -23,7 +22,6 @@ public class DisplayAmmo : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerController.OnWeaponTaken -= OnTaken;
         PlayerController.OnWeaponTaken -= DetermineAmmo;
 
         PlayerController.OnAttackInput -= DetermineAmmo;
@@ -33,14 +31,13 @@ public class DisplayAmmo : MonoBehaviour
         PlayerController.OnWeaponChanged -= DetermineAmmo;
     }
 
-    private void OnTaken() => ammoText.enabled = true;
-
     private void OnDroped() => ammoText.enabled = false;
 
     private void DetermineAmmo()
     {
-        Gun currentGun = WeaponsSwitcher.currentWeapon as Gun;
+        var currentWeapon = WeaponsSwitcher.currentWeapon as Gun;
+        ammoText.enabled = true;
         if (WeaponsSwitcher.currentWeapon != null)
-            ammoText.text = $"{currentGun.currentAmmo}/{currentGun.reserveAmmo}";
+            ammoText.text = $"{currentWeapon.currentAmmo}/{currentWeapon.reserveAmmo}";
     }
 }

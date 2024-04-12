@@ -400,14 +400,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3aa180ff04fc9c4db5aaff188e3a4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 26
+  <Name>k__BackingField: M1911
+  <Size>k__BackingField: 1
+  powerOfHit: 100
+  powerOfDrop: 4
+  rightHandle: {fileID: 8178916180084907248}
+  leftHandle: {fileID: 8178916180163578512}
+  weaponZoom: {fileID: 0}
+  weaponSway: {fileID: 0}
+  weaponBobbing: {fileID: 0}
+  weaponRigidbody: {fileID: 0}
+  weaponCollider: {fileID: 0}
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
-  Name: M1911
-  Size: 1
   automatic: 0
-  damage: 26
   maxDistance: 200
-  powerOfShot: 50
   powerOfVerticalRecoil: 2.5
   powerOfHorizontalRecoil: 2
   powerOfForwardRecoil: 0.02
@@ -418,20 +426,8 @@ MonoBehaviour:
   magSize: 8
   fireRate: 250
   reloadTime: 1
-  reloading: 0
-  currentAmmo: 8
-  reserveAmmo: 999
-  rightHandle: {fileID: 8178916180084907248}
-  leftHandle: {fileID: 8178916180163578512}
   muzzle: {fileID: 7456368721888274317}
   bolt: {fileID: 8183275557969373699}
-  fpc: {fileID: 0}
-  animator: {fileID: 475303178}
-  weaponZoom: {fileID: 0}
-  weaponSway: {fileID: 0}
-  weaponBobbing: {fileID: 0}
-  weaponRigidbody: {fileID: 0}
-  weaponCollider: {fileID: 0}
 --- !u!114 &2711640644429102420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,10 +442,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ergonomics: 15
   zoomSize: 0.95
-  gunPivot: {fileID: 0}
+  weaponPivot: {fileID: 0}
   zoomPosition: {x: 0, y: -0.0456, z: 0.29}
-  defaultGunPosition: {x: 0.1861, y: -0.0964, z: 0.2325}
-  fpc: {fileID: 0}
+  defaultWeaponPosition: {x: 0.185, y: -0.1, z: 0.23}
+  FPC: {fileID: 0}
 --- !u!114 &8178916179672470889
 MonoBehaviour:
   m_ObjectHideFlags: 0

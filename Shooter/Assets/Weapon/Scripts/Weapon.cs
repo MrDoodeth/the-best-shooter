@@ -8,6 +8,7 @@ public abstract class Weapon : MonoBehaviour
     [field:SerializeField] public string Name { get; protected set; }
     [field: SerializeField] public int Size { get; protected set; }
     [SerializeField][Min(0.01f)] protected float powerOfHit;
+    [SerializeField][Min(0.01f)] private float powerOfDrop = 4f;
 
     [SerializeField] public Transform rightHandle;
     [SerializeField] public Transform leftHandle;
@@ -29,7 +30,7 @@ public abstract class Weapon : MonoBehaviour
         weaponCollider = GetComponent<BoxCollider>();
         animator = GetComponent<Animator>();
     }
-    public void SetFPC(FirstPersonController fpc)
+    protected void SetFPC(FirstPersonController fpc)
     {
         this.fpc = fpc;
         weaponZoom.FPC = fpc != null ? fpc : null;
@@ -45,5 +46,26 @@ public abstract class Weapon : MonoBehaviour
         weaponZoom.enabled = false;
         weaponSway.enabled = false;
         weaponBobbing.enabled = false;
+    }
+    public void OnPickedUp(Transform weaponPivot, Transform weaponsSwitcher, FirstPersonController FPC)
+    {       
+        transform.SetPositionAndRotation(weaponPivot.position, weaponPivot.rotation);
+        transform.SetParent(weaponsSwitcher);
+        weaponZoom.weaponPivot = weaponPivot;
+        SetFPC(FPC);
+        weaponRigidbody.isKinematic = true;
+        weaponCollider.enabled = false;
+        PlayerController.OnWeaponTaken?.Invoke();             
+        enabled = true;
+    }
+
+    public void OnDroped()
+    {
+        SetFPC(null);    
+        weaponRigidbody.isKinematic = false;
+        weaponCollider.enabled = true;
+        enabled = false;
+        weaponRigidbody.AddForce(transform.forward * powerOfDrop + transform.up * (powerOfDrop / 2), ForceMode.Impulse);
+        transform.SetParent(null);
     }
 }

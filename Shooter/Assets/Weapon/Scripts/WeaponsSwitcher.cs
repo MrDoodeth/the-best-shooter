@@ -37,7 +37,7 @@ public class WeaponsSwitcher : MonoBehaviour
         currentInventorySize = inventorySize;
     }
 
-    private void HandMovements(Transform rightPos, Transform leftPos)
+    private void HandsMovement(Transform rightPos, Transform leftPos)
     {
         rightHand.SetParent(rightPos);
         rightHand.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
@@ -65,28 +65,11 @@ public class WeaponsSwitcher : MonoBehaviour
             if (CanPickUp(weapon.Size, _hit.transform))
             {
                 currentWeapon = weapon;
-                PickUpWeapon(weapon);
+                weapons.Add(currentWeapon);
+                weapon.OnPickedUp(weaponPivot, this.transform, FPC);
+                currentInventorySize -= currentWeapon.Size;
+                ChangeSelectedWeapon("Up");
             }
-        }
-
-        void PickUpWeapon(Weapon wp)
-        {
-            weapons.Add(wp);
-
-            wp.transform.SetPositionAndRotation(weaponPivot.position, weaponPivot.rotation);
-            currentWeapon.weaponZoom.weaponPivot = weaponPivot;
-            wp.transform.SetParent(transform);
-
-            wp.weaponRigidbody.isKinematic = true;
-            wp.weaponCollider.enabled = false;
-
-            currentWeapon.enabled = true;
-            currentWeapon.SetFPC(FPC);
-
-            PlayerController.OnWeaponTaken?.Invoke();
-            currentInventorySize -= currentWeapon.Size;
-
-            ChangeSelectedWeapon("Up");
         }
 
         bool CanPickUp(int gunInvSize, Transform tr) => currentInventorySize >= gunInvSize && tr.CompareTag("Weapone");
@@ -96,17 +79,9 @@ public class WeaponsSwitcher : MonoBehaviour
         if (currentWeapon == null)
             return;
 
-        currentWeapon.SetFPC(null);
-        currentInventorySize += currentWeapon.Size;
-        currentWeapon.enabled = false;
-
-        currentWeapon.weaponRigidbody.isKinematic = false;
-        currentWeapon.weaponCollider.enabled = true;
-        currentWeapon.weaponRigidbody.AddForce(transform.forward * 4f + transform.up * 2f, ForceMode.Impulse);
-
-        currentWeapon.transform.SetParent(null);
         weapons.Remove(currentWeapon);
-
+        currentWeapon.OnDroped();
+        currentInventorySize += currentWeapon.Size;
         ChangeSelectedWeapon("Down");
     }
     private void Select(int weaponIndex)
@@ -164,7 +139,7 @@ public class WeaponsSwitcher : MonoBehaviour
             currentWeapon = null;
             PlayerController.OnWeaponDroped?.Invoke();
 
-            HandMovements(joint, joint);
+            HandsMovement(joint, joint);
 
         }
         else
@@ -173,7 +148,7 @@ public class WeaponsSwitcher : MonoBehaviour
             currentWeapon = weapons[selectedWeapon];
             PlayerController.OnWeaponChanged?.Invoke();
 
-            HandMovements(weapons[selectedWeapon].rightHandle, weapons[selectedWeapon].leftHandle);
+            HandsMovement(weapons[selectedWeapon].rightHandle, weapons[selectedWeapon].leftHandle);
 
         }
 

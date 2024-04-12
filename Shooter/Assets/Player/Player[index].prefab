@@ -955,8 +955,8 @@ MonoBehaviour:
   armsRig: {fileID: 2840594679978251852}
   bodyAim: {fileID: 2840594680789291761}
   takeBodyAimPosition: {x: 8, y: 30, z: 0}
-  gunPivot: {fileID: 2840594680257283645}
-  inventorySize: 3
+  weaponPivot: {fileID: 2840594680257283645}
+  inventorySize: 4
   delayBeforeSwitching: 0.2
   animator: {fileID: 3259111270828020142}
   FPC: {fileID: 1913834936968865013}
@@ -968,21 +968,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300170808926228182}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3823c473a5f5e084f80ddda8cbc01669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fpc: {fileID: 1913834936968865013}
   timer: 0
-  stayTimeScale: 1.6
+  stayTimeScale: 1.65
   walkingTimeScale: 3.2
   walkingAmplitudeX: 2
-  walkingAmplitudeY: 1.7
+  walkingAmplitudeY: 1.2
+  walkingAmplitudeZ: 0
   sprintingTimeScale: 20
   sprintingAmplitudeX: 2
   sprintingAmplitudeY: 5
-  BreathAmount: {x: 0.00005, y: 0.00002, z: 0}
+  sprintingAmplitudeZ: 0
+  BreathAmount: {x: 0.0002, y: 0.0005, z: 0.00007}
   Shift: 4
 --- !u!114 &300170808926228187
 MonoBehaviour:
@@ -1013,8 +1015,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0992dac1e1c8347b91ad5bebdef92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priceLabel: {fileID: 2840594679573560209}
   buyKey: 102
+  priceLabel: {fileID: 2840594679573560209}
   PointsAmount: 0
 --- !u!114 &2840594680179539795
 MonoBehaviour:
@@ -1041,8 +1043,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59229f08e303bf14bada34761ec60735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemNameLabel: {fileID: 5444317383705621706}
   pickUpKey: 102
+  itemNameLabel: {fileID: 5444317383705621706}
   plInventory: {fileID: 2540516230264680851}
 --- !u!114 &2540516230264680851
 MonoBehaviour:
@@ -3002,7 +3004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2840594680257283645}
   m_Layer: 0
-  m_Name: GunPivot
+  m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3227,7 +3229,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2840594680348368896}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -3322,7 +3324,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoText: {fileID: 2840594680348368901}
-  switching: {fileID: 300170808926228185}
 --- !u!1 &2840594680500831027
 GameObject:
   m_ObjectHideFlags: 0
