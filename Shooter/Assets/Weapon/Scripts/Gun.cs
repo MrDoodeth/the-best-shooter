@@ -83,6 +83,7 @@ public sealed class Gun : Weapon
             animator.SetBool("isReloading", true);
         }
     }
+
     #region ForAnimations
     private void ReloadEnd() //animator
     {

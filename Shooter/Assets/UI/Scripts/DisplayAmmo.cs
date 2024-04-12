@@ -35,9 +35,13 @@ public class DisplayAmmo : MonoBehaviour
 
     private void DetermineAmmo()
     {
-        var currentWeapon = WeaponsSwitcher.currentWeapon as Gun;
+        var currentWeapon = WeaponsSwitcher.currentWeapon;
         ammoText.enabled = true;
-        if (WeaponsSwitcher.currentWeapon != null)
-            ammoText.text = $"{currentWeapon.currentAmmo}/{currentWeapon.reserveAmmo}";
+        if (currentWeapon is Gun gun)
+        {
+            if (WeaponsSwitcher.currentWeapon != null)
+                ammoText.text = $"{gun.currentAmmo}/{gun.reserveAmmo}";
+        }
+
     }
 }

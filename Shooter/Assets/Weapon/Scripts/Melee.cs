@@ -1,18 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Melee : MonoBehaviour
+[RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
+public sealed class Melee : Weapon
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float radius;
+    [SerializeField] private Transform centerOfSphere;
+
+    private void Awake()
     {
-        
+        Initialization();
+        //Важно в конце!!!
+        enabled = false;
+    }
+    private void OnEnable()
+    {
+        PlayerController.OnAttackInputDown += StartHit;
+        TurnOnControl();
+        animator.enabled = false;
+    }
+    private void OnDisable()
+    {
+        PlayerController.OnAttackInputDown -= StartHit;
+        TurnOffControl();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void StartHit()
     {
-        
+        Debug.Log("Hit");
+    }
+    private void OnDrawGizmos()
+    {
+        if (centerOfSphere != null)
+            Gizmos.DrawWireSphere(centerOfSphere.position, radius);
     }
 }
