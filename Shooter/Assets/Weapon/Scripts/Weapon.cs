@@ -12,12 +12,12 @@ public abstract class Weapon : MonoBehaviour
 
     [SerializeField] public Transform rightHandle;
     [SerializeField] public Transform leftHandle;
+    [SerializeField] protected LayerMask enemiesLayer;
     protected FirstPersonController fpc;
     protected Animator animator;
 
     [HideInInspector] public WeaponZoom weaponZoom;
     [HideInInspector] public WeaponSway weaponSway;
-    [HideInInspector] public WeaponBobbing weaponBobbing;
     [HideInInspector] public Rigidbody weaponRigidbody;
     [HideInInspector] public BoxCollider weaponCollider;
 
@@ -25,7 +25,6 @@ public abstract class Weapon : MonoBehaviour
     {
         weaponZoom = GetComponent<WeaponZoom>();
         weaponSway = GetComponent<WeaponSway>();
-        weaponBobbing = GetComponent<WeaponBobbing>();
         weaponRigidbody = GetComponent<Rigidbody>();
         weaponCollider = GetComponent<BoxCollider>();
         animator = GetComponent<Animator>();
@@ -39,13 +38,11 @@ public abstract class Weapon : MonoBehaviour
     {
         weaponZoom.enabled = true;
         weaponSway.enabled = true;
-        weaponBobbing.enabled = true;
     }
     protected void TurnOffControl()
     {
         weaponZoom.enabled = false;
         weaponSway.enabled = false;
-        weaponBobbing.enabled = false;
     }
     public void OnPickedUp(Transform weaponPivot, Transform weaponsSwitcher, FirstPersonController FPC)
     {       

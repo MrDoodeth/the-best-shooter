@@ -131,8 +131,8 @@ MonoBehaviour:
   ergonomics: 8
   zoomSize: 0.86
   weaponPivot: {fileID: 0}
-  zoomPosition: {x: 0, y: -0.047, z: 0.25}
-  defaultWeaponPosition: {x: 0.134, y: -0.06, z: 0.17}
+  zoomPosition: {x: 0, y: -0.0462, z: 0.1873}
+  defaultWeaponPosition: {x: 0.071, y: -0.0995, z: 0.184}
   FPC: {fileID: 0}
 --- !u!114 &1829007119099331879
 MonoBehaviour:

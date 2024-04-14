@@ -6,16 +6,14 @@ public class WeaponBobbing : MonoBehaviour
     [SerializeField][Range(0.01f, 10f)] private float speed;
     [SerializeField][Range(0.01f, 10f)] private float sensitivityMultiplier;
     [SerializeField][Range(0.01f, 10f)] private float walkSensitivity = 0.1f;
+    [HideInInspector] public Vector3 targetPosition;
 
     private void Update()
     {
         // get mouse input
-        float mouseX = (Input.GetAxis("Mouse X") + Input.GetAxis("Horizontal") * walkSensitivity) * sensitivityMultiplier;
-        float mouseY = -Input.GetAxis("Mouse Y") * sensitivityMultiplier;
-        float mouseZ = -Input.GetAxis("Vertical") * sensitivityMultiplier;
+        float mouseX = (Input.GetAxis("Horizontal") * walkSensitivity) * sensitivityMultiplier;
+        float mouseZ = (Input.GetAxis("Vertical") * walkSensitivity) * sensitivityMultiplier;
 
-        Vector3 targetPosition = new Vector3(mouseX, mouseY, 0f);
-
-        transform.localPosition = Vector3.Slerp(transform.localPosition, targetPosition, speed * Time.deltaTime);
+        targetPosition = new Vector3(mouseX, 0f, 0f);
     }
 }

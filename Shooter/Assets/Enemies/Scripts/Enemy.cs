@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     [Range(1, 30)] public float contusionDelay = 3f;
     [Range(1, 30)] public float deathDelay = 3f;
     [HideInInspector] public bool isAlive = true;
-    [HideInInspector] public float currentHealth;
+    public float currentHealth;
     [Space(15)]
 
     [Min(10)] public int rewardAmount = 100;

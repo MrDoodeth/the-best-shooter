@@ -1,8 +1,9 @@
 using UnityEngine;
 
-[RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
+[RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)))]
 public sealed class Melee : Weapon
 {
+    [Space(10)]
     [SerializeField] private float radius;
     [SerializeField] private Transform centerOfSphere;
 
@@ -26,7 +27,27 @@ public sealed class Melee : Weapon
 
     private void StartHit()
     {
-        Debug.Log("Hit");
+        PlayerController.isControllerAvailable = false;
+        animator.enabled = true;
+        animator.SetTrigger("isHit");
+    }
+
+    private void Hit()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(centerOfSphere.position, radius, enemiesLayer);
+        foreach (var hitCollider in hitColliders)
+        {
+            var entity = hitCollider.transform.GetComponentInParent<IDamagable>();
+            entity?.TakeDamage(damage);
+            if (hitCollider.transform.TryGetComponent<Rigidbody>(out var rb))
+                rb.AddForceAtPosition(centerOfSphere.forward * powerOfHit, hitCollider.transform.position, ForceMode.Impulse);
+        }
+    }
+
+    private void AnimatorOff()
+    {
+        animator.enabled = false;
+        PlayerController.isControllerAvailable = true;
     }
     private void OnDrawGizmos()
     {

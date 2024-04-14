@@ -3,7 +3,7 @@ using System;
 using Random = UnityEngine.Random;
 using DG.Tweening;
 
-[RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)), typeof(WeaponBobbing))]
+[RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)))]
 public sealed class Gun : Weapon
 {
     [Space(10)]
@@ -122,7 +122,7 @@ public sealed class Gun : Weapon
             currentAmmo--;
             timeSinceLastShoot = 0;
 
-            if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance))
+            if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer))
             {
                 var entity = hitInfo.transform.GetComponentInParent<IDamagable>();
                 entity?.TakeDamage(damage);
