@@ -3779,6 +3779,16 @@ PrefabInstance:
       propertyPath: enemiesLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 1829007119099331880, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
+        type: 3}
+      propertyPath: powerOfVerticalRecoil
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829007119099331880, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
+        type: 3}
+      propertyPath: powerOfHorizontalRecoil
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3786346487634470170, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
       propertyPath: FPC
@@ -4198,7 +4208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f84604b083cd04894e80b2b012ef2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 999
   <Name>k__BackingField: Knife
   <Size>k__BackingField: 1
   powerOfHit: 20

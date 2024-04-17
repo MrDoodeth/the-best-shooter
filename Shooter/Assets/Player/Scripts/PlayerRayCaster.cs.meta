@@ -1,14 +1,10 @@
 fileFormatVersion: 2
-<<<<<<<< Updated upstream:Shooter/Assets/Stuff/Items/Item.cs.meta
 guid: 339f293d94bce524ea4652537c0232cb
-========
-guid: 1d08a5a8cd4ffff40a2dbb5f1eea41a3
->>>>>>>> Stashed changes:Shooter/Assets/Player/Scripts/PlayerRayCaster.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences: []
-  executionOrder: 0
+  executionOrder: -20
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 
