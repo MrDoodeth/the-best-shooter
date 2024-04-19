@@ -3,10 +3,16 @@ using UnityEngine;
 public class WeaponBobbing : MonoBehaviour
 {
     [Header("Bobbing Settings")]
-    [SerializeField][Range(0.01f, 10f)] private float speed;
-    [SerializeField][Range(0.01f, 10f)] private float sensitivityMultiplier;
-    [SerializeField][Range(0.01f, 10f)] private float walkSensitivity = 0.1f;
-    [HideInInspector] public Vector3 targetPosition;
+    [SerializeField] private float speed;
+    [SerializeField] private float sensitivityMultiplier;
+    [SerializeField] private float walkSensitivity = 0.1f;
+
+    private Vector3 defaultWeaponPosition;
+
+    private void Awake()
+    {
+        defaultWeaponPosition = transform.position;
+    }
 
     private void Update()
     {
@@ -14,6 +20,10 @@ public class WeaponBobbing : MonoBehaviour
         float mouseX = (Input.GetAxis("Horizontal") * walkSensitivity) * sensitivityMultiplier;
         float mouseZ = (Input.GetAxis("Vertical") * walkSensitivity) * sensitivityMultiplier;
 
-        targetPosition = new Vector3(mouseX, 0f, 0f);
+        Vector3 targetPosition = new Vector3(mouseX, mouseZ, 0f) + transform.position;
+
+        transform.localPosition = Vector3.Slerp(transform.localPosition, targetPosition, speed * Time.deltaTime);
+
+        transform.localPosition = Vector3.Slerp(transform.localPosition, defaultWeaponPosition, speed * 0.5f * Time.deltaTime);
     }
 }

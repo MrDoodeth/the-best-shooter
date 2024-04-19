@@ -22,4 +22,6 @@ public class WeaponSway : MonoBehaviour
 
         transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, speed * Time.deltaTime);
     }
+
+
 }

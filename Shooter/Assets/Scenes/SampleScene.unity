@@ -2310,7 +2310,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608808991}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b74f70fd14e4f5408021a7e3ffb57b8, type: 3}
   m_Name: 
@@ -2571,7 +2571,8 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5903728323974821215, guid: 06431fa2fd9d9804da65a2cbf24fa88c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 06431fa2fd9d9804da65a2cbf24fa88c, type: 3}
 --- !u!1 &1740925801 stripped
 GameObject:
@@ -3873,6 +3874,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 300170808926228184, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1913834936968865011, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
         type: 3}
       propertyPath: m_RootOrder
@@ -3933,29 +3939,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player[index]
       objectReference: {fileID: 0}
-    - target: {fileID: 1913834937827708523, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+    - target: {fileID: 4277476777048071840, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
         type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 383
+      propertyPath: speed
+      value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 3389295228469355390, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+    - target: {fileID: 4277476777048071840, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
         type: 3}
-      propertyPath: m_Data.m_Hint
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3389295228469355390, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
-        type: 3}
-      propertyPath: m_Data.m_HintWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5949212205843858579, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
-        type: 3}
-      propertyPath: m_Data.m_Hint
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5949212205843858579, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
-        type: 3}
-      propertyPath: m_Data.m_HintWeight
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

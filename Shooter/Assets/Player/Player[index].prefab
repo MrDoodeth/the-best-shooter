@@ -931,6 +931,7 @@ GameObject:
   - component: {fileID: 3397443039025900138}
   - component: {fileID: 300170808926228185}
   - component: {fileID: 300170808926228184}
+  - component: {fileID: 4277476777048071840}
   - component: {fileID: 300170808926228187}
   - component: {fileID: 300170808926228186}
   - component: {fileID: 2840594680179539795}
@@ -1022,6 +1023,21 @@ MonoBehaviour:
   sprintingAmplitudeZ: 0
   BreathAmount: {x: 0.0002, y: 0.0005, z: 0.00007}
   Shift: 4
+--- !u!114 &4277476777048071840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300170808926228182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.46
+  sensitivityMultiplier: 0.09
+  walkSensitivity: 0.01
 --- !u!114 &300170808926228187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1593,7 +1609,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 127
+    m_Bits: 383
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2325,10 +2341,10 @@ MonoBehaviour:
     m_Mid: {fileID: 7679477201886777488}
     m_Tip: {fileID: 7820696372870752301}
     m_Target: {fileID: 2673942669332542797}
-    m_Hint: {fileID: 2840594679465460014}
+    m_Hint: {fileID: 0}
     m_TargetPositionWeight: 1
     m_TargetRotationWeight: 1
-    m_HintWeight: 1
+    m_HintWeight: 0
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
 --- !u!1 &2840594680253993929
@@ -2818,10 +2834,10 @@ MonoBehaviour:
     m_Mid: {fileID: 5279124056066568036}
     m_Tip: {fileID: 1190725578521035196}
     m_Target: {fileID: 2447376561927891991}
-    m_Hint: {fileID: 2840594679465460014}
+    m_Hint: {fileID: 0}
     m_TargetPositionWeight: 1
     m_TargetRotationWeight: 1
-    m_HintWeight: 1
+    m_HintWeight: 0
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
 --- !u!1 &2840594680670496065

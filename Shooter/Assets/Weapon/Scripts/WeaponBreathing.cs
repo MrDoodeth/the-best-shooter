@@ -30,7 +30,7 @@ public class WeaponBreathing : MonoBehaviour
     private Vector3 defaultLocalPosition;
     private bool isZoom = true;
 
-    private void OnValidate()
+    private void Awake()
     {
         defaultLocalPosition = transform.localPosition;
     }
@@ -96,14 +96,16 @@ public class WeaponBreathing : MonoBehaviour
 
     private void Update()
     {
-        if (!isZoom)
-        {
-            GunShaking();
-        }
-        else
-        {
-            transform.localPosition = defaultLocalPosition;
-        }
+        //if (!isZoom)
+        //{
+        //    GunShaking();
+        //}
+        //else
+        //{
+        //    transform.localPosition = defaultLocalPosition;
+        //}
+
+        transform.localPosition = defaultLocalPosition;
 
     }
 }
