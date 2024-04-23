@@ -8,6 +8,7 @@ public class WeaponZoom : MonoBehaviour
     public Transform weaponPivot;
     public Vector3 zoomPosition;
     public Vector3 defaultWeaponPosition;
+    public Vector3 targetPosition;
     private bool isZoom = false;
     [HideInInspector] public FirstPersonController FPC;
 
@@ -35,11 +36,13 @@ public class WeaponZoom : MonoBehaviour
     {
         if (isZoom)
         {
-            transform.localPosition = Vector3.Slerp(transform.localPosition, zoomPosition, ergonomics * Time.deltaTime);
+            //transform.localPosition = Vector3.Slerp(transform.localPosition, zoomPosition, ergonomics * Time.deltaTime);
+            targetPosition = zoomPosition;
         }
         else
         {
-            transform.localPosition = Vector3.Slerp(transform.localPosition, defaultWeaponPosition, ergonomics * Time.deltaTime);
+            //transform.localPosition = Vector3.Slerp(transform.localPosition, defaultWeaponPosition, ergonomics * Time.deltaTime);
+            targetPosition = defaultWeaponPosition;
         }
     }
 }

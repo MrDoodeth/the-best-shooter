@@ -1890,6 +1890,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183299014}
   m_Mesh: {fileID: 4300000, guid: 09581238a7eee2a448621efbc36abb72, type: 3}
+--- !u!4 &1225840810 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1829007119099331878, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1829007119514024592}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1343561682
 GameObject:
   m_ObjectHideFlags: 0
@@ -3682,6 +3688,46 @@ PrefabInstance:
       propertyPath: enemiesLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 18198136533641983, guid: c8eef3b0eaa4f814e8502c11cef8b986,
+        type: 3}
+      propertyPath: swaySmooth
+      value: 18.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 18198136533641983, guid: c8eef3b0eaa4f814e8502c11cef8b986,
+        type: 3}
+      propertyPath: maxSwayAmount
+      value: 1.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 18198136533641983, guid: c8eef3b0eaa4f814e8502c11cef8b986,
+        type: 3}
+      propertyPath: weaponTransform
+      value: 
+      objectReference: {fileID: 1225840810}
+    - target: {fileID: 18198136533641983, guid: c8eef3b0eaa4f814e8502c11cef8b986,
+        type: 3}
+      propertyPath: positionSwayMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 18198136533641983, guid: c8eef3b0eaa4f814e8502c11cef8b986,
+        type: 3}
+      propertyPath: rotationSwayMultiplier
+      value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 18198136533641983, guid: c8eef3b0eaa4f814e8502c11cef8b986,
+        type: 3}
+      propertyPath: swayCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 18198136533641983, guid: c8eef3b0eaa4f814e8502c11cef8b986,
+        type: 3}
+      propertyPath: swayCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 18198136533641983, guid: c8eef3b0eaa4f814e8502c11cef8b986,
+        type: 3}
+      propertyPath: swayCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 200763546178363780, guid: c8eef3b0eaa4f814e8502c11cef8b986,
         type: 3}
       propertyPath: FPC
@@ -3772,23 +3818,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1829007119099331879, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: swaySmooth
+      value: 18
       objectReference: {fileID: 0}
-    - target: {fileID: 1829007119099331880, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
+    - target: {fileID: 1829007119099331879, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
-      propertyPath: enemiesLayer.m_Bits
-      value: 256
+      propertyPath: positionSwayMultiplier
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1829007119099331880, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
+    - target: {fileID: 1829007119099331879, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
-      propertyPath: powerOfVerticalRecoil
-      value: 1.3
+      propertyPath: rotationSwayMultiplier
+      value: 0.44
       objectReference: {fileID: 0}
-    - target: {fileID: 1829007119099331880, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
+    - target: {fileID: 1829007119099331879, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
-      propertyPath: powerOfHorizontalRecoil
-      value: 0.5
+      propertyPath: swaySmoothCounteraction
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3786346487634470170, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
@@ -3800,8 +3846,7 @@ PrefabInstance:
       propertyPath: weaponPivot
       value: 
       objectReference: {fileID: 110011583}
-    m_RemovedComponents:
-    - {fileID: 5903728323974821215, guid: 06431fa2fd9d9804da65a2cbf24fa88c, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06431fa2fd9d9804da65a2cbf24fa88c, type: 3}
 --- !u!1001 &2840594680179539793
 PrefabInstance:
@@ -4165,10 +4210,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  sensitivityMultiplier: 8
-  walkSensitivity: 0.2
-  tiltSensitivity: 0.5
+  weaponTransform: {fileID: 0}
+  swayAmount: 0.01
+  maxSwayAmount: 0.5
+  swaySmooth: 50
+  swayCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  swaySmoothCounteraction: 1
+  rotationSwayMultiplier: -1
+  positionSwayMultiplier: 9
 --- !u!114 &4427762338772378854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4186,6 +4240,7 @@ MonoBehaviour:
   weaponPivot: {fileID: 110011583}
   zoomPosition: {x: 0.1722, y: -0.3427, z: 0.108}
   defaultWeaponPosition: {x: 0.1722, y: -0.3427, z: 0.108}
+  targetPosition: {x: 0, y: 0, z: 0}
   FPC: {fileID: 0}
 --- !u!114 &4427762338772378855
 MonoBehaviour:
@@ -4386,6 +4441,51 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultWeaponPosition.z
       value: 0.2314
+      objectReference: {fileID: 0}
+    - target: {fileID: 8178916179672470889, guid: f9a5b9d1dd1280147a79169fa3131817,
+        type: 3}
+      propertyPath: swaySmooth
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8178916179672470889, guid: f9a5b9d1dd1280147a79169fa3131817,
+        type: 3}
+      propertyPath: maxSwayAmount
+      value: 1.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 8178916179672470889, guid: f9a5b9d1dd1280147a79169fa3131817,
+        type: 3}
+      propertyPath: weaponTransform
+      value: 
+      objectReference: {fileID: 1225840810}
+    - target: {fileID: 8178916179672470889, guid: f9a5b9d1dd1280147a79169fa3131817,
+        type: 3}
+      propertyPath: positionSwayMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8178916179672470889, guid: f9a5b9d1dd1280147a79169fa3131817,
+        type: 3}
+      propertyPath: rotationSwayMultiplier
+      value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 8178916179672470889, guid: f9a5b9d1dd1280147a79169fa3131817,
+        type: 3}
+      propertyPath: swaySmoothCounteraction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8178916179672470889, guid: f9a5b9d1dd1280147a79169fa3131817,
+        type: 3}
+      propertyPath: swayCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8178916179672470889, guid: f9a5b9d1dd1280147a79169fa3131817,
+        type: 3}
+      propertyPath: swayCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8178916179672470889, guid: f9a5b9d1dd1280147a79169fa3131817,
+        type: 3}
+      propertyPath: swayCurve.m_Curve.Array.data[1].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8178916179672470902, guid: f9a5b9d1dd1280147a79169fa3131817,
         type: 3}
