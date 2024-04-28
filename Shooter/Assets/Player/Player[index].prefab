@@ -930,9 +930,7 @@ GameObject:
   - component: {fileID: 4305658065361458889}
   - component: {fileID: 3397443039025900138}
   - component: {fileID: 300170808926228185}
-  - component: {fileID: 300170808926228184}
   - component: {fileID: 4277476777048071840}
-  - component: {fileID: 300170808926228187}
   - component: {fileID: 300170808926228186}
   - component: {fileID: 2840594680179539795}
   - component: {fileID: 2540516230264680850}
@@ -998,31 +996,6 @@ MonoBehaviour:
   animator: {fileID: 8727830366765379850}
   FPC: {fileID: 1913834936968865013}
   weapons: []
---- !u!114 &300170808926228184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300170808926228182}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3823c473a5f5e084f80ddda8cbc01669, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fpc: {fileID: 1913834936968865013}
-  timer: 0
-  stayTimeScale: 1.65
-  walkingTimeScale: 3.2
-  walkingAmplitudeX: 2
-  walkingAmplitudeY: 1.2
-  walkingAmplitudeZ: 0
-  sprintingTimeScale: 20
-  sprintingAmplitudeX: 2
-  sprintingAmplitudeY: 5
-  sprintingAmplitudeZ: 0
-  BreathAmount: {x: 0.0002, y: 0.0005, z: 0.00007}
-  Shift: 4
 --- !u!114 &4277476777048071840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,31 +1003,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300170808926228182}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.46
+  speed: 15
   sensitivityMultiplier: 0.09
   walkSensitivity: 0.01
---- !u!114 &300170808926228187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300170808926228182}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a415b60a18b1645996d9a8a3b20313, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponSwitching: {fileID: 300170808926228185}
-  fpc: {fileID: 1913834936968865013}
-  runTransform: {fileID: 2840594680670496064}
-  defaultPosition: {x: 0, y: 0.4139, z: 0.1109}
-  speed: 5
 --- !u!114 &300170808926228186
 MonoBehaviour:
   m_ObjectHideFlags: 0

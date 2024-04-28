@@ -354,7 +354,6 @@ GameObject:
   - component: {fileID: 8178916179672470902}
   - component: {fileID: 2711640644429102420}
   - component: {fileID: 8178916179672470889}
-  - component: {fileID: 2690638802374388557}
   - component: {fileID: 8183252265878648142}
   - component: {fileID: 8183252265878648143}
   - component: {fileID: 475303178}
@@ -407,9 +406,11 @@ MonoBehaviour:
   powerOfDrop: 4
   rightHandle: {fileID: 8178916180084907248}
   leftHandle: {fileID: 8178916180163578512}
+  enemiesLayer:
+    serializedVersion: 2
+    m_Bits: 256
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
-  weaponBobbing: {fileID: 0}
   weaponRigidbody: {fileID: 0}
   weaponCollider: {fileID: 0}
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
@@ -443,8 +444,9 @@ MonoBehaviour:
   ergonomics: 15
   zoomSize: 0.95
   weaponPivot: {fileID: 0}
-  zoomPosition: {x: 0, y: -0.0456, z: 0.29}
-  defaultWeaponPosition: {x: 0.185, y: -0.1, z: 0.23}
+  zoomPosition: {x: 0, y: -0.0455, z: 0.2255}
+  defaultWeaponPosition: {x: 0.0888, y: -0.1414, z: 0.2314}
+  targetPosition: {x: 0, y: 0, z: 0}
   FPC: {fileID: 0}
 --- !u!114 &8178916179672470889
 MonoBehaviour:
@@ -458,25 +460,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  sensitivityMultiplier: 8
-  walkSensitivity: 0.2
-  tiltSensitivity: 0.5
---- !u!114 &2690638802374388557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8180610573758829913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4320021dcfff8e40a82a341542fe50c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.1
-  sensitivityMultiplier: 1
-  walkSensitivity: 0.1
+  weaponTransform: {fileID: 0}
+  swayAmount: 0.01
+  maxSwayAmount: 1.92
+  swaySmooth: 25
+  swayCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  swaySmoothCounteraction: 2
+  rotationSwayMultiplier: 0.44
+  positionSwayMultiplier: 2
 --- !u!54 &8183252265878648142
 Rigidbody:
   m_ObjectHideFlags: 0

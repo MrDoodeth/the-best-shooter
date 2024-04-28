@@ -1,29 +1,98 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
+
 
 public class WeaponBobbing : MonoBehaviour
 {
-    [Header("Bobbing Settings")]
-    [SerializeField] private float speed;
-    [SerializeField] private float sensitivityMultiplier;
-    [SerializeField] private float walkSensitivity = 0.1f;
+    [Header("Sway")]
+    public float step = 0.01f;
+    public float maxStepDistance = 0.06f;
+    Vector3 swayPos;
 
-    private Vector3 defaultWeaponPosition;
+    [Header("Sway Rotation")]
+    public float rotationStep = 4f;
+    public float maxRotationStep = 5f;
+    Vector3 swayEulerRot;
 
-    private void Awake()
+    public float smooth = 10f;
+    float smoothRot = 12f;
+
+    [Header("Bobbing")]
+    public float speedCurve;
+    float curveSin { get => Mathf.Sin(speedCurve); }
+    float curveCos { get => Mathf.Cos(speedCurve); }
+    public Vector3 travelLimit = Vector3.one * 0.025f;
+    public Vector3 bobLimit = Vector3.one * 0.01f;
+    Vector3 bobPosition;
+    public float bobExaggeration;
+
+    [Header("Bob Rotation")]
+    public Vector3 multiplier;
+    Vector3 bobEulerRotation;
+
+    void Update()
     {
-        defaultWeaponPosition = transform.position;
+        GetInput();
+
+        Sway();
+        SwayRotation();
+
+        BobOffset();
+        BobRotation();
+
+        CompositePositionRotation();
     }
 
-    private void Update()
+    Vector2 walkInput;
+    Vector2 lookInput;
+
+    void GetInput()
     {
-        // get mouse input
-        float mouseX = (Input.GetAxis("Horizontal") * walkSensitivity) * sensitivityMultiplier;
-        float mouseZ = (Input.GetAxis("Vertical") * walkSensitivity) * sensitivityMultiplier;
 
-        Vector3 targetPosition = new Vector3(mouseX, mouseZ, 0f) + transform.position;
+        walkInput.x = Input.GetAxis("Horizontal");
+        walkInput.y = Input.GetAxis("Vertical");
+        walkInput = walkInput.normalized;
+        lookInput.x = Input.GetAxis("Mouse X");
+        lookInput.y = Input.GetAxis("Mouse Y");
+    }
 
-        transform.localPosition = Vector3.Slerp(transform.localPosition, targetPosition, speed * Time.deltaTime);
+    void Sway()
+    {
+        Vector3 invertLook = lookInput * -step;
+        invertLook.x = Mathf.Clamp(invertLook.x, -maxStepDistance, maxStepDistance);
+        invertLook.y = Mathf.Clamp(invertLook.y, -maxStepDistance, maxStepDistance);
+        swayPos = invertLook;
+    }
 
-        transform.localPosition = Vector3.Slerp(transform.localPosition, defaultWeaponPosition, speed * 0.5f * Time.deltaTime);
+    void SwayRotation()
+    {
+        Vector2 invertLook = lookInput * -rotationStep;
+        invertLook.x = Mathf.Clamp(invertLook.x, -maxRotationStep, maxRotationStep);
+        invertLook.y = Mathf.Clamp(invertLook.y, -maxRotationStep, maxRotationStep);
+        swayEulerRot = new Vector3(invertLook.y, invertLook.x, invertLook.x);
+    }
+
+    void CompositePositionRotation()
+    {
+        transform.localPosition = Vector3.Lerp(transform.localPosition, swayPos + bobPosition, Time.deltaTime * smooth);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(swayEulerRot) * Quaternion.Euler(bobEulerRotation), Time.deltaTime * smoothRot);
+    }
+
+    void BobOffset()
+    {
+        speedCurve += Time.deltaTime * (Input.GetAxis("Horizontal") + Input.GetAxis("Vertical") + 0.01f);
+        bobPosition.x = (curveCos * bobLimit.x * 1 ) - (walkInput.x * travelLimit.x);
+        bobPosition.y = (curveSin * bobLimit.y) - (Input.GetAxis("Vertical") * travelLimit.y);
+        bobPosition.z = -(walkInput.y * travelLimit.z);
+    }
+
+    void BobRotation()
+    {
+        bobEulerRotation.x = (walkInput != Vector2.zero ? multiplier.x * (Mathf.Sin(2 * speedCurve)) : multiplier.x * (Mathf.Sin(2 * speedCurve) / 2));
+        bobEulerRotation.y = (walkInput != Vector2.zero ? multiplier.y * curveCos : 0);
+        bobEulerRotation.z = (walkInput != Vector2.zero ? multiplier.z * curveCos * walkInput.x : 0);
+
     }
 }
