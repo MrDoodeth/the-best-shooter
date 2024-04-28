@@ -4,7 +4,7 @@ public class EnemyAttack : MonoBehaviour
 {
     [Header("Fight")]
     [SerializeField] private float attackRange = 1.6f;
-    [SerializeField] private float damage = 33f;
+    [SerializeField] private int damage = 33;
     [SerializeField] private LayerMask whatIsPlayer;
 
     private Enemy enemy;

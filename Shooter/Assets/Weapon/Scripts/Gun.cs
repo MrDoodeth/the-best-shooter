@@ -2,6 +2,9 @@ using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
 using DG.Tweening;
+using UnityEditor.PackageManager;
+using Unity.Burst.CompilerServices;
+using UnityEngine.SocialPlatforms;
 
 [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)))]
 public sealed class Gun : Weapon
@@ -12,6 +15,13 @@ public sealed class Gun : Weapon
     [Header("Shooting")]
     [SerializeField] private bool automatic;
     [SerializeField] private float maxDistance;
+
+    [SerializeField] private bool isShotgun = false;
+    [Tooltip("Использовать только если isShotgun = true")]
+    [SerializeField][Range(0.01f, 85f)] private float maxSprayRange;
+    [Tooltip("Использовать только если isShotgun = true")]
+    [SerializeField] private int bulletAmount = 10;
+
     private float timeSinceLastShoot;
 
     [Header("Recoil")]
@@ -122,16 +132,38 @@ public sealed class Gun : Weapon
             currentAmmo--;
             timeSinceLastShoot = 0;
 
-            if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer))
+            if (!isShotgun)
             {
-                var entity = hitInfo.transform.GetComponentInParent<IDamagable>();
-                entity?.TakeDamage(damage);
-                var hole = Instantiate(bulletHole, hitInfo.point, Quaternion.identity);
-                hole.transform.SetParent(hitInfo.transform);
-                if (hitInfo.transform.TryGetComponent<Rigidbody>(out var rb))
-                    rb.AddForceAtPosition(muzzle.forward * powerOfHit, hitInfo.point, ForceMode.Impulse);
+                if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer))
+                {
+                    Damage(hitInfo);
+                    Debug.DrawLine(muzzle.position, hitInfo.point, Color.green, 1f);
+                }
+                else
+                {
+                    Debug.DrawLine(muzzle.position, muzzle.position + muzzle.forward * maxDistance, Color.red, 1f);
+                }
+            }
+            else if (isShotgun)
+            {
+                for(int bulletCounter = bulletAmount; bulletCounter > 0; bulletCounter--)
+                {
+                    Quaternion defaultLocalRotation = muzzle.localRotation;
+                    muzzle.localRotation = Quaternion.Euler(muzzle.localRotation.x + Random.Range(-maxSprayRange, maxSprayRange),
+                                                            muzzle.localRotation.y + Random.Range(-maxSprayRange, maxSprayRange),
+                                                            muzzle.localRotation.z);
 
-                OnGunShot();
+                    if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer))
+                    {
+                        Damage(hitInfo);
+                        Debug.DrawLine(muzzle.position, hitInfo.point, Color.green, 1f);
+                    }
+                    else
+                    {
+                        Debug.DrawLine(muzzle.position, muzzle.position + muzzle.forward * maxDistance, Color.red, 1f);
+                    }
+                    muzzle.localRotation = defaultLocalRotation;
+                }
             }
 
             Recoil();
@@ -152,9 +184,14 @@ public sealed class Gun : Weapon
                 fpc.transform.localEulerAngles = new Vector3(0, fpc.transform.localEulerAngles.y + Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil) / 2, 0);
             }
 
-            void OnGunShot()
+            void Damage(RaycastHit hitInfo)
             {
-
+                var entity = hitInfo.transform.GetComponentInParent<IDamagable>();
+                entity?.TakeDamage(damage);
+                var hole = Instantiate(bulletHole, hitInfo.point, Quaternion.identity);
+                hole.transform.SetParent(hitInfo.transform);
+                if (hitInfo.transform.TryGetComponent<Rigidbody>(out var rb))
+                    rb.AddForceAtPosition(muzzle.forward * powerOfHit, hitInfo.point, ForceMode.Impulse);
             }
         }
     }

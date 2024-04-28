@@ -10,7 +10,7 @@ public class ExplosiveEnemyHealth : MonoBehaviour, IDamagable
         enemy = GetComponent<Enemy>();
         exComponent = GetComponent<ExplosiveComponent>();
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         if (enemy.isAlive)
             Die();

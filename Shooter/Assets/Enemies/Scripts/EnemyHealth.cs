@@ -11,7 +11,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable, IContusionable
         enemy = GetComponent<Enemy>();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         if (!enemy.isAlive) return;
 

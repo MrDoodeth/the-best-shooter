@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     {
         CurrentHealth = maxHealth;
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
 
