@@ -1,5 +1,7 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Inventory/Item", order = 1)]
@@ -12,6 +14,7 @@ public class Item : ScriptableObject
     public int maxItemAmount;
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(Item)), InitializeOnLoadAttribute]
 public class ItemEditor : Editor
 {
@@ -46,3 +49,4 @@ public class ItemEditor : Editor
         }
     }
 }
+#endif

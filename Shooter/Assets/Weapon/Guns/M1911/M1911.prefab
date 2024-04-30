@@ -408,7 +408,7 @@ MonoBehaviour:
   leftHandle: {fileID: 8178916180163578512}
   enemiesLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 257
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
   weaponRigidbody: {fileID: 0}
@@ -417,6 +417,9 @@ MonoBehaviour:
     type: 3}
   automatic: 0
   maxDistance: 200
+  isShotgun: 0
+  maxSprayRange: 0
+  bulletAmount: 10
   powerOfVerticalRecoil: 2.5
   powerOfHorizontalRecoil: 2
   powerOfForwardRecoil: 0.02

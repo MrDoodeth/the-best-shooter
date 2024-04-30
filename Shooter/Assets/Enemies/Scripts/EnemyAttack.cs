@@ -12,7 +12,7 @@ public class EnemyAttack : MonoBehaviour
     private bool isRun;
     private bool isAttack;
 
-    void Start()
+    void Awake()
     {
         enemy = GetComponent<Enemy>();
     }
@@ -23,7 +23,8 @@ public class EnemyAttack : MonoBehaviour
         if (enemy.agent.isOnNavMesh)
             enemy.agent.SetDestination(transform.position);
 
-        transform.LookAt(enemy.playerPosition);
+        transform.LookAt(new Vector3(enemy.playerTransform.position.x, transform.position.y, enemy.playerTransform.position.z));
+
         isAttack = true;
         isRun = false;
     }
@@ -35,15 +36,15 @@ public class EnemyAttack : MonoBehaviour
         foreach (Collider hit in playerHit)
         {
             if (hit.CompareTag("Player"))
-                hit.GetComponent<IDamagable>().TakeDamage(damage);
+                hit.GetComponent<IDamagable>()?.TakeDamage(damage);
         }
     }
     #endregion
 
     private void ChasePlayer()
     {
-        if (enemy.agent.isOnNavMesh && !enemy.animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK"))
-            enemy.agent.SetDestination(enemy.playerPosition.position);
+        if (enemy.agent.isOnNavMesh && !enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("ATTACK"))
+            enemy.agent.SetDestination(enemy.playerTransform.position);
         isAttack = false;
         isRun = true;
     }

@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 public class EnemiesSpawner : MonoBehaviour
 {
-
     [Header("Wave Settings")]
     [SerializeField][Min(1)] private int baseEnemyCount = 3;
     [SerializeField] private float enemyCountIncreaseRate = 1.2f;
@@ -97,7 +96,7 @@ public class EnemiesSpawner : MonoBehaviour
     }
     private void CheckWave()
     {
-        if (currentEnemyCount == 0)
+        if (currentEnemyCount <= 0)
         {
             OnEndWave?.Invoke();
         }        
@@ -119,7 +118,7 @@ public class EnemiesSpawner : MonoBehaviour
     private void ChooseWave()
     {
         Wave?.Invoke();
-        Debug.Log($"{currentWaveNumber} Wave, Zombie: {currentEnemyCount}");
+        print($"{currentWaveNumber} Wave, Zombie: {currentEnemyCount}");
     }
     private void WaitWave(float delayInSeconds)
     {
@@ -207,6 +206,5 @@ public class EnemiesSpawner : MonoBehaviour
     {
         Instantiate(enemy, spawnPoint.position, Quaternion.identity);
     }
-
     #endregion
 }

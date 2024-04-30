@@ -16,8 +16,8 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public Collider[] allColliders;
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Animator animator;
-    [HideInInspector] public Transform playerPosition;
-    [HideInInspector] public PlayerScore plInventory;
+    [HideInInspector] public Transform playerTransform;
+    [HideInInspector] public PlayerScore playerScore;
     void Awake()
     {
         Init();
@@ -28,9 +28,9 @@ public class Enemy : MonoBehaviour
         allColliders = GetComponentsInChildren<Collider>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        var player = GameObject.FindGameObjectWithTag("Player");
-        playerPosition = player.transform;
-        plInventory = player.GetComponent<PlayerScore>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerTransform = player.transform;
+        playerScore = player.GetComponent<PlayerScore>();
         allRigidbodys.SetIsKinematics(true);
         currentHealth = maxHealth;
     }

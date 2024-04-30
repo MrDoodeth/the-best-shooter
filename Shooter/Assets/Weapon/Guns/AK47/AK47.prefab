@@ -90,7 +90,7 @@ MonoBehaviour:
   leftHandle: {fileID: 1829007119287524062}
   enemiesLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 257
   weaponZoom: {fileID: 0}
   weaponSway: {fileID: 0}
   weaponRigidbody: {fileID: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
   weaponTransform: {fileID: 1829007119099331878}
   swayAmount: 0.01
   maxSwayAmount: 1.92
-  swaySmooth: 18
+  swaySmooth: 25
   swayCurve:
     serializedVersion: 2
     m_Curve:
@@ -173,7 +173,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  swaySmoothCounteraction: 7
+  swaySmoothCounteraction: 2
   rotationSwayMultiplier: 0.44
   positionSwayMultiplier: 2
 --- !u!54 &1829007119099331881

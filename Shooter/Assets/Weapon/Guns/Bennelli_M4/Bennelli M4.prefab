@@ -162,8 +162,8 @@ MonoBehaviour:
   automatic: 0
   maxDistance: 200
   isShotgun: 1
-  maxSprayRange: 3
-  bulletAmount: 50
+  maxSprayRange: 10
+  bulletAmount: 25
   powerOfVerticalRecoil: 2
   powerOfHorizontalRecoil: 0.5
   powerOfForwardRecoil: 0.02
@@ -172,7 +172,7 @@ MonoBehaviour:
   cameraRecoilRatio: 0.4
   maxReserveAmmo: 999
   magSize: 4
-  fireRate: 600
+  fireRate: 240
   reloadTime: 2
   muzzle: {fileID: 6974456438013012447}
   bolt: {fileID: 6979207653071472129}

@@ -3533,11 +3533,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 18198136533641982, guid: c8eef3b0eaa4f814e8502c11cef8b986,
-        type: 3}
-      propertyPath: enemiesLayer.m_Bits
-      value: 257
-      objectReference: {fileID: 0}
     - target: {fileID: 18198136533641983, guid: c8eef3b0eaa4f814e8502c11cef8b986,
         type: 3}
       propertyPath: weaponTransform
@@ -3621,26 +3616,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829007119099331879, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
-        type: 3}
-      propertyPath: swaySmooth
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829007119099331879, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
-        type: 3}
-      propertyPath: swaySmoothCounteraction
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829007119099331880, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
-        type: 3}
-      propertyPath: fireRate
-      value: 240
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829007119099331880, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
-        type: 3}
-      propertyPath: enemiesLayer.m_Bits
-      value: 257
       objectReference: {fileID: 0}
     - target: {fileID: 3786346487634470170, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
@@ -3859,21 +3834,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player[index]
       objectReference: {fileID: 0}
-    - target: {fileID: 4277476777048071840, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
-        type: 3}
-      propertyPath: intensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4277476777048071840, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4277476777048071840, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
-        type: 3}
-      propertyPath: intensityX
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b8729204a3fd01479a137fd6bbb4aa0, type: 3}
 --- !u!4 &3030311171642601698
@@ -3967,16 +3927,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6974456438559410356, guid: 50aaaed0f9c50dd4f9d175fa83505868,
-        type: 3}
-      propertyPath: bulletAmount
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6974456438559410356, guid: 50aaaed0f9c50dd4f9d175fa83505868,
-        type: 3}
-      propertyPath: maxSprayRange
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6974456438559410357, guid: 50aaaed0f9c50dd4f9d175fa83505868,
         type: 3}
       propertyPath: m_RootOrder
@@ -4185,11 +4135,6 @@ PrefabInstance:
       propertyPath: weaponTransform
       value: 
       objectReference: {fileID: 1225840810}
-    - target: {fileID: 8178916179672470902, guid: f9a5b9d1dd1280147a79169fa3131817,
-        type: 3}
-      propertyPath: enemiesLayer.m_Bits
-      value: 257
-      objectReference: {fileID: 0}
     - target: {fileID: 8180610573758829913, guid: f9a5b9d1dd1280147a79169fa3131817,
         type: 3}
       propertyPath: m_Name

@@ -12,7 +12,6 @@ public class ExplosiveComponent : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private float force;
     private bool endExplosion;
-    private float timer;
     public void ExploedWithDelay()
     {
         if (endExplosion)
@@ -56,10 +55,5 @@ public class ExplosiveComponent : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius / 2);
-    }
-
-    private void Update()
-    {
-        timer += Time.deltaTime;
     }
 }
