@@ -6,7 +6,7 @@ public class ExplosiveEnemyAttack : MonoBehaviour
     private ExplosiveEnemyHealth exHealth;
     private bool isRun;
 
-    void Awake()
+    private void Awake()
     {
         enemy = GetComponent<Enemy>();
         exHealth = GetComponent<ExplosiveEnemyHealth>();
@@ -27,7 +27,8 @@ public class ExplosiveEnemyAttack : MonoBehaviour
             enemy.agent.SetDestination(enemy.playerTransform.position);
         isRun = true;
     }
-    void Update()
+
+    private void Update()
     {
         ChasePlayer();
 

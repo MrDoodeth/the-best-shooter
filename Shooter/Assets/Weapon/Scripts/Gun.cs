@@ -9,44 +9,43 @@ using UnityEngine.SocialPlatforms;
 [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)))]
 public sealed class Gun : Weapon
 {
-    [Space(10)]
-    [SerializeField] private GameObject bulletHole;
+    [Space(10)] [SerializeField] private GameObject bulletHole;
 
-    [Header("Shooting")]
-    [SerializeField] private bool automatic;
+    [Header("Shooting")] [SerializeField] private bool automatic;
     [SerializeField] private float maxDistance;
 
     [SerializeField] private bool isShotgun = false;
-    [Tooltip("Использовать только если isShotgun = true")]
-    [SerializeField][Range(0.01f, 85f)] private float maxSprayRange;
-    [Tooltip("Использовать только если isShotgun = true")]
-    [SerializeField] private int bulletAmount = 10;
+
+    [Tooltip("Использовать только если isShotgun = true")] [SerializeField] [Range(0.01f, 85f)]
+    private float maxSprayRange;
+
+    [Tooltip("Использовать только если isShotgun = true")] [SerializeField]
+    private int bulletAmount = 10;
 
     private float timeSinceLastShoot;
 
-    [Header("Recoil")]
-    [SerializeField] private float powerOfVerticalRecoil;
+    [Header("Recoil")] [SerializeField] private float powerOfVerticalRecoil;
     [SerializeField] private float powerOfHorizontalRecoil;
     [SerializeField] private float powerOfForwardRecoil = 0.1f;
     [SerializeField] private float powerOfBoltRecoil = 0.1f;
     [SerializeField] private float durationOfBoltRecoil = 0.1f;
 
-    [SerializeField][Range(0.01f, 5f)] private float cameraRecoilRatio = 1f;
-    [Space(10)]
+    [SerializeField] [Range(0.01f, 5f)] private float cameraRecoilRatio = 1f;
 
-    [Header("Reloading")]
-    [SerializeField] private int maxReserveAmmo;
+    [Space(10)] [Header("Reloading")] [SerializeField]
+    private int maxReserveAmmo;
+
     [SerializeField] private int magSize;
     [SerializeField] private float fireRate;
     [SerializeField] private float reloadTime;
     public int currentAmmo { get; private set; }
     public int reserveAmmo { get; private set; }
     public static event Action OnReloadEnd;
-    [Space(10)]
 
-    [Header("Gun Initialization")]
-    [SerializeField] private Transform muzzle;
-    [SerializeField] private Transform bolt;   
+    [Space(10)] [Header("Gun Initialization")] [SerializeField]
+    private Transform muzzle;
+
+    [SerializeField] private Transform bolt;
 
     private void Awake()
     {
@@ -70,6 +69,7 @@ public sealed class Gun : Weapon
         TurnOnControl();
         animator.enabled = false;
     }
+
     private void OnDisable()
     {
         if (automatic)
@@ -79,8 +79,9 @@ public sealed class Gun : Weapon
 
         PlayerController.OnReloadInput -= StartReload;
 
-        TurnOffControl();        
+        TurnOffControl();
     }
+
     private void StartReload()
     {
         bool CanReload() => currentAmmo < magSize && reserveAmmo > 0 && this.gameObject.activeSelf;
@@ -95,6 +96,7 @@ public sealed class Gun : Weapon
     }
 
     #region ForAnimations
+
     private void ReloadEnd() //animator
     {
         if (enabled == true)
@@ -114,7 +116,7 @@ public sealed class Gun : Weapon
             animator.SetBool("isReloading", false);
         }
     }
-    
+
     private void AnimatorOff()
     {
         animator.enabled = false;
@@ -123,6 +125,8 @@ public sealed class Gun : Weapon
     }
 
     #endregion
+
+    // ReSharper disable Unity.PerformanceAnalysis
     private void Shoot()
     {
         bool CanShoot() => currentAmmo > 0 && timeSinceLastShoot > 1f / (fireRate / 60f);
@@ -146,14 +150,16 @@ public sealed class Gun : Weapon
             }
             else if (isShotgun)
             {
-                for(int bulletCounter = bulletAmount; bulletCounter > 0; bulletCounter--)
+                for (int bulletCounter = bulletAmount; bulletCounter > 0; bulletCounter--)
                 {
                     Quaternion defaultLocalRotation = muzzle.localRotation;
-                    muzzle.localRotation = Quaternion.Euler(muzzle.localRotation.x + Random.Range(-maxSprayRange, maxSprayRange),
-                                                            muzzle.localRotation.y + Random.Range(-maxSprayRange, maxSprayRange),
-                                                            muzzle.localRotation.z);
+                    muzzle.localRotation = Quaternion.Euler(
+                        muzzle.localRotation.x + Random.Range(-maxSprayRange, maxSprayRange),
+                        muzzle.localRotation.y + Random.Range(-maxSprayRange, maxSprayRange),
+                        muzzle.localRotation.z);
 
-                    if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer))
+                    if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance,
+                            enemiesLayer))
                     {
                         Damage(hitInfo);
                         Debug.DrawLine(muzzle.position, hitInfo.point, Color.green, 1f);
@@ -162,6 +168,7 @@ public sealed class Gun : Weapon
                     {
                         Debug.DrawLine(muzzle.position, muzzle.position + muzzle.forward * maxDistance, Color.red, 1f);
                     }
+
                     muzzle.localRotation = defaultLocalRotation;
                 }
             }
@@ -173,15 +180,19 @@ public sealed class Gun : Weapon
                 transform.localPosition -= Vector3.forward * powerOfForwardRecoil;
                 var fPos = bolt.localPosition;
                 DOTween.Sequence()
-                    .Append(bolt.DOLocalMove(bolt.localPosition - (Vector3.forward * powerOfBoltRecoil), durationOfBoltRecoil))
+                    .Append(bolt.DOLocalMove(bolt.localPosition - (Vector3.forward * powerOfBoltRecoil),
+                        durationOfBoltRecoil))
                     .Append(bolt.DOLocalMove(fPos, durationOfBoltRecoil));
 
                 transform.localEulerAngles -= Vector3.right * powerOfVerticalRecoil;
-                transform.localEulerAngles -= Vector3.up * Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil);
+                transform.localEulerAngles -=
+                    Vector3.up * Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil);
 
                 fpc.pitch += -powerOfVerticalRecoil * cameraRecoilRatio;
 
-                fpc.transform.localEulerAngles = new Vector3(0, fpc.transform.localEulerAngles.y + Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil) / 2, 0);
+                fpc.transform.localEulerAngles = new Vector3(0,
+                    fpc.transform.localEulerAngles.y +
+                    Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil) / 2, 0);
             }
 
             void Damage(RaycastHit hitInfo)
