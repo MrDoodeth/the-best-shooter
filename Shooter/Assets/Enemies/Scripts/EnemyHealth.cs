@@ -1,15 +1,19 @@
+using System;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Enemy))]
 public class EnemyHealth : MonoBehaviour, IDamagable, IContusionable
 {
     private Enemy enemy;
+    private Transform hipsBone;
 
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
+        hipsBone = transform.GetChild(0);
     }
 
     public void TakeDamage(int damage)
@@ -31,6 +35,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable, IContusionable
     {
         StopAllCoroutines();
         StartCoroutine(Death());
+        return;
 
         IEnumerator Death()
         {
@@ -49,6 +54,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable, IContusionable
     {
         StopAllCoroutines();
         StartCoroutine(Damage());
+        return;
 
         IEnumerator Damage()
         {
@@ -58,33 +64,35 @@ public class EnemyHealth : MonoBehaviour, IDamagable, IContusionable
             enemy.animator.SetBool("isMirror", Random.value > 0.5f);
             yield return new WaitForSeconds(enemy.animator.GetCurrentAnimatorStateInfo(0).length + enemy.animator.GetAnimatorTransitionInfo(0).duration);
             enemy.agent.isStopped = false;
-        }
-    }
-    public void GetContusion()
-    {
+        }   
+    }   
+    public void GetContusion()   
+    {   
         StopAllCoroutines();
         StartCoroutine(Contusion());
+        return;
 
         IEnumerator Contusion()
         {
             enemy.isAlive = false;
             enemy.agent.isStopped = true;
-            enemy.animator.SetTrigger("isStandUp");
             enemy.animator.enabled = false;
             enemy.allRigidbodys.SetIsKinematics(false);
+            
             yield return new WaitForSeconds(enemy.contusionDelay);
             yield return new WaitUntil(() => enemy.agent.isOnNavMesh);
 
             //return rigs in world position
-            transform.position = enemy.allColliders[0].transform.position;
-            enemy.allColliders[0].transform.localPosition = Vector3.zero;
+            transform.position = hipsBone.position;
+            hipsBone.localPosition = Vector3.zero;
 
-            enemy.isAlive = true;
             enemy.allRigidbodys.SetIsKinematics(true);
             enemy.animator.enabled = true;
+            enemy.animator.SetTrigger("isStandUp");
             yield return new WaitForSeconds(enemy.animator.GetCurrentAnimatorStateInfo(0).length + enemy.animator.GetAnimatorTransitionInfo(0).duration);
+            enemy.isAlive = true;
             enemy.agent.isStopped = false;
             yield return null;
         }
-    }        
+    }
 }

@@ -193,7 +193,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: 7afd3702e7fe80a4dbe1dc39972255d0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: 
+  m_MirrorParameter: isAttacking
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1101 &-3587122273508050368

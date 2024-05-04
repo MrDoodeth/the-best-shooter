@@ -12,7 +12,7 @@ public class EnemyAttack : MonoBehaviour
     private bool isRun;
     private bool isAttack;
 
-    void Awake()
+    private void Awake()
     {
         enemy = GetComponent<Enemy>();
     }
@@ -50,20 +50,19 @@ public class EnemyAttack : MonoBehaviour
     }
     void Update()
     {
+        if (!enemy.isAlive) return;
+        
         bool playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (enemy.isAlive)
+        if (playerInAttackRange)
         {
-            if (playerInAttackRange)
-            {
-                AttackPlayer();
-            }
-            else
-            {
-                ChasePlayer();
-            }
+            AttackPlayer();
         }
-
+        else
+        {
+            ChasePlayer();
+        }
+            
         UpdateAnimations();
     }
     private void UpdateAnimations()

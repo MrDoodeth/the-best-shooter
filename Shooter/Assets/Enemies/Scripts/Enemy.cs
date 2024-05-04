@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 public class Enemy : MonoBehaviour
@@ -6,7 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField][Range(1, 5000)] private float maxHealth = 100;
     [Range(1, 30)] public float contusionDelay = 3f;
     [Range(1, 30)] public float deathDelay = 3f;
-    [HideInInspector] public bool isAlive = true;
+    public bool isAlive = true;
     public float currentHealth;
     [Space(15)]
 
@@ -18,7 +19,8 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public Animator animator;
     [HideInInspector] public Transform playerTransform;
     [HideInInspector] public PlayerScore playerScore;
-    void Awake()
+
+    private void Awake()
     {
         Init();
     }
@@ -39,11 +41,11 @@ public class Enemy : MonoBehaviour
 //Перегрузка метода
 public static class RigidbodyTools
 {
-    public static void SetIsKinematics(this Rigidbody[] rb, bool _isKinematic)
+    public static void SetIsKinematics(this IEnumerable<Rigidbody> rigidBodies, bool isKinematic)
     {
-        for (int i = 0; i < rb.Length; i++)
+        foreach (var rb in rigidBodies)
         {
-            rb[i].isKinematic = _isKinematic;
+            rb.isKinematic = isKinematic;
         }
     }
 }
