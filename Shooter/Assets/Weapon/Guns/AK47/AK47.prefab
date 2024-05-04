@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 719624726}
   m_Layer: 6
   m_Name: AK47
-  m_TagString: Weapone
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   zoomPosition: {x: 0, y: -0.0462, z: 0.1873}
   defaultWeaponPosition: {x: 0.071, y: -0.0995, z: 0.184}
   targetPosition: {x: 0, y: 0, z: 0}
-  FPC: {fileID: 0}
+  fpc: {fileID: 0}
 --- !u!114 &1829007119099331879
 MonoBehaviour:
   m_ObjectHideFlags: 0

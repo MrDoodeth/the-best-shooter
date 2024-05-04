@@ -2424,6 +2424,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AK47_Preview
       objectReference: {fileID: 0}
+    - target: {fileID: 1829007119099331877, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 1829007119099331878, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
       propertyPath: m_RootOrder
@@ -3556,11 +3561,6 @@ PrefabInstance:
       objectReference: {fileID: 1225840810}
     - target: {fileID: 200763546178363780, guid: c8eef3b0eaa4f814e8502c11cef8b986,
         type: 3}
-      propertyPath: FPC
-      value: 
-      objectReference: {fileID: 787625962}
-    - target: {fileID: 200763546178363780, guid: c8eef3b0eaa4f814e8502c11cef8b986,
-        type: 3}
       propertyPath: weaponPivot
       value: 
       objectReference: {fileID: 110011583}
@@ -4059,11 +4059,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3786346487634470170, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
         type: 3}
-      propertyPath: FPC
-      value: 
-      objectReference: {fileID: 787625962}
-    - target: {fileID: 3786346487634470170, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
-        type: 3}
       propertyPath: weaponPivot
       value: 
       objectReference: {fileID: 110011583}
@@ -4440,6 +4435,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 300170808926228185, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
+        type: 3}
+      propertyPath: fpc
+      value: 
+      objectReference: {fileID: 787625962}
     - target: {fileID: 1913834936968865011, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
         type: 3}
       propertyPath: m_RootOrder
@@ -6364,11 +6364,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6974456438559410361, guid: 50aaaed0f9c50dd4f9d175fa83505868,
         type: 3}
-      propertyPath: FPC
-      value: 
-      objectReference: {fileID: 787625962}
-    - target: {fileID: 6974456438559410361, guid: 50aaaed0f9c50dd4f9d175fa83505868,
-        type: 3}
       propertyPath: weaponPivot
       value: 
       objectReference: {fileID: 110011583}
@@ -6930,11 +6925,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2711640644429102420, guid: f9a5b9d1dd1280147a79169fa3131817,
-        type: 3}
-      propertyPath: FPC
-      value: 
-      objectReference: {fileID: 787625962}
     - target: {fileID: 2711640644429102420, guid: f9a5b9d1dd1280147a79169fa3131817,
         type: 3}
       propertyPath: weaponPivot

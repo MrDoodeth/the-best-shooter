@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 475303178}
   m_Layer: 6
   m_Name: M1911
-  m_TagString: Weapone
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -450,7 +450,7 @@ MonoBehaviour:
   zoomPosition: {x: 0, y: -0.0455, z: 0.2255}
   defaultWeaponPosition: {x: 0.0888, y: -0.1414, z: 0.2314}
   targetPosition: {x: 0, y: 0, z: 0}
-  FPC: {fileID: 0}
+  fpc: {fileID: 0}
 --- !u!114 &8178916179672470889
 MonoBehaviour:
   m_ObjectHideFlags: 0

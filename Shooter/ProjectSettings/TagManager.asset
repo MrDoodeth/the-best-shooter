@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Weapone
   - Floor
   - Enemy
   - Vendor
   - Item
+  - Weapon
   layers:
   - Default
   - TransparentFX

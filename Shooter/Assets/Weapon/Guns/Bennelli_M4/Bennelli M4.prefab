@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 6974456438559410363}
   m_Layer: 6
   m_Name: Bennelli M4
-  m_TagString: Weapone
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   zoomPosition: {x: 0, y: -0.0242, z: 0.1798}
   defaultWeaponPosition: {x: 0.0998, y: -0.0942, z: 0.2543}
   targetPosition: {x: 0, y: 0, z: 0}
-  FPC: {fileID: 0}
+  fpc: {fileID: 0}
 --- !u!114 &6974456438559410362
 MonoBehaviour:
   m_ObjectHideFlags: 0
