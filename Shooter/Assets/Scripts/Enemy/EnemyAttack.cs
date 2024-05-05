@@ -5,9 +5,11 @@ namespace Shooter.Enemy
     [RequireComponent(typeof(Enemy))]
     public class EnemyAttack : MonoBehaviour
     {
-        [Header("Fight")]
+        [Header("Fight")] 
+        [SerializeField] private float sightRange = 1.5f;
         [SerializeField] private float attackRange = 1.6f;
-        [SerializeField] private int damage = 33;
+        [SerializeField] protected Transform attackPoint;
+        [SerializeField] protected int damage = 33;
         [SerializeField] private LayerMask whatIsPlayer;
 
         private Enemy enemy;
@@ -18,6 +20,7 @@ namespace Shooter.Enemy
         private void Awake()
         {
             enemy = GetComponent<Enemy>();
+            attackPoint ??= transform;
         }
 
         #region Attack
@@ -32,9 +35,9 @@ namespace Shooter.Enemy
             isRun = false;
         }
 
-        public void Attack()
+        private void Attack()
         {
-            Collider[] playerHit = Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
+            Collider[] playerHit = Physics.OverlapSphere(attackPoint.position, attackRange, whatIsPlayer);
 
             foreach (Collider hit in playerHit)
             {
@@ -51,11 +54,12 @@ namespace Shooter.Enemy
             isAttack = false;
             isRun = true;
         }
-        void Update()
+
+        private void Update()
         {
             if (!enemy.isAlive) return;
         
-            bool playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            bool playerInAttackRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
 
             if (playerInAttackRange)
             {
@@ -75,8 +79,10 @@ namespace Shooter.Enemy
         }
         private void OnDrawGizmos()
         {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, sightRange);
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         }
     }
 }
