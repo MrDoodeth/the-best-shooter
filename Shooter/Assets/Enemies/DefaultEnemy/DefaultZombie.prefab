@@ -1200,12 +1200,12 @@ GameObject:
   - component: {fileID: 3423586411741746365}
   - component: {fileID: 3423586411741746364}
   - component: {fileID: 3423586411741746367}
+  - component: {fileID: 8191755803819396128}
   - component: {fileID: 3423586411741746366}
   - component: {fileID: 3423586411741746353}
-  - component: {fileID: 8191755803819396128}
   m_Layer: 8
   m_Name: DefaultZombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1270,6 +1270,31 @@ NavMeshAgent:
   m_BaseOffset: 0.82
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8191755803819396128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423586411741746352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75444100f4810841aecdb3809633296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typesOfEnemy: 0
+  maxHealth: 100
+  contusionDelay: 3
+  deathDelay: 3
+  isAlive: 1
+  currentHealth: 0
+  rewardAmount: 50
+  allRigidbodys: []
+  allColliders: []
+  agent: {fileID: 0}
+  animator: {fileID: 0}
+  playerTransform: {fileID: 0}
+  playerScore: {fileID: 0}
 --- !u!114 &3423586411741746366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1301,30 +1326,6 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &8191755803819396128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3423586411741746352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c75444100f4810841aecdb3809633296, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  contusionDelay: 3
-  deathDelay: 3
-  isAlive: 1
-  currentHealth: 0
-  rewardAmount: 50
-  allRigidbodys: []
-  allColliders: []
-  agent: {fileID: 0}
-  animator: {fileID: 0}
-  playerTransform: {fileID: 0}
-  playerScore: {fileID: 0}
 --- !u!1 &3446486135663180554
 GameObject:
   m_ObjectHideFlags: 0

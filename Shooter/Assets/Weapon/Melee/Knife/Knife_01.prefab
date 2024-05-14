@@ -134,7 +134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ergonomics: 1.7
   zoomSize: 1
-  weaponPivot: {fileID: 0}
   zoomPosition: {x: 0.1655, y: -0.3578, z: 0.2578}
   defaultWeaponPosition: {x: 0.1655, y: -0.3578, z: 0.2578}
   targetPosition: {x: 0, y: 0, z: 0}

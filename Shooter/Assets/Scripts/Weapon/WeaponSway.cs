@@ -38,14 +38,13 @@ namespace Shooter.Weapon
         private void Awake()
         {
             weaponTransform = this.transform;
-            wpZoom = GetComponent<WeaponZoom>();
+            wpZoom ??= GetComponent<WeaponZoom>();
         }
         private void Start()
         {
             if (!weaponTransform)
                 weaponTransform = transform;
             lastRot = transform.localRotation;
-            initialPosition = wpZoom.defaultWeaponPosition;
             initialRotation = weaponTransform.localRotation;
         }
 

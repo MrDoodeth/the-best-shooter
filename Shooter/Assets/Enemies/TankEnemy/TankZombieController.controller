@@ -193,7 +193,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: 7afd3702e7fe80a4dbe1dc39972255d0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: 
+  m_MirrorParameter: isAttacking
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1101 &-3587122273508050368
@@ -230,7 +230,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ZombieShooterAnimController
+  m_Name: TankZombieController
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isAttacking
@@ -311,7 +311,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ATTACK
+  m_Name: PUNCH
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -325,7 +325,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b41849e8cae752046a8d81e59a0dd99c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 77c3e1c37cfbcfa4a96b4f4e2716f301, type: 2}
   m_Tag: ATTACK
   m_SpeedParameter: 
   m_MirrorParameter: 

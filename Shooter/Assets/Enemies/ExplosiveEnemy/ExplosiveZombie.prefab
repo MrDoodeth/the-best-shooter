@@ -1099,8 +1099,8 @@ GameObject:
   - component: {fileID: 5381057961795650586}
   - component: {fileID: 5381057961795650576}
   - component: {fileID: 5381057961795650591}
-  - component: {fileID: 5381057961795650590}
   - component: {fileID: 5381057961795650589}
+  - component: {fileID: 5381057961795650590}
   m_Layer: 8
   m_Name: ExplosiveZombie
   m_TagString: Untagged
@@ -1210,6 +1210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75444100f4810841aecdb3809633296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typesOfEnemy: 4
   maxHealth: 1
   contusionDelay: 3
   deathDelay: 3
@@ -1220,20 +1221,8 @@ MonoBehaviour:
   allColliders: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  playerPosition: {fileID: 0}
+  playerTransform: {fileID: 0}
   playerScore: {fileID: 0}
---- !u!114 &5381057961795650590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5381057961795650585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06cdeeac7c1fc2548afeda4e62e1f19b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5381057961795650589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1244,6 +1233,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4447b6f1567ae1449a0229a7175724e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5381057961795650590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381057961795650585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06cdeeac7c1fc2548afeda4e62e1f19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5885165185875495363

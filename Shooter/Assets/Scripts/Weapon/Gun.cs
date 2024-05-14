@@ -4,6 +4,7 @@ using Shooter.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Shooter.Enemy;
+using UnityEditor;
 
 namespace Shooter.Weapon
 {
@@ -20,8 +21,8 @@ namespace Shooter.Weapon
         [Tooltip("Использовать только если isShotgun = true")] [SerializeField] [Range(0.01f, 85f)]
         private float maxSprayRange;
 
-        [Tooltip("Использовать только если isShotgun = true")] [SerializeField]
-        private int bulletAmount = 10;
+        [Tooltip("Использовать только если isShotgun = true")]
+        [SerializeField] private int bulletAmount = 10;
 
         private float timeSinceLastShoot;
 

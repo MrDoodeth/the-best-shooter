@@ -9,7 +9,8 @@ namespace Shooter.Enemy
     {
         private Enemy enemy;
         private ExplosiveComponent exComponent;
-        void Start()
+
+        private void Awake()
         {
             enemy = GetComponent<Enemy>();
             exComponent = GetComponent<ExplosiveComponent>();
@@ -24,7 +25,7 @@ namespace Shooter.Enemy
             enemy.isAlive = false;
             EnemiesSpawner.OnEnemyDeath?.Invoke();
             PlayerScore.OnGetReward?.Invoke(enemy.rewardAmount);
-            Debug.Log("Death");
+            print("Death");
             exComponent.ExploedWithDelay();
         }
     }

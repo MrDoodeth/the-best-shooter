@@ -32,9 +32,8 @@ namespace Shooter.Enemy
                 //OnGetDamage();
             }
         }
-        public void Die()
+        public virtual void Die()
         {
-            StopAllCoroutines();
             StartCoroutine(Death());
             return;
 
@@ -53,7 +52,6 @@ namespace Shooter.Enemy
 
         private void OnGetDamage()
         {
-            StopAllCoroutines();
             StartCoroutine(Damage());
             return;
 
@@ -68,18 +66,16 @@ namespace Shooter.Enemy
             }   
         }   
         public void GetContusion()   
-        {   
-            StopAllCoroutines();
+        {
+            enemy.agent.enabled = false;
+            enemy.animator.enabled = false;
+            enemy.allRigidbodys.SetIsKinematics(false);
+            
             StartCoroutine(Contusion());
             return;
 
             IEnumerator Contusion()
             {
-                enemy.isAlive = false;
-                enemy.agent.isStopped = true;
-                enemy.animator.enabled = false;
-                enemy.allRigidbodys.SetIsKinematics(false);
-            
                 yield return new WaitForSeconds(enemy.contusionDelay);
                 yield return new WaitUntil(() => enemy.agent.isOnNavMesh);
 
@@ -91,8 +87,7 @@ namespace Shooter.Enemy
                 enemy.animator.enabled = true;
                 enemy.animator.SetTrigger("isStandUp");
                 yield return new WaitForSeconds(enemy.animator.GetCurrentAnimatorStateInfo(0).length + enemy.animator.GetAnimatorTransitionInfo(0).duration);
-                enemy.isAlive = true;
-                enemy.agent.isStopped = false;
+                enemy.agent.enabled = true;
                 yield return null;
             }
         }

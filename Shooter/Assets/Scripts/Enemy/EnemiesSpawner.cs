@@ -1,100 +1,91 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
-
 namespace Shooter.Enemy
 {
+    public enum Difficulty { Easy, Normal, Hard, Nightmare }
+    
     public class EnemiesSpawner : MonoBehaviour
     {
         [Header("Wave Settings")]
         [SerializeField][Min(1)] private int baseEnemyCount = 3;
         [SerializeField] private float enemyCountIncreaseRate = 1.2f;
         [SerializeField] private float waveDelay;
-        public Difficulty difficulty;
-        public enum Difficulty { Easy, Normal, Hard, Nightmare }
-
-        [Header("Types of zombies")]
-        [Tooltip("Сюда вставлять всех зомби в порядке возрастания их силы (обычный, бегун; танк, токсик)")]
-        [SerializeField] private GameObject[] zombies;
-        [SerializeField][Range(1, 10)] private int maxExplosiveEnemyAmount;
-        private int currentExplosiveEnemyAmount;
-        [Space(15)]
-
-        [Tooltip("Сюда вставлять все точки спавна на карте")]
         [SerializeField] private Transform[] spawnPoints;
+        [Space(15)]
+        
+        [SerializeField][Range(1, 10)] private int maxExplosiveEnemyAmount;
+        [Space(15)]
+        
+        [SerializeField] private Difficulty difficulty;
+        [SerializeField] public ZombiesConfig zombiesConfig;
+        private Zombie[] currentZombies;
+        private int currentExplosiveEnemyAmount;
 
         public static Action OnStartNewWave;
         public static Action OnEndWave;
         public static Action OnEnemyDeath;
-        private Action Wave;
+        //private Action Wave;
 
         private static int currentEnemyCount;
         private int currentWaveNumber = 1;
-
+        private int selectedSpawnerIndex = 0;
+        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;      
             for (int i = 0; i < spawnPoints.Length && spawnPoints != null; i++)
                 Gizmos.DrawWireCube(spawnPoints[i].position, Vector3.one / 2);
         }
-        private void Start()
+        private void Awake()
         {
-            currentEnemyCount = baseEnemyCount;
-            OnStartNewWave?.Invoke();
-        }
-
-        private void OnEnable()
-        {
-            OnStartNewWave += ChooseWave;
-            OnEndWave += EndWave;
-
-            OnEnemyDeath += OnEnemyDied;
-            OnEnemyDeath += CheckWave;
-
             #region InitDifficulty
             switch (difficulty)
             {
                 case Difficulty.Easy:
-                    Wave += EasyMode; break;
-
+                    currentZombies = zombiesConfig.easyZombies; break;
+            
                 case Difficulty.Normal:
-                    Wave += NormalMode; break;
-
+                    currentZombies = zombiesConfig.normalZombies; break;
+            
                 case Difficulty.Hard:
-                    Wave += HardMode; break;
-
+                    currentZombies = zombiesConfig.hardZombies; break;
+            
                 case Difficulty.Nightmare:
-                    Wave += NightmareMode; break;
+                    currentZombies = zombiesConfig.nightmareZombies; break;
             }
             #endregion
+            
+            currentEnemyCount = baseEnemyCount;
+        }
+
+        private void Start()
+        {
+            StartNewWave();
+        }
+        private void OnEnable()
+        {
+            OnStartNewWave += Wave;
+            OnEndWave += EndWave;
+
+            OnEnemyDeath += OnEnemyDied;
+            OnEnemyDeath += CheckWave;
         }
 
         private void OnDisable()
         {
-            OnStartNewWave -= ChooseWave;
+            OnStartNewWave -= Wave;
             OnEndWave -= EndWave;
 
             OnEnemyDeath -= OnEnemyDied;
             OnEnemyDeath -= CheckWave;
-
-            #region ReinitDifficulty
-            switch (difficulty)
-            {
-                case Difficulty.Easy:
-                    Wave -= EasyMode; break;
-
-                case Difficulty.Normal:
-                    Wave -= NormalMode; break;
-
-                case Difficulty.Hard:
-                    Wave -= HardMode; break;
-
-                case Difficulty.Nightmare:
-                    Wave -= NightmareMode; break;
-            }
-            #endregion
         }
+
+        public void StartNewWave() => OnStartNewWave?.Invoke();
+        private static void OnEnemyDied() => currentEnemyCount--;
+
         private static void CheckWave()
         {
             if (currentEnemyCount <= 0)
@@ -103,50 +94,25 @@ namespace Shooter.Enemy
             }        
         }
 
-        private static void OnEnemyDied()
-        {
-            currentEnemyCount--;
-        }   
         private void EndWave()
         {
             baseEnemyCount = Mathf.RoundToInt(baseEnemyCount * enemyCountIncreaseRate);
             currentEnemyCount = baseEnemyCount;
             currentWaveNumber++;
             currentExplosiveEnemyAmount = 0;
-            WaitWave(waveDelay);
+            Invoke(nameof(StartNewWave), waveDelay);
         }
-
-        private void ChooseWave()
-        {
-            Wave?.Invoke();
-            print($"{currentWaveNumber} Wave, Zombie: {currentEnemyCount}");
-        }
-        private void WaitWave(float delayInSeconds)
-        {
-            StartCoroutine(Inv());
-            return;
-
-            IEnumerator Inv()
-            {
-                yield return new WaitForSeconds(delayInSeconds);
-                OnStartNewWave?.Invoke();
-                yield return null;
-            }
-        }
-
-        #region Difficulty Presets
-
-        private int selectedSpawner = 0;
-
         private void ChangeSelectedSpawnPoint()
         {
-            if (selectedSpawner >= spawnPoints.Length - 1)
-                selectedSpawner = 0;
+            if (selectedSpawnerIndex >= spawnPoints.Length - 1)
+                selectedSpawnerIndex = 0;
             else
-                selectedSpawner++;
+                selectedSpawnerIndex++;
         }
-        private void EasyMode()
+        private void Wave()
         {
+            print($"{currentWaveNumber} Wave, Zombie: {currentEnemyCount}");
+            
             StartCoroutine(Spawning());
             return;
 
@@ -154,61 +120,55 @@ namespace Shooter.Enemy
             {
                 for (int i = currentEnemyCount; i > 0; i--)
                 {
-                    SpawnRandomEnemy(spawnPoints[selectedSpawner], zombies);
+                    SpawnRandomEnemy(spawnPoints[selectedSpawnerIndex], currentZombies);
                     ChangeSelectedSpawnPoint();
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.2f);
                 }
                 yield return null;
             }
         }
 
-        private void NormalMode()
+        private void SpawnRandomEnemy(Transform spawnPoint, Zombie[] enemes)
         {
-
-        }
-        private void HardMode()
-        {
-
-        }
-
-        private void NightmareMode()
-        {
-
-        }
-        #endregion
-
-        #region Enemy Spawn
-        private void SpawnBonusZombie(Transform spawnPoint)
-        {
-            int type = Random.Range(0, 5);
-
-            if (type == 0)
-                SpawnEnemy(zombies[0], spawnPoint);
-            else
-                return;
-        }
-
-
-        private void SpawnRandomEnemy(Transform spawnPoint, params GameObject[] enemes)
-        {
-            int type = Random.Range(0, enemes.Length);
-        
-            if (type == (enemes.Length - 1))
+            // Сначала вычисляем сумму всех вероятностей
+            int totalProbability = 0;
+            foreach (Zombie zombie in enemes)
             {
-                currentExplosiveEnemyAmount++;
-                if (currentExplosiveEnemyAmount > maxExplosiveEnemyAmount)
-                {
-                    SpawnRandomEnemy(spawnPoint, enemes);
-                    return;
-                }
+                totalProbability += zombie.probability;
             }
 
-            SpawnEnemy(enemes[type], spawnPoint);
+            // Затем генерируем случайное число от 0 до суммы всех вероятностей
+            int randomNumber = Random.Range(0, totalProbability);
+
+            // После этого находим зомби, чей диапазон вероятности включает это случайное число
+            foreach (Zombie zombie in enemes)
+            {
+                if (randomNumber < zombie.probability)
+                {
+                    if (zombie.zombie.typesOfEnemy is TypesOfEnemy.Explosive)
+                    {
+                        currentExplosiveEnemyAmount++;
+                    }
+                    // Если случайное число меньше вероятности текущего зомби,
+                    // то мы выбираем этого зомби для спавна
+                    if (currentExplosiveEnemyAmount > maxExplosiveEnemyAmount)
+                    {
+                        //Рекурсия, если взрывных зомби уже больше максимального
+                        SpawnRandomEnemy(spawnPoint, enemes);
+                        return;
+                    }
+                    
+                    SpawnEnemy(zombie.zombie, spawnPoint);
+                    return;
+                }
+                // Если случайное число не попало в диапазон текущего зомби,
+                // то мы уменьшаем это число на вероятность текущего зомби
+                randomNumber -= zombie.probability;
+            }
         }
-        private static void SpawnEnemy(GameObject enemy, Transform spawnPoint)
+        private static void SpawnEnemy(Enemy enemy, Transform spawnPoint)
         {
             Instantiate(enemy, spawnPoint.position, Quaternion.identity);
         }
-        #endregion
     }
 }

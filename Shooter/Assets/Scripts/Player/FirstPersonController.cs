@@ -3,7 +3,9 @@
 // CHANGES || version VERSION
 //
 // "Enable/Disable Headbob, Changed look rotations - should result in reduced camera jitters" || version 1.0.1
-using UnityEditor;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -532,7 +534,7 @@ namespace Shooter.Player
     }
 // Custom Editor
 #if UNITY_EDITOR
-    [CustomEditor(typeof(FirstPersonController)), InitializeOnLoad]
+    [CustomEditor(typeof(FirstPersonController))]
     public class FirstPersonControllerEditor : Editor
     {
         FirstPersonController fpc;
@@ -730,8 +732,6 @@ namespace Shooter.Player
                 SerFPC.ApplyModifiedProperties();
             }
         }
-
     }
-
 #endif
 }

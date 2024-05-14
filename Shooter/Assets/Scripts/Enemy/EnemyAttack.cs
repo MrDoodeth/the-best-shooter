@@ -7,10 +7,10 @@ namespace Shooter.Enemy
     {
         [Header("Fight")] 
         [SerializeField] private float sightRange = 1.5f;
-        [SerializeField] private float attackRange = 1.6f;
+        [SerializeField] protected float attackRange = 1.6f;
         [SerializeField] protected Transform attackPoint;
         [SerializeField] protected int damage = 33;
-        [SerializeField] private LayerMask whatIsPlayer;
+        [SerializeField] protected LayerMask whatIsPlayer;
 
         private Enemy enemy;
         //States

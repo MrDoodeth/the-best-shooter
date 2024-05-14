@@ -446,7 +446,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ergonomics: 15
   zoomSize: 0.95
-  weaponPivot: {fileID: 0}
   zoomPosition: {x: 0, y: -0.0455, z: 0.2255}
   defaultWeaponPosition: {x: 0.0888, y: -0.1414, z: 0.2314}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -463,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponTransform: {fileID: 0}
+  weaponTransform: {fileID: 8183252265878648141}
   swayAmount: 0.01
   maxSwayAmount: 1.92
   swaySmooth: 25

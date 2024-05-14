@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 1832510817252317915}
   - component: {fileID: 1832510817252317914}
   m_Layer: 8
-  m_Name: ZombieTank
+  m_Name: TankZombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75444100f4810841aecdb3809633296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typesOfEnemy: 2
   maxHealth: 300
   contusionDelay: 3
   deathDelay: 3

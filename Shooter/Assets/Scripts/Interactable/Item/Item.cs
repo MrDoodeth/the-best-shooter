@@ -1,5 +1,7 @@
 using System;
-using UnityEditor;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Shooter.Interactable.Item
@@ -15,19 +17,19 @@ namespace Shooter.Interactable.Item
     }
 
 #if UNITY_EDITOR
-    [CustomEditor(typeof(Item)), InitializeOnLoad]
+    [CustomEditor(typeof(Item))]
     public class ItemEditor : Editor
     {
         Item item;
-        private void Awake()
+        SerializedObject serItem;
+        private void OnEnable()
         {
             item = (Item)target;
+            serItem = new SerializedObject(item);
         }
         public override void OnInspectorGUI()
         {
-            item = (Item)target;
-
-            serializedObject.Update();
+            serItem.Update();
 
             item.itemName = EditorGUILayout.TextField("Item name", item.itemName);
             item.icon = EditorGUILayout.ObjectField("Item icon", item.icon, typeof(Sprite), true) as Sprite;
@@ -45,7 +47,7 @@ namespace Shooter.Interactable.Item
             {
                 EditorUtility.SetDirty(item);
                 Undo.RecordObject(item, "Item Change");
-                serializedObject.ApplyModifiedProperties();
+                serItem.ApplyModifiedProperties();
             }
         }
     }

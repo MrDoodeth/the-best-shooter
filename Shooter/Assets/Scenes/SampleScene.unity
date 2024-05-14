@@ -261,12 +261,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fa9f87c8f134184c8e1f363e8728750, type: 3}
---- !u!4 &110011583 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2840594680257283645, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
-    type: 3}
-  m_PrefabInstance: {fileID: 2840594680179539793}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &192625119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1219,18 +1213,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fa9f87c8f134184c8e1f363e8728750, type: 3}
---- !u!114 &787625962 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1913834936968865013, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
-    type: 3}
-  m_PrefabInstance: {fileID: 2840594680179539793}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d90ba6530d9bfda47abb4610956b2f44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &827334620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1797,12 +1779,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183299014}
   m_Mesh: {fileID: 4300000, guid: 09581238a7eee2a448621efbc36abb72, type: 3}
---- !u!4 &1225840810 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1829007119099331878, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1829007119514024592}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1343561682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,20 +2206,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseEnemyCount: 4
   enemyCountIncreaseRate: 1.2
-  waveDelay: 10
-  difficulty: 0
-  zombies:
-  - {fileID: 660315338262885663, guid: 1f3e88ad0127c424498f852e2dd684de, type: 3}
-  - {fileID: 3423586411741746352, guid: 65185020bbdcf0e45bc82cd25a728069, type: 3}
-  - {fileID: 3044759202855864814, guid: f06de8d4ce8184a4e800fcdcfe401c05, type: 3}
-  - {fileID: 1307647313016176743, guid: a57cf6879b37ca941a8802b83174a7eb, type: 3}
-  - {fileID: 5381057961795650585, guid: 1b0d779723d70c546953dd386350a129, type: 3}
-  maxExplosiveEnemyAmount: 2
+  waveDelay: 5
   spawnPoints:
   - {fileID: 1629281318}
   - {fileID: 701180430}
   - {fileID: 1375718665}
   - {fileID: 2144702519}
+  maxExplosiveEnemyAmount: 7
+  difficulty: 0
+  zombiesConfig: {fileID: 11400000, guid: 83bf31128e4e967499648f2e0ae4489c, type: 2}
 --- !u!1 &1629281317
 GameObject:
   m_ObjectHideFlags: 0
@@ -3539,16 +3510,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 18198136533641983, guid: c8eef3b0eaa4f814e8502c11cef8b986,
-        type: 3}
-      propertyPath: weaponTransform
-      value: 
-      objectReference: {fileID: 1225840810}
-    - target: {fileID: 200763546178363780, guid: c8eef3b0eaa4f814e8502c11cef8b986,
-        type: 3}
-      propertyPath: weaponPivot
-      value: 
-      objectReference: {fileID: 110011583}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8eef3b0eaa4f814e8502c11cef8b986, type: 3}
 --- !u!1001 &1829007119514024592
@@ -3618,11 +3579,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3786346487634470170, guid: 06431fa2fd9d9804da65a2cbf24fa88c,
-        type: 3}
-      propertyPath: weaponPivot
-      value: 
-      objectReference: {fileID: 110011583}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06431fa2fd9d9804da65a2cbf24fa88c, type: 3}
 --- !u!1001 &2803922879823884491
@@ -3692,11 +3648,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -5.37
       objectReference: {fileID: 0}
-    - target: {fileID: 1989213774931776557, guid: e3fc85d90e938e648957181a0c796111,
-        type: 3}
-      propertyPath: weaponPivot
-      value: 
-      objectReference: {fileID: 110011583}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fc85d90e938e648957181a0c796111, type: 3}
 --- !u!1001 &2840594680179539793
@@ -3770,11 +3721,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 300170808926228185, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
-        type: 3}
-      propertyPath: fpc
-      value: 
-      objectReference: {fileID: 787625962}
     - target: {fileID: 1913834936968865011, guid: 5b8729204a3fd01479a137fd6bbb4aa0,
         type: 3}
       propertyPath: m_RootOrder
@@ -3988,11 +3934,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bennelli M4
       objectReference: {fileID: 0}
-    - target: {fileID: 6974456438559410361, guid: 50aaaed0f9c50dd4f9d175fa83505868,
-        type: 3}
-      propertyPath: weaponPivot
-      value: 
-      objectReference: {fileID: 110011583}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50aaaed0f9c50dd4f9d175fa83505868, type: 3}
 --- !u!65 &7215362626362854419
@@ -4116,16 +4057,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2711640644429102420, guid: f9a5b9d1dd1280147a79169fa3131817,
-        type: 3}
-      propertyPath: weaponPivot
-      value: 
-      objectReference: {fileID: 110011583}
-    - target: {fileID: 8178916179672470889, guid: f9a5b9d1dd1280147a79169fa3131817,
-        type: 3}
-      propertyPath: weaponTransform
-      value: 
-      objectReference: {fileID: 1225840810}
     - target: {fileID: 8180610573758829913, guid: f9a5b9d1dd1280147a79169fa3131817,
         type: 3}
       propertyPath: m_Name

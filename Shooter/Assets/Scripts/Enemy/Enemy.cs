@@ -5,14 +5,25 @@ using UnityEngine.AI;
 
 namespace Shooter.Enemy
 {
+    public enum TypesOfEnemy
+    {
+        Default,
+        Sprinter,
+        Tank,
+        Shooter,
+        Explosive,
+        Toxic,
+        Bonus
+    }
     public class Enemy : MonoBehaviour
     {
+        public TypesOfEnemy typesOfEnemy;
         [Header("Health")]
-        [SerializeField][Range(1, 5000)] private float maxHealth = 100;
+        [SerializeField][Range(1, 5000)] private int maxHealth = 100;
         [Range(1, 30)] public float contusionDelay = 3f;
         [Range(1, 30)] public float deathDelay = 3f;
         public bool isAlive = true;
-        public float currentHealth;
+        public int currentHealth;
         [Space(15)]
 
         [Min(10)] public int rewardAmount = 100;

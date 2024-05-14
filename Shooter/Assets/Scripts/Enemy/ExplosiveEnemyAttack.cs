@@ -26,7 +26,7 @@ namespace Shooter.Enemy
         }
         private void ChasePlayer()
         {
-            if (enemy.agent.isOnNavMesh && !enemy.animator.GetCurrentAnimatorStateInfo(0).IsName("ATTACK"))
+            if (enemy.agent.isOnNavMesh)
                 enemy.agent.SetDestination(enemy.playerTransform.position);
             isRun = true;
         }

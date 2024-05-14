@@ -994,7 +994,7 @@ MonoBehaviour:
   inventorySize: 4
   delayBeforeSwitching: 0.2
   animator: {fileID: 8727830366765379850}
-  FPC: {fileID: 1913834936968865013}
+  fpc: {fileID: 1913834936968865013}
   weapons: []
 --- !u!114 &4277476777048071840
 MonoBehaviour:

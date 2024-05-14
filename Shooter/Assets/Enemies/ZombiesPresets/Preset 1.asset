@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21d4e4f6c4cf3e488edbeb2562c31c5, type: 3}
+  m_Name: Preset 1
+  m_EditorClassIdentifier: 
+  easyZombies:
+  - zombie: {fileID: 8191755803819396128, guid: 65185020bbdcf0e45bc82cd25a728069,
+      type: 3}
+    probability: 40
+  - zombie: {fileID: 6851670577253855599, guid: f06de8d4ce8184a4e800fcdcfe401c05,
+      type: 3}
+    probability: 20
+  - zombie: {fileID: 8402902968451554565, guid: a57cf6879b37ca941a8802b83174a7eb,
+      type: 3}
+    probability: 10
+  - zombie: {fileID: 5733049552388350811, guid: c1f6d48f311eb7b43a52aea443f7fb8f,
+      type: 3}
+    probability: 10
+  - zombie: {fileID: 171763377047531425, guid: 1f3e88ad0127c424498f852e2dd684de, type: 3}
+    probability: 10
+  - zombie: {fileID: 5381057961795650591, guid: 1b0d779723d70c546953dd386350a129,
+      type: 3}
+    probability: 10
+  normalZombies: []
+  hardZombies: []
+  nightmareZombies: []

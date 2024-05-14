@@ -52,7 +52,6 @@ namespace Shooter.Weapon
         {       
             transform.SetPositionAndRotation(weaponPivot.position, weaponPivot.rotation);
             transform.SetParent(weaponsSwitcher);
-            weaponZoom.weaponPivot = weaponPivot;
             SetFPC(FPC);
             weaponRigidbody.isKinematic = true;
             weaponCollider.enabled = false;

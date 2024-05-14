@@ -9,7 +9,6 @@ namespace Shooter.Weapon
         [Header("Zoom")]
         [SerializeField][Range(0.01f, 20f)] private float ergonomics;
         [SerializeField][Range(0.01f, 1f)] private float zoomSize = 1f;
-        public Transform weaponPivot;
         public Vector3 zoomPosition;
         public Vector3 defaultWeaponPosition;
         public Vector3 targetPosition;
@@ -24,13 +23,12 @@ namespace Shooter.Weapon
         private void OnDisable()
         {
             PlayerController.OnZoomInput -= Zoom;    
-            if (weaponPivot != null)
-                transform.localPosition = weaponPivot.localPosition;
+            transform.localPosition += -Vector3.up / 2;
             Zoom(false);
         }
         private void Zoom(bool isPressed)
         {
-            if (enabled == true)
+            if (enabled)
                 fpc.zoomFOV = fpc.fov * zoomSize;
 
             isZoom = isPressed;
