@@ -39,12 +39,20 @@ namespace Shooter.Enemy
 
             IEnumerator Death()
             {
+                if (Random.value <= enemy.buffsSpawnProbability)
+                {
+                    int rundomInt = Random.Range(0, enemy.buffs.Length);
+                    var buff = enemy.buffs[rundomInt];
+
+                    Instantiate(buff, transform.position, Quaternion.identity);
+                }
+                
                 enemy.isAlive = false;
+                enemy.animator.enabled = false;
+                enemy.agent.enabled = false;
                 EnemiesSpawner.OnEnemyDeath?.Invoke();
                 PlayerScore.OnGetReward?.Invoke(enemy.rewardAmount);
-                enemy.agent.enabled = false;
                 enemy.allRigidbodys.SetIsKinematics(false);
-                enemy.animator.enabled = false;
                 yield return new WaitForSeconds(enemy.deathDelay);
                 Destroy(gameObject);
             }

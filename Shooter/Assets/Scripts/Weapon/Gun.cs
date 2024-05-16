@@ -41,8 +41,20 @@ namespace Shooter.Weapon
         [SerializeField] private float fireRate;
         [SerializeField] private float reloadTime;
         public int currentAmmo { get; private set; }
-        public int reserveAmmo { get; private set; }
+        private int reserveAmmo;
+
+        public int ReserveAmmo
+        {
+            get => reserveAmmo;
+            set
+            {
+                reserveAmmo = Math.Clamp(value, 0, maxReserveAmmo);
+                OnBuffUse?.Invoke();
+            }
+        }
+
         public static event Action OnReloadEnd;
+        public static event Action OnBuffUse; 
 
         [Space(10)] [Header("Gun Initialization")] [SerializeField]
         private Transform muzzle;
@@ -52,7 +64,7 @@ namespace Shooter.Weapon
         private void Awake()
         {
             currentAmmo = magSize;
-            reserveAmmo = maxReserveAmmo;
+            ReserveAmmo = maxReserveAmmo;
 
             Initialization();
             //Важно в конце!!!
@@ -93,7 +105,7 @@ namespace Shooter.Weapon
             animator.SetBool("isReloading", true);
             return;
 
-            bool CanReload() => currentAmmo < magSize && reserveAmmo > 0 && this.gameObject.activeSelf;
+            bool CanReload() => currentAmmo < magSize && ReserveAmmo > 0 && this.gameObject.activeSelf;
         }
 
         #region ForAnimations
@@ -104,15 +116,15 @@ namespace Shooter.Weapon
             
             int neededAmmo = magSize - currentAmmo;
             
-            if (neededAmmo >= reserveAmmo)
+            if (neededAmmo >= ReserveAmmo)
             {
-                currentAmmo += reserveAmmo;
-                reserveAmmo = 0;
+                currentAmmo += ReserveAmmo;
+                ReserveAmmo = 0;
             }
             else
             {
                 currentAmmo = magSize;
-                reserveAmmo -= neededAmmo;
+                ReserveAmmo -= neededAmmo;
             }
 
             animator.SetBool("isReloading", false);
@@ -136,7 +148,7 @@ namespace Shooter.Weapon
 
                 if (!isShotgun)
                 {
-                    if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer))
+                    if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer, QueryTriggerInteraction.Ignore))
                     {
                         Damage(hitInfo);
                         Debug.DrawLine(muzzle.position, hitInfo.point, Color.green, 1f);
@@ -156,7 +168,7 @@ namespace Shooter.Weapon
                             muzzle.localRotation.y + Random.Range(-maxSprayRange, maxSprayRange),
                             muzzle.localRotation.z);
 
-                        if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer))
+                        if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer, QueryTriggerInteraction.Ignore))
                         {
                             Damage(hitInfo);
                             Debug.DrawLine(muzzle.position, hitInfo.point, Color.green, 1f);

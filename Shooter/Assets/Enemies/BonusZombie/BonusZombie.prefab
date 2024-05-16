@@ -152,18 +152,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75444100f4810841aecdb3809633296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typesOfEnemy: 0
   maxHealth: 100
   contusionDelay: 3
   deathDelay: 3
   isAlive: 1
   currentHealth: 0
   rewardAmount: 100
+  buffsSpawnProbability: 0.5
+  buffs:
+  - {fileID: 1768431093694469048, guid: 6a2ca910a4c256344b346b23ccf240d0, type: 3}
+  - {fileID: 827857191707841035, guid: f8ed506b05595de4eb5a400cbe9bf55a, type: 3}
   allRigidbodys: []
   allColliders: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  playerPosition: {fileID: 0}
-  plInventory: {fileID: 0}
+  playerTransform: {fileID: 0}
+  playerScore: {fileID: 0}
 --- !u!114 &-8376145799628051496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765d59ebadc7ebe4cbf8f13fa16d88e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sightRange: 1.5
   attackRange: 1.6
+  attackPoint: {fileID: 0}
   damage: 33
   whatIsPlayer:
     serializedVersion: 2

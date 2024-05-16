@@ -27,7 +27,6 @@ namespace Shooter.Enemy
         public static Action OnStartNewWave;
         public static Action OnEndWave;
         public static Action OnEnemyDeath;
-        //private Action Wave;
 
         private static int currentEnemyCount;
         private int currentWaveNumber = 1;
@@ -130,17 +129,14 @@ namespace Shooter.Enemy
 
         private void SpawnRandomEnemy(Transform spawnPoint, Zombie[] enemes)
         {
-            // Сначала вычисляем сумму всех вероятностей
             int totalProbability = 0;
             foreach (Zombie zombie in enemes)
             {
                 totalProbability += zombie.probability;
             }
-
-            // Затем генерируем случайное число от 0 до суммы всех вероятностей
+            
             int randomNumber = Random.Range(0, totalProbability);
-
-            // После этого находим зомби, чей диапазон вероятности включает это случайное число
+            
             foreach (Zombie zombie in enemes)
             {
                 if (randomNumber < zombie.probability)
@@ -149,11 +145,9 @@ namespace Shooter.Enemy
                     {
                         currentExplosiveEnemyAmount++;
                     }
-                    // Если случайное число меньше вероятности текущего зомби,
-                    // то мы выбираем этого зомби для спавна
+                    
                     if (currentExplosiveEnemyAmount > maxExplosiveEnemyAmount)
                     {
-                        //Рекурсия, если взрывных зомби уже больше максимального
                         SpawnRandomEnemy(spawnPoint, enemes);
                         return;
                     }
@@ -161,8 +155,7 @@ namespace Shooter.Enemy
                     SpawnEnemy(zombie.zombie, spawnPoint);
                     return;
                 }
-                // Если случайное число не попало в диапазон текущего зомби,
-                // то мы уменьшаем это число на вероятность текущего зомби
+
                 randomNumber -= zombie.probability;
             }
         }

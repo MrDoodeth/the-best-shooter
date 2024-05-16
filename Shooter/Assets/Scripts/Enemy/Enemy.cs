@@ -28,6 +28,10 @@ namespace Shooter.Enemy
 
         [Min(10)] public int rewardAmount = 100;
 
+        [Space(15)] 
+        [SerializeField] [Range(0.01f, 1f)] public float buffsSpawnProbability;
+        [SerializeField] public GameObject[] buffs;
+
         [HideInInspector] public Rigidbody[] allRigidbodys;
         [HideInInspector] public Collider[] allColliders;
         [HideInInspector] public NavMeshAgent agent;

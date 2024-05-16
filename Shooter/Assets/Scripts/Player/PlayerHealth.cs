@@ -12,9 +12,9 @@ namespace Shooter.Player
         public float CurrentHealth
         {
             get => currentHealth;
-            private set
+            set
             {            
-                currentHealth = Math.Clamp(value, 0, int.MaxValue);
+                currentHealth = Math.Clamp(value, 0, maxHealth);
                 OnPlayerHealthChanged?.Invoke();
             }
         }

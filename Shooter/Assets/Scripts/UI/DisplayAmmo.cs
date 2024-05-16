@@ -20,6 +20,7 @@ namespace Shooter.UI
 
             PlayerController.OnAttackInput += DetermineAmmo;
             Gun.OnReloadEnd += DetermineAmmo;
+            Gun.OnBuffUse += DetermineAmmo;
 
             PlayerController.OnWeaponDroped += OnDroped;
             PlayerController.OnWeaponChanged += DetermineAmmo;
@@ -31,6 +32,7 @@ namespace Shooter.UI
 
             PlayerController.OnAttackInput -= DetermineAmmo;
             Gun.OnReloadEnd -= DetermineAmmo;
+            Gun.OnBuffUse -= DetermineAmmo;
 
             PlayerController.OnWeaponDroped -= OnDroped;
             PlayerController.OnWeaponChanged -= DetermineAmmo;
@@ -44,7 +46,7 @@ namespace Shooter.UI
             {
                 ammoText.enabled = true;
                 if (WeaponsSwitcher.currentWeapon is not null)
-                    ammoText.text = $"{gun.currentAmmo}/{gun.reserveAmmo}";
+                    ammoText.text = $"{gun.currentAmmo}/{gun.ReserveAmmo}";
             }
             else
             {
