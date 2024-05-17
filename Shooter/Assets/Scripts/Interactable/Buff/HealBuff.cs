@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace Shooter.Interactable.Buff
 {
-    public class HealBuff : MonoBehaviour
+    public class HealBuff : Buff
     {
         [SerializeField, Range(1, 1000)] private int healAmount;
-        [SerializeField, Range(0.01f, 20f)] private float lifeTime;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -14,14 +13,8 @@ namespace Shooter.Interactable.Buff
             {
                 other.transform.GetComponent<PlayerHealth>().CurrentHealth += healAmount;
                 print("+++Healing+++");
-                Destroy();
+                Destroy(gameObject);
             }
-        }
-
-        private void Destroy() => Destroy(gameObject);
-        private void Start()
-        {
-            Invoke(nameof(Destroy), lifeTime);
         }
     }
 }

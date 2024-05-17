@@ -23,7 +23,7 @@ namespace Shooter.Enemy
         public void Die()
         {
             enemy.isAlive = false;
-            EnemiesSpawner.OnEnemyDeath?.Invoke();
+            EnemiesSpawner.OnEnemyDeath?.Invoke(enemy);
             PlayerScore.OnGetReward?.Invoke(enemy.rewardAmount);
             print("Death");
             exComponent.ExploedWithDelay();

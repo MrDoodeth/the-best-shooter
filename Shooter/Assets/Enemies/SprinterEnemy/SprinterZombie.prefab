@@ -1434,7 +1434,7 @@ GameObject:
   - component: {fileID: 2380989064345228119}
   m_Layer: 8
   m_Name: SprinterZombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1491,7 +1491,7 @@ NavMeshAgent:
   m_Acceleration: 6
   avoidancePriority: 1
   m_AngularSpeed: 360
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.77
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1520,8 +1520,9 @@ MonoBehaviour:
   rewardAmount: 30
   buffsSpawnProbability: 0.5
   buffs:
-  - {fileID: 1768431093694469048, guid: 6a2ca910a4c256344b346b23ccf240d0, type: 3}
-  - {fileID: 827857191707841035, guid: f8ed506b05595de4eb5a400cbe9bf55a, type: 3}
+  - {fileID: 5625200430822746277, guid: 6a2ca910a4c256344b346b23ccf240d0, type: 3}
+  - {fileID: 827857191707841034, guid: f8ed506b05595de4eb5a400cbe9bf55a, type: 3}
+  - {fileID: 8688500742669797620, guid: 474063778d308ee4da6efdda5b1d64ae, type: 3}
   allRigidbodys: []
   allColliders: []
   agent: {fileID: 0}
@@ -1552,8 +1553,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765d59ebadc7ebe4cbf8f13fa16d88e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRange: 1.5
-  attackRange: 0.5
+  sightRange: 0.78
+  attackRange: 0.32
   attackPoint: {fileID: 7361825781644968712}
   damage: 33
   whatIsPlayer:

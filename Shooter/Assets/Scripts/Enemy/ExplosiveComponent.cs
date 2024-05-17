@@ -34,8 +34,8 @@ namespace Shooter.Enemy
                 else
                     entity?.TakeDamage(farExplosionDamage);
 
-                IContusionable enemy = col.GetComponentInParent<IContusionable>();
-                enemy?.GetContusion();
+                //IContusionable enemy = col.GetComponentInParent<IContusionable>();
+                //enemy?.GetContusion();
 
                 //Regdoll отталкивание
                 Rigidbody[] rbEntities = col.GetComponents<Rigidbody>();

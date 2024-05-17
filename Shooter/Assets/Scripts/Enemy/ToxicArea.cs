@@ -20,12 +20,16 @@ namespace Shooter.Enemy
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.transform.CompareTag("Player") && timeSinceLastDamage <= 0f)
+            if (other.transform.CompareTag("Player"))
             {
-                other.transform.GetComponent<IDamagable>()?.TakeDamage((int)damageFrequency);
-                timeSinceLastDamage = 1f;
+                if (timeSinceLastDamage <= 0f)
+                {
+                    other.transform.GetComponent<IDamagable>()?.TakeDamage((int)damageFrequency);
+                    timeSinceLastDamage = 1f;
+                }
+                else
+                    timeSinceLastDamage -= Time.deltaTime;
             }
-            timeSinceLastDamage -= Time.deltaTime;
         }
 
         private void OnTriggerExit(Collider other)

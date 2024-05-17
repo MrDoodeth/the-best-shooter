@@ -17,10 +17,17 @@ namespace Shooter.Enemy
         private bool isRun;
         private bool isAttack;
 
+        private float insideSightRange;
+        private float outsideSightRange;
+
         private void Awake()
         {
             enemy = GetComponent<Enemy>();
             attackPoint ??= transform;
+
+            insideSightRange = sightRange + 0.1f;
+            outsideSightRange = sightRange;
+            attackRange += 0.1f;
         }
 
         #region Attack
@@ -59,14 +66,16 @@ namespace Shooter.Enemy
         {
             if (!enemy.isAlive) return;
         
-            bool playerInAttackRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+            bool playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
 
-            if (playerInAttackRange)
+            if (playerInSightRange)
             {
+                sightRange = insideSightRange;
                 AttackPlayer();
             }
             else
             {
+                sightRange = outsideSightRange;
                 ChasePlayer();
             }
             

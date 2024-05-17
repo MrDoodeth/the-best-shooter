@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Shooter.Interactable.Buff;
 using Shooter.Player;
 using UnityEngine;
 using UnityEngine.AI;
@@ -30,7 +31,7 @@ namespace Shooter.Enemy
 
         [Space(15)] 
         [SerializeField] [Range(0.01f, 1f)] public float buffsSpawnProbability;
-        [SerializeField] public GameObject[] buffs;
+        [SerializeField] public Buff[] buffs;
 
         [HideInInspector] public Rigidbody[] allRigidbodys;
         [HideInInspector] public Collider[] allColliders;

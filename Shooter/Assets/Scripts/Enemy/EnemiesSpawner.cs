@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 namespace Shooter.Enemy
 {
@@ -22,11 +23,14 @@ namespace Shooter.Enemy
         [SerializeField] private Difficulty difficulty;
         [SerializeField] public ZombiesConfig zombiesConfig;
         private Zombie[] currentZombies;
+
+        [SerializeField] private List<Enemy> currentEnemiesOnScene;
         private int currentExplosiveEnemyAmount;
 
         public static Action OnStartNewWave;
         public static Action OnEndWave;
-        public static Action OnEnemyDeath;
+        public static Action<Enemy> OnEnemyDeath;
+        public static Action<float, int> OnFireBuffActivate; 
 
         private static int currentEnemyCount;
         private int currentWaveNumber = 1;
@@ -70,7 +74,8 @@ namespace Shooter.Enemy
             OnEndWave += EndWave;
 
             OnEnemyDeath += OnEnemyDied;
-            OnEnemyDeath += CheckWave;
+
+            OnFireBuffActivate += OnFireBuff;
         }
 
         private void OnDisable()
@@ -79,11 +84,18 @@ namespace Shooter.Enemy
             OnEndWave -= EndWave;
 
             OnEnemyDeath -= OnEnemyDied;
-            OnEnemyDeath -= CheckWave;
+            
+            OnFireBuffActivate -= OnFireBuff;
         }
 
         public void StartNewWave() => OnStartNewWave?.Invoke();
-        private static void OnEnemyDied() => currentEnemyCount--;
+
+        private void OnEnemyDied(Enemy enemy)
+        {
+            currentEnemyCount--;
+            currentEnemiesOnScene.Remove(enemy);
+            CheckWave();
+        }
 
         private static void CheckWave()
         {
@@ -159,9 +171,33 @@ namespace Shooter.Enemy
                 randomNumber -= zombie.probability;
             }
         }
-        private static void SpawnEnemy(Enemy enemy, Transform spawnPoint)
+        private void SpawnEnemy(Enemy enemy, Transform spawnPoint)
         {
-            Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+            var currentEnemy = Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+            currentEnemiesOnScene.Add(currentEnemy);
+        }
+
+        private void OnFireBuff(float duration, int damage)
+        {
+            StartCoroutine(Fire());
+            
+            IEnumerator Fire()
+            {
+                while (duration > 0)
+                {
+                    if (currentEnemiesOnScene.ToList().Count > 0)
+                    {
+                        foreach (var enemy in currentEnemiesOnScene.ToList())
+                        {
+                            var entity = enemy?.GetComponent<IDamagable>();
+                            entity?.TakeDamage(Random.Range(damage, damage + 5));
+                        }
+                    }
+
+                    duration -= 1f;
+                    yield return new WaitForSeconds(1f);
+                }
+            }
         }
     }
 }

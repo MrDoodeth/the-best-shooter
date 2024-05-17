@@ -1801,6 +1801,7 @@ MonoBehaviour:
   maxExplosiveEnemyAmount: 2
   difficulty: 0
   zombiesConfig: {fileID: 11400000, guid: 83bf31128e4e967499648f2e0ae4489c, type: 2}
+  currentEnemiesOnScene: []
 --- !u!1 &1629281317
 GameObject:
   m_ObjectHideFlags: 0

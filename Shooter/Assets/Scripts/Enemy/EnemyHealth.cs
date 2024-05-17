@@ -35,7 +35,6 @@ namespace Shooter.Enemy
         public virtual void Die()
         {
             StartCoroutine(Death());
-            return;
 
             IEnumerator Death()
             {
@@ -50,7 +49,7 @@ namespace Shooter.Enemy
                 enemy.isAlive = false;
                 enemy.animator.enabled = false;
                 enemy.agent.enabled = false;
-                EnemiesSpawner.OnEnemyDeath?.Invoke();
+                EnemiesSpawner.OnEnemyDeath?.Invoke(enemy);
                 PlayerScore.OnGetReward?.Invoke(enemy.rewardAmount);
                 enemy.allRigidbodys.SetIsKinematics(false);
                 yield return new WaitForSeconds(enemy.deathDelay);
@@ -61,7 +60,6 @@ namespace Shooter.Enemy
         private void OnGetDamage()
         {
             StartCoroutine(Damage());
-            return;
 
             IEnumerator Damage()
             {
@@ -75,15 +73,15 @@ namespace Shooter.Enemy
         }   
         public void GetContusion()   
         {
-            enemy.agent.enabled = false;
-            enemy.animator.enabled = false;
-            enemy.allRigidbodys.SetIsKinematics(false);
-            
-            StartCoroutine(Contusion());
-            return;
+            //StartCoroutine(Contusion());
 
             IEnumerator Contusion()
             {
+                enemy.isAlive = false;
+                enemy.agent.enabled = false;
+                enemy.animator.enabled = false;
+                enemy.allRigidbodys.SetIsKinematics(false);
+                
                 yield return new WaitForSeconds(enemy.contusionDelay);
                 yield return new WaitUntil(() => enemy.agent.isOnNavMesh);
 
@@ -95,8 +93,8 @@ namespace Shooter.Enemy
                 enemy.animator.enabled = true;
                 enemy.animator.SetTrigger("isStandUp");
                 yield return new WaitForSeconds(enemy.animator.GetCurrentAnimatorStateInfo(0).length + enemy.animator.GetAnimatorTransitionInfo(0).duration);
+                enemy.isAlive = true;
                 enemy.agent.enabled = true;
-                yield return null;
             }
         }
     }

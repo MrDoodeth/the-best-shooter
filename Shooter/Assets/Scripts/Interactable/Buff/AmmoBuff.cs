@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace Shooter.Interactable.Buff
 {
-    public class AmmoBuff : MonoBehaviour
+    public class AmmoBuff : Buff
     {
         [SerializeField, Range(1, 1000)] private int ammoAmount;
-        [SerializeField, Range(0.01f, 20f)] private float lifeTime;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -16,15 +15,9 @@ namespace Shooter.Interactable.Buff
                 {
                     gun.ReserveAmmo += ammoAmount;
                     print("===AmmoAdded===");
-                    Destroy();
+                    Destroy(gameObject);
                 }
             }
-        }
-
-        private void Destroy() => Destroy(gameObject);
-        private void Start()
-        {
-            Invoke(nameof(Destroy), lifeTime);
         }
     }
 }

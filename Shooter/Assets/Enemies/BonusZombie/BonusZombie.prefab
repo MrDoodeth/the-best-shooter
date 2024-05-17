@@ -161,8 +161,9 @@ MonoBehaviour:
   rewardAmount: 100
   buffsSpawnProbability: 0.5
   buffs:
-  - {fileID: 1768431093694469048, guid: 6a2ca910a4c256344b346b23ccf240d0, type: 3}
-  - {fileID: 827857191707841035, guid: f8ed506b05595de4eb5a400cbe9bf55a, type: 3}
+  - {fileID: 5625200430822746277, guid: 6a2ca910a4c256344b346b23ccf240d0, type: 3}
+  - {fileID: 827857191707841034, guid: f8ed506b05595de4eb5a400cbe9bf55a, type: 3}
+  - {fileID: 8688500742669797620, guid: 474063778d308ee4da6efdda5b1d64ae, type: 3}
   allRigidbodys: []
   allColliders: []
   agent: {fileID: 0}
