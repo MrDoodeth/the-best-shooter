@@ -4,7 +4,7 @@ using Shooter.Enemy;
 
 namespace Shooter.Weapon
 {
-    [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)))]
+    [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSwayAndBobbing)))]
     public sealed class Melee : Weapon
     {
         [Space(10)]

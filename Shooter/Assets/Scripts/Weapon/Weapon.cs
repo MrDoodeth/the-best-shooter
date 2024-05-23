@@ -20,14 +20,14 @@ namespace Shooter.Weapon
         protected Animator animator;
 
         [HideInInspector] public WeaponZoom weaponZoom;
-        [HideInInspector] public WeaponSway weaponSway;
+        [HideInInspector] public WeaponSwayAndBobbing weaponSwayAndBobbing;
         [HideInInspector] public Rigidbody weaponRigidbody;
         [HideInInspector] public BoxCollider weaponCollider;
 
         protected void Initialization()
         {
             weaponZoom = GetComponent<WeaponZoom>();
-            weaponSway = GetComponent<WeaponSway>();
+            weaponSwayAndBobbing = GetComponent<WeaponSwayAndBobbing>();
             weaponRigidbody = GetComponent<Rigidbody>();
             weaponCollider = GetComponent<BoxCollider>();
             animator = GetComponent<Animator>();
@@ -37,16 +37,17 @@ namespace Shooter.Weapon
         {
             this.fpc = fpc;
             weaponZoom.fpc = fpc;
+            weaponSwayAndBobbing.mover = this.fpc;
         }
         protected void TurnOnControl()
         {
             weaponZoom.enabled = true;
-            weaponSway.enabled = true;
+            weaponSwayAndBobbing.enabled = true;
         }
         protected void TurnOffControl()
         {
             weaponZoom.enabled = false;
-            weaponSway.enabled = false;
+            weaponSwayAndBobbing.enabled = false;
         }
         public void OnPickedUp(Transform weaponPivot, Transform weaponsSwitcher, FirstPersonController FPC)
         {       

@@ -154,7 +154,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 257
   weaponZoom: {fileID: 0}
-  weaponSway: {fileID: 0}
+  weaponSwayAndBobbing: {fileID: 0}
   weaponRigidbody: {fileID: 0}
   weaponCollider: {fileID: 0}
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
@@ -206,37 +206,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponTransform: {fileID: 6974456438559410357}
-  swayAmount: 0.01
-  maxSwayAmount: 1.92
-  swaySmooth: 25
-  swayCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  swaySmoothCounteraction: 3
-  rotationSwayMultiplier: 0.44
-  positionSwayMultiplier: 2
+  mover: {fileID: 0}
+  sway: 1
+  swayRotation: 1
+  bob0ffset: 1
+  bobSway: 1
+  step: 0.004
+  maxStepDistance: 0.03
+  rotationStep: 1
+  maxRotationStep: 3
+  smooth: 9
+  speedCurve: 0
+  travelLimit: {x: 0.01, y: 0.01, z: 0.01}
+  bobLimit: {x: 0.01, y: 0.01, z: 0.01}
+  bobExaggeration: 0
+  multiplier: {x: 0, y: 0, z: 0}
 --- !u!54 &6974456438559410367
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -4,11 +4,10 @@ using Shooter.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Shooter.Enemy;
-using UnityEditor;
 
 namespace Shooter.Weapon
 {
-    [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSway)))]
+    [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSwayAndBobbing)))]
     public sealed class Gun : Weapon
     {
         [Space(10)] [SerializeField] private GameObject bulletHole;

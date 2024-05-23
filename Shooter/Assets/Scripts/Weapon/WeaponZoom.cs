@@ -1,6 +1,6 @@
+using System;
 using Shooter.Player;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Shooter.Weapon
 {
@@ -14,6 +14,12 @@ namespace Shooter.Weapon
         public Vector3 targetPosition;
         private bool isZoom = false;
         [HideInInspector] public FirstPersonController fpc;
+        private WeaponSwayAndBobbing weaponSwayAndBobbing;
+
+        private void Awake()
+        {
+            weaponSwayAndBobbing = GetComponent<WeaponSwayAndBobbing>();
+        }
 
         private void OnEnable()
         {
@@ -39,11 +45,15 @@ namespace Shooter.Weapon
             if (isZoom)
             {
                 //transform.localPosition = Vector3.Slerp(transform.localPosition, zoomPosition, ergonomics * Time.deltaTime);
+                weaponSwayAndBobbing.bob0ffset = false;
+                weaponSwayAndBobbing.bobSway = false;
                 targetPosition = zoomPosition;
             }
             else
             {
                 //transform.localPosition = Vector3.Slerp(transform.localPosition, defaultWeaponPosition, ergonomics * Time.deltaTime);
+                weaponSwayAndBobbing.bob0ffset = true;
+                weaponSwayAndBobbing.bobSway = true;
                 targetPosition = defaultWeaponPosition;
             }
         }

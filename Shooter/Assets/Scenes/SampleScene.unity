@@ -1776,7 +1776,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1608808994
 MonoBehaviour:
@@ -1785,7 +1785,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608808991}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b74f70fd14e4f5408021a7e3ffb57b8, type: 3}
   m_Name: 
@@ -3257,7 +3257,7 @@ PrefabInstance:
     - target: {fileID: 6974456438559410357, guid: 50aaaed0f9c50dd4f9d175fa83505868,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6974456438559410357, guid: 50aaaed0f9c50dd4f9d175fa83505868,
         type: 3}

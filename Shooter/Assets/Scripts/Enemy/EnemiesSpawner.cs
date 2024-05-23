@@ -135,9 +135,8 @@ namespace Shooter.Enemy
                 {
                     SpawnRandomEnemy(spawnPoints[selectedSpawnerIndex], currentZombies);
                     ChangeSelectedSpawnPoint();
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(0.5f);
                 }
-                yield return null;
             }
         }
 
