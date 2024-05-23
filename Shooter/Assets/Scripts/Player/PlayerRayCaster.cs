@@ -8,7 +8,8 @@ namespace Shooter.Player
         [Range(0.01f, 10f)] public float pickUpDistance;
         public static RaycastHit HIT;
         public static bool isHit;
-        void Update()
+
+        private void Update()
         {
             isHit = Physics.Raycast(centerPoint.position, transform.forward, out RaycastHit hit, pickUpDistance);
             HIT = hit;

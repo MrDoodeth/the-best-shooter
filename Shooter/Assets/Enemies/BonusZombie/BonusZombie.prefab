@@ -159,7 +159,7 @@ MonoBehaviour:
   isAlive: 1
   currentHealth: 0
   rewardAmount: 100
-  buffsSpawnProbability: 0.5
+  buffsSpawnProbability: 1
   buffs:
   - {fileID: 5625200430822746277, guid: 6a2ca910a4c256344b346b23ccf240d0, type: 3}
   - {fileID: 827857191707841034, guid: f8ed506b05595de4eb5a400cbe9bf55a, type: 3}

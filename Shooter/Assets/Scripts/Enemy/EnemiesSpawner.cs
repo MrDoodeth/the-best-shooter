@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Shooter.Interactable.Buff;
+using Shooter.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 namespace Shooter.Enemy
@@ -30,7 +32,6 @@ namespace Shooter.Enemy
         public static Action OnStartNewWave;
         public static Action OnEndWave;
         public static Action<Enemy> OnEnemyDeath;
-        public static Action<float, int> OnFireBuffActivate; 
 
         private static int currentEnemyCount;
         private int currentWaveNumber = 1;
@@ -75,7 +76,7 @@ namespace Shooter.Enemy
 
             OnEnemyDeath += OnEnemyDied;
 
-            OnFireBuffActivate += OnFireBuff;
+            PlayerBuffs.OnFireBuffActivated += OnFireBuff;
         }
 
         private void OnDisable()
@@ -85,7 +86,7 @@ namespace Shooter.Enemy
 
             OnEnemyDeath -= OnEnemyDied;
             
-            OnFireBuffActivate -= OnFireBuff;
+            PlayerBuffs.OnFireBuffActivated -= OnFireBuff;
         }
 
         public void StartNewWave() => OnStartNewWave?.Invoke();
@@ -177,7 +178,7 @@ namespace Shooter.Enemy
             currentEnemiesOnScene.Add(currentEnemy);
         }
 
-        private void OnFireBuff(float duration, int damage)
+        private void OnFireBuff(BuffState buffState, Sprite sprite, float duration, int damage)
         {
             StartCoroutine(Fire());
             
@@ -189,6 +190,8 @@ namespace Shooter.Enemy
                     {
                         foreach (var enemy in currentEnemiesOnScene.ToList())
                         {
+                            enemy.GetComponentInChildren<Light>().enabled = true;
+                            
                             var entity = enemy?.GetComponent<IDamagable>();
                             entity?.TakeDamage(Random.Range(damage, damage + 5));
                         }
@@ -197,6 +200,9 @@ namespace Shooter.Enemy
                     duration -= 1f;
                     yield return new WaitForSeconds(1f);
                 }
+                foreach (var enemy in currentEnemiesOnScene.ToList())
+                    enemy.GetComponentInChildren<Light>().enabled = false;
+                yield return null;
             }
         }
     }

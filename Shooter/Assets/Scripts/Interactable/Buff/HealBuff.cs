@@ -11,7 +11,7 @@ namespace Shooter.Interactable.Buff
         {
             if (other.transform.CompareTag("Player"))
             {
-                other.transform.GetComponent<PlayerHealth>().CurrentHealth += healAmount;
+                PlayerBuffs.OnHealBuffActivated?.Invoke(healAmount);
                 print("+++Healing+++");
                 Destroy(gameObject);
             }

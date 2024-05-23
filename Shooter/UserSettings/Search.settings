@@ -10,15 +10,15 @@ scopes = {
 	"last_search.DE949528" = "Reg"
 	"OpenInspectorPreview.DE949528" = "0"
 	"currentGroup.DE949528" = "all"
-	"last_search.DD5CDD96" = ""
+	"last_search.DD5CDD96" = "Image"
 	"OpenInspectorPreview.DD5CDD96" = "0"
 	"currentGroup.DD5CDD96" = "scene"
 	"last_search.2138236A" = ""
 	"OpenInspectorPreview.2138236A" = "0"
 	"currentGroup.2138236A" = "asset"
-	"last_search.DA949528" = "Zombie.pre"
+	"last_search.DA949528" = "Im"
 	"OpenInspectorPreview.DA949528" = "0"
-	"currentGroup.DA949528" = "asset"
+	"currentGroup.DA949528" = "scene"
 }
 providers = {
 	adb = {
@@ -90,6 +90,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"I"
 	"Z"
 ]
 searchItemFavorites = [

@@ -1,3 +1,4 @@
+using Shooter.Player;
 using Shooter.Weapon;
 using UnityEngine;
 
@@ -11,9 +12,9 @@ namespace Shooter.Interactable.Buff
         {
             if (other.transform.CompareTag("Player"))
             {
-                if (WeaponsSwitcher.currentWeapon is not null && WeaponsSwitcher.currentWeapon is Gun gun)
+                if (WeaponsSwitcher.currentWeapon is not null && WeaponsSwitcher.currentWeapon is Gun)
                 {
-                    gun.ReserveAmmo += ammoAmount;
+                    PlayerBuffs.OnAmmoBuffActivated?.Invoke(ammoAmount);
                     print("===AmmoAdded===");
                     Destroy(gameObject);
                 }

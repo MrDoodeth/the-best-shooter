@@ -103,7 +103,7 @@ namespace Shooter.Player
                 if (itemAmounts[i] < 1)
                 {
                     counterLabels[i].enabled = false;
-                    SetAlpha(0f, i);
+                    icons[i].SetAlpha(0f);
                     continue;
                 }
                 else if (itemAmounts[i] == 1)
@@ -115,17 +115,7 @@ namespace Shooter.Player
                     counterLabels[i].text = itemAmounts[i].ToString();
                     counterLabels[i].enabled = true;
                 }
-                SetAlpha(1f, i);
-            }
-            return;
-
-            void SetAlpha(float value, int index)
-            {
-                Image icon = icons[index].GetComponent<Image>();
-
-                Color color = icon.color;
-                color.a = value;
-                icon.color = color;
+                icons[i].SetAlpha(1f);
             }
         }
 
@@ -157,6 +147,15 @@ namespace Shooter.Player
                 tradeLabel.text = "";
                 tradeLabel.enabled = false;
             }
+        }
+    }
+    public static class ImageTool
+    {
+        public static void SetAlpha(this Image image, float value)
+        {
+            Color color = image.color;
+            color.a = value;
+            image.color = color;
         }
     }
 }

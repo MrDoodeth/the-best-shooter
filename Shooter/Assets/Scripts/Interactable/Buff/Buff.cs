@@ -11,4 +11,9 @@ namespace Shooter.Interactable.Buff
             Invoke(nameof(Destroy), lifeTime);
         }
     }
+
+    public enum BuffState
+    {
+        Fire,
+    }
 }

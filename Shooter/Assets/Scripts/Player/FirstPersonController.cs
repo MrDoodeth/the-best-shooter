@@ -386,7 +386,7 @@ namespace Shooter.Player
                     isWalking = false;
                 }
 
-                // All movement calculations shile sprint is active
+                // All movement calculations while sprint is active
                 if (enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown && Input.GetAxis("Vertical") > 0f )
                 {
                     animator.SetBool("isRunning", true);
