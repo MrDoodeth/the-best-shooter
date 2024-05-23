@@ -6,6 +6,7 @@ using Shooter.Interactable.Buff;
 using Shooter.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
+
 namespace Shooter.Enemy
 {
     public enum Difficulty { Easy, Normal, Hard, Nightmare }
@@ -202,7 +203,6 @@ namespace Shooter.Enemy
                 }
                 foreach (var enemy in currentEnemiesOnScene.ToList())
                     enemy.GetComponentInChildren<Light>().enabled = false;
-                yield return null;
             }
         }
     }

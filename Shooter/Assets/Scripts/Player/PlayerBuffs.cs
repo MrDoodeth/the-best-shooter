@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Shooter.Interactable.Buff;
 using Shooter.Weapon;
@@ -12,17 +13,21 @@ namespace Shooter.Player
         [SerializeField] private Image imagePrefab;
         [SerializeField] private int imageCount;
         [SerializeField] private Transform buffStatusBarTransform;
-        [SerializeField, Range(0.01f, 0.99f)] private float slowdownRatio;
-        [SerializeField] private float lerpSpeed;
 
         private FirstPersonController FPC;
         private PlayerHealth playerHealth;
         private BuffImagePool imagePool;
         private List<BuffIconUI> buffIcons;
 
-        public static Action<BuffState, Sprite, float, int> OnFireBuffActivated;
         public static Action<int> OnHealBuffActivated;
         public static Action<int> OnAmmoBuffActivated;
+        public static Action<BuffState, Sprite, float, int> OnFireBuffActivated;
+        public static Action<BuffState, Sprite, float, float, float> OnSlowdownBuffActivated;
+
+        //Slowdown
+        private bool isSlowdown;
+        private float slowdownRatio;
+        private float lerpSpeed;
 
         private void Awake()
         {
@@ -38,27 +43,15 @@ namespace Shooter.Player
             OnHealBuffActivated += OnHealBuff;
             OnAmmoBuffActivated += OnAmmoBuff;
             OnFireBuffActivated += OnFireBuff;
+            OnSlowdownBuffActivated += OnSlowdownBuff;
         }
         private void OnDisable()
         {
             OnHealBuffActivated -= OnHealBuff;
             OnAmmoBuffActivated -= OnAmmoBuff;
             OnFireBuffActivated -= OnFireBuff;
+            OnSlowdownBuffActivated -= OnSlowdownBuff;
         }
-        private void OnHealBuff(int healAmount) => playerHealth.CurrentHealth += healAmount;
-        private void OnAmmoBuff(int ammoAmount)
-        {
-            if (WeaponsSwitcher.currentWeapon is Gun gun)
-            {
-                gun.ReserveAmmo += ammoAmount;
-            }
-        }
-
-        private void OnFireBuff(BuffState buffState, Sprite sprite, float duration, int damage)
-        {
-            AddBuff(buffState, sprite, duration);
-        }
-
         private void AddBuff(BuffState buffState, Sprite sprite, float duration)
         {
             if (buffIcons.Count > 0)
@@ -101,22 +94,57 @@ namespace Shooter.Player
                 }
             }
         }
+        
+        private void OnHealBuff(int healAmount) => playerHealth.CurrentHealth += healAmount;
+        private void OnAmmoBuff(int ammoAmount)
+        {
+            if (WeaponsSwitcher.currentWeapon is Gun gun)
+            {
+                gun.ReserveAmmo += ammoAmount;
+            }
+        }
 
+        private void OnFireBuff(BuffState buffState, Sprite sprite, float duration, int damage)
+        {
+            AddBuff(buffState, sprite, duration);
+        }
+
+        private void OnSlowdownBuff(BuffState buffState, Sprite sprite, float duration, float slowdownRatio, float lerpSpeed)
+        {
+            AddBuff(buffState, sprite, duration);
+            
+            this.slowdownRatio = slowdownRatio;
+            this.lerpSpeed = lerpSpeed;
+            StartCoroutine(Slowdown());
+            
+            IEnumerator Slowdown()
+            {
+                isSlowdown = true;
+                yield return new WaitForSeconds(duration);
+                isSlowdown = false;
+            }
+        }
+
+        private void UpdateSlowdown()
+        {
+            if (FPC.isWalking && isSlowdown)
+            {
+                Time.timeScale = Mathf.Lerp(Time.timeScale, slowdownRatio, lerpSpeed);
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+            
+        }
         private void Update()
         {
             UpdateBuffUI();
         }
-        // private void FixedUpdate()
-        // {
-        //     if (FPC.isWalking)
-        //     {
-        //         float lerpTime = lerpSpeed;
-        //         Time.timeScale = Mathf.Lerp(Time.timeScale, slowdownRatio, lerpTime);
-        //     }
-        //     else
-        //     {
-        //         Time.timeScale = 1f;
-        //     }
-        // }
+        
+        private void FixedUpdate()
+        {
+            UpdateSlowdown();
+        }
     }
 }

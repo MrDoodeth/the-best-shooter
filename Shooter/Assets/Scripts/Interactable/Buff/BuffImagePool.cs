@@ -14,7 +14,7 @@ namespace Shooter.Interactable.Buff
         {
             this.prefab = prefab;
             this.buffStatusBarTransform = buffStatusBarTransform;
-            pool = new ObjectPool<Image>(OnImageCreate, OnImageGet, OnImageRelease, OnImageDestroy, false, prewarmObjectsCount, prewarmObjectsCount + 4);
+            pool = new ObjectPool<Image>(OnImageCreate, OnImageGet, OnImageRelease, OnImageDestroy, false, prewarmObjectsCount, prewarmObjectsCount + 1);
         }
 
         public Image Get() => pool.Get();

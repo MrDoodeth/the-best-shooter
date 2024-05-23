@@ -15,5 +15,6 @@ namespace Shooter.Interactable.Buff
     public enum BuffState
     {
         Fire,
+        Slowdown,
     }
 }
