@@ -190,7 +190,7 @@ namespace Shooter.Weapon
                 if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer, QueryTriggerInteraction.Ignore))
                 {
                     var entity = hitInfo.transform.GetComponentInParent<IDamagable>();
-                    entity?.TakeDamage(damage);
+                    entity?.TakeDamage(PlayerBuffs.CalculateDamage(damage));
                     var hole = Instantiate(bulletHole, hitInfo.point, Quaternion.identity);
                     hole.transform.SetParent(hitInfo.transform);
                     if (hitInfo.transform.TryGetComponent<Rigidbody>(out var rb))

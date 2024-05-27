@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f84604b083cd04894e80b2b012ef2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 999
+  damage: 20
   <Name>k__BackingField: Knife
   <Size>k__BackingField: 1
   powerOfHit: 20
@@ -115,7 +115,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   weaponZoom: {fileID: 0}
-  weaponSway: {fileID: 0}
+  weaponSwayAndBobbing: {fileID: 0}
   weaponRigidbody: {fileID: 0}
   weaponCollider: {fileID: 0}
   radius: 0.1
@@ -132,12 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403ca266daa896d4295242ebefa9fcdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ergonomics: 1.7
   zoomSize: 1
   zoomPosition: {x: 0.1655, y: -0.3578, z: 0.2578}
   defaultWeaponPosition: {x: 0.1655, y: -0.3578, z: 0.2578}
   targetPosition: {x: 0, y: 0, z: 0}
   fpc: {fileID: 0}
+  isZoom: 0
 --- !u!114 &1989213774931776558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,37 +150,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponTransform: {fileID: 1989213774931776554}
-  swayAmount: 0.01
-  maxSwayAmount: 1.92
-  swaySmooth: 25
-  swayCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  swaySmoothCounteraction: 2
-  rotationSwayMultiplier: 0.44
-  positionSwayMultiplier: 2
+  mover: {fileID: 0}
+  sway: 1
+  swayRotation: 1
+  bob0ffset: 1
+  bobSway: 1
+  step: 0.01
+  maxStepDistance: 0.06
+  rotationStep: 4
+  maxRotationStep: 5
+  smooth: 10
+  speedCurve: 0
+  travelLimit: {x: 0.025, y: 0.025, z: 0.025}
+  bobLimit: {x: 0.01, y: 0.01, z: 0.01}
+  bobExaggeration: 0
+  multiplier: {x: 0, y: 0, z: 0}
 --- !u!65 &1989213774931776552
 BoxCollider:
   m_ObjectHideFlags: 0

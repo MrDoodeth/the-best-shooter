@@ -23,12 +23,17 @@ namespace Shooter.Player
         public static Action<int> OnAmmoBuffActivated;
         public static Action<BuffState, Sprite, float, int> OnFireBuffActivated;
         public static Action<BuffState, Sprite, float, float, float> OnSlowdownBuffActivated;
+        public static Action<BuffState, Sprite, float, float> OnDamageBoostBuffActivated;
 
         //Slowdown
         private float slowdownRatio;
-        private float lerpSpeed;
-        private float duration;
+        private float slowdownLerpSpeed;
+        private float slowdownDuration;
         private float defaultFixedDeltaTime;
+        
+        //DamageBoost
+        private static float damageBoostRatio = 1f;
+        private static float damageBoostDuration;
 
         private void Awake()
         {
@@ -47,6 +52,7 @@ namespace Shooter.Player
             OnAmmoBuffActivated += OnAmmoBuff;
             OnFireBuffActivated += OnFireBuff;
             OnSlowdownBuffActivated += OnSlowdownBuff;
+            OnDamageBoostBuffActivated += OnDamageBoostBuff;
         }
         private void OnDisable()
         {
@@ -54,6 +60,7 @@ namespace Shooter.Player
             OnAmmoBuffActivated -= OnAmmoBuff;
             OnFireBuffActivated -= OnFireBuff;
             OnSlowdownBuffActivated -= OnSlowdownBuff;
+            OnDamageBoostBuffActivated -= OnDamageBoostBuff;
         }
         private void AddBuff(BuffState buffState, Sprite sprite, float duration)
         {
@@ -117,26 +124,45 @@ namespace Shooter.Player
             AddBuff(buffState, sprite, duration);
             
             this.slowdownRatio = slowdownRatio;
-            this.lerpSpeed = lerpSpeed;
-            this.duration = duration;
+            this.slowdownLerpSpeed = lerpSpeed;
+            this.slowdownDuration = duration;
         }
 
-        private void UpdateSlowdown()
+        private void OnDamageBoostBuff(BuffState buffState, Sprite sprite, float duration, float damageRatio)
         {
-            if (FPC.isWalking && duration > 0)
+            AddBuff(buffState, sprite, duration);
+
+            damageBoostRatio = damageRatio;
+            damageBoostDuration = duration;
+        }
+
+        public static int CalculateDamage(int damage)
+        {
+            if (damageBoostDuration > 0)
+                return (int)(damage * damageBoostRatio);
+            
+            return damage;
+        }
+
+        private static void DamageBoostUpdate() => damageBoostDuration -= Time.deltaTime;
+
+        private void SlowdownUpdate()
+        {
+            if (FPC.isWalking && slowdownDuration > 0)
             {
-                Time.timeScale = Mathf.Lerp(Time.timeScale, slowdownRatio, lerpSpeed);
+                Time.timeScale = Mathf.Lerp(Time.timeScale, slowdownRatio, slowdownLerpSpeed);
             }
             else
             {
-                Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, lerpSpeed);;
+                Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, slowdownLerpSpeed);;
             }
-            duration -= Time.deltaTime;
+            slowdownDuration -= Time.deltaTime;
             Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
         }
         private void Update()
         {
-            UpdateSlowdown();
+            SlowdownUpdate();
+            DamageBoostUpdate();
             
             UpdateBuffUI();
         }

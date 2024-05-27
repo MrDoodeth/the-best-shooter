@@ -42,7 +42,7 @@ namespace Shooter.Weapon
             foreach (var hitCollider in hitColliders)
             {
                 var entity = hitCollider.transform.GetComponentInParent<IDamagable>();
-                entity?.TakeDamage(damage);
+                entity?.TakeDamage(PlayerBuffs.CalculateDamage(damage));
                 if (hitCollider.transform.TryGetComponent<Rigidbody>(out var rb))
                     rb.AddForceAtPosition(centerOfSphere.forward * powerOfHit, hitCollider.transform.position, ForceMode.Impulse);
             }

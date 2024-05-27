@@ -16,5 +16,6 @@ namespace Shooter.Interactable.Buff
     {
         Fire,
         Slowdown,
+        DamageBoost,
     }
 }
