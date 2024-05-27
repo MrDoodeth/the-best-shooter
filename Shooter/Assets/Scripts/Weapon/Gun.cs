@@ -38,7 +38,6 @@ namespace Shooter.Weapon
 
         [SerializeField] private int magSize;
         [SerializeField] private float fireRate;
-        [SerializeField] private float reloadTime;
         public int currentAmmo { get; private set; }
         private int reserveAmmo;
 

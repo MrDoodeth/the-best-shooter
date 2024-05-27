@@ -105,10 +105,9 @@ MonoBehaviour:
   defaultCameraRecoil: {x: -0.65, y: 0.63, z: 0.39}
   zoomCameraRecoil: {x: -0.25, y: 0.345, z: 0.225}
   gunRecoil: {x: 0.34, y: 0.61, z: 0.05}
-  maxReserveAmmo: 999
+  maxReserveAmmo: 250
   magSize: 30
   fireRate: 600
-  reloadTime: 2
   muzzle: {fileID: 1829007119323588178}
 --- !u!114 &3786346487634470170
 MonoBehaviour:
@@ -167,7 +166,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
