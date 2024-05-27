@@ -101,7 +101,7 @@ namespace Shooter.Weapon
             animator.SetBool("isReloading", true);
             return;
 
-            bool CanReload() => currentAmmo < magSize && ReserveAmmo > 0 && this.gameObject.activeSelf;
+            bool CanReload() => currentAmmo < magSize && ReserveAmmo > 0 && this.gameObject.activeSelf && !weaponZoom.isZoom;
         }
 
         #region ForAnimations

@@ -10,6 +10,7 @@ namespace Shooter.Weapon
         [Space(10)]
         [SerializeField] private float radius;
         [SerializeField] private Transform centerOfSphere;
+        [SerializeField] private Vector3 cameraRecoil;
 
         private void Awake()
         {
@@ -46,6 +47,8 @@ namespace Shooter.Weapon
                 if (hitCollider.transform.TryGetComponent<Rigidbody>(out var rb))
                     rb.AddForceAtPosition(centerOfSphere.forward * powerOfHit, hitCollider.transform.position, ForceMode.Impulse);
             }
+            
+            CameraRecoil.Recoil(cameraRecoil);
         }
 
         private void AnimatorOff()
