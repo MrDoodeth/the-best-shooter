@@ -1,9 +1,9 @@
 using System;
-using DG.Tweening;
 using Shooter.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Shooter.Enemy;
+using UnityEngine.Serialization;
 
 namespace Shooter.Weapon
 {
@@ -12,29 +12,29 @@ namespace Shooter.Weapon
     {
         [Space(10)] [SerializeField] private GameObject bulletHole;
 
-        [Header("Shooting")] [SerializeField] private bool automatic;
+        [Header("Shooting")]
+        [SerializeField] private bool automatic;
         [SerializeField] private float maxDistance;
 
         [SerializeField] private bool isShotgun = false;
 
-        [Tooltip("Использовать только если isShotgun = true")] [SerializeField] [Range(0.01f, 85f)]
-        private float maxSprayRange;
+        [Tooltip("Использовать только если isShotgun = true")]
+        [SerializeField] [Range(0.01f, 85f)] private float maxSprayRange;
 
         [Tooltip("Использовать только если isShotgun = true")]
         [SerializeField] private int bulletAmount = 10;
 
         private float timeSinceLastShoot;
+        
+        [Header("Recoil")]
+        [SerializeField] private Vector3 defaultCameraRecoil;
+        [SerializeField] private Vector3 zoomCameraRecoil;
 
-        [Header("Recoil")] [SerializeField] private float powerOfVerticalRecoil;
-        [SerializeField] private float powerOfHorizontalRecoil;
-        [SerializeField] private float powerOfForwardRecoil = 0.1f;
-        [SerializeField] private float powerOfBoltRecoil = 0.1f;
-        [SerializeField] private float durationOfBoltRecoil = 0.1f;
+        [SerializeField] private Vector3 gunRecoil;
 
-        [SerializeField] [Range(0.01f, 5f)] private float cameraRecoilRatio = 1f;
-
-        [Space(10)] [Header("Reloading")] [SerializeField]
-        private int maxReserveAmmo;
+        [Space(10)]
+        [Header("Reloading")]
+        [SerializeField] private int maxReserveAmmo;
 
         [SerializeField] private int magSize;
         [SerializeField] private float fireRate;
@@ -57,8 +57,6 @@ namespace Shooter.Weapon
 
         [Space(10)] [Header("Gun Initialization")] [SerializeField]
         private Transform muzzle;
-
-        [SerializeField] private Transform bolt;
 
         private void Awake()
         {
@@ -144,18 +142,13 @@ namespace Shooter.Weapon
             {
                 currentAmmo--;
                 timeSinceLastShoot = 0;
+                
+                animator.enabled = true;
+                animator.SetTrigger("isShooting");
 
                 if (!isShotgun)
                 {
-                    if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer, QueryTriggerInteraction.Ignore))
-                    {
-                        Damage(hitInfo);
-                        Debug.DrawLine(muzzle.position, hitInfo.point, Color.green, 1f);
-                    }
-                    else
-                    {
-                        Debug.DrawLine(muzzle.position, muzzle.position + muzzle.forward * maxDistance, Color.red, 1f);
-                    }
+                    Damage();
                 }
                 else if (isShotgun)
                 {
@@ -167,19 +160,16 @@ namespace Shooter.Weapon
                             muzzle.localRotation.y + Random.Range(-maxSprayRange, maxSprayRange),
                             muzzle.localRotation.z);
 
-                        if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer, QueryTriggerInteraction.Ignore))
-                        {
-                            Damage(hitInfo);
-                            Debug.DrawLine(muzzle.position, hitInfo.point, Color.green, 1f);
-                        }
-                        else
-                        {
-                            Debug.DrawLine(muzzle.position, muzzle.position + muzzle.forward * maxDistance, Color.red, 1f);
-                        }
+                        Damage();
 
                         muzzle.localRotation = defaultLocalRotation;
                     }
                 }
+                if (weaponZoom.isZoom)
+                    CameraRecoil.Recoil(zoomCameraRecoil);
+                else
+                    CameraRecoil.Recoil(defaultCameraRecoil);
+                
                 Recoil();
             }
 
@@ -189,32 +179,28 @@ namespace Shooter.Weapon
             
             void Recoil()
             {
-                transform.localPosition -= Vector3.forward * powerOfForwardRecoil;
-                var fPos = bolt.localPosition;
-                DOTween.Sequence()
-                    .Append(bolt.DOLocalMove(bolt.localPosition - (Vector3.forward * powerOfBoltRecoil),
-                        durationOfBoltRecoil))
-                    .Append(bolt.DOLocalMove(fPos, durationOfBoltRecoil));
-
-                transform.localEulerAngles -= Vector3.right * powerOfVerticalRecoil;
-                transform.localEulerAngles -=
-                    Vector3.up * Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil);
-
-                fpc.pitch += -powerOfVerticalRecoil * cameraRecoilRatio;
-
-                fpc.transform.localEulerAngles = new Vector3(0,
-                    fpc.transform.localEulerAngles.y +
-                    Random.Range(-powerOfHorizontalRecoil, powerOfHorizontalRecoil) / 2, 0);
+                transform.localPosition -= Vector3.forward * gunRecoil.z;
+                
+                transform.localEulerAngles -= Vector3.right * gunRecoil.y;
+                transform.localEulerAngles -= Vector3.up * Random.Range(-gunRecoil.x, gunRecoil.x);
             }
             
-            void Damage(RaycastHit hitInfo)
+            void Damage()
             {
-                var entity = hitInfo.transform.GetComponentInParent<IDamagable>();
-                entity?.TakeDamage(damage);
-                var hole = Instantiate(bulletHole, hitInfo.point, Quaternion.identity);
-                hole.transform.SetParent(hitInfo.transform);
-                if (hitInfo.transform.TryGetComponent<Rigidbody>(out var rb))
-                    rb.AddForceAtPosition(muzzle.forward * powerOfHit, hitInfo.point, ForceMode.Impulse);
+                if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer, QueryTriggerInteraction.Ignore))
+                {
+                    var entity = hitInfo.transform.GetComponentInParent<IDamagable>();
+                    entity?.TakeDamage(damage);
+                    var hole = Instantiate(bulletHole, hitInfo.point, Quaternion.identity);
+                    hole.transform.SetParent(hitInfo.transform);
+                    if (hitInfo.transform.TryGetComponent<Rigidbody>(out var rb))
+                        rb.AddForceAtPosition(muzzle.forward * powerOfHit, hitInfo.point, ForceMode.Impulse);
+                    Debug.DrawLine(muzzle.position, hitInfo.point, Color.green, 1f);
+                }
+                else
+                {
+                    Debug.DrawLine(muzzle.position, muzzle.position + muzzle.forward * maxDistance, Color.red, 1f);
+                }
             }
         }
 

@@ -37,8 +37,8 @@ namespace Shooter.Player
 
         #region Camera Zoom Variables
 
-        public bool enableZoom = true;
-        public bool holdToZoom = false;
+        public bool enableZoom = false;
+        public bool holdToZoom = true;
         public KeyCode zoomKey = KeyCode.Mouse1;
         public float zoomFOV = 30f;
         public float zoomStepTime = 5f;
@@ -221,8 +221,8 @@ namespace Shooter.Player
                 // Clamp pitch between lookAngle
                 pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
 
-                transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, new Vector3(0, yaw, 0), 10f);
-                joint.transform.localEulerAngles = Vector3.Slerp(joint.transform.localEulerAngles, new Vector3(pitch, 0, 0), 10f);
+                transform.localEulerAngles = Vector3.Slerp(transform.localEulerAngles, new Vector3(0, yaw, 0), 100f * Time.fixedDeltaTime);
+                joint.transform.localEulerAngles = Vector3.Slerp(joint.transform.localEulerAngles, new Vector3(pitch, 0, 0), 100f * Time.fixedDeltaTime);
             }
 
             #region Camera Zoom

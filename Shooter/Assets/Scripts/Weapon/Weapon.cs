@@ -62,10 +62,10 @@ namespace Shooter.Weapon
 
         public void Droped()
         {
-            SetFPC(null);    
             weaponRigidbody.isKinematic = false;
             weaponCollider.enabled = true;
             enabled = false;
+            SetFPC(null);
             weaponRigidbody.AddForce(transform.forward * powerOfDrop + transform.up * (powerOfDrop / 2), ForceMode.Impulse);
             transform.SetParent(null);
         }

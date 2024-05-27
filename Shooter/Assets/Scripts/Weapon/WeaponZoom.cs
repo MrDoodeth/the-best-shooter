@@ -7,14 +7,13 @@ namespace Shooter.Weapon
     public class WeaponZoom : MonoBehaviour
     {
         [Header("Zoom")]
-        [SerializeField][Range(0.01f, 20f)] private float ergonomics;
         [SerializeField][Range(0.01f, 1f)] private float zoomSize = 1f;
         public Vector3 zoomPosition;
         public Vector3 defaultWeaponPosition;
-        public Vector3 targetPosition;
-        private bool isZoom = false;
+        [HideInInspector] public Vector3 targetPosition;
         [HideInInspector] public FirstPersonController fpc;
         private WeaponSwayAndBobbing weaponSwayAndBobbing;
+        public bool isZoom = false;
 
         private void Awake()
         {
@@ -42,16 +41,14 @@ namespace Shooter.Weapon
 
         private void Update()
         {
-            if (isZoom)
+            if (isZoom && !fpc.isSprinting)
             {
-                //transform.localPosition = Vector3.Slerp(transform.localPosition, zoomPosition, ergonomics * Time.deltaTime);
                 weaponSwayAndBobbing.bob0ffset = false;
                 weaponSwayAndBobbing.bobSway = false;
                 targetPosition = zoomPosition;
             }
             else
             {
-                //transform.localPosition = Vector3.Slerp(transform.localPosition, defaultWeaponPosition, ergonomics * Time.deltaTime);
                 weaponSwayAndBobbing.bob0ffset = true;
                 weaponSwayAndBobbing.bobSway = true;
                 targetPosition = defaultWeaponPosition;

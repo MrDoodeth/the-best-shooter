@@ -3,10 +3,11 @@ using Shooter.Interactable.Buff;
 using Shooter.Player;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Shooter.Enemy
 {
-    public enum TypesOfEnemy
+    public enum TypeOfEnemy
     {
         Default,
         Sprinter,
@@ -18,7 +19,7 @@ namespace Shooter.Enemy
     }
     public class Enemy : MonoBehaviour
     {
-        public TypesOfEnemy typesOfEnemy;
+        [FormerlySerializedAs("typesOfEnemy")] public TypeOfEnemy typeOfEnemy;
         [Header("Health")]
         [SerializeField][Range(1, 5000)] private int maxHealth = 100;
         [Range(1, 30)] public float contusionDelay = 3f;

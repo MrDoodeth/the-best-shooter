@@ -167,15 +167,12 @@ MonoBehaviour:
   powerOfVerticalRecoil: 2
   powerOfHorizontalRecoil: 0.5
   powerOfForwardRecoil: 0.02
-  powerOfBoltRecoil: 0.106
-  durationOfBoltRecoil: 0.04
   cameraRecoilRatio: 0.4
   maxReserveAmmo: 999
   magSize: 4
   fireRate: 240
   reloadTime: 2
   muzzle: {fileID: 6974456438013012447}
-  bolt: {fileID: 6979207653071472129}
 --- !u!114 &6974456438559410361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403ca266daa896d4295242ebefa9fcdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ergonomics: 8
   zoomSize: 0.86
   zoomPosition: {x: 0, y: -0.0242, z: 0.1798}
   defaultWeaponPosition: {x: 0.0998, y: -0.0942, z: 0.2543}
@@ -212,7 +208,7 @@ MonoBehaviour:
   bob0ffset: 1
   bobSway: 1
   step: 0.004
-  maxStepDistance: 0.03
+  maxStepDistance: 0.05
   rotationStep: 1
   maxRotationStep: 3
   smooth: 9
@@ -294,7 +290,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6974456438841814581}
-  m_LocalRotation: {x: -0.000008800916, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
@@ -306,7 +302,7 @@ Transform:
   - {fileID: 6974456438478092581}
   m_Father: {fileID: 6974456438559410357}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6975613422771959927
 GameObject:
   m_ObjectHideFlags: 0

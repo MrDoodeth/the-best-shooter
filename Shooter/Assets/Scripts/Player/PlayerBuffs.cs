@@ -25,9 +25,10 @@ namespace Shooter.Player
         public static Action<BuffState, Sprite, float, float, float> OnSlowdownBuffActivated;
 
         //Slowdown
-        private bool isSlowdown;
         private float slowdownRatio;
         private float lerpSpeed;
+        private float duration;
+        private float defaultFixedDeltaTime;
 
         private void Awake()
         {
@@ -37,6 +38,8 @@ namespace Shooter.Player
             buffIcons = new List<BuffIconUI>();
             
             imagePool = new BuffImagePool(imagePrefab, imageCount, buffStatusBarTransform);
+
+            defaultFixedDeltaTime = Time.fixedDeltaTime;
         }
         private void OnEnable()
         {
@@ -115,36 +118,27 @@ namespace Shooter.Player
             
             this.slowdownRatio = slowdownRatio;
             this.lerpSpeed = lerpSpeed;
-            StartCoroutine(Slowdown());
-            
-            IEnumerator Slowdown()
-            {
-                isSlowdown = true;
-                yield return new WaitForSeconds(duration);
-                isSlowdown = false;
-            }
+            this.duration = duration;
         }
 
         private void UpdateSlowdown()
         {
-            if (FPC.isWalking && isSlowdown)
+            if (FPC.isWalking && duration > 0)
             {
                 Time.timeScale = Mathf.Lerp(Time.timeScale, slowdownRatio, lerpSpeed);
             }
             else
             {
-                Time.timeScale = 1f;
+                Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, lerpSpeed);;
             }
-            
+            duration -= Time.deltaTime;
+            Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
         }
         private void Update()
         {
-            UpdateBuffUI();
-        }
-        
-        private void FixedUpdate()
-        {
             UpdateSlowdown();
+            
+            UpdateBuffUI();
         }
     }
 }

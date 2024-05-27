@@ -133,7 +133,6 @@ namespace Shooter.Weapon
         }
         private void ChangeSelectedWeapon()
         {      
-
             if (weapons.Count == 0)
             {
                 //Важен именно такой порядок
@@ -141,7 +140,6 @@ namespace Shooter.Weapon
                 PlayerController.OnWeaponDroped?.Invoke();
 
                 HandsMovement(joint, joint);
-
             }
             else
             {
@@ -150,8 +148,12 @@ namespace Shooter.Weapon
                 PlayerController.OnWeaponChanged?.Invoke();
 
                 HandsMovement(weapons[selectedWeapon].rightHandle, weapons[selectedWeapon].leftHandle);
-
             }
+
+            if (currentWeapon is not null)
+                fpc.enableZoom = true;
+            else
+                fpc.enableZoom = false;
 
             timeSinceLastSwitch = 0f;
         }

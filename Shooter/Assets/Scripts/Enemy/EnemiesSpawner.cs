@@ -140,31 +140,30 @@ namespace Shooter.Enemy
             }
         }
 
-        private void SpawnRandomEnemy(Transform spawnPoint, Zombie[] enemes)
+        private void SpawnRandomEnemy(Transform spawnPoint, Zombie[] enemies)
         {
             int totalProbability = 0;
-            foreach (Zombie zombie in enemes)
+            foreach (Zombie zombie in enemies)
             {
                 totalProbability += zombie.probability;
             }
             
             int randomNumber = Random.Range(0, totalProbability);
             
-            foreach (Zombie zombie in enemes)
+            foreach (Zombie zombie in enemies)
             {
                 if (randomNumber < zombie.probability)
                 {
-                    if (zombie.zombie.typesOfEnemy is TypesOfEnemy.Explosive)
+                    if (zombie.zombie.typeOfEnemy is TypeOfEnemy.Explosive)
                     {
                         currentExplosiveEnemyAmount++;
+                        
+                        if (currentExplosiveEnemyAmount > maxExplosiveEnemyAmount)
+                        {
+                            SpawnRandomEnemy(spawnPoint, enemies);
+                            return;
+                        }
                     }
-                    
-                    if (currentExplosiveEnemyAmount > maxExplosiveEnemyAmount)
-                    {
-                        SpawnRandomEnemy(spawnPoint, enemes);
-                        return;
-                    }
-                    
                     SpawnEnemy(zombie.zombie, spawnPoint);
                     return;
                 }
