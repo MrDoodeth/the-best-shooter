@@ -15,11 +15,6 @@ namespace Shooter.Weapon
         [SerializeField] private Rig armsRig;
         [Space(10)]
 
-        [Header("Body")]
-        [SerializeField] private MultiAimConstraint bodyAim;
-        [SerializeField] private Vector3 takeBodyAimPosition;
-        [Space(10)]
-
         [Header("Settings")]
         [SerializeField] private Transform weaponPivot;
         [SerializeField][Range(1f, 5f)] private int inventorySize;
@@ -50,13 +45,11 @@ namespace Shooter.Weapon
             if (rightPosition == joint || leftPosition == joint)
             {
                 armsRig.weight = 0f;
-                bodyAim.data.offset = Vector3.zero;
                 animator.SetLayerWeight(1, 0f);
             }
             else
             {
                 armsRig.weight = 1f;
-                bodyAim.data.offset = takeBodyAimPosition;
                 animator.SetLayerWeight(1, 1f);
             }       
         }
