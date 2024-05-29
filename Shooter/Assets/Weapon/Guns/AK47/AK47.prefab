@@ -122,9 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomSize: 0.86
-  zoomPosition: {x: 0, y: -0.0462, z: 0.1873}
-  defaultWeaponPosition: {x: 0.071, y: -0.0995, z: 0.184}
-  targetPosition: {x: 0, y: 0, z: 0}
+  zoomPosition: {x: 0, y: -0.046, z: -0.17}
+  defaultWeaponPosition: {x: 0.071, y: -0.0995, z: -0.15}
+  targetPosition: {x: 0.071, y: -0.0995, z: -0.15}
   fpc: {fileID: 0}
   isZoom: 0
 --- !u!114 &1829007119099331879
@@ -181,8 +181,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.066241145, y: 0.23983616, z: 0.786204}
-  m_Center: {x: 0.010050237, y: -0.07126537, z: 0.06304246}
+  m_Size: {x: 0.066241145, y: 0.23722798, z: 0.775771}
+  m_Center: {x: 0.010050237, y: -0.06996128, z: 0.38521644}
 --- !u!95 &719624726
 Animator:
   serializedVersion: 5
@@ -290,7 +290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5514396933780749092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

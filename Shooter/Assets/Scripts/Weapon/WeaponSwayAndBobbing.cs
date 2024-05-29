@@ -8,7 +8,7 @@ namespace Shooter.Weapon
     {
         
         private WeaponZoom weaponZoom;
-        public FirstPersonController mover;
+        private FirstPersonController mover;
         
         [Header("Settings")]
         public bool sway = true;
@@ -44,6 +44,7 @@ namespace Shooter.Weapon
         private void Awake()
         {
             weaponZoom = GetComponent<WeaponZoom>();
+            mover = WeaponsSwitcher.FPC;
         }
 
         void Update()

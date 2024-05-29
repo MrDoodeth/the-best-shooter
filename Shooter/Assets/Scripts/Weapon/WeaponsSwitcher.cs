@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Shooter.Player;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.Serialization;
 
 namespace Shooter.Weapon
 {
@@ -30,6 +29,7 @@ namespace Shooter.Weapon
 
         [SerializeField] private Animator animator;
         [SerializeField] private FirstPersonController fpc;
+        public static FirstPersonController FPC;
 
         [SerializeField] private List<Weapon> weapons;
         public static Weapon currentWeapon { get; private set; }
@@ -38,6 +38,8 @@ namespace Shooter.Weapon
         private void Awake()
         {
             currentInventorySize = inventorySize;
+            currentWeapon = null;
+            FPC = fpc;
         }
 
         private void HandsMovement(Transform rightPosition, Transform leftPosition)
@@ -81,7 +83,7 @@ namespace Shooter.Weapon
         }
         private void Drop()
         {     
-            if (currentWeapon is null) return;
+            if (currentWeapon is null || currentWeapon.weaponZoom.isZoom) return;
 
             weapons.Remove(currentWeapon);
             currentWeapon.Droped();
@@ -135,7 +137,7 @@ namespace Shooter.Weapon
         {      
             if (weapons.Count == 0)
             {
-                //Важен именно такой порядок
+                //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 currentWeapon = null;
                 PlayerController.OnWeaponDroped?.Invoke();
 
@@ -143,7 +145,7 @@ namespace Shooter.Weapon
             }
             else
             {
-                //Важен именно такой порядок
+                //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 currentWeapon = weapons[selectedWeapon];
                 PlayerController.OnWeaponChanged?.Invoke();
 

@@ -1,4 +1,3 @@
-using System;
 using Shooter.Player;
 using UnityEngine;
 
@@ -11,7 +10,6 @@ namespace Shooter.Weapon
         public Vector3 zoomPosition;
         public Vector3 defaultWeaponPosition;
         [HideInInspector] public Vector3 targetPosition;
-        [HideInInspector] public FirstPersonController fpc;
         private WeaponSwayAndBobbing weaponSwayAndBobbing;
         public bool isZoom = false;
 
@@ -34,24 +32,32 @@ namespace Shooter.Weapon
         private void Zoom(bool isPressed)
         {
             if (enabled)
-                fpc.zoomFOV = fpc.fov * zoomSize;
+                WeaponsSwitcher.FPC.zoomFOV = WeaponsSwitcher.FPC.fov * zoomSize;
 
             isZoom = isPressed;
         }
 
         private void Update()
         {
-            if (isZoom && !fpc.isSprinting)
+            if (isZoom && !WeaponsSwitcher.FPC.isSprinting)
             {
                 weaponSwayAndBobbing.bob0ffset = false;
                 weaponSwayAndBobbing.bobSway = false;
                 targetPosition = zoomPosition;
+                
+                if (WeaponsSwitcher.currentWeapon is not null &&
+                    WeaponsSwitcher.currentWeapon is Gun { typeOfGun: TypeOfGun.SniperRifle })
+                    transform.GetChild(0).gameObject.SetActive(false);
             }
             else
             {
                 weaponSwayAndBobbing.bob0ffset = true;
                 weaponSwayAndBobbing.bobSway = true;
                 targetPosition = defaultWeaponPosition;
+                
+                if (WeaponsSwitcher.currentWeapon is not null &&
+                    WeaponsSwitcher.currentWeapon is Gun { typeOfGun: TypeOfGun.SniperRifle })
+                    transform.GetChild(0).gameObject.SetActive(true);
             }
         }
     }

@@ -3,28 +3,25 @@ using Shooter.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Shooter.Enemy;
-using UnityEngine.Serialization;
 
 namespace Shooter.Weapon
 {
     [RequireComponent(typeof(WeaponZoom), (typeof(WeaponSwayAndBobbing)))]
     public sealed class Gun : Weapon
     {
-        [Space(10)] [SerializeField] private GameObject bulletHole;
+        [Space(10)] 
+        [SerializeField] private GameObject bulletHole;
 
         [Header("Shooting")]
         [SerializeField] private bool automatic;
         [SerializeField] private float maxDistance;
 
-        [SerializeField] private bool isShotgun = false;
-
-        [Tooltip("Использовать только если isShotgun = true")]
+        public TypeOfGun typeOfGun;
+        [Space(10)] 
+        
+        [Header("For Shotgun")]
         [SerializeField] [Range(0.01f, 85f)] private float maxSprayRange;
-
-        [Tooltip("Использовать только если isShotgun = true")]
         [SerializeField] private int bulletAmount = 10;
-
-        private float timeSinceLastShoot;
         
         [Header("Recoil")]
         [SerializeField] private Vector3 defaultCameraRecoil;
@@ -38,6 +35,7 @@ namespace Shooter.Weapon
 
         [SerializeField] private int magSize;
         [SerializeField] private float fireRate;
+        private float timeSinceLastShoot;
         public int currentAmmo { get; private set; }
         private int reserveAmmo;
 
@@ -145,25 +143,34 @@ namespace Shooter.Weapon
                 animator.enabled = true;
                 animator.SetTrigger("isShooting");
 
-                if (!isShotgun)
+                switch (typeOfGun)
                 {
-                    Damage();
-                }
-                else if (isShotgun)
-                {
-                    for (int bulletCounter = bulletAmount; bulletCounter > 0; bulletCounter--)
+                    case TypeOfGun.Default: Damage(muzzle.position);
+                        break;
+                    case TypeOfGun.Shotgun:
                     {
-                        Quaternion defaultLocalRotation = muzzle.localRotation;
-                        muzzle.localRotation = Quaternion.Euler(
-                            muzzle.localRotation.x + Random.Range(-maxSprayRange, maxSprayRange),
-                            muzzle.localRotation.y + Random.Range(-maxSprayRange, maxSprayRange),
-                            muzzle.localRotation.z);
+                        for (int bulletCounter = bulletAmount; bulletCounter > 0; bulletCounter--)
+                        {
+                            Quaternion defaultLocalRotation = muzzle.localRotation;
+                            muzzle.localRotation = Quaternion.Euler(
+                                muzzle.localRotation.x + Random.Range(-maxSprayRange, maxSprayRange),
+                                muzzle.localRotation.y + Random.Range(-maxSprayRange, maxSprayRange),
+                                muzzle.localRotation.z);
 
-                        Damage();
+                            Damage(muzzle.position);
 
-                        muzzle.localRotation = defaultLocalRotation;
+                            muzzle.localRotation = defaultLocalRotation;
+                        }
+                        break;
                     }
+                    case TypeOfGun.SniperRifle:
+                        if (weaponZoom.isZoom)
+                            Damage(WeaponsSwitcher.FPC.playerCamera.transform.position);
+                        else
+                            Damage(muzzle.position);
+                        break;
                 }
+                
                 if (weaponZoom.isZoom)
                     CameraRecoil.Recoil(zoomCameraRecoil);
                 else
@@ -184,9 +191,9 @@ namespace Shooter.Weapon
                 transform.localEulerAngles -= Vector3.up * Random.Range(-gunRecoil.x, gunRecoil.x);
             }
             
-            void Damage()
+            void Damage(Vector3 origin)
             {
-                if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(origin, muzzle.forward, out RaycastHit hitInfo, maxDistance, enemiesLayer, QueryTriggerInteraction.Ignore))
                 {
                     var entity = hitInfo.transform.GetComponentInParent<IDamagable>();
                     entity?.TakeDamage(PlayerBuffs.CalculateDamage(damage));
@@ -209,5 +216,12 @@ namespace Shooter.Weapon
 
             Debug.DrawRay(muzzle.position, muzzle.forward, Color.red);
         }
+    }
+    
+    public enum TypeOfGun
+    {
+        Default,
+        Shotgun,
+        SniperRifle
     }
 }

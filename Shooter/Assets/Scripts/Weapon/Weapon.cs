@@ -16,7 +16,6 @@ namespace Shooter.Weapon
         [SerializeField] public Transform rightHandle;
         [SerializeField] public Transform leftHandle;
         [SerializeField] protected LayerMask enemiesLayer;
-        protected FirstPersonController fpc;
         protected Animator animator;
 
         [HideInInspector] public WeaponZoom weaponZoom;
@@ -32,13 +31,6 @@ namespace Shooter.Weapon
             weaponCollider = GetComponent<BoxCollider>();
             animator = GetComponent<Animator>();
         }
-
-        private void SetFPC(FirstPersonController fpc)
-        {
-            this.fpc = fpc;
-            weaponZoom.fpc = fpc;
-            weaponSwayAndBobbing.mover = this.fpc;
-        }
         protected void TurnOnControl()
         {
             weaponZoom.enabled = true;
@@ -53,7 +45,6 @@ namespace Shooter.Weapon
         {       
             transform.SetPositionAndRotation(weaponPivot.position, weaponPivot.rotation);
             transform.SetParent(weaponsSwitcher);
-            SetFPC(FPC);
             weaponRigidbody.isKinematic = true;
             weaponCollider.enabled = false;
             PlayerController.OnWeaponTaken?.Invoke();             
@@ -65,7 +56,6 @@ namespace Shooter.Weapon
             weaponRigidbody.isKinematic = false;
             weaponCollider.enabled = true;
             enabled = false;
-            SetFPC(null);
             weaponRigidbody.AddForce(transform.forward * powerOfDrop + transform.up * (powerOfDrop / 2), ForceMode.Impulse);
             transform.SetParent(null);
         }
