@@ -137,7 +137,6 @@ namespace Shooter.Weapon
         {      
             if (weapons.Count == 0)
             {
-                //����� ������ ����� �������
                 currentWeapon = null;
                 PlayerController.OnWeaponDroped?.Invoke();
 
@@ -145,7 +144,6 @@ namespace Shooter.Weapon
             }
             else
             {
-                //����� ������ ����� �������
                 currentWeapon = weapons[selectedWeapon];
                 PlayerController.OnWeaponChanged?.Invoke();
 

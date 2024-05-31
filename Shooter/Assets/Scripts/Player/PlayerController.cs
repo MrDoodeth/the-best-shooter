@@ -23,7 +23,7 @@ namespace Shooter.Player
         public static Action OnWeaponChanged;
         public static Action OnWeaponDroped;
 
-        public static bool isControllerAvailable;
+        public static bool isControllerAvailable = true;
         private bool isZoom;
 
         private void Update()
