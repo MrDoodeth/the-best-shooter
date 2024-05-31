@@ -661,8 +661,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c27f412fe5f3a54487b788d2fe8e4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  returnSpeed: 2
-  snappiness: 4
+  returnSpeed: 5
+  snappiness: 10
 --- !u!1 &1577195045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,8 +1518,8 @@ MonoBehaviour:
   jumpKey: 32
   jumpPower: 30
   isGrounded: 0
-  enableCrouch: 1
-  holdToCrouch: 1
+  enableCrouch: 0
+  holdToCrouch: 0
   crouchKey: 306
   crouchHeight: 0.75
   speedReduction: 0.5
@@ -1677,7 +1677,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 383
+    m_Bits: 895
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
