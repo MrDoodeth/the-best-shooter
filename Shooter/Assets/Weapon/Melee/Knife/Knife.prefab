@@ -66,7 +66,7 @@ MonoBehaviour:
   weaponCollider: {fileID: 0}
   radius: 0.15
   centerOfSphere: {fileID: 2803922879917686910}
-  cameraRecoil: {x: 0, y: 0, z: 0}
+  cameraRecoil: {x: 2, y: 1, z: 0.02}
 --- !u!114 &1989213774931776557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +83,6 @@ MonoBehaviour:
   zoomPosition: {x: 0.1558, y: -0.2673, z: 0.2578}
   defaultWeaponPosition: {x: 0.1558, y: -0.2673, z: 0.2578}
   targetPosition: {x: 0, y: 0, z: 0}
-  fpc: {fileID: 0}
   isZoom: 0
 --- !u!114 &1989213774931776558
 MonoBehaviour:
@@ -97,7 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mover: {fileID: 0}
   sway: 1
   swayRotation: 1
   bob0ffset: 1
