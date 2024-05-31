@@ -12,15 +12,18 @@ namespace Shooter.Weapon
         [HideInInspector] public Vector3 targetPosition;
         private WeaponSwayAndBobbing weaponSwayAndBobbing;
         public bool isZoom = false;
+        private Transform model;
 
         private void Awake()
         {
             weaponSwayAndBobbing = GetComponent<WeaponSwayAndBobbing>();
+            model = transform.GetChild(0);
         }
 
         private void OnEnable()
         {
             PlayerController.OnZoomInput += Zoom;
+            model.gameObject.SetActive(true);
         }
 
         private void OnDisable()
@@ -47,7 +50,7 @@ namespace Shooter.Weapon
                 
                 if (WeaponsSwitcher.currentWeapon is not null &&
                     WeaponsSwitcher.currentWeapon is Gun { typeOfGun: TypeOfGun.SniperRifle })
-                    transform.GetChild(0).gameObject.SetActive(false);
+                    model.gameObject.SetActive(false);
             }
             else
             {
@@ -55,9 +58,7 @@ namespace Shooter.Weapon
                 weaponSwayAndBobbing.bobSway = true;
                 targetPosition = defaultWeaponPosition;
                 
-                if (WeaponsSwitcher.currentWeapon is not null &&
-                    WeaponsSwitcher.currentWeapon is Gun { typeOfGun: TypeOfGun.SniperRifle })
-                    transform.GetChild(0).gameObject.SetActive(true);
+                model.gameObject.SetActive(true);
             }
         }
     }

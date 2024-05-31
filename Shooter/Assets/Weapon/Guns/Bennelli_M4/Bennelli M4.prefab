@@ -164,9 +164,9 @@ MonoBehaviour:
   typeOfGun: 1
   maxSprayRange: 10
   bulletAmount: 25
-  defaultCameraRecoil: {x: 2.36, y: 0.87, z: 0.49}
-  zoomCameraRecoil: {x: 0.23, y: 0.21, z: 0.14}
-  gunRecoil: {x: 0.4, y: 0.92, z: 0.03}
+  defaultCameraRecoil: {x: -8, y: 3, z: 0.02}
+  zoomCameraRecoil: {x: -4, y: 1.5, z: 0.01}
+  gunRecoil: {x: 0.33, y: -3, z: 0.06}
   maxReserveAmmo: 999
   magSize: 4
   fireRate: 240
@@ -184,10 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomSize: 0.86
-  zoomPosition: {x: 0, y: -0.0242, z: 0.1798}
-  defaultWeaponPosition: {x: 0.0998, y: -0.0942, z: 0.2543}
+  zoomPosition: {x: 0, y: -0.0237, z: -0.2202}
+  defaultWeaponPosition: {x: 0.0998, y: -0.0942, z: -0.1457}
   targetPosition: {x: 0, y: 0, z: 0}
-  fpc: {fileID: 0}
   isZoom: 0
 --- !u!114 &6974456438559410362
 MonoBehaviour:
@@ -201,18 +200,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mover: {fileID: 0}
   sway: 1
   swayRotation: 1
   bob0ffset: 1
   bobSway: 1
-  step: 0.004
+  step: 0.002
   maxStepDistance: 0.05
-  rotationStep: 1
-  maxRotationStep: 3
-  smooth: 9
-  speedCurve: 0
-  travelLimit: {x: 0.01, y: 0.01, z: 0.01}
+  rotationStep: 4.56
+  maxRotationStep: 2
+  smooth: 10
+  speedCurve: 109.795044
+  travelLimit: {x: 0.017, y: 0.017, z: 0.017}
   bobLimit: {x: 0.01, y: 0.01, z: 0.01}
   bobExaggeration: 0
   multiplier: {x: 0, y: 0, z: 0}
@@ -244,7 +242,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.04738319, y: 0.15496731, z: 0.7840122}
-  m_Center: {x: 0.0065947175, y: -0.048726678, z: -0.0074805617}
+  m_Center: {x: 0.0065947175, y: -0.048726678, z: 0.39251944}
 --- !u!95 &6974456438559410363
 Animator:
   serializedVersion: 5
@@ -290,7 +288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6974456438841814581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.4}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:

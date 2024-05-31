@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4527571602603538681}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -441,20 +441,20 @@ MonoBehaviour:
   enemiesLayer:
     serializedVersion: 2
     m_Bits: 257
-  weaponZoom: {fileID: 0}
-  weaponSwayAndBobbing: {fileID: 0}
-  weaponRigidbody: {fileID: 0}
-  weaponCollider: {fileID: 0}
+  weaponZoom: {fileID: 2711640644429102420}
+  weaponSwayAndBobbing: {fileID: 8178916179672470889}
+  weaponRigidbody: {fileID: 8183252265878648142}
+  weaponCollider: {fileID: 8183252265878648143}
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
   automatic: 0
   maxDistance: 200
-  isShotgun: 0
+  typeOfGun: 0
   maxSprayRange: 0
   bulletAmount: 10
-  defaultCameraRecoil: {x: -0.65, y: 0.63, z: 0.39}
-  zoomCameraRecoil: {x: -0.25, y: 0.345, z: 0.225}
-  gunRecoil: {x: 0.34, y: 0.61, z: 0.05}
+  defaultCameraRecoil: {x: -1.5, y: 1, z: 0.02}
+  zoomCameraRecoil: {x: -0.75, y: 0.5, z: 0.01}
+  gunRecoil: {x: 0.3, y: 1.5, z: 0.03}
   maxReserveAmmo: 300
   magSize: 8
   fireRate: 250
@@ -472,10 +472,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomSize: 0.95
-  zoomPosition: {x: 0, y: -0.0455, z: 0.2255}
-  defaultWeaponPosition: {x: 0.0888, y: -0.1414, z: 0.2314}
+  zoomPosition: {x: 0, y: -0.0455, z: 0.1255}
+  defaultWeaponPosition: {x: 0.0888, y: -0.1414, z: 0.1314}
   targetPosition: {x: 0, y: 0, z: 0}
-  fpc: {fileID: 0}
   isZoom: 0
 --- !u!114 &8178916179672470889
 MonoBehaviour:
@@ -489,18 +488,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mover: {fileID: 0}
   sway: 1
   swayRotation: 1
   bob0ffset: 1
   bobSway: 1
   step: 0.01
-  maxStepDistance: 0.06
-  rotationStep: 4
-  maxRotationStep: 5
-  smooth: 10
+  maxStepDistance: 0.02
+  rotationStep: 2
+  maxRotationStep: 3
+  smooth: 15
   speedCurve: 0
-  travelLimit: {x: 0.025, y: 0.025, z: 0.025}
+  travelLimit: {x: 0.03, y: 0.03, z: 0.03}
   bobLimit: {x: 0.01, y: 0.01, z: 0.01}
   bobExaggeration: 0
   multiplier: {x: 0, y: 0, z: 0}
@@ -531,8 +529,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.04607746, y: 0.15523279, z: 0.2525233}
-  m_Center: {x: 0.0023729503, y: -0.028475285, z: 0.029661596}
+  m_Size: {x: 0.030739307, y: 0.14903843, z: 0.2525233}
+  m_Center: {x: 0.00001276331, y: -0.02980262, z: 0.12966162}
 --- !u!95 &475303178
 Animator:
   serializedVersion: 5

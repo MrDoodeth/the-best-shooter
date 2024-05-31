@@ -131,20 +131,20 @@ MonoBehaviour:
   enemiesLayer:
     serializedVersion: 2
     m_Bits: 257
-  weaponZoom: {fileID: 0}
-  weaponSwayAndBobbing: {fileID: 0}
-  weaponRigidbody: {fileID: 0}
-  weaponCollider: {fileID: 0}
+  weaponZoom: {fileID: 7093210219999190801}
+  weaponSwayAndBobbing: {fileID: 7093210219999190800}
+  weaponRigidbody: {fileID: 7093210219999190803}
+  weaponCollider: {fileID: 7093210219999190802}
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
   automatic: 1
   maxDistance: 200
-  isShotgun: 0
+  typeOfGun: 0
   maxSprayRange: 0
   bulletAmount: 10
-  defaultCameraRecoil: {x: -0.65, y: 0.63, z: 0.39}
-  zoomCameraRecoil: {x: -0.25, y: 0.345, z: 0.225}
-  gunRecoil: {x: 0.16, y: 0.09, z: 0.02}
+  defaultCameraRecoil: {x: -2.25, y: 1.75, z: 0.02}
+  zoomCameraRecoil: {x: -1.125, y: 0.875, z: 0.01}
+  gunRecoil: {x: 0.2, y: -0.4, z: 0.03}
   maxReserveAmmo: 250
   magSize: 30
   fireRate: 700
@@ -165,7 +165,6 @@ MonoBehaviour:
   zoomPosition: {x: 0, y: -0.0526, z: -0.1785}
   defaultWeaponPosition: {x: 0.0828, y: -0.1065, z: -0.12}
   targetPosition: {x: 0, y: 0, z: 0}
-  fpc: {fileID: 0}
   isZoom: 0
 --- !u!114 &7093210219999190800
 MonoBehaviour:
@@ -179,18 +178,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ca3d8481d6fc5468b78098e10a644c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mover: {fileID: 0}
   sway: 1
   swayRotation: 1
   bob0ffset: 1
   bobSway: 1
-  step: 0.007
-  maxStepDistance: 0.03
+  step: 0.001
+  maxStepDistance: 0.0001
   rotationStep: 3
   maxRotationStep: 4
-  smooth: 10
+  smooth: 12
   speedCurve: 0
-  travelLimit: {x: 0.025, y: 0.025, z: 0.025}
+  travelLimit: {x: 0.02, y: 0.02, z: 0.02}
   bobLimit: {x: 0.01, y: 0.01, z: 0.01}
   bobExaggeration: 0
   multiplier: {x: 0, y: 0, z: 0}

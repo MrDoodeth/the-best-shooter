@@ -74,7 +74,7 @@ namespace Shooter.Weapon
         {
             if(!sway) { swayPos = Vector3.zero; return; }
             
-            Vector3 invertLook = lookInput *-step;
+            Vector3 invertLook = lookInput * -step;
             invertLook.x = Mathf.Clamp(invertLook.x, -maxStepDistance, maxStepDistance);
             invertLook.y = Mathf.Clamp(invertLook.y, -maxStepDistance, maxStepDistance);
             
