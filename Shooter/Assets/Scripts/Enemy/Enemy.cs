@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NaughtyAttributes;
 using Shooter.Interactable.Buff;
 using Shooter.Player;
 using UnityEngine;
@@ -24,8 +25,8 @@ namespace Shooter.Enemy
         [SerializeField][Range(1, 5000)] private int maxHealth = 100;
         [Range(1, 30)] public float contusionDelay = 3f;
         [Range(1, 30)] public float deathDelay = 3f;
-        public bool isAlive = true;
-        public int currentHealth;
+        [HideInInspector] public bool isAlive = true;
+        [ReadOnly] public int currentHealth;
         [Space(15)]
 
         [Min(10)] public int rewardAmount = 100;

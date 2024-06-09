@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using Shooter.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,15 +14,13 @@ namespace Shooter.Weapon
         [SerializeField] private GameObject bulletHole;
 
         [Header("Shooting")]
+        public TypeOfGun typeOfGun;
         [SerializeField] private bool automatic;
         [SerializeField] private float maxDistance;
-
-        public TypeOfGun typeOfGun;
-        [Space(10)] 
+        [ShowIf("isShotgun")] [SerializeField] [Range(0.01f, 85f)] private float maxSprayRange;
+        [ShowIf("isShotgun")] [SerializeField] private int bulletAmount = 10;
+        private bool isShotgun() => typeOfGun == TypeOfGun.Shotgun;
         
-        [Header("For Shotgun")]
-        [SerializeField] [Range(0.01f, 85f)] private float maxSprayRange;
-        [SerializeField] private int bulletAmount = 10;
         
         [Header("Recoil")]
         [SerializeField] private Vector3 defaultCameraRecoil;

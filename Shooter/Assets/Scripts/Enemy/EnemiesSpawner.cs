@@ -6,6 +6,7 @@ using Shooter.Interactable.Buff;
 using Shooter.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using NaughtyAttributes;
 
 namespace Shooter.Enemy
 {
@@ -33,7 +34,8 @@ namespace Shooter.Enemy
         public static Action OnStartNewWave;
         public static Action OnEndWave;
         public static Action<Enemy> OnEnemyDeath;
-
+        
+        [ShowNonSerializedField]
         private static int currentEnemyCount;
         private int currentWaveNumber = 1;
         private int selectedSpawnerIndex = 0;
