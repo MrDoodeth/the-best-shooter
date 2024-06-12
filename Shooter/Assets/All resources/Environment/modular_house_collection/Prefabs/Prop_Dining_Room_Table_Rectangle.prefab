@@ -61,8 +61,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6201864105307463516, guid: 1b8f2e4762867bf4892a1e7305bfa95e, type: 3}
-  - {fileID: 7674218692686825065, guid: 1b8f2e4762867bf4892a1e7305bfa95e, type: 3}
+  - {fileID: -4770390735465466038, guid: de505e7e580b97f42a84e9d0143218ef, type: 3}
+  - {fileID: -191448823479050371, guid: de505e7e580b97f42a84e9d0143218ef, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6281163823830001312}
+  - component: {fileID: 2076686204}
   m_Layer: 0
   m_Name: Prop_Dining_Room_Table_Rectangle
   m_TagString: Untagged
@@ -107,7 +108,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6656599093124250650}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.37603283, y: -4.0010004, z: 3.8792307}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -116,3 +117,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2076686204
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6656599093124250650}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.95, z: 2}
+  m_Center: {x: 0, y: 0.475, z: 0}
