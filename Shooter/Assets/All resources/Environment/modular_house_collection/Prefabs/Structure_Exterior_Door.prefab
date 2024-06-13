@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3479954006631581868}
   - component: {fileID: 8944498359159166226}
   - component: {fileID: 3141998606963679182}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: object4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,8 @@ GameObject:
   - component: {fileID: 3157506687137071388}
   - component: {fileID: 1934565104143450089}
   - component: {fileID: 8127774401608503745}
-  m_Layer: 0
+  - component: {fileID: 9084980820550297713}
+  m_Layer: 10
   m_Name: Structure_Exterior_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,6 +151,24 @@ MonoBehaviour:
   openDuration: 2
   openingAngle: 90
   rotMode: 0
+--- !u!114 &9084980820550297713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2349303640810429350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2648614764835223662
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +180,7 @@ GameObject:
   - component: {fileID: 1309115446466182297}
   - component: {fileID: 5431074773444990933}
   - component: {fileID: 8251603392604624019}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: object1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +263,7 @@ GameObject:
   - component: {fileID: 6383688355211258096}
   - component: {fileID: 8451245164788386948}
   - component: {fileID: 9208912311936466593}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: object5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +346,7 @@ GameObject:
   - component: {fileID: 5637252709830535157}
   - component: {fileID: 1661115818317452642}
   - component: {fileID: 1424281147493905368}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: object2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +429,7 @@ GameObject:
   - component: {fileID: 8158470728113157234}
   - component: {fileID: 1503697286711932807}
   - component: {fileID: 6262411713187902159}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: object3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

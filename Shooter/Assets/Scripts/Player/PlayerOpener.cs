@@ -11,7 +11,7 @@ namespace Shooter.Player
             if (PlayerRayCaster.isHit)
             {
                 var hit = PlayerRayCaster.HIT;
-                if (hit.transform.TryGetComponent(out IOpenable iOpenableEntity) && PlayerRayCaster.HIT.transform is not null)
+                if (hit.transform.TryGetComponent(out IOpenable iOpenableEntity) && hit.transform is not null)
                 {
                     if (Input.GetKeyDown(openKey))
                     {

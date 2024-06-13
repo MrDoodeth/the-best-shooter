@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5797784668126894084}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Structure_Wall_Doorway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7606158083253265793}
   - component: {fileID: 3529525034153873101}
   - component: {fileID: 659773477100342667}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: object1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,10 +123,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5797784668126894084}
     m_Modifications:
+    - target: {fileID: 599004521, guid: e4fb33578434aca4bbe41dd83660c687, type: 3}
+      propertyPath: openingAngle
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784032028726659358, guid: e4fb33578434aca4bbe41dd83660c687,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5062021680953174742, guid: e4fb33578434aca4bbe41dd83660c687,
         type: 3}
       propertyPath: m_Name
       value: Structure_Wall_Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5062021680953174742, guid: e4fb33578434aca4bbe41dd83660c687,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5581148831165870188, guid: e4fb33578434aca4bbe41dd83660c687,
         type: 3}
@@ -183,8 +197,52 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5600097699647195566, guid: e4fb33578434aca4bbe41dd83660c687,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6117929396184191250, guid: e4fb33578434aca4bbe41dd83660c687,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118632540909437583, guid: e4fb33578434aca4bbe41dd83660c687,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633593504172410252, guid: e4fb33578434aca4bbe41dd83660c687,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4fb33578434aca4bbe41dd83660c687, type: 3}
+--- !u!1 &6315653658682763749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5062021680953174742, guid: e4fb33578434aca4bbe41dd83660c687,
+    type: 3}
+  m_PrefabInstance: {fileID: 1268427865471615795}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &599004521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6315653658682763749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!4 &6696400913732399967 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5581148831165870188, guid: e4fb33578434aca4bbe41dd83660c687,

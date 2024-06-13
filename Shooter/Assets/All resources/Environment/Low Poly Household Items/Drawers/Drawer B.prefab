@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1996494656332084566}
   - component: {fileID: 400073474}
   - component: {fileID: 400073473}
+  - component: {fileID: 225637619}
   m_Layer: 0
   m_Name: Drawer B.001
   m_TagString: Untagged
@@ -111,9 +112,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71379cf6ca4c8049b361160800c8f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetVector: {x: 0, y: 0, z: 0.3}
+  offsetVector: {x: 0, y: 0, z: 1.37}
   openDuration: 5
-  isOpen: 0
+--- !u!114 &225637619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498497708602968393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1821338089914868223
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +145,7 @@ GameObject:
   - component: {fileID: 8778025828622541905}
   - component: {fileID: 400073470}
   - component: {fileID: 400073469}
+  - component: {fileID: 225637617}
   m_Layer: 0
   m_Name: Drawer B.003
   m_TagString: Untagged
@@ -225,9 +244,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71379cf6ca4c8049b361160800c8f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetVector: {x: 0, y: 0, z: 0.3}
+  offsetVector: {x: 0, y: 0, z: 1.37}
   openDuration: 5
-  isOpen: 0
+--- !u!114 &225637617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821338089914868223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &3549588283088212165
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +410,7 @@ GameObject:
   - component: {fileID: 4454418582349772567}
   - component: {fileID: 400073472}
   - component: {fileID: 400073471}
+  - component: {fileID: 225637618}
   m_Layer: 0
   m_Name: Drawer B.002
   m_TagString: Untagged
@@ -472,6 +509,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71379cf6ca4c8049b361160800c8f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetVector: {x: 0, y: 0, z: 0.3}
+  offsetVector: {x: 0, y: 0, z: 1.37}
   openDuration: 5
-  isOpen: 0
+--- !u!114 &225637618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7124634286077565211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 3892463924066756405}
   - component: {fileID: 435201974}
   - component: {fileID: 435201972}
+  - component: {fileID: 666727161}
   m_Layer: 0
   m_Name: LeftDoor
   m_TagString: Untagged
@@ -143,9 +144,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee9adb04e88f654891d809279c2e443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openingAngle: 90
+  openingAngleX: 0
+  openingAngleY: 90
+  openingAngleZ: 0
   openDuration: 3
-  isOpen: 0
+--- !u!114 &666727161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014709988481085121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2457175235914375757
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +393,7 @@ GameObject:
   - component: {fileID: 8540747750558464318}
   - component: {fileID: 435201973}
   - component: {fileID: 435201971}
+  - component: {fileID: 666727160}
   m_Layer: 0
   m_Name: RightDoor
   m_TagString: Untagged
@@ -421,6 +442,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee9adb04e88f654891d809279c2e443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openingAngle: -90
+  openingAngleX: 0
+  openingAngleY: -90
+  openingAngleZ: 0
   openDuration: 3
-  isOpen: 0
+--- !u!114 &666727160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9111418317228796166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

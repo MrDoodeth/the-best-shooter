@@ -1045,6 +1045,7 @@ GameObject:
   - component: {fileID: 6432431917418167372}
   - component: {fileID: 2540516230264680850}
   - component: {fileID: 2540516230264680851}
+  - component: {fileID: 652554286}
   m_Layer: 0
   m_Name: ==WEAPONS CONTAINER==
   m_TagString: Untagged
@@ -1179,6 +1180,18 @@ MonoBehaviour:
   - {fileID: 2543222243703724125}
   tradeLabel: {fileID: 7928307467352525318}
   tradeKey: 102
+--- !u!114 &652554286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300170808926228182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07a180967b6f1145aefb126a34ca138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &392432584720242137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,7 +1690,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 895
+    m_Bits: 1919
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

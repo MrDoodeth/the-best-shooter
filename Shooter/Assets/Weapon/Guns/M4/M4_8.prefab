@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 7093210219999190803}
   - component: {fileID: 7093210219999190802}
   - component: {fileID: 7093210219999190829}
+  - component: {fileID: 7093210219634094452}
   m_Layer: 6
   m_Name: M4_8
   m_TagString: Weapon
@@ -137,9 +138,9 @@ MonoBehaviour:
   weaponCollider: {fileID: 7093210219999190802}
   bulletHole: {fileID: 1511656570062213101, guid: dbc43b838f3d6f0448dfcac0be5e17bc,
     type: 3}
+  typeOfGun: 0
   automatic: 1
   maxDistance: 200
-  typeOfGun: 0
   maxSprayRange: 0
   bulletAmount: 10
   defaultCameraRecoil: {x: -2.25, y: 1.75, z: 0.02}
@@ -242,6 +243,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7093210219634094452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7093210219999190828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &7093210221218567405
 GameObject:
   m_ObjectHideFlags: 0
