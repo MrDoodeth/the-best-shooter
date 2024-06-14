@@ -40,7 +40,7 @@ namespace Shooter.Player
         }
         private void Update()
         {
-            if (PlayerRayCaster.isHit && PlayerRayCaster.HIT.transform is not null)
+            if (PlayerRayCaster.isHit)
             {
                 var hit = PlayerRayCaster.HIT;
                 if (hit.transform.TryGetComponent(out IBuyable iBuyableEntity))

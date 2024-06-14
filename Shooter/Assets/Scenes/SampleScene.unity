@@ -1915,6 +1915,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4747ad01d0e95464180ab385ad33f6c4,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9999999
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4747ad01d0e95464180ab385ad33f6c4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9999999
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4747ad01d0e95464180ab385ad33f6c4,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.526
       objectReference: {fileID: 0}
@@ -1926,7 +1936,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4747ad01d0e95464180ab385ad33f6c4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.686
+      value: 0.6859999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4747ad01d0e95464180ab385ad33f6c4,
         type: 3}
@@ -1941,7 +1951,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4747ad01d0e95464180ab385ad33f6c4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4747ad01d0e95464180ab385ad33f6c4,
         type: 3}
@@ -2420,6 +2430,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 566453a8f6868c648bce5251b69f30c8, type: 3}
+--- !u!4 &1561198696 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6555521293121105063, guid: 566453a8f6868c648bce5251b69f30c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561198695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1561198697 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8592827504678177546, guid: 566453a8f6868c648bce5251b69f30c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561198695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1561198698 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6285364348575060401, guid: 566453a8f6868c648bce5251b69f30c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561198695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1561198699 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6590445972956865410, guid: 566453a8f6868c648bce5251b69f30c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561198695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1561198700 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6630616138573074676, guid: 566453a8f6868c648bce5251b69f30c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561198695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1561198701 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4861954504813350460, guid: 566453a8f6868c648bce5251b69f30c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561198695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1561198702 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2326050865277113108, guid: 566453a8f6868c648bce5251b69f30c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561198695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1608808991
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,13 +2482,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1608808993}
   - component: {fileID: 1608808994}
+  - component: {fileID: 1608808995}
   m_Layer: 0
   m_Name: ===GAMEMANAGER===
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1608808993
 Transform:
   m_ObjectHideFlags: 0
@@ -2459,7 +2512,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608808991}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b74f70fd14e4f5408021a7e3ffb57b8, type: 3}
   m_Name: 
@@ -2476,6 +2529,29 @@ MonoBehaviour:
   difficulty: 0
   zombiesConfig: {fileID: 11400000, guid: 83bf31128e4e967499648f2e0ae4489c, type: 2}
   currentEnemiesOnScene: []
+--- !u!114 &1608808995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608808991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036c72067935e7a458d5a56f944ee9c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnItem: {fileID: 2228361879989594042, guid: 1fa9f87c8f134184c8e1f363e8728750,
+    type: 3}
+  amountOfItems: 6
+  spawnPoints:
+  - {fileID: 1561198702}
+  - {fileID: 1561198701}
+  - {fileID: 1561198700}
+  - {fileID: 1561198699}
+  - {fileID: 1561198698}
+  - {fileID: 1561198697}
+  - {fileID: 1561198696}
 --- !u!1 &1629281317
 GameObject:
   m_ObjectHideFlags: 0

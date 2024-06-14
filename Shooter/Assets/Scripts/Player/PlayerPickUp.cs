@@ -18,13 +18,13 @@ namespace Shooter.Player
         }
         private void Update()
         {
-            if (PlayerRayCaster.isHit && PlayerRayCaster.HIT.transform is not null)
+            if (PlayerRayCaster.isHit)
             {
                 var hit = PlayerRayCaster.HIT;
                 if (hit.transform.TryGetComponent(out PhysicalItem phItem))
                 {
                     itemNameLabel.enabled = true;
-                    itemNameLabel.text = phItem.item.itemName.ToString();
+                    itemNameLabel.text = phItem.item.itemName;
 
                     if (Input.GetKeyDown(pickUpKey))
                     {
