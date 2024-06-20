@@ -35,6 +35,7 @@ namespace Shooter.Weapon
         [SerializeField] private int magSize;
         [SerializeField] private float fireRate;
         private float timeSinceLastShoot;
+        public bool isReloading { get; private set; }
         public int currentAmmo { get; private set; }
         private int reserveAmmo;
 
@@ -96,6 +97,7 @@ namespace Shooter.Weapon
             PlayerController.isControllerAvailable = false;
             animator.enabled = true;
             animator.SetBool("isReloading", true);
+            isReloading = true;
             return;
 
             bool CanReload() => currentAmmo < magSize && ReserveAmmo > 0 && this.gameObject.activeSelf && !weaponZoom.isZoom;
@@ -121,6 +123,7 @@ namespace Shooter.Weapon
             }
 
             animator.SetBool("isReloading", false);
+            isReloading = false;
         }
 
         private void AnimatorOff()

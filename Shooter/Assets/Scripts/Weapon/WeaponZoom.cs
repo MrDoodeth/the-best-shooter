@@ -48,7 +48,7 @@ namespace Shooter.Weapon
                 weaponSwayAndBobbing.bobSway = false;
                 targetPosition = zoomPosition;
                 
-                if (WeaponsSwitcher.currentWeapon is not null &&
+                if (WeaponsSwitcher.currentWeapon != null &&
                     WeaponsSwitcher.currentWeapon is Gun { typeOfGun: TypeOfGun.SniperRifle })
                     model.gameObject.SetActive(false);
             }

@@ -6,7 +6,8 @@
 #if UNITY_EDITOR
     using UnityEditor;
 #endif
-using UnityEngine;
+    using Shooter.Weapon;
+    using UnityEngine;
 using UnityEngine.UI;
 
 namespace Shooter.Player
@@ -258,7 +259,7 @@ namespace Shooter.Player
                 }
 
                 // Lerps camera.fieldOfView to allow for a smooth transistion
-                if(isZoomed)
+                if(isZoomed && WeaponsSwitcher.currentWeapon is Gun { isReloading: false})
                 {
                     playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, zoomFOV, zoomStepTime * Time.deltaTime);
                 }

@@ -20,6 +20,12 @@ namespace Shooter.Interactable.Item
 
         private IEnumerator Start()
         {
+            if (amountOfItems > spawnPoints.Length)
+            {
+                Debug.LogError("amountOfItems > spawnPoints.Length");
+                yield break;
+            }
+                
             while (currentAmountOfItems < amountOfItems)
             {
                 if (Random.value > 0.5 && !isBusySlot[selectedSpawnerIndex])
@@ -29,7 +35,7 @@ namespace Shooter.Interactable.Item
                     item.transform.SetParent(spawnPoints[selectedSpawnerIndex]);
                     currentAmountOfItems++;
                     isBusySlot[selectedSpawnerIndex] = true;
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(0.05f);
                 }
                 
                 ChangeSelectedSpawnPoint();
