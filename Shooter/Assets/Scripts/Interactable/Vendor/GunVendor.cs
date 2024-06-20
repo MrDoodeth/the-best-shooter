@@ -23,8 +23,6 @@ namespace Shooter.Interactable.Vendor
             }
 
             //Usefull action
-            PlayerScore.OnChangePointsAmount?.Invoke();
-            Debug.Log($"Вы купили {item.GetComponent<Gun>().Name} за {price} ");
             SpawnItem();     
         
             return price;
@@ -32,8 +30,12 @@ namespace Shooter.Interactable.Vendor
 
         private void SpawnItem()
         {
-            var _item = Instantiate(item, spawnPoint.position, Quaternion.identity);
+            var _item = Instantiate(item);
+            _item.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             _item.GetComponent<Rigidbody>().isKinematic = false;
+            
+            PlayerScore.OnChangePointsAmount?.Invoke();
+            Debug.Log($"Вы купили {item.GetComponent<Gun>().Name} за {price} ");
         }
     }
 }

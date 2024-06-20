@@ -1194,8 +1194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c27b3fb6ab8b084fae1d3eeac19a307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closeExplosionDamage: 14
-  farExplosionDamage: 5
+  closeExplosionDamage: 15
+  farExplosionDamage: 7
   explosionDelay: 0.15
   radius: 2
   force: 50
@@ -1217,7 +1217,7 @@ MonoBehaviour:
   deathDelay: 3
   isAlive: 1
   currentHealth: 0
-  rewardAmount: 100
+  rewardAmount: 10
   buffsSpawnProbability: 1
   buffs:
   - {fileID: 5625200430822746277, guid: 6a2ca910a4c256344b346b23ccf240d0, type: 3}

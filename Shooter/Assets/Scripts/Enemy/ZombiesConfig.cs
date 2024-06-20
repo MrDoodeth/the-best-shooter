@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Shooter.Enemy
@@ -9,21 +10,26 @@ namespace Shooter.Enemy
         [SerializeField] public Enemy zombie;
         [SerializeField, Range(1, 100)] public int probability;
     }
+
+    [Serializable]
+    public class DifficultyMode
+    {
+        [SerializeField, Min(1)] public int baseEnemyCount;
+        [SerializeField] public float enemyCountIncreaseRate;
+        [SerializeField] public float waveDelay;
+        [SerializeField] public Zombie[] zombies;
+    }
     
     [CreateAssetMenu(fileName = "Preset", menuName = "DifficultyConfig/Preset", order = 1)]
     [Serializable]
     public class ZombiesConfig : ScriptableObject
     {
-        [Tooltip("Keep sum probability = 100")]
-        [SerializeField] public Zombie[] easyZombies;
+        [SerializeField] public DifficultyMode easy;
         
-        [Tooltip("Keep sum probability = 100")] 
-        [SerializeField] public Zombie[] normalZombies;
+        [SerializeField] public DifficultyMode normal;
         
-        [Tooltip("Keep sum probability = 100")]
-        [SerializeField] public Zombie[] hardZombies;
+        [SerializeField] public DifficultyMode hard;
         
-        [Tooltip("Keep sum probability = 100")]
-        [SerializeField] public Zombie[] nightmareZombies;
+        [SerializeField] public DifficultyMode nightmare;
     }
 }

@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 5410126209688197656}
   - component: {fileID: 5346921410579415391}
   - component: {fileID: 1419593913531352924}
-  - component: {fileID: 167457879}
   m_Layer: 0
   m_Name: LeftDoor
   m_TagString: Untagged
@@ -163,24 +162,6 @@ MonoBehaviour:
   openingAngleY: 90
   openingAngleZ: 0
   openDuration: 3
---- !u!114 &167457879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619137676610621625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &2074450665812481796
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +291,6 @@ GameObject:
   - component: {fileID: 5395069107483272952}
   - component: {fileID: 7610950950207885767}
   - component: {fileID: 7437943203329642583}
-  - component: {fileID: 167457878}
   m_Layer: 0
   m_Name: RightDoor
   m_TagString: Untagged
@@ -363,24 +343,6 @@ MonoBehaviour:
   openingAngleY: -90
   openingAngleZ: 0
   openDuration: 3
---- !u!114 &167457878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7751881189990343595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &9165315047565431006
 GameObject:
   m_ObjectHideFlags: 0

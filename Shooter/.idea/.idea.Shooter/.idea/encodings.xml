@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/Assets/Enemies/Scripts/Enemy.cs" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Enemy/Enemy.cs" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Enemy/ZombiesConfig.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/Interactable/Vendor/GunVendor.cs" charset="windows-1251" />
     <file url="PROJECT" charset="windows-1251" />
   </component>
 </project>

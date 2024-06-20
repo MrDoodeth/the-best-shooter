@@ -15,7 +15,6 @@ using UnityEngine;
 
 public class PickUpOutline : MonoBehaviour {
   private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
-  private float StartOutlineWidth;
   public enum Mode {
     OutlineAll,
     OutlineVisible,
@@ -82,10 +81,6 @@ public class PickUpOutline : MonoBehaviour {
 
   void Awake()
   {
-
-    StartOutlineWidth = OutlineWidth;
-    OutlineWidth = 0f;
-    
     // Cache renderers
     renderers = GetComponentsInChildren<Renderer>();
 
@@ -102,6 +97,7 @@ public class PickUpOutline : MonoBehaviour {
     // Apply material properties immediately
     needsUpdate = true;
   }
+
   void OnEnable() {
     foreach (var renderer in renderers) {
 
@@ -310,6 +306,6 @@ public class PickUpOutline : MonoBehaviour {
     }
   }
 
-  public void OnHoverEnter() => OutlineWidth = StartOutlineWidth;
-  public void OnHoverExit() => OutlineWidth = 0f;
+  public void OnHoverEnter() => enabled = true;
+  public void OnHoverExit() => enabled = false;
 }

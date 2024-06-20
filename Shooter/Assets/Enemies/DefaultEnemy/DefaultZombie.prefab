@@ -1399,7 +1399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfEnemy: 0
-  maxHealth: 100
+  maxHealth: 110
   contusionDelay: 3
   deathDelay: 3
   isAlive: 1
@@ -1445,7 +1445,7 @@ MonoBehaviour:
   sightRange: 0.78
   attackRange: 0.31
   attackPoint: {fileID: 1425996706322108555}
-  damage: 33
+  damage: 25
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8

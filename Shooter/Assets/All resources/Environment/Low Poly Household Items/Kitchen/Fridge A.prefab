@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 6270620698574633789}
   - component: {fileID: 7794710825622681847}
   - component: {fileID: 4558101170903735534}
-  - component: {fileID: 1880760037}
   m_Layer: 0
   m_Name: UpDoor
   m_TagString: Untagged
@@ -162,24 +161,6 @@ MonoBehaviour:
   openingAngleY: 90
   openingAngleZ: 0
   openDuration: 3
---- !u!114 &1880760037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2498749590423059437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &4470686074221603066
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +172,6 @@ GameObject:
   - component: {fileID: 9006278037924308233}
   - component: {fileID: 7761538317534467867}
   - component: {fileID: 1305651356248209732}
-  - component: {fileID: 1880760036}
   m_Layer: 0
   m_Name: DownDoor
   m_TagString: Untagged
@@ -244,24 +224,6 @@ MonoBehaviour:
   openingAngleY: 90
   openingAngleZ: 0
   openDuration: 3
---- !u!114 &1880760036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4470686074221603066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &4804592875834203134
 GameObject:
   m_ObjectHideFlags: 0

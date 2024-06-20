@@ -1762,12 +1762,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfEnemy: 5
-  maxHealth: 100
+  maxHealth: 150
   contusionDelay: 3
   deathDelay: 3
   isAlive: 1
   currentHealth: 0
-  rewardAmount: 100
+  rewardAmount: 70
   buffsSpawnProbability: 1
   buffs:
   - {fileID: 5625200430822746277, guid: 6a2ca910a4c256344b346b23ccf240d0, type: 3}
@@ -1795,7 +1795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toxicArea: {fileID: -6740678394508822784, guid: 8231d69a9a8f9334c8722d60bd3a4f3b,
     type: 3}
-  toxicAreaDamage: 30
+  toxicAreaDamage: 10
   toxicAreaDuration: 10
 --- !u!114 &3480771707277697336
 MonoBehaviour:
@@ -1812,7 +1812,7 @@ MonoBehaviour:
   sightRange: 0.87
   attackRange: 0.36
   attackPoint: {fileID: 7417368877666244036}
-  damage: 20
+  damage: 17
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8

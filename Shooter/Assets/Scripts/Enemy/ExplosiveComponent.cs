@@ -5,9 +5,9 @@ namespace Shooter.Enemy
     public class ExplosiveComponent : MonoBehaviour
     {
         [Header("Explosion Settings")]
-        [Tooltip("Нужно помнить, что коллайдеров несколько => урон проходит по каждому отдельно")]
+        [Tooltip("Нужно помнить, что коллайдеров несколько => урон проходит по каждому отдельно (Если Tag = Player  *3)")]
         [SerializeField, Range(1f, 100f)] private int closeExplosionDamage = 70;
-        [Tooltip("Нужно помнить, что коллайдеров несколько => урон проходит по каждому отдельно")]
+        [Tooltip("Нужно помнить, что коллайдеров несколько => урон проходит по каждому отдельно (Если Tag = Player  *3)")]
         [SerializeField, Range(1f, 100f)] private int farExplosionDamage = 30;
         [SerializeField] private float explosionDelay = 0.15f;
         [SerializeField] private float radius;
@@ -30,9 +30,19 @@ namespace Shooter.Enemy
                 IDamagable entity = col.GetComponentInParent<IDamagable>();
 
                 if (Vector3.Distance(transform.position, col.transform.position) <= radius / 2)
-                    entity?.TakeDamage(closeExplosionDamage);
+                {
+                    if (col.CompareTag("Player"))
+                        entity?.TakeDamage(closeExplosionDamage * 3);
+                    else
+                        entity?.TakeDamage(closeExplosionDamage);
+                }
                 else
-                    entity?.TakeDamage(farExplosionDamage);
+                {
+                    if (col.CompareTag("Player"))
+                        entity?.TakeDamage(farExplosionDamage * 3);
+                    else
+                        entity?.TakeDamage(farExplosionDamage);
+                }
 
                 //IContusionable enemy = col.GetComponentInParent<IContusionable>();
                 //enemy?.GetContusion();

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4632307794174106935}
   - component: {fileID: 2369592701661255565}
   - component: {fileID: 5200800595148261027}
-  - component: {fileID: 2004416391}
   m_Layer: 0
   m_Name: RightDoor
   m_TagString: Untagged
@@ -64,24 +63,6 @@ MonoBehaviour:
   openingAngleY: -90
   openingAngleZ: 0
   openDuration: 3
---- !u!114 &2004416391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918090412260399575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &1980408079460333079
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +160,6 @@ GameObject:
   - component: {fileID: 9021915026368553618}
   - component: {fileID: 1714229525376782654}
   - component: {fileID: 6540427860809823245}
-  - component: {fileID: 2004416393}
   m_Layer: 0
   m_Name: Cupboard E.001
   m_TagString: Untagged
@@ -281,24 +261,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetVector: {x: 0, y: 0, z: 2}
   openDuration: 3
---- !u!114 &2004416393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4336302302293064379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &5502968250716105577
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +272,6 @@ GameObject:
   - component: {fileID: 4358743431622901784}
   - component: {fileID: 7223569360383492923}
   - component: {fileID: 5454068586255118440}
-  - component: {fileID: 2004416392}
   m_Layer: 0
   m_Name: LeftDoor
   m_TagString: Untagged
@@ -363,24 +324,6 @@ MonoBehaviour:
   openingAngleY: 90
   openingAngleZ: 0
   openDuration: 3
---- !u!114 &2004416392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5502968250716105577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0.8960143, b: 0.3915094, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &5851173575676347402
 GameObject:
   m_ObjectHideFlags: 0

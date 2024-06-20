@@ -14,29 +14,32 @@ namespace Shooter.Enemy
     
     public class EnemiesSpawner : MonoBehaviour
     {
-        [Header("Wave Settings")]
-        [SerializeField][Min(1)] private int baseEnemyCount = 3;
-        [SerializeField] private float enemyCountIncreaseRate = 1.2f;
-        [SerializeField] private float waveDelay;
+        [SerializeField] public ZombiesConfig zombiesConfig;
+        [SerializeField] private Difficulty difficulty;
         [SerializeField] private Transform[] spawnPoints;
         [Space(15)]
         
         [SerializeField][Range(1, 10)] private int maxExplosiveEnemyAmount;
         [Space(15)]
         
-        [SerializeField] private Difficulty difficulty;
-        [SerializeField] public ZombiesConfig zombiesConfig;
-        private Zombie[] currentZombies;
-
         [SerializeField] private List<Enemy> currentEnemiesOnScene;
+        
+        private DifficultyMode difficultyMode;
+        private Zombie[] currentZombies;
+        
+        private int _baseEnemyCount;
+        private float _enemyCountIncreaseRate;
+        private float _waveDelay;
+        
         private int currentExplosiveEnemyAmount;
-
+        
         public static Action OnStartNewWave;
         public static Action OnEndWave;
         public static Action<Enemy> OnEnemyDeath;
         
         [ShowNonSerializedField]
         private static int currentEnemyCount;
+        
         private int currentWaveNumber = 1;
         private int selectedSpawnerIndex = 0;
         
@@ -52,20 +55,26 @@ namespace Shooter.Enemy
             switch (difficulty)
             {
                 case Difficulty.Easy:
-                    currentZombies = zombiesConfig.easyZombies; break;
+                    difficultyMode = zombiesConfig.easy; break;
             
                 case Difficulty.Normal:
-                    currentZombies = zombiesConfig.normalZombies; break;
+                    difficultyMode = zombiesConfig.normal; break;
             
                 case Difficulty.Hard:
-                    currentZombies = zombiesConfig.hardZombies; break;
+                    difficultyMode = zombiesConfig.hard; break;
             
                 case Difficulty.Nightmare:
-                    currentZombies = zombiesConfig.nightmareZombies; break;
+                    difficultyMode = zombiesConfig.nightmare; break;
             }
-            #endregion
             
-            currentEnemyCount = baseEnemyCount;
+
+            _baseEnemyCount = difficultyMode.baseEnemyCount;
+            _enemyCountIncreaseRate = difficultyMode.enemyCountIncreaseRate;
+            _waveDelay = difficultyMode.waveDelay;
+            currentZombies = difficultyMode.zombies;
+            
+            currentEnemyCount = _baseEnemyCount;
+            #endregion
         }
 
         private void Start()
@@ -111,11 +120,11 @@ namespace Shooter.Enemy
 
         private void EndWave()
         {
-            baseEnemyCount = Mathf.RoundToInt(baseEnemyCount * enemyCountIncreaseRate);
-            currentEnemyCount = baseEnemyCount;
+            _baseEnemyCount = Mathf.RoundToInt(_baseEnemyCount * _enemyCountIncreaseRate);
+            currentEnemyCount = _baseEnemyCount;
             currentWaveNumber++;
             currentExplosiveEnemyAmount = 0;
-            Invoke(nameof(StartNewWave), waveDelay);
+            Invoke(nameof(StartNewWave), _waveDelay);
         }
         private void ChangeSelectedSpawnPoint()
         {

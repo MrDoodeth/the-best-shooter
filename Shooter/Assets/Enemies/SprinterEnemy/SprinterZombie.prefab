@@ -1513,12 +1513,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfEnemy: 1
-  maxHealth: 100
+  maxHealth: 115
   contusionDelay: 3
   deathDelay: 3
   isAlive: 1
   currentHealth: 0
-  rewardAmount: 30
+  rewardAmount: 60
   buffsSpawnProbability: 1
   buffs:
   - {fileID: 5625200430822746277, guid: 6a2ca910a4c256344b346b23ccf240d0, type: 3}
@@ -1559,7 +1559,7 @@ MonoBehaviour:
   sightRange: 0.78
   attackRange: 0.32
   attackPoint: {fileID: 7361825781644968712}
-  damage: 33
+  damage: 27
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8

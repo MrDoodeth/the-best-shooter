@@ -16,9 +16,9 @@ scopes = {
 	"last_search.2138236A" = ""
 	"OpenInspectorPreview.2138236A" = "0"
 	"currentGroup.2138236A" = "asset"
-	"last_search.DA949528" = "Zombie.pre"
+	"last_search.DA949528" = ""
 	"OpenInspectorPreview.DA949528" = "0"
-	"currentGroup.DA949528" = "asset"
+	"currentGroup.DA949528" = "scene"
 }
 providers = {
 	adb = {
@@ -90,6 +90,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"O"
 	"I"
 	"Z"
 ]
