@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Shooter.Player;
 using UnityEngine;
@@ -30,6 +31,8 @@ namespace Shooter.Weapon
         [SerializeField] private Animator animator;
         [SerializeField] private FirstPersonController fpc;
         public static FirstPersonController FPC;
+        [SerializeField] private Weapon startWeaponPrefab;
+        private Weapon startWeapon;
 
         [SerializeField] private List<Weapon> weapons;
         public static Weapon currentWeapon { get; private set; }
@@ -40,6 +43,13 @@ namespace Shooter.Weapon
             currentInventorySize = inventorySize;
             currentWeapon = null;
             FPC = fpc;
+            startWeapon = Instantiate(startWeaponPrefab);
+        }
+
+        private void Start()
+        {
+            if (startWeapon != null)
+                SetWeapon(startWeapon);
         }
 
         private void HandsMovement(Transform rightPosition, Transform leftPosition)
@@ -69,17 +79,22 @@ namespace Shooter.Weapon
             {
                 if (CanPickUp(weapon.Size, hit.transform))
                 {
-                    currentWeapon = weapon;
-                    weapons.Add(currentWeapon);
-                    weapon.OnPickedUp(weaponPivot, this.transform, fpc);
-                    currentInventorySize -= currentWeapon.Size;
-                    ChangeSelectedWeapon("Up");
+                    SetWeapon(weapon);
                 }
             }
 
             return;
 
             bool CanPickUp(int gunInventorySize, Transform tr) => currentInventorySize >= gunInventorySize && tr.CompareTag("Weapon");
+        }
+
+        private void SetWeapon(Weapon weapon)
+        {
+            currentWeapon = weapon;
+            weapons.Add(currentWeapon);
+            weapon.OnPickedUp(weaponPivot, this.transform, fpc);
+            currentInventorySize -= currentWeapon.Size;
+            ChangeSelectedWeapon("Up");
         }
         private void Drop()
         {     

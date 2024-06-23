@@ -7,7 +7,7 @@ namespace Shooter.UI
     public class DisplayPoints : MonoBehaviour
     {
         [SerializeField] private TMP_Text pointsText;
-        [SerializeField] private PlayerScore plInventory;
+        [SerializeField] private PlayerScore playerScore;
 
         private void OnEnable()
         {       
@@ -19,6 +19,6 @@ namespace Shooter.UI
             PlayerScore.OnChangePointsAmount -= DeterminePoints;
         }
 
-        private void DeterminePoints() => pointsText.text = plInventory.pointsAmount.ToString();
+        private void DeterminePoints() => pointsText.text = playerScore.pointsAmount.ToString();
     }
 }

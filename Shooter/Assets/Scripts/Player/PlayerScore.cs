@@ -22,9 +22,10 @@ namespace Shooter.Player
                 OnChangePointsAmount?.Invoke();
             }
         }
-        private void Awake()
+        private void Start()
         {
             priceLabel.enabled = false;
+            pointsAmount = PointsAmount;
         }
         private void OnEnable()
         {
